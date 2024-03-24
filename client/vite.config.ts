@@ -1,6 +1,8 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
-import path from 'path'
+import path, { resolve } from 'path'
+
+const rootPath = resolve(__dirname, "src");
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -8,6 +10,12 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.relative(__dirname, "./src"),
+      "components": resolve(rootPath, "components"),
+      "constants": resolve(rootPath, "constants"),
+      "hooks": resolve(rootPath, "hooks"),
+      "assets": resolve(rootPath, "assets"),
+      "types": resolve(rootPath, "types"),
+      "utils": resolve(rootPath, "utils"),
     }
   }
 })

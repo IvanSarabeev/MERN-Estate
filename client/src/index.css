@@ -1,3 +1,65 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .max-container {
+        @apply max-w-[1440px] mx-auto;
+    }
+
+    .padding-container {
+        @apply px-6 md:px-12 lg:px-16 xl:px-20;
+    }
+
+    .active-link {
+        @apply pr-4 lg:pr-7 text-slate-800 font-bold hover:text-slate-500;
+    }
+
+    .passive-link {
+        @apply font-medium pr-4 lg:pr-7 hover:font-semibold transition-all ease-in-out;
+    }
+
+    .flexCenter {
+        @apply flex items-center justify-center;
+    }
+
+    .flexStart {
+        @apply flex items-start justify-start;
+    }
+
+    .flexEnd {
+        @apply flex items-end justify-end;
+    }
+
+    .flexBetween {
+        @apply flex items-center justify-between;
+    }
+
+    .flexEvenly {
+        @apply flex items-center justify-evenly;
+    }
+
+    .flexAround {
+        @apply flex items-center justify-around;
+    }
+
+    .bold-20 {
+        @apply text-xl font-bold;
+    }
+
+    .regular-18 {
+        @apply text-lg font-medium;
+    }
+
+    .regular-16 {
+        @apply text-base font-normal;
+    }
+
+    .regular-14 {
+        @apply text-sm font-normal;
+    }
+
+    .regular-12 {
+        @apply text-xs font-normal;
+    }
+}
