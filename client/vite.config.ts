@@ -7,6 +7,14 @@ const rootPath = resolve(__dirname, "src");
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        secure: false,
+      },
+    },
+  },
   resolve: {
     alias: {
       "@": path.relative(__dirname, "./src"),
@@ -16,6 +24,7 @@ export default defineConfig({
       "assets": resolve(rootPath, "assets"),
       "types": resolve(rootPath, "types"),
       "utils": resolve(rootPath, "utils"),
+      "services": resolve(rootPath, "services")
     }
   }
 })
