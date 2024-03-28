@@ -3,11 +3,11 @@ import Input from "components/HTML/Input";
 import Button from "components/HTML/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { UserData } from "types/user";
-import { registerUser } from "../services/apiService";
+import { UserSignUpData } from "types/user";
+import { registerUser } from "../services/apiUser";
 
 const SignUp = () => {
-  const [formData, setFormData] = useState<UserData>({
+  const [formData, setFormData] = useState<UserSignUpData>({
     email: "",
     username: "",
     password: "",
