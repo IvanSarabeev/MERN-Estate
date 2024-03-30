@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { UserSignUpData } from "types/user";
 import { registerUser } from "../services/apiUser";
+import GoogleAuth from "components/OAuth/GoogleAuth";
 
 const SignUp = () => {
   const [formData, setFormData] = useState<UserSignUpData>({
@@ -102,6 +103,8 @@ const SignUp = () => {
         >
           {loading ? "Loading ..." : "Sign up"}
         </Button>
+        <span className="size-auto relative mx-auto">OR</span>
+        <GoogleAuth />
       </form>
       <div className="flex justify-center mt-3">
         <p className="text-slate-900">Have an account ?</p>

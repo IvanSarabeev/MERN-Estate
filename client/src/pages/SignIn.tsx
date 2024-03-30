@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { signInUser } from "../services/apiUser";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "store/store";
+import GoogleAuth from "components/OAuth/GoogleAuth";
 
 const SignIn = () => {
   const [formData, setFormData] = useState<UserSignInData>({
@@ -74,6 +75,8 @@ const SignIn = () => {
         >
           {loading ? "Loading..." : "Sign In"}
         </Button>
+        <span className="size-auto relative mx-auto">OR</span>
+        <GoogleAuth />
       </form>
       <div className="flex justify-center mt-3">
         <p className="text-slate-900">Don't have an account ?</p>
