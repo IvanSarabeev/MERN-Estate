@@ -1,4 +1,6 @@
 import { UserSignInData, UserSignUpData } from 'types/user';
+import { signInStart, signInSucces, signInFailure } from "store/user/userSlice";
+import { AppDispatch } from 'store/store';
 
 const postMethod = 'POST';
 
@@ -29,8 +31,10 @@ export const registerUser = async (formData: UserSignUpData) => {
     }
 }
 
-export const signInUser = async (formData: UserSignInData) => {
+export const signInUser = async (formData: UserSignInData, dispatch: AppDispatch) => {
     try {
+        dispatch(signInStart());
+
         const response = await fetch(urlSignIn, {
             method: postMethod,
             headers: {
@@ -45,11 +49,13 @@ export const signInUser = async (formData: UserSignInData) => {
     
         const data = await response.json();
 
-        console.log('User signed in successfully!');
+        if (data === false) {
+            dispatch(signInFailure(data));
+        }
+
+        dispatch(signInSucces(data));
         
         return data;
-
-        
     } catch (error) {
         throw new Error(`Error message: ${error}`)
     }

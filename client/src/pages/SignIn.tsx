@@ -4,6 +4,8 @@ import Button from "components/HTML/Button";
 import { UserSignInData } from "types/user";
 import { Link, useNavigate } from "react-router-dom";
 import { signInUser } from "../services/apiUser";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "store/store";
 
 const SignIn = () => {
   const [formData, setFormData] = useState<UserSignInData>({
@@ -11,10 +13,10 @@ const SignIn = () => {
     password: "",
   });
 
-  const [error, setError] = useState<null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
+  const { loading, error } = useSelector((state: RootState) => state.user);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
@@ -25,21 +27,16 @@ const SignIn = () => {
     });
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
     try {
-      setLoading(true);
-
-      if (formData !== null) {
-        signInUser(formData);
-        setError(null);
+      if (formData) {
+        await signInUser(formData, dispatch);
         navigate("/");
       }
     } catch (catchError) {
-      setLoading(false);
-
-      throw new Error(`Unexpected error ${error}`);
+      throw new Error(`Error occur, cound't sign in ${error}`);
     }
   };
 

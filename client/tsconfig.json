@@ -13,6 +13,7 @@
       "assets/*":["./src/assets/*"],
       "types/*":["./src/types/*"],
       "utils/*":["./src/utils/*"],
+      "store/*":["./src/store/*"],
     },
 
     /* Bundler mode */

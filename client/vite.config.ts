@@ -24,7 +24,8 @@ export default defineConfig({
       "assets": resolve(rootPath, "assets"),
       "types": resolve(rootPath, "types"),
       "utils": resolve(rootPath, "utils"),
-      "services": resolve(rootPath, "services")
+      "store": resolve(rootPath, "store"),
+      "services": resolve(rootPath, "services"),
     }
   }
 })
