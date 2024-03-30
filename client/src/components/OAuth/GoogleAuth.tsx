@@ -1,10 +1,17 @@
 import Button from "components/HTML/Button";
 import { FcGoogle } from "react-icons/fc";
+import { googleAuth } from "../../services/apiGoogle";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const GoogleAuth = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const handleGoogleSubmit = async () => {
     try {
-      console.log("");
+      googleAuth(dispatch);
+      navigate("/");
     } catch (error) {
       throw new Error(`You can't login via Google: ${error}`);
     }
