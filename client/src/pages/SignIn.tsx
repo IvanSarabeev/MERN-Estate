@@ -3,7 +3,7 @@ import Input from "components/HTML/Input";
 import Button from "components/HTML/Button";
 import { UserSignInData } from "types/user";
 import { Link, useNavigate } from "react-router-dom";
-import { signInUser } from "../services/apiUser";
+import { signInUser } from "../services/apiAuth";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "store/store";
 import GoogleAuth from "components/OAuth/GoogleAuth";

@@ -10,7 +10,7 @@ const GoogleAuth = () => {
 
   const handleGoogleSubmit = async () => {
     try {
-      googleAuth(dispatch);
+      await googleAuth(dispatch);
       navigate("/");
     } catch (error) {
       throw new Error(`You can't login via Google: ${error}`);

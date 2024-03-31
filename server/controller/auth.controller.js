@@ -26,13 +26,13 @@ export const signIn = async (req, res, next) => {
         const validUser = await User.findOne({email}); 
 
         if (!validUser) {
-            return next(errorHandler(404, 'User not found'));
+            return next(errorHandler(404, 'User not found!'));
         }
 
         const validUserPassword = bcryptjs.compareSync(password, validUser.password);
 
         if (!validUserPassword) {
-            return new(errorHandler(401, 'Wrong credentials!'));
+            return next(errorHandler(401, 'Wrong credentials!'));
         }
 
         // Set the jwtToken on the user id
@@ -43,11 +43,9 @@ export const signIn = async (req, res, next) => {
         // Set the session cookie, to not allow 3-rd party reading cookie & expiration time
         res.cookie('acces_token', jwtToken, {
             httpOnly: true, 
-            expires: new Date(Date.now() + 24 * 60),
-        })
-        .status(200)
-        .json(rest)
-        ;
+            // sameSite: 'strict', // Prevent CSRF attacks
+            expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+        }).status(200).json(rest);
     } catch (error) {
         next(error);
     }

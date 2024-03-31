@@ -3,7 +3,7 @@ import Button from "components/HTML/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { UserSignUpData } from "types/user";
-import { registerUser } from "../services/apiUser";
+import { registerUser } from "../services/apiAuth";
 import GoogleAuth from "components/OAuth/GoogleAuth";
 
 const SignUp = () => {

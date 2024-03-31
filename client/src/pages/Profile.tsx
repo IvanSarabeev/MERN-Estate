@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "store/store";
 import Input from "components/HTML/Input";
@@ -18,9 +18,9 @@ import { updateUser } from "../services/apiUser";
 
 const Profile = () => {
   const { avatar } = useSelector((state: RootState) => state.user.currentUser)!;
-  const { currentUser, loading } = useSelector(
-    (state: RootState) => state.user
-  );
+  const { currentUser } = useSelector(
+    (state: RootState) => state.user.currentUser
+  )!;
 
   const fileRef = useRef<HTMLInputElement | null>(null);
 
@@ -52,7 +52,7 @@ const Profile = () => {
     });
   };
 
-  useCallback(() => {
+  useEffect(() => {
     if (file) {
       const storage = getStorage(app);
       const fileName = new Date().getTime() + file.name;
@@ -66,7 +66,7 @@ const Profile = () => {
         // round the file
         setFilePerc(Math.round(progress));
       }),
-        (error) => {
+        (error: boolean) => {
           setFileError(error);
         },
         () => {
@@ -187,10 +187,11 @@ const Profile = () => {
         <Button
           type="submit"
           title="Update button"
-          disabled={loading}
+          // disabled={loading}
           className="text-white rounded-lg p-2.5 uppercase mt-3 bg-slate-700 transition-all ease-in-out hover:scale-105 hover:opacity-95 disabled:opacity-80"
         >
-          {loading ? "Loading" : "Update"}
+          {/* {loading ? "Loading" : "Update"} */}
+          Update
         </Button>
         <div className="flex items-center justify-between mt-5">
           <span className="text-slate-900 cursor-pointer">Delete Account</span>

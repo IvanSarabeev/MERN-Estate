@@ -23,7 +23,7 @@ const Header = () => {
 
   const [show, setShow] = useToggle();
   const [hidden, setHidden] = useState<boolean>(false);
-  const { avatar } = useSelector((state: RootState) => state.user.currentUser)!;
+  const { avatar } = useSelector((state: RootState) => state.user);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious();
