@@ -5,7 +5,7 @@ import useToggle from "hooks/useToggle";
 import { IoMenu } from "react-icons/io5";
 import { FaSearch } from "react-icons/fa";
 import { HiMiniXMark } from "react-icons/hi2";
-import { headerLinks } from "components/constants";
+import { headerLinks, userNavigation, userProfile } from "components/constants";
 import { NavLink } from "react-router-dom";
 import MobileNav from "./MobileNav";
 import {
@@ -15,12 +15,15 @@ import {
   useMotionValueEvent,
 } from "framer-motion";
 import { scrollTop } from "utils/scrollTop";
+import { useSelector } from "react-redux";
+import { RootState } from "store/store";
 
 const Header = () => {
   const { scrollY } = useScroll();
 
   const [show, setShow] = useToggle();
   const [hidden, setHidden] = useState<boolean>(false);
+  const { avatar } = useSelector((state: RootState) => state.user.currentUser)!;
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious();
@@ -93,6 +96,56 @@ const Header = () => {
               </motion.li>
             );
           })}
+          {avatar ? (
+            <motion.li
+              initial={{ opacity: 0, translateX: -50, translateY: -50 }}
+              animate={{ opacity: 1, translateX: 0, translateY: 0 }}
+              transition={{
+                duration: 0.5,
+                type: "spring",
+                ease: "easeInOut",
+              }}
+            >
+              {userProfile.map((item) => {
+                return (
+                  <NavLink key={item.id} to={item.href}>
+                    <span className="sr-only">User Profile Image</span>
+                    {avatar && (
+                      <img
+                        src={avatar}
+                        alt={`${item.label}`}
+                        className="size-7 rounded-full object-cover aspect-auto transition-all ease-in-out hover:scale-110"
+                      />
+                    )}
+                  </NavLink>
+                );
+              })}
+            </motion.li>
+          ) : (
+            <motion.li
+              initial={{ opacity: 0, translateX: -50, translateY: -50 }}
+              animate={{ opacity: 1, translateX: 0, translateY: 0 }}
+              transition={{
+                duration: 0.5,
+                type: "spring",
+                ease: "easeInOut",
+              }}
+            >
+              {userNavigation.map((item) => {
+                return (
+                  <NavLink
+                    key={item.id}
+                    to={item.href}
+                    className={({ isActive }) =>
+                      isActive ? "active-link" : "passive-link"
+                    }
+                  >
+                    {item.label}
+                  </NavLink>
+                );
+              })}
+            </motion.li>
+          )}
         </menu>
         <AnimatePresence mode="wait">
           {show ? <MobileNav /> : hidden}

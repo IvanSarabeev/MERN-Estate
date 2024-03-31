@@ -5,6 +5,8 @@ import SignUp from "./pages/SignUp";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Layout from "components/Layouts/Layout";
+import AuthRequiredRoute from "./auth/AuthRequiredRoute";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -16,6 +18,9 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
+          <Route element={<AuthRequiredRoute />}>
+            <Route path="/profile" element={<Profile />} />
+          </Route>
         </Routes>
       </Layout>
     </BrowserRouter>
