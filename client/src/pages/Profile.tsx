@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "store/store";
 import Input from "components/HTML/Input";
 import Button from "components/HTML/Button";
@@ -14,9 +14,13 @@ import {
 } from "firebase/storage";
 import { app } from "../fireStore/firebase";
 import { UserUploadData } from "types/user";
+import { updateUser } from "../services/apiUser";
 
 const Profile = () => {
   const { avatar } = useSelector((state: RootState) => state.user.currentUser)!;
+  const { currentUser, loading } = useSelector(
+    (state: RootState) => state.user
+  );
 
   const fileRef = useRef<HTMLInputElement | null>(null);
 
@@ -29,6 +33,9 @@ const Profile = () => {
     password: "",
     avatar: "",
   });
+  const [onSuccess, setOnSuccess] = useState<boolean>(false);
+
+  const dispatch = useDispatch();
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
@@ -73,6 +80,20 @@ const Profile = () => {
     }
   }, [file, formData]);
 
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+
+    try {
+      if (formData) {
+        updateUser(formData, dispatch, currentUser);
+
+        setOnSuccess(true);
+      }
+    } catch (error) {
+      throw new Error(`Error occur, cound't sign in ${error}`);
+    }
+  };
+
   return (
     <section className="padding-container">
       <h1 className="text-3xl font-semibold text-center my-7 sm:text-5xl">
@@ -81,6 +102,7 @@ const Profile = () => {
       <form
         action=""
         method="post"
+        onSubmit={handleSubmit}
         className="gap-1 sm:gap-2 lg-gap-4 flex flex-col max-w-xl mx-auto"
       >
         <div className="flex flex-col items-center justify-center">
@@ -163,17 +185,21 @@ const Profile = () => {
           />
         </div>
         <Button
-          title="Update button"
           type="submit"
+          title="Update button"
+          disabled={loading}
           className="text-white rounded-lg p-2.5 uppercase mt-3 bg-slate-700 transition-all ease-in-out hover:scale-105 hover:opacity-95 disabled:opacity-80"
         >
-          Update
+          {loading ? "Loading" : "Update"}
         </Button>
         <div className="flex items-center justify-between mt-5">
           <span className="text-slate-900 cursor-pointer">Delete Account</span>
           <span className="text-red-700 cursor-pointer">Logout</span>
         </div>
       </form>
+      <p className="text-green-700 text-2xl text-center mt-5 mx-auto">
+        {onSuccess ? "User updated successfully" : ""}
+      </p>
     </section>
   );
 };

@@ -28,11 +28,23 @@ export const userSlicer = createSlice({
             state.error = action.payload;
             state.loading = false;
         },
+        updatedUserStart: (state) => {
+            state.loading = true;
+        },
+        updatedUserSuccess: (state, action) => {
+            state.currentUser = action.payload
+            state.loading = false;
+            state.error = null;
+        },
+        updatedUserFailure: (state, action) => {
+            state.error = action.payload;
+            state.loading = false;
+        }
     }
 });
 
 // Export reducer functions
-export const { signInStart, signInSucces, signInFailure } = userSlicer.actions;
+export const { signInStart, signInSucces, signInFailure, updatedUserStart, updatedUserSuccess, updatedUserFailure } = userSlicer.actions;
 
 // Export the entire reducer
 export default userSlicer.reducer;
