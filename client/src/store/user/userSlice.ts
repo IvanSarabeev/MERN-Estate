@@ -39,12 +39,34 @@ export const userSlicer = createSlice({
         updatedUserFailure: (state, action) => {
             state.error = action.payload;
             state.loading = false;
+        },
+        deleteUserStart: (state) => {
+            state.loading = true;
+        },
+        deleteUserSuccess: (state, action) => {
+            state.currentUser = action.payload;
+            state.loading = false;
+            state.error = null;
+        },
+        deleteUserFailure: (state, action) => {
+            state.error = action.payload;
+            state.loading = false;
         }
     }
 });
 
 // Export reducer functions
-export const { signInStart, signInSucces, signInFailure, updatedUserStart, updatedUserSuccess, updatedUserFailure } = userSlicer.actions;
+export const { 
+    signInStart, 
+    signInSucces, 
+    signInFailure, 
+    updatedUserStart, 
+    updatedUserSuccess, 
+    updatedUserFailure,
+    deleteUserStart,
+    deleteUserSuccess,
+    deleteUserFailure
+} = userSlicer.actions;
 
 // Export the entire reducer
 export default userSlicer.reducer;

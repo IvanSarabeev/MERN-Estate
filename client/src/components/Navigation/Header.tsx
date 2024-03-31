@@ -23,7 +23,7 @@ const Header = () => {
 
   const [show, setShow] = useToggle();
   const [hidden, setHidden] = useState<boolean>(false);
-  const { avatar } = useSelector((state: RootState) => state.user);
+  const { currentUser } = useSelector((state: RootState) => state.user);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious();
@@ -96,7 +96,7 @@ const Header = () => {
               </motion.li>
             );
           })}
-          {avatar ? (
+          {currentUser ? (
             <motion.li
               initial={{ opacity: 0, translateX: -50, translateY: -50 }}
               animate={{ opacity: 1, translateX: 0, translateY: 0 }}
@@ -110,9 +110,9 @@ const Header = () => {
                 return (
                   <NavLink key={item.id} to={item.href}>
                     <span className="sr-only">User Profile Image</span>
-                    {avatar && (
+                    {currentUser && (
                       <img
-                        src={avatar}
+                        src={currentUser.avatar}
                         alt={`${item.label}`}
                         className="size-7 rounded-full object-cover aspect-auto transition-all ease-in-out hover:scale-110"
                       />

@@ -15,6 +15,7 @@ import {
 import { app } from "../fireStore/firebase";
 import { UserUploadData } from "types/user";
 import { updateUser } from "../services/apiUser";
+import { deleteUser } from "firebase/auth";
 
 const Profile = () => {
   const { avatar } = useSelector((state: RootState) => state.user.currentUser)!;
@@ -92,6 +93,10 @@ const Profile = () => {
     } catch (error) {
       throw new Error(`Error occur, cound't sign in ${error}`);
     }
+  };
+
+  const handleAccountDelete = () => {
+    deleteUser(currentUser);
   };
 
   return (
@@ -194,7 +199,12 @@ const Profile = () => {
           Update
         </Button>
         <div className="flex items-center justify-between mt-5">
-          <span className="text-slate-900 cursor-pointer">Delete Account</span>
+          <span
+            onClick={handleAccountDelete}
+            className="text-slate-900 cursor-pointer"
+          >
+            Delete Account
+          </span>
           <span className="text-red-700 cursor-pointer">Logout</span>
         </div>
       </form>
