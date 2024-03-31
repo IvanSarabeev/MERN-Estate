@@ -1,4 +1,4 @@
-import React from "react";
+import { useCallback, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "store/store";
 import Input from "components/HTML/Input";
@@ -6,9 +6,72 @@ import Button from "components/HTML/Button";
 import { FaRegUserCircle } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 import { IoLockOpenOutline } from "react-icons/io5";
+import {
+  getDownloadURL,
+  getStorage,
+  ref,
+  uploadBytesResumable,
+} from "firebase/storage";
+import { app } from "../fireStore/firebase";
+import { UserUploadData } from "types/user";
 
 const Profile = () => {
   const { avatar } = useSelector((state: RootState) => state.user.currentUser)!;
+
+  const fileRef = useRef<HTMLInputElement | null>(null);
+
+  const [file, setFile] = useState<File | null>(null);
+  const [filePerc, setFilePerc] = useState<number>(0);
+  const [fileError, setFileError] = useState<boolean>(false);
+  const [formData, setFormData] = useState<UserUploadData>({
+    username: "",
+    email: "",
+    password: "",
+    avatar: "",
+  });
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files.length > 0) {
+      setFile(event.target.files[0]);
+    }
+  };
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+
+    setFormData({
+      ...formData,
+      [event.target.id]: event.target.value,
+    });
+  };
+
+  useCallback(() => {
+    if (file) {
+      const storage = getStorage(app);
+      const fileName = new Date().getTime() + file.name;
+
+      const storageRef = ref(storage, fileName);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      uploadTask.on("state_changed", (snapshop) => {
+        const progress =
+          (snapshop.bytesTransferred / snapshop.totalBytes) * 100;
+        // round the file
+        setFilePerc(Math.round(progress));
+      }),
+        (error) => {
+          setFileError(error);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) =>
+            setFormData({
+              ...formData,
+              avatar: downloadURL,
+            })
+          );
+        };
+    }
+  }, [file, formData]);
 
   return (
     <section className="padding-container">
@@ -20,11 +83,34 @@ const Profile = () => {
         method="post"
         className="gap-1 sm:gap-2 lg-gap-4 flex flex-col max-w-xl mx-auto"
       >
-        <img
-          src={avatar}
-          alt=""
-          className="size-24 self-center rounded-full mb-4 aspect-auto object-cover transition-all ease-in-out hover:scale-110 hover:cursor-pointer"
-        />
+        <div className="flex flex-col items-center justify-center">
+          <Input
+            hidden
+            type="file"
+            ref={fileRef}
+            accept="image/*"
+            onChange={handleFileChange}
+          />
+          <img
+            src={formData.avatar || avatar}
+            alt="profile-avatar"
+            onClick={() => fileRef.current?.click()}
+            className="size-24 self-center rounded-full mb-4 aspect-auto object-cover transition-all ease-in-out hover:scale-110 hover:cursor-pointer"
+          />
+          <p className="text-sm self-center">
+            {fileError ? (
+              <span className="text-red-700">Error on image upload</span>
+            ) : filePerc > 0 && filePerc < 100 ? (
+              <span className="text-slate-900">Uploading {filePerc}%</span>
+            ) : filePerc === 100 ? (
+              <span className="text-green-700">
+                Image successfully uploaded
+              </span>
+            ) : (
+              ""
+            )}
+          </p>
+        </div>
         <div className="flex">
           <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border rounded-e-0 border-gray-300 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
             <FaRegUserCircle height={16} width={16} />
@@ -35,6 +121,8 @@ const Profile = () => {
             required
             id="username"
             name="username"
+            value={formData.username}
+            onChange={handleInputChange}
             title="Username Input"
             placeholder="Enter your username"
             className="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -50,6 +138,8 @@ const Profile = () => {
             required
             id="email"
             name="email"
+            value={formData.email}
+            onChange={handleInputChange}
             title="Email Input"
             placeholder="Enter your email address"
             className="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -65,6 +155,8 @@ const Profile = () => {
             required
             id="password"
             name="password"
+            value={formData.password}
+            onChange={handleInputChange}
             title="Password Input"
             placeholder="Enter your password"
             className="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -73,7 +165,7 @@ const Profile = () => {
         <Button
           title="Update button"
           type="submit"
-          className="text-white rounded-lg p-3 uppercase bg-slate-700 transition-all ease-in-out hover:scale-110 hover:opacity-95 disabled:opacity-80"
+          className="text-white rounded-lg p-2.5 uppercase mt-3 bg-slate-700 transition-all ease-in-out hover:scale-105 hover:opacity-95 disabled:opacity-80"
         >
           Update
         </Button>

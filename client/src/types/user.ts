@@ -9,3 +9,10 @@ export interface UserSignInData {
     'email': string,
     'password': string,
 }
+
+export interface UserUploadData {
+    'username': string,
+    'email': string,
+    'password': string,
+    'avatar': string
+}
