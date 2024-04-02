@@ -14,14 +14,15 @@ import {
 } from "firebase/storage";
 import { app } from "../fireStore/firebase";
 import { UserUploadData } from "types/user";
-import { updateUser } from "../services/apiUser";
-import { deleteUser } from "firebase/auth";
+import { signOutUser } from "../services/apiAuth";
+import { updateUser, deleteUser } from "../services/apiUser";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const { avatar } = useSelector((state: RootState) => state.user.currentUser)!;
-  const { currentUser } = useSelector(
-    (state: RootState) => state.user.currentUser
-  )!;
+
+  // const currentUser = store.getState().user.currentUser;
+  const currentUser = useSelector((state: RootState) => state.user.currentUser);
 
   const fileRef = useRef<HTMLInputElement | null>(null);
 
@@ -37,6 +38,7 @@ const Profile = () => {
   const [onSuccess, setOnSuccess] = useState<boolean>(false);
 
   const dispatch = useDispatch();
+  const navigation = useNavigate();
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
@@ -96,7 +98,12 @@ const Profile = () => {
   };
 
   const handleAccountDelete = () => {
-    deleteUser(currentUser);
+    deleteUser(dispatch, currentUser);
+  };
+
+  const handleSignOut = () => {
+    signOutUser(dispatch);
+    navigation("/sign-up");
   };
 
   return (
@@ -205,7 +212,14 @@ const Profile = () => {
           >
             Delete Account
           </span>
-          <span className="text-red-700 cursor-pointer">Logout</span>
+          <Button
+            title="SignOut"
+            type="button"
+            onClick={handleSignOut}
+            className="text-red-700 cursor-pointer"
+          >
+            Logout
+          </Button>
         </div>
       </form>
       <p className="text-green-700 text-2xl text-center mt-5 mx-auto">

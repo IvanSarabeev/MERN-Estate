@@ -51,7 +51,19 @@ export const userSlicer = createSlice({
         deleteUserFailure: (state, action) => {
             state.error = action.payload;
             state.loading = false;
-        }
+        },
+        signOutUserStart: (state) => {
+            state.loading = true;
+        },
+        signOutUserSuccess: (state, action) => {
+            state.currentUser = action.payload;
+            state.loading = false;
+            state.error = null;
+        },
+        signOutUserFailure: (state, action) => {
+            state.error = action.payload;
+            state.loading = false;
+        },
     }
 });
 
@@ -65,7 +77,10 @@ export const {
     updatedUserFailure,
     deleteUserStart,
     deleteUserSuccess,
-    deleteUserFailure
+    deleteUserFailure,
+    signOutUserStart,
+    signOutUserSuccess,
+    signOutUserFailure,
 } = userSlicer.actions;
 
 // Export the entire reducer

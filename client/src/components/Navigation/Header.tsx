@@ -15,15 +15,15 @@ import {
   useMotionValueEvent,
 } from "framer-motion";
 import { scrollTop } from "utils/scrollTop";
-import { useSelector } from "react-redux";
-import { RootState } from "store/store";
+import { store } from "store/store";
 
 const Header = () => {
   const { scrollY } = useScroll();
 
   const [show, setShow] = useToggle();
   const [hidden, setHidden] = useState<boolean>(false);
-  const { currentUser } = useSelector((state: RootState) => state.user);
+  const { currentUser } = store.getState().user;
+  console.log(currentUser);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious();
@@ -112,7 +112,7 @@ const Header = () => {
                     <span className="sr-only">User Profile Image</span>
                     {currentUser && (
                       <img
-                        src={currentUser.avatar}
+                        src={currentUser?.avatar}
                         alt={`${item.label}`}
                         className="size-7 rounded-full object-cover aspect-auto transition-all ease-in-out hover:scale-110"
                       />

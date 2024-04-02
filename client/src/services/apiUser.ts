@@ -7,16 +7,19 @@ import {
     deleteUserSuccess,
     deleteUserFailure
 } from "store/user/userSlice";
-import { AppDispatch } from 'store/store';
+import { AppDispatch, store } from 'store/store';
 import { UserUploadData } from "types/user";
 
 const urlUpdateUser: string = "/api/user/update";
 const urlDeleteUser: string = "/api/user/delete";
 
+const currentUser = store.getState().user.currentUser;
+console.log(currentUser);
+
 const postMethod = 'POST';
 const deleteMethod = 'DELETE';
 
-export const updateUser = async (formData:UserUploadData, dispatch:AppDispatch, currentUser: userState|null) => {
+export const updateUser = async (formData:UserUploadData, dispatch:AppDispatch, currentUser: userState | null) => {
     try {
         dispatch(updatedUserStart())
 
@@ -48,14 +51,18 @@ export const deleteUser = async (dispatch: AppDispatch, currentUser: userState|n
     try {
         dispatch(deleteUserStart());
 
-        const response = await fetch(`${urlDeleteUser}/${currentUser}`, {
+        if (!currentUser) {
+            throw new Error("currentUser is null or does not have _id property");
+        }
+
+        const response = await fetch(`${urlDeleteUser}/${currentUser?.currentUser}._id`, {
             method: deleteMethod,
         });
 
         const data = await response.json();
         
-        if (!response.ok) {
-            return dispatch(deleteUserFailure(data.message));
+        if (data.success === false) {
+            dispatch(deleteUserFailure(data));
         }
 
         dispatch(deleteUserSuccess(data));

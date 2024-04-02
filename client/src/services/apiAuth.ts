@@ -1,11 +1,19 @@
 import { UserSignInData, UserSignUpData } from 'types/user';
-import { signInStart, signInSucces, signInFailure } from "store/user/userSlice";
+import { 
+    signInStart, 
+    signInSucces, 
+    signInFailure,
+    signOutUserStart,
+    signOutUserSuccess,
+    signOutUserFailure,
+ } from "store/user/userSlice";
 import { AppDispatch } from 'store/store';
 
 const postMethod = 'POST';
 
 const urlSignUp: string = "/api/auth/signup";
 const urlSignIn: string = "/api/auth/signin";
+const urlSignOut: string = "/api/auth/signout";
 
 export const registerUser = async (formData: UserSignUpData) => {
     try {
@@ -57,6 +65,26 @@ export const signInUser = async (formData: UserSignInData, dispatch: AppDispatch
         
         return data;
     } catch (error) {
+        dispatch(signInFailure(error));
         throw new Error(`Error message: ${error}`)
     }
 }
+
+export const signOutUser = async (dispatch: AppDispatch) => {
+    try {
+        dispatch(signOutUserStart());
+
+        const response = await fetch(urlSignOut);
+
+        const data = await response.json();
+
+        if (data.success === false) {
+            return dispatch(signOutUserFailure(data));
+        }
+
+        dispatch(signOutUserSuccess(data));
+    } catch (error) {
+        dispatch(signOutUserSuccess(error));
+        throw new Error(`Error message: ${error}`);
+    }
+};

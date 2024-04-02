@@ -21,8 +21,7 @@ const app = express();
 
 app.use(express.json());
 
-// Get info from cookkie
-// app.use(cookieParser);
+app.use(cookieParser());
 
 app.listen(PORT, () => {
     console.log("Server is running up");
