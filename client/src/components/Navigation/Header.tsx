@@ -26,7 +26,7 @@ const Header = () => {
   console.log(currentUser);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    const previous = scrollY.getPrevious();
+    const previous: number | undefined = scrollY.getPrevious();
 
     if (latest > previous) {
       setHidden(true);
@@ -97,58 +97,53 @@ const Header = () => {
             );
           })}
           {currentUser ? (
-            <motion.li
-              initial={{ opacity: 0, translateX: -50, translateY: -50 }}
-              animate={{ opacity: 1, translateX: 0, translateY: 0 }}
-              transition={{
-                duration: 0.5,
-                type: "spring",
-                ease: "easeInOut",
-              }}
-            >
-              {userProfile.map((item) => {
+              userProfile.map((item) => {
                 return (
-                  <NavLink key={item.id} to={item.href}>
-                    <span className="sr-only">User Profile Image</span>
-                    {currentUser && (
-                      <img
-                        src={currentUser?.avatar}
-                        alt={`${item.label}`}
-                        className="size-7 rounded-full object-cover aspect-auto transition-all ease-in-out hover:scale-110"
-                      />
-                    )}
-                  </NavLink>
-                );
-              })}
-            </motion.li>
-          ) : (
-            <motion.li
-              initial={{ opacity: 0, translateX: -50, translateY: -50 }}
-              animate={{ opacity: 1, translateX: 0, translateY: 0 }}
-              transition={{
-                duration: 0.5,
-                type: "spring",
-                ease: "easeInOut",
-              }}
-            >
-              {userNavigation.map((item) => {
-                return (
-                  <NavLink
-                    key={item.id}
-                    to={item.href}
-                    className={({ isActive }) =>
-                      isActive ? "active-link" : "passive-link"
-                    }
-                  >
-                    {item.label}
-                  </NavLink>
-                );
-              })}
-            </motion.li>
-          )}
+                    <motion.li
+                        initial={{opacity: 0, translateX: -50, translateY: -50}}
+                        animate={{opacity: 1, translateX: 0, translateY: 0}}
+                        transition={{
+                          duration: 0.5,
+                          type: "spring",
+                          ease: "easeInOut",
+                        }}
+                        key={item.id}
+                    >
+                      <NavLink to={item.href} aria-label={'Profile'}>
+                        {item.label}
+                      </NavLink>
+                    </motion.li>
+                )
+              })
+          ) :
+              (
+                  userNavigation.map((item) => {
+                    return (
+                        <motion.li
+                            initial={{opacity: 0, translateX: -50, translateY: -50}}
+                            animate={{opacity: 1, translateX: 0, translateY: 0}}
+                            transition={{
+                              duration: 0.5,
+                              type: "spring",
+                              ease: "easeInOut",
+                            }}
+                            key={item.id}
+                        >
+                          <NavLink
+                               to={item.href}
+                               type='button'
+                               className={`${item.cssAttribute}`}>
+                            {item.label}
+                          </NavLink>
+                        </motion.li>
+                    )
+                  })
+              )
+          }
+
         </menu>
         <AnimatePresence mode="wait">
-          {show ? <MobileNav /> : hidden}
+          {show ? <MobileNav/> : hidden}
         </AnimatePresence>
       </nav>
     </motion.header>

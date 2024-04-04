@@ -4,8 +4,8 @@ import { RootState } from "store/store";
 
 const AuthRequiredRoute = () => {
   const { currentUser } = useSelector(
-    (state: RootState) => state.user.currentUser
-  )!;
+    (state: RootState) => state.user
+  );
 
   return currentUser ? <Navigate to={"/sign-in"} /> : <Outlet />;
 };
