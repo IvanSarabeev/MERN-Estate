@@ -1,5 +1,13 @@
+import Layout from "components/Layouts/Layout";
+
 const Home = () => {
-  return <div>Home Page</div>;
+  return (
+    <Layout>
+      <section className="h-screen w-screen bg-home-wallpaper bg-cover bg-top">
+        <h1>Hello</h1>
+      </section>
+    </Layout>
+  );
 };
 
 export default Home;
