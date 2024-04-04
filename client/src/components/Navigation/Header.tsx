@@ -23,7 +23,6 @@ const Header = () => {
   const [show, setShow] = useToggle();
   const [hidden, setHidden] = useState<boolean>(false);
   const { currentUser } = store.getState().user;
-  console.log(currentUser);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous: number | undefined = scrollY.getPrevious();
@@ -38,7 +37,7 @@ const Header = () => {
       variants={{ visibility: { y: 0 }, hidden: { y: "-100%" } }}
       animate={hidden ? "block" : "visible"}
       onClick={() => scrollTop()}
-      className="sticky top-0 h-fit w-full bg-slate-200 shadow-md transition-all"
+      className="sticky top-0 h-fit w-full z-50 bg-slate-200 shadow-md transition-all"
     >
       <nav className="max-container flexBetween padding-container py-3">
         <NavLink to={"/"}>
@@ -96,54 +95,50 @@ const Header = () => {
               </motion.li>
             );
           })}
-          {currentUser ? (
-              userProfile.map((item) => {
+          {currentUser
+            ? userProfile.map((item) => {
                 return (
-                    <motion.li
-                        initial={{opacity: 0, translateX: -50, translateY: -50}}
-                        animate={{opacity: 1, translateX: 0, translateY: 0}}
-                        transition={{
-                          duration: 0.5,
-                          type: "spring",
-                          ease: "easeInOut",
-                        }}
-                        key={item.id}
-                    >
-                      <NavLink to={item.href} aria-label={'Profile'}>
-                        {item.label}
-                      </NavLink>
-                    </motion.li>
-                )
+                  <motion.li
+                    initial={{ opacity: 0, translateX: -50, translateY: -50 }}
+                    animate={{ opacity: 1, translateX: 0, translateY: 0 }}
+                    transition={{
+                      duration: 0.5,
+                      type: "spring",
+                      ease: "easeInOut",
+                    }}
+                    key={item.id}
+                  >
+                    <NavLink to={item.href} aria-label={"Profile"}>
+                      {item.label}
+                    </NavLink>
+                  </motion.li>
+                );
               })
-          ) :
-              (
-                  userNavigation.map((item) => {
-                    return (
-                        <motion.li
-                            initial={{opacity: 0, translateX: -50, translateY: -50}}
-                            animate={{opacity: 1, translateX: 0, translateY: 0}}
-                            transition={{
-                              duration: 0.5,
-                              type: "spring",
-                              ease: "easeInOut",
-                            }}
-                            key={item.id}
-                        >
-                          <NavLink
-                               to={item.href}
-                               type='button'
-                               className={`${item.cssAttribute}`}>
-                            {item.label}
-                          </NavLink>
-                        </motion.li>
-                    )
-                  })
-              )
-          }
-
+            : userNavigation.map((item) => {
+                return (
+                  <motion.li
+                    initial={{ opacity: 0, translateX: -50, translateY: -50 }}
+                    animate={{ opacity: 1, translateX: 0, translateY: 0 }}
+                    transition={{
+                      duration: 0.5,
+                      type: "spring",
+                      ease: "easeInOut",
+                    }}
+                    key={item.id}
+                  >
+                    <NavLink
+                      to={item.href}
+                      type="button"
+                      className={`${item.cssAttribute}`}
+                    >
+                      {item.label}
+                    </NavLink>
+                  </motion.li>
+                );
+              })}
         </menu>
         <AnimatePresence mode="wait">
-          {show ? <MobileNav/> : hidden}
+          {show ? <MobileNav /> : hidden}
         </AnimatePresence>
       </nav>
     </motion.header>

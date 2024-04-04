@@ -10,7 +10,9 @@ const Layout = ({ children }: LayoutProp) => {
   return (
     <>
       <Header />
-      <main>{children}</main>
+      <main className="min-h-screen w-full max-container padding-container overflow-x-auto">
+        {children}
+      </main>
       <Footer />
     </>
   );
