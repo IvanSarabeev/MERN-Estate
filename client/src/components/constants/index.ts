@@ -1,4 +1,8 @@
 import { FaFacebook, FaInstagram, FaTwitter, FaGithub, FaDribbble } from "react-icons/fa";
+import { TbUserStar } from "react-icons/tb";
+import { BsHouseGear } from "react-icons/bs";
+import { PiWarehouseLight } from "react-icons/pi";
+import { RiSecurePaymentFill } from "react-icons/ri";
 
 export const headerLinks = [
     {id: 1, label: "Home", href: "/"},
@@ -23,4 +27,11 @@ export const socialMedia = [
 
 export const userProfile = [
     {id: 1, label: "Profile", href: "/profile"},
+] as const;
+
+export const achievmentTestimonial = [
+    {id: 1, label: 'Completed Contracts', icon: TbUserStar, review: 2500},
+    {id: 2, label: 'Property Sales', icon: BsHouseGear, review: 3500},
+    {id: 3, label: 'Apartment Rent', icon: PiWarehouseLight, review: 8500},
+    {id: 4, label: 'Happy Clients', icon: RiSecurePaymentFill, review: 4500},
 ] as const;
