@@ -18,13 +18,12 @@ import { signOutUser } from "../services/apiAuth";
 import { updateUser, deleteUser } from "../services/apiUser";
 import { useNavigate } from "react-router-dom";
 import Layout from "components/Layouts/Layout";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   const { avatar } = useSelector((state: RootState) => state.user.currentUser)!;
-
-  // const currentUser = store.getState().user.currentUser;
+  const { loading } = useSelector((state: RootState) => state.user.loading);
   const { currentUser } = useSelector((state: RootState) => state.user);
-  console.log(currentUser);
 
   const fileRef = useRef<HTMLInputElement | null>(null);
 
@@ -205,9 +204,14 @@ const Profile = () => {
             // disabled={loading}
             className="text-white rounded-lg p-2.5 uppercase mt-3 bg-slate-700 transition-all ease-in-out hover:scale-105 hover:opacity-95 disabled:opacity-80"
           >
-            {/* {loading ? "Loading" : "Update"} */}
-            Update
+            {loading ? "Loading" : "Update"}
           </Button>
+          <Link
+            to={"/create-listing"}
+            className="uppercase text-center p-3 rounded-lg text-white bg-green-700 hover:opacity-95"
+          >
+            Add property
+          </Link>
           <div className="flex items-center justify-between mt-5">
             <span
               onClick={handleAccountDelete}

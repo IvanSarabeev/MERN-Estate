@@ -7,13 +7,14 @@ import {
     deleteUserSuccess,
     deleteUserFailure
 } from "store/user/userSlice";
-import { AppDispatch, store } from 'store/store';
+import { AppDispatch } from 'store/store';
 import { UserUploadData } from "types/user";
 
 const urlUpdateUser: string = "/api/user/update";
 const urlDeleteUser: string = "/api/user/delete";
 
-const currentUser = store.getState().user;
+// const currentUser = store.getState().user.currentUser;
+// TODO: fix user functionallity
 
 const postMethod = 'POST';
 const deleteMethod = 'DELETE';
@@ -22,7 +23,7 @@ export const updateUser = async (formData:UserUploadData, dispatch:AppDispatch, 
     try {
         dispatch(updatedUserStart())
 
-        const response = await fetch(`${urlUpdateUser}/${currentUser}`, {
+        const response = await fetch(`${urlUpdateUser}/${currentUser?.currentUser}`, {
             method: postMethod,
             headers: {
                 'Content-Type': 'application/json',

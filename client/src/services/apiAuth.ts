@@ -82,9 +82,9 @@ export const signOutUser = async (dispatch: AppDispatch) => {
             return dispatch(signOutUserFailure(data));
         }
 
-        dispatch(signOutUserSuccess(data));
+        return dispatch(signOutUserSuccess(data));
     } catch (error) {
         dispatch(signOutUserSuccess(error));
-        throw new Error(`Error message: ${error}`);
+        throw new Error(`Error message: ${JSON.stringify(error)}`);
     }
 };

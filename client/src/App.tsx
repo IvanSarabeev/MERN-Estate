@@ -7,6 +7,7 @@ import Contact from "./pages/Contact";
 import AuthRequiredRoute from "./auth/AuthRequiredRoute";
 import Profile from "./pages/Profile";
 import ErrorPage from "./pages/ErrorPage";
+import CreateListing from "./pages/CreateListing";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/sign-up" element={<SignUp />} />
         <Route element={<AuthRequiredRoute />}>
           <Route path="/profile" element={<Profile />} />
+          <Route path="/create-listing" element={<CreateListing />} />
         </Route>
         <Route path="*" element={<ErrorPage />} />
       </Routes>
