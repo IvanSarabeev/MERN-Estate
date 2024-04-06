@@ -23,7 +23,8 @@ const Profile = () => {
   const { avatar } = useSelector((state: RootState) => state.user.currentUser)!;
 
   // const currentUser = store.getState().user.currentUser;
-  const currentUser = useSelector((state: RootState) => state.user.currentUser);
+  const { currentUser } = useSelector((state: RootState) => state.user);
+  console.log(currentUser);
 
   const fileRef = useRef<HTMLInputElement | null>(null);
 

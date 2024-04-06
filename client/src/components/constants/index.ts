@@ -16,6 +16,10 @@ export const userNavigation = [
     {id: 2, label: "Register", href: "/sign-up", cssAttribute: 'rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600'},
 ] as const;
 
+export const userProfile = [
+    {id: 1, label: "Profile", href: "/profile"},
+] as const;
+
 export const socialMedia = [
     {id: 1, label: 'Facebook', href: 'https://www.facebook.com/?locale=bg_BG', icon: FaFacebook},
     {id: 2, label: 'Instagram', href: 'https://www.instagram.com/', icon: FaInstagram},
@@ -24,10 +28,6 @@ export const socialMedia = [
     {id: 5, label: 'Dribble', href: 'https://dribbble.com/', icon: FaDribbble},
 ] as const;
 
-
-export const userProfile = [
-    {id: 1, label: "Profile", href: "/profile"},
-] as const;
 
 export const achievmentTestimonial = [
     {id: 1, label: 'Completed Contracts', icon: TbUserStar, review: 2500},

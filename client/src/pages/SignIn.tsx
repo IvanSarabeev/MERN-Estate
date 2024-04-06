@@ -40,7 +40,7 @@ const SignIn = () => {
         navigate("/");
       }
     } catch (catchError) {
-      throw new Error(`Error occur, cound't sign in ${error}`);
+      throw new Error(`Error occur, cound't sign in ${JSON.stringify(error)}`);
     }
   };
 
@@ -62,11 +62,11 @@ const SignIn = () => {
             <Input
               type="text"
               required
-              id="username"
-              name="username"
+              id="email"
+              name="email"
               onChange={handleInputChange}
               title="Username Input"
-              placeholder="Enter your username"
+              placeholder="Enter your email"
               className="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
           </div>

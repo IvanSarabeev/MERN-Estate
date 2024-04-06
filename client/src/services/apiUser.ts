@@ -13,8 +13,7 @@ import { UserUploadData } from "types/user";
 const urlUpdateUser: string = "/api/user/update";
 const urlDeleteUser: string = "/api/user/delete";
 
-const currentUser = store.getState().user.currentUser;
-console.log(currentUser);
+const currentUser = store.getState().user;
 
 const postMethod = 'POST';
 const deleteMethod = 'DELETE';
