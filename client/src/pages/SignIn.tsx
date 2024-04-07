@@ -37,7 +37,7 @@ const SignIn = () => {
     try {
       if (formData) {
         await signInUser(formData, dispatch);
-        navigate("/");
+        navigate("/profile");
       }
     } catch (catchError) {
       throw new Error(`Error occur, cound't sign in ${JSON.stringify(error)}`);

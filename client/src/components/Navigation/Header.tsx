@@ -109,7 +109,11 @@ const Header = () => {
                     key={item.id}
                   >
                     <NavLink to={item.href} aria-label={"Profile"}>
-                      {item.label}
+                      <img
+                        src={currentUser?.avatar}
+                        alt={item.label}
+                        className="size-7 rounded-full object-cover aspect-auto"
+                      />
                     </NavLink>
                   </motion.li>
                 );
