@@ -1,6 +1,6 @@
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { app } from "../fireStore/firebase";
-import { signInSucces } from "store/user/userSlice";
+import { signInFailure, signInStart, signInSucces } from "store/user/userSlice";
 import { AppDispatch } from "store/store";
 
 const googleUrl = "/api/auth/google";
@@ -12,6 +12,8 @@ export const googleAuth = async (dispatch: AppDispatch) => {
         const auth = getAuth(app);
 
         const result = await signInWithPopup(auth, provider);
+
+        dispatch(signInStart());
 
         const response = await fetch(googleUrl, {
             method: methodPOST,
@@ -32,8 +34,15 @@ export const googleAuth = async (dispatch: AppDispatch) => {
 
         const data = await response.json();
 
+        if (data === false) {
+            dispatch(signInFailure(data));
+            return;
+        }
+
         dispatch(signInSucces(data));
+
+        return data;
     } catch (error) {
-        throw new Error(`Unable to fetch, error message occur: ${error}`)
+        throw new Error(`Unable to fetch, error message occur: ${JSON.stringify(error)}`);
     }
 }

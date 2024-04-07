@@ -104,7 +104,7 @@ const Profile = () => {
 
   const handleSignOut = () => {
     signOutUser(dispatch);
-    navigation("/sign-up");
+    navigation("/sign-in");
   };
 
   return (

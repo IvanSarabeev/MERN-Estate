@@ -1,0 +1,17 @@
+export interface CreateListingIntf {
+    imageUrls: string[],
+    name?: string,
+    description?: string,
+    address?: string,
+    userRef?: string,
+    type?: 'rent' | 'sell',
+    bedroom?: number,
+    bathroom?: number,
+    regularPrice?: number,
+    discountPrice?: number,
+    yearBuild?: number,
+    rooms?: number,
+    offer?: boolean,
+    parking?: boolean,
+    furnished?: boolean,
+}
