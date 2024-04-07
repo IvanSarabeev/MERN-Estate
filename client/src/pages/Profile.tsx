@@ -19,6 +19,7 @@ import { updateUser, deleteUser } from "../services/apiUser";
 import { useNavigate } from "react-router-dom";
 import Layout from "components/Layouts/Layout";
 import { Link } from "react-router-dom";
+import { showListing } from "../services/apiListing";
 
 const Profile = () => {
   const { avatar } = useSelector((state: RootState) => state.user.currentUser)!;
@@ -37,6 +38,8 @@ const Profile = () => {
     avatar: "",
   });
   const [onSuccess, setOnSuccess] = useState<boolean>(false);
+  const [showListingError, setShowListingError] = useState<boolean>(false);
+  const [userListings, setUserListings] = useState([]);
 
   const dispatch = useDispatch();
   const navigation = useNavigate();
@@ -107,6 +110,13 @@ const Profile = () => {
     navigation("/sign-in");
   };
 
+  const handleShowListings = async () => {
+    const data = await showListing(currentUser);
+    setUserListings(data);
+    console.log(data);
+    console.log(setUserListings);
+  };
+
   return (
     <Layout>
       <section className="padding-container">
@@ -160,7 +170,7 @@ const Profile = () => {
               value={formData.username}
               onChange={handleInputChange}
               title="Username Input"
-              placeholder="Enter your username"
+              placeholder={currentUser.username}
               className="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
           </div>
@@ -170,14 +180,14 @@ const Profile = () => {
               <span className="sr-only">Email Icon</span>
             </span>
             <Input
-              type="email"
               required
               id="email"
+              type="email"
               name="email"
+              title="Email Input"
               value={formData.email}
               onChange={handleInputChange}
-              title="Email Input"
-              placeholder="Enter your email address"
+              placeholder={currentUser.email}
               className="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
           </div>
@@ -201,7 +211,7 @@ const Profile = () => {
           <Button
             type="submit"
             title="Update button"
-            // disabled={loading}
+            disabled={loading}
             className="text-white rounded-lg p-2.5 uppercase mt-3 bg-slate-700 transition-all ease-in-out hover:scale-105 hover:opacity-95 disabled:opacity-80"
           >
             {loading ? "Loading" : "Update"}
@@ -229,9 +239,28 @@ const Profile = () => {
             </Button>
           </div>
         </form>
+        <p className="text-red-700 mt-5">
+          {showListingError ? JSON.stringify(showListingError) : ""}
+        </p>
         <p className="text-green-700 text-2xl text-center mt-5 mx-auto">
           {onSuccess ? "User updated successfully" : ""}
         </p>
+        <Button
+          title="Show Listings"
+          onClick={handleShowListings}
+          className="w-full text-green-700"
+        >
+          Show Listing
+        </Button>
+        {userListings &&
+          userListings.length > 0 &&
+          userListings.map((item, index) => {
+            return (
+              <div key={index}>
+                <Link to={`/listings/${item._id}`}>{item.title}</Link>
+              </div>
+            );
+          })}
       </section>
     </Layout>
   );
