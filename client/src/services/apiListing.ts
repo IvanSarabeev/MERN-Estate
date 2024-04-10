@@ -1,34 +1,28 @@
-interface User {
-    id: string,
-    username?: string,
+import { CurrentUserInterface } from "types/user";
+
+interface ApiListingProps {
+    setShowListingError: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
-// interface ProfileListingIntf {
-//     setShowListingError: React.Dispatch<React.SetStateAction<boolean>>,
-// }
+const listingUrl = "/api/user/listings";
 
-// {setShowListingError}: ProfileListingIntf
-
-export const showListing = async (currentUser: User | null)=> {
+export const showListing = async (
+    currentUser: CurrentUserInterface,
+     {setShowListingError}: ApiListingProps) => {
     try {
-        // setShowListingError(false);
+        setShowListingError(false);
         
-        if (currentUser) {
-            const { _id, username } = currentUser;
-            console.log(_id, username);
-        }
-        
-        const response = await fetch(`/api/user/listings/${currentUser._id}`);
-        console.log(response);
+        const response = await fetch(`${listingUrl}/${currentUser._id}`);
         
         const data = await response.json();
 
         if (data.success === false) {
-            // setShowListingError(true);
+            return setShowListingError(true)
         }
 
         return data;
     } catch (error) {
+        setShowListingError(true);
         throw new Error(`Error message: ${error}`);
     }
 };

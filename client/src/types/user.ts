@@ -2,7 +2,6 @@ export interface UserSignUpData {
     'username': string,
     'email': string,
     'password': string,
-    // 'repassword': string,
 }
 
 export interface UserSignInData {
@@ -17,5 +16,9 @@ export interface UserUploadData {
 }
 
 export interface CurrentUserInterface {
-    '_id': string,
+    '_id'?: string,
+    'username'?: string,
+    'email'?: string,
+    'avatar'?: string,
+    'createdAt'?: string,
 }
