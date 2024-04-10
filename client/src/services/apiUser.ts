@@ -2,40 +2,43 @@ import {
     updatedUserStart, 
     updatedUserSuccess, 
     updatedUserFailure,
-    userState,
     deleteUserStart,
     deleteUserSuccess,
     deleteUserFailure
 } from "store/user/userSlice";
-import { AppDispatch } from 'store/store';
-import { UserUploadData } from "types/user";
+import { AppDispatch, store } from 'store/store';
+import { CurrentUserInterface, UserUploadData } from "types/user";
 
 const urlUpdateUser: string = "/api/user/update";
 const urlDeleteUser: string = "/api/user/delete";
 
-// const currentUser = store.getState().user.currentUser;
-// TODO: fix user functionallity
-
 const postMethod = 'POST';
 const deleteMethod = 'DELETE';
 
-export const updateUser = async (formData:UserUploadData, dispatch:AppDispatch, currentUser: userState | null) => {
+export const updateUser = async (formData:UserUploadData, dispatch:AppDispatch) => {
     try {
-        dispatch(updatedUserStart())
+        const currentUser = store.getState().user.currentUser! as CurrentUserInterface;
+        const userId = currentUser._id ?? 'defaultUserId';
 
-        const response = await fetch(`${urlUpdateUser}/${currentUser?.currentUser}`, {
+        dispatch(updatedUserStart())
+        
+        const response = await fetch(`${urlUpdateUser}/${userId}`, {
             method: postMethod,
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(formData),
         });
-
+        
         const data = await response.json();
 
         if (!response.ok) {
             dispatch(updatedUserFailure(data.message));
             throw new Error(`Status code: ${response.status}, status message: ${response.statusText}`);
+        }
+
+        if (data.success === false) {
+            return dispatch(updatedUserFailure(data));
         }
 
         dispatch(updatedUserSuccess(data));
@@ -47,15 +50,20 @@ export const updateUser = async (formData:UserUploadData, dispatch:AppDispatch, 
     }
 }
 
-export const deleteUser = async (dispatch: AppDispatch, currentUser: userState|null) => {
+export const deleteUser = async (dispatch: AppDispatch) => {
     try {
+        const currentUser = store.getState().user.currentUser! as CurrentUserInterface;
+        const userId = currentUser._id ?? "defaultUser";
+
+        console.log(currentUser, userId);
+
         dispatch(deleteUserStart());
 
         if (!currentUser) {
             throw new Error("currentUser is null or does not have _id property");
         }
 
-        const response = await fetch(`${urlDeleteUser}/${currentUser?.currentUser}._id`, {
+        const response = await fetch(`${urlDeleteUser}/${userId}`, {
             method: deleteMethod,
         });
 

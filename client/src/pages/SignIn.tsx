@@ -110,7 +110,11 @@ const SignIn = () => {
             </Link>
           </u>
         </div>
-        {error && <p className="text-red-500 mt-3"> {error} </p>}
+        {error ? (
+          <p className="text-red-500 mt-3"> {JSON.stringify(error)} </p>
+        ) : (
+          ""
+        )}
       </section>
     </Layout>
   );

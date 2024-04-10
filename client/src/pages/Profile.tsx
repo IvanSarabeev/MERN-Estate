@@ -23,7 +23,7 @@ import { showListing } from "../services/apiListing";
 
 const Profile = () => {
   const { avatar } = useSelector((state: RootState) => state.user.currentUser)!;
-  const { loading } = useSelector((state: RootState) => state.user.loading);
+  // const { loading } = useSelector((state: RootState) => state.user.loading);
   const { currentUser } = useSelector((state: RootState) => state.user);
 
   const fileRef = useRef<HTMLInputElement | null>(null);
@@ -34,7 +34,6 @@ const Profile = () => {
   const [formData, setFormData] = useState<UserUploadData>({
     username: "",
     email: "",
-    password: "",
     avatar: "",
   });
   const [onSuccess, setOnSuccess] = useState<boolean>(false);
@@ -92,7 +91,7 @@ const Profile = () => {
 
     try {
       if (formData) {
-        updateUser(formData, dispatch, currentUser);
+        updateUser(formData, dispatch);
 
         setOnSuccess(true);
       }
@@ -101,8 +100,8 @@ const Profile = () => {
     }
   };
 
-  const handleAccountDelete = () => {
-    deleteUser(dispatch, currentUser);
+  const handleAccountDelete = async () => {
+    await deleteUser(dispatch);
   };
 
   const handleSignOut = () => {
@@ -191,30 +190,29 @@ const Profile = () => {
               className="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
           </div>
-          <div className="flex">
+          {/* <div className="flex">
             <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border rounded-e-0 border-gray-300 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
               <IoLockOpenOutline height={16} width={16} />
               <span className="sr-only">Pasword Icon</span>
             </span>
             <Input
               type="password"
-              required
               id="password"
               name="password"
-              value={formData.password}
+              // value={formData.password}
               onChange={handleInputChange}
               title="Password Input"
               placeholder="Enter your password"
               className="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
-          </div>
+          </div> */}
           <Button
             type="submit"
             title="Update button"
-            disabled={loading}
+            disabled={currentUser?.loading}
             className="text-white rounded-lg p-2.5 uppercase mt-3 bg-slate-700 transition-all ease-in-out hover:scale-105 hover:opacity-95 disabled:opacity-80"
           >
-            {loading ? "Loading" : "Update"}
+            {currentUser?.loading ? "Loading" : "Update"}
           </Button>
           <Link
             to={"/create-listing"}

@@ -41,11 +41,9 @@ export const signIn = async (req, res, next) => {
         const {password: pass, ...rest} = validUser._doc;
 
         // Set the session cookie, to not allow 3-rd party reading cookie & expiration time
-        res.cookie('acces_token', jwtToken, {
-            httpOnly: true, 
-            // sameSite: 'strict', // Prevent CSRF attacks
-            expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-        }).status(200).json(rest);
+        res.cookie('acces_token', jwtToken, { httpOnly: true })
+        .status(200)
+        .json(rest);
     } catch (error) {
         next(error);
     }
@@ -62,7 +60,6 @@ export const googleAuth = async (req, res, next) => {
 
             res.cookie('access_token', jwtToken, {
                 httpOnly: true,
-                expires: new Date(Date.now() + 24 * 60),
             })
             .status(200)
             .json(rest)
@@ -86,7 +83,6 @@ export const googleAuth = async (req, res, next) => {
 
             res.cookie('access_token', jwtToken, {
                 httpOnly: true,
-                expires: new Date(Date.now() + 24 * 60),
             })
             .status(200)
             .json(rest)

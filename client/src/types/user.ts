@@ -13,6 +13,9 @@ export interface UserSignInData {
 export interface UserUploadData {
     'username': string,
     'email': string,
-    'password': string,
     'avatar': string
+}
+
+export interface CurrentUserInterface {
+    '_id': string,
 }
