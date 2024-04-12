@@ -19,6 +19,7 @@ import Layout from "components/Layouts/Layout";
 import { showListing } from "../services/apiListing";
 import { UserUploadData } from "types/user";
 import { ReduxUserState } from "types/redux";
+import { PropertysData } from "types/listing";
 
 const Profile: React.FC = () => {
   const currUser = store.getState().user.currentUser! as ReduxUserState;
@@ -34,7 +35,7 @@ const Profile: React.FC = () => {
   });
   const [onSuccess, setOnSuccess] = useState<boolean>(false);
   const [showListingError, setShowListingError] = useState<boolean>(false);
-  const [userListings, setUserListings] = useState([]);
+  const [userListings, setUserListings] = useState<PropertysData[]>([]);
 
   const dispatch = useDispatch();
   const navigation = useNavigate();
@@ -108,6 +109,7 @@ const Profile: React.FC = () => {
   const handleShowListings = async () => {
     const data = await showListing(currUser, { setShowListingError });
     setUserListings(data);
+    console.log(data);
   };
 
   return (
@@ -228,15 +230,46 @@ const Profile: React.FC = () => {
         >
           Show Listing
         </Button>
-        {userListings &&
-          userListings.length > 0 &&
-          userListings.map((item, index) => {
-            return (
-              <div key={index}>
-                <Link to={`/listings/${item._id}`}>{item.title}</Link>
-              </div>
-            );
-          })}
+        {userListings && userListings.length > 0 && (
+          <div className="flex flex-col gap-4">
+            <h1 className="text-center mt-7 text-2xl font-semibold">
+              Your Listings
+            </h1>
+            {userListings.map((item) => {
+              return (
+                <div
+                  key={item._id}
+                  className="border rounded-lg p-3 flex justify-between items-center gap-4"
+                >
+                  <Link to={`/listing/${item._id}`}>
+                    <img
+                      src={item.imageUrls[0]}
+                      alt="listing cover"
+                      className="size-16 object-contain aspect-auto"
+                    />
+                  </Link>
+                  <Link
+                    className="text-slate-700 font-semibold  hover:underline truncate flex-1"
+                    to={`/listing/${item._id}`}
+                  >
+                    <p>{item.name}</p>
+                  </Link>
+                  {/* <div className="flex flex-col item-center">
+                    <button
+                      onClick={() => handleListingDelete(listing._id)}
+                      className="text-red-700 uppercase"
+                    >
+                      Delete
+                    </button>
+                    <Link to={`/update-listing/${listing._id}`}>
+                      <button className="text-green-700 uppercase">Edit</button>
+                    </Link>
+                  </div> */}
+                </div>
+              );
+            })}
+          </div>
+        )}
       </section>
     </Layout>
   );

@@ -24,7 +24,7 @@ const CreateListing: React.FC = () => {
     description: "",
     address: "",
     userRef: "",
-    type: "rent",
+    type: "sell",
     bedroom: 1,
     bathroom: 1,
     regularPrice: 50,
@@ -50,6 +50,7 @@ const CreateListing: React.FC = () => {
       const storage = getStorage(app);
       const fileName = new Date().getTime() + file.name;
       const storageRef = ref(storage, "Name/" + fileName);
+
       const uploadTask = uploadBytesResumable(storageRef, file);
       uploadTask.on(
         "state_changed",
@@ -78,7 +79,9 @@ const CreateListing: React.FC = () => {
 
       for (let i = 0; i < files.length; i++) {
         promises.push(storeImage(files[i]));
+        console.log(files);
       }
+
       Promise.all(promises)
         .then((urls) => {
           const stringifyUrl = urls as string[];
@@ -91,7 +94,7 @@ const CreateListing: React.FC = () => {
           setUploading(false);
         })
         .catch((err) => {
-          setImageUploadError("Image upload failed (2 mb max per image)");
+          setImageUploadError("Error occur while uploading images");
           setUploading(false);
           throw new Error(err);
         });
@@ -159,14 +162,12 @@ const CreateListing: React.FC = () => {
 
       const data = await res.json();
 
-      console.log(data);
-
       setLoading(false);
 
       if (data.success === false) {
         setError(data.message);
       }
-      navigate(`/listing/${data._id}`);
+      // navigate(`/listing/${data._id}`);
     } catch (error) {
       setError(error);
       setLoading(false);
@@ -364,7 +365,7 @@ const CreateListing: React.FC = () => {
               formData.imageUrls.map((url, index) => {
                 return (
                   <div
-                    key={index}
+                    key={url}
                     className="flex items-center justify-between border p-3"
                   >
                     <img

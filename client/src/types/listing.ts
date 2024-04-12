@@ -4,7 +4,7 @@ export interface CreateListingIntf {
     description?: string,
     address?: string,
     userRef?: string,
-    type?: 'rent' | 'sell',
+    type?: 'rent' | 'sell' | undefined,
     bedroom?: number,
     bathroom?: number,
     regularPrice?: number,
@@ -14,4 +14,13 @@ export interface CreateListingIntf {
     offer?: boolean,
     parking?: boolean,
     furnished?: boolean,
+}
+
+export interface PropertysData {
+    _id: string,
+    name: string,
+    imageUrls: [],
+    description: string,
+    createdAt?: Date,
+    type: string
 }
