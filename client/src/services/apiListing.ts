@@ -38,8 +38,6 @@ export const showListing = async (
 
 export const deleteListing = async ({itemId}: ApiListingTypeProps) => {
     try {
-        console.log(itemId);
-
         const response = await fetch(`${deleteListingUrl}/${itemId}`, {
             method: "DELETE",
         });
