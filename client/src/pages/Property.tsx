@@ -27,7 +27,8 @@ const Property: React.FC = () => {
     null
   );
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState<boolean>(false);
+  const [contact, setContact] = useState<boolean>(false);
 
   SwiperCore.use([Navigation]);
 
@@ -38,8 +39,8 @@ const Property: React.FC = () => {
           const data = await fetchListing(id, { setLoading });
 
           if (data) {
-            setPropertyData(data);
-          }
+            return setPropertyData(data);
+          } else return setError(data);
         } catch (error) {
           throw new Error(`Unexpected error occur: ${error}`);
         }
@@ -103,13 +104,13 @@ const Property: React.FC = () => {
             <ul className="text-green-900 font-semibold text-sm flex flex-wrap items-center gap-4 sm:gap-6">
               <li className="flex items-center gap-1 whitespace-nowrap ">
                 <FaBed className="text-lg" />
-                {propertyData.bedroom > 1 && propertyData.bedroom !== null
+                {propertyData.bedroom !== null
                   ? `${propertyData.bedroom} beds `
                   : `${propertyData.bedroom} bed `}
               </li>
               <li className="flex items-center gap-1 whitespace-nowrap ">
                 <FaBath className="text-lg" />
-                {propertyData.bathroom > 1
+                {propertyData.bathroom !== null
                   ? `${propertyData.bathroom} baths `
                   : `${propertyData.bathroom} bath `}
               </li>
@@ -123,16 +124,14 @@ const Property: React.FC = () => {
               </li>
             </ul>
             {currentUser && propertyData.userRef !== currentUser._id && (
-              // !contact &&
               <button
-                // onClick={() => setContact(true)}
+                onClick={() => setContact(true)}
                 className="bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3"
               >
                 Contact landlord
               </button>
             )}
-            {/* contact */}
-            {currentUser && <MessageModal listing={propertyData} />}
+            {contact && <MessageModal listing={propertyData} />}
           </article>
         </>
       ) : (
