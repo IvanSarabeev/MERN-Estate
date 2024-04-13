@@ -239,7 +239,6 @@ const Profile: React.FC = () => {
               Your Listings
             </h1>
             {userListings.map((item) => {
-              console.log(item);
               return (
                 <div
                   key={item._id}
@@ -259,15 +258,15 @@ const Profile: React.FC = () => {
                     <p>{item.name}</p>
                   </Link>
                   <div className="flex flex-col item-center">
+                    <Link to={`/update-listing/${item._id}`}>
+                      <button className="text-green-700 uppercase">Edit</button>
+                    </Link>
                     <button
                       onClick={() => handleListingDelete(item._id)}
                       className="text-red-700 uppercase"
                     >
                       Delete
                     </button>
-                    {/* <Link to={`/update-listing/${listing._id}`}>
-                      <button className="text-green-700 uppercase">Edit</button>
-                    </Link> */}
                   </div>
                 </div>
               );

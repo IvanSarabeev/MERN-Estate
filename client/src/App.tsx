@@ -8,6 +8,7 @@ import AuthRequiredRoute from "./auth/AuthRequiredRoute";
 import Profile from "./pages/Profile";
 import ErrorPage from "./pages/ErrorPage";
 import CreateListing from "./pages/CreateListing";
+import UpdateListing from "./pages/UpdateListing";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route element={<AuthRequiredRoute />}>
           <Route path="/profile" element={<Profile />} />
           <Route path="/create-listing" element={<CreateListing />} />
+          <Route path="/update-listing/:id" element={<UpdateListing />} />
         </Route>
         <Route path="*" element={<ErrorPage />} />
       </Routes>
