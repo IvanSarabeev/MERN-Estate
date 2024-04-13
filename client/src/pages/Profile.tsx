@@ -16,7 +16,7 @@ import { signOutUser } from "../services/apiAuth";
 import { updateUser, deleteUser } from "../services/apiUser";
 import { Link, useNavigate } from "react-router-dom";
 import Layout from "components/Layouts/Layout";
-import { showListing } from "../services/apiListing";
+import { deleteListing, showListing } from "../services/apiListing";
 import { UserUploadData } from "types/user";
 import { ReduxUserState } from "types/redux";
 import { PropertysData } from "types/listing";
@@ -109,7 +109,10 @@ const Profile: React.FC = () => {
   const handleShowListings = async () => {
     const data = await showListing(currUser, { setShowListingError });
     setUserListings(data);
-    console.log(data);
+  };
+
+  const handleListingDelete = async (itemId: string) => {
+    await deleteListing({ itemId });
   };
 
   return (
@@ -218,7 +221,7 @@ const Profile: React.FC = () => {
           </div>
         </form>
         <p className="text-red-700 mt-5">
-          {showListingError ? JSON.stringify(showListingError) : ""}
+          {showListingError ? showListingError : ""}
         </p>
         <p className="text-green-700 text-2xl text-center mt-5 mx-auto">
           {onSuccess ? "User updated successfully" : ""}
@@ -236,6 +239,7 @@ const Profile: React.FC = () => {
               Your Listings
             </h1>
             {userListings.map((item) => {
+              console.log(item);
               return (
                 <div
                   key={item._id}
@@ -254,17 +258,17 @@ const Profile: React.FC = () => {
                   >
                     <p>{item.name}</p>
                   </Link>
-                  {/* <div className="flex flex-col item-center">
+                  <div className="flex flex-col item-center">
                     <button
-                      onClick={() => handleListingDelete(listing._id)}
+                      onClick={() => handleListingDelete(item._id)}
                       className="text-red-700 uppercase"
                     >
                       Delete
                     </button>
-                    <Link to={`/update-listing/${listing._id}`}>
+                    {/* <Link to={`/update-listing/${listing._id}`}>
                       <button className="text-green-700 uppercase">Edit</button>
-                    </Link>
-                  </div> */}
+                    </Link> */}
+                  </div>
                 </div>
               );
             })}

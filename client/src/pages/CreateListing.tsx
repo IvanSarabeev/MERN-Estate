@@ -392,9 +392,8 @@ const CreateListing: React.FC = () => {
             >
               {loading ? "Creating..." : "Create listing"}
             </Button>
-            {error && (
-              <p className="text-red-700 text-sm">{JSON.stringify(error)}</p>
-            )}
+            {/* Removed the JSON.stringify */}
+            {error && <p className="text-red-700 text-sm">{error}</p>}
           </div>
         </form>
       </section>
