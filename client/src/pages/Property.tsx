@@ -8,9 +8,19 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
 import { Navigation } from "swiper/modules";
 import "swiper/css/bundle";
+import {
+  FaMapMarkerAlt,
+  FaBed,
+  FaBath,
+  FaParking,
+  FaChair,
+} from "react-icons/fa";
+import { store } from "store/store";
+import { ReduxUserState } from "types/redux";
 
 const Property: React.FC = () => {
   const { id } = useParams();
+  const currentUser = store.getState().user.currentUser as ReduxUserState;
 
   const [propertyData, setPropertyData] = useState<CreateListingIntf | null>(
     null
@@ -51,7 +61,7 @@ const Property: React.FC = () => {
               return (
                 <SwiperSlide key={item}>
                   <div
-                    className="h-[550px] aspect-auto"
+                    className="h-80 sm:h-96 lg:h-[550px] aspect-auto"
                     style={{
                       background: `url(${item}) center no-repeat`,
                       backgroundSize: "cover",
@@ -61,8 +71,70 @@ const Property: React.FC = () => {
               );
             })}
           </Swiper>
-          <h1>Property</h1>
+          <article className="max-w-5xl gap-4 flex flex-col p-3 my-7 mx-auto">
+            <p className="text-2xl font-semibold">
+              {propertyData.name} - ${" "}
+              {propertyData.offer
+                ? propertyData.discountPrice?.toLocaleString("en-US")
+                : propertyData.regularPrice?.toLocaleString("en-US")}
+              {propertyData.type === "rent" && " / month"}
+            </p>
+            <p className="flex items-center mt-6 gap-2 text-slate-600  text-sm">
+              <FaMapMarkerAlt className="text-green-700" />
+              {propertyData.address}
+            </p>
+            <div className="flex gap-4">
+              <p className="bg-red-900 w-full max-w-[200px] text-white text-center p-1 rounded-md">
+                {propertyData.type === "rent" ? "For Rent" : "For Sale"}
+              </p>
+              {propertyData.offer && (
+                <p className="bg-green-900 w-full max-w-[200px] text-white text-center p-1 rounded-md">
+                  {+propertyData.regularPrice?.toLocaleString("en-US") -
+                    +propertyData.discountPrice?.toLocaleString("en-US")}{" "}
+                  $ OFF
+                </p>
+              )}
+            </div>
+            <p className="text-slate-800">
+              <span className="font-semibold text-black">Description - </span>
+              {propertyData.description}
+            </p>
+            <ul className="text-green-900 font-semibold text-sm flex flex-wrap items-center gap-4 sm:gap-6">
+              <li className="flex items-center gap-1 whitespace-nowrap ">
+                <FaBed className="text-lg" />
+                {propertyData.bedroom > 1 && propertyData.bedroom !== null
+                  ? `${propertyData.bedroom} beds `
+                  : `${propertyData.bedroom} bed `}
+              </li>
+              <li className="flex items-center gap-1 whitespace-nowrap ">
+                <FaBath className="text-lg" />
+                {propertyData.bathroom > 1
+                  ? `${propertyData.bathroom} baths `
+                  : `${propertyData.bathroom} bath `}
+              </li>
+              <li className="flex items-center gap-1 whitespace-nowrap ">
+                <FaParking className="text-lg" />
+                {propertyData.parking ? "Parking spot" : "No Parking"}
+              </li>
+              <li className="flex items-center gap-1 whitespace-nowrap ">
+                <FaChair className="text-lg" />
+                {propertyData.furnished ? "Furnished" : "Unfurnished"}
+              </li>
+            </ul>
+            {currentUser && propertyData.userRef !== currentUser._id && (
+              // !contact &&
+              <button
+                // onClick={() => setContact(true)}
+                className="bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3"
+              >
+                Contact landlord
+              </button>
+            )}
+            {/* {contact && <Contact listing={listing} />} */}
+          </article>
+          {/* <h1>Property</h1>
           <div>{propertyData.name}</div>
+          <p>{propertyData.description}</p> */}
         </>
       ) : (
         <Loader />
