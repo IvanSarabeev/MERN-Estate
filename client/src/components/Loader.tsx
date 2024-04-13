@@ -2,7 +2,7 @@ import { ThreeCircles } from "react-loader-spinner";
 
 function Loader() {
   return (
-    <div className="w-full flexCenter mx-auto">
+    <div className="h-screen w-full flexCenter mx-auto">
       <ThreeCircles
         visible={true}
         height="100"
