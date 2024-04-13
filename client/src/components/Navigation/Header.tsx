@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "components/HTML/Button";
 import Input from "components/HTML/Input";
 import useToggle from "hooks/useToggle";
@@ -6,7 +6,7 @@ import { IoMenu } from "react-icons/io5";
 import { FaSearch } from "react-icons/fa";
 import { HiMiniXMark } from "react-icons/hi2";
 import { headerLinks, userNavigation, userProfile } from "components/constants";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import MobileNav from "./MobileNav";
 import {
   motion,
@@ -22,7 +22,11 @@ const Header = () => {
 
   const [show, setShow] = useToggle();
   const [hidden, setHidden] = useState<boolean>(false);
+  const [searchTerm, setSearchTerm] = useState<string>("");
+
   const { currentUser } = store.getState().user;
+
+  const navigate = useNavigate();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous: number | undefined = scrollY.getPrevious();
@@ -31,6 +35,30 @@ const Header = () => {
       setHidden(true);
     } else setHidden(false);
   });
+
+  const handleInputSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+
+    const urlParams = new URLSearchParams(window.location.search);
+
+    urlParams.set("searchTerm", searchTerm);
+
+    const searchQuery = urlParams.toString();
+    navigate(`/search?${searchQuery}`);
+  };
+
+  useEffect(() => {
+    const urlParam = new URLSearchParams(location.search);
+    const searchTermFromUrl = urlParam.get("searchTerm");
+
+    if (searchTermFromUrl) {
+      setSearchTerm(searchTermFromUrl);
+    }
+  }, []);
 
   return (
     <motion.header
@@ -49,15 +77,20 @@ const Header = () => {
         <form
           action=""
           method="get"
+          onSubmit={handleSubmit}
           className="hidden md:flex items-center p-3 rounded-lg bg-slate-100"
         >
           <Input
             type="text"
             placeholder="Search..."
             aria-label="Search input"
+            value={searchTerm}
+            onChange={handleInputSearch}
             className="bg-transparent focus:outline-none w-20 md:w-64 lg:w-72 xl:w-80 xxl:w-96"
           />
-          <FaSearch className="text-slate-500" />
+          <Button>
+            <FaSearch className="text-slate-500" />
+          </Button>
         </form>
         <Button
           type="button"
