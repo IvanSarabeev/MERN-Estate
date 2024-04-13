@@ -24,7 +24,7 @@ export const updateUser = async (req, res, next) => {
 
         const {password, ...rest} = updateUser._doc;
 
-        res.status(200).json(test);
+        res.status(200).json(rest);
     } catch (error) {
         next(error);
     }
@@ -55,5 +55,21 @@ export const getUserListing = async (req, res, next) => {
         }
     } else {
         return next(errorHandler(401, 'You can only view listings!'));
+    }
+};
+
+export const getUser = async (req, res, next) => {
+    try {
+        const user = User.findById(req.params.id);
+    
+        if (!user) {
+            return next(errorHandler(404, "User not found!"));
+        };
+    
+        const { password: pass, ...rest } = user._doc;
+    
+        res.status(200).json(rest);
+    } catch (error) {
+        next(error);
     }
 };

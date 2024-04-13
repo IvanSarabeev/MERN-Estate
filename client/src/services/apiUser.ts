@@ -8,12 +8,18 @@ import {
 } from "store/user/userSlice";
 import { AppDispatch, store } from 'store/store';
 import { CurrentUserInterface, UserUploadData } from "types/user";
+import { CreateListingIntf } from "types/listing";
 
 const urlUpdateUser: string = "/api/user/update";
 const urlDeleteUser: string = "/api/user/delete";
+const urlGetUser: string = "/api/user";
 
 const postMethod = 'POST';
 const deleteMethod = 'DELETE';
+
+interface ApiUserListingProps {
+    listing: CreateListingIntf;
+}
 
 export const updateUser = async (formData:UserUploadData, dispatch:AppDispatch) => {
     try {
@@ -55,8 +61,6 @@ export const deleteUser = async (dispatch: AppDispatch) => {
         const currentUser = store.getState().user.currentUser! as CurrentUserInterface;
         const userId = currentUser._id ?? "defaultUser";
 
-        console.log(currentUser, userId);
-
         dispatch(deleteUserStart());
 
         if (!currentUser) {
@@ -78,5 +82,25 @@ export const deleteUser = async (dispatch: AppDispatch) => {
         return data;
     } catch (error) {
         dispatch(deleteUserFailure(`Error message: ${error}`));
+    }
+};
+
+export const getUser = async ({listing}: ApiUserListingProps) => {
+    try {
+        const response = await fetch(`${urlGetUser}/${listing.userRef}`);
+
+        console.log(response);
+
+        if (!response.ok) {
+            throw new Error(`Status code: ${response.status}, status message: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+
+        console.log(data);
+
+        return data;
+    } catch (error) {
+        throw new Error(`Unexpected error, cound't get user! ${error}`)
     }
 };

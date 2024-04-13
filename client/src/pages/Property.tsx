@@ -17,6 +17,7 @@ import {
 } from "react-icons/fa";
 import { store } from "store/store";
 import { ReduxUserState } from "types/redux";
+import MessageModal from "components/MessageModal";
 
 const Property: React.FC = () => {
   const { id } = useParams();
@@ -130,11 +131,9 @@ const Property: React.FC = () => {
                 Contact landlord
               </button>
             )}
-            {/* {contact && <Contact listing={listing} />} */}
+            {/* contact */}
+            {currentUser && <MessageModal listing={propertyData} />}
           </article>
-          {/* <h1>Property</h1>
-          <div>{propertyData.name}</div>
-          <p>{propertyData.description}</p> */}
         </>
       ) : (
         <Loader />
