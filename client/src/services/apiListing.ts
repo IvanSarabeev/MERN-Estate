@@ -79,3 +79,35 @@ export const fetchListing = async (id: string, {setLoading}: ApiLoadingProps) =>
         throw new Error(`Error message: ${error}`);
     }
 };
+
+export const fetchRentListing = async () => {
+    try {
+        const response = await fetch(`${getListingUrl}?type=rent&limit=4`);
+
+        if (!response.ok) {
+            throw new Error(`Status code: ${response.status}, status message: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+
+        return data;
+    } catch (error) {
+        throw new Error(`Error, coun't fetch rent listing, error message: ${error}`);
+    }
+};
+
+export const fetchSalesListing = async () => {
+    try {
+        const response = await fetch(`${getListingUrl}?type=sell&limit=4`);
+
+        if (!response.ok) {
+            throw new Error(`Status code: ${response.status}, status message: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+
+        return data;
+    } catch (error) {
+        throw new Error(`Error, coun't fetch listing with sales, error message: ${error}`);
+    }
+}
