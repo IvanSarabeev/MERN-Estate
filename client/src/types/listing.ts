@@ -1,4 +1,5 @@
 export interface CreateListingIntf {
+    _id?: string,
     imageUrls: string[],
     name?: string,
     description?: string,
@@ -23,4 +24,13 @@ export interface PropertysData {
     description: string,
     createdAt?: Date,
     type: string
+}
+
+export interface SearchDataIntf {
+    searchTerm: string,
+    type: "all" | "rent" | "sell",
+    parking: boolean | undefined;
+    furnished: boolean | undefined;
+    sort: string,
+    order: string,
 }
