@@ -91,8 +91,10 @@ const Property: React.FC = () => {
               </p>
               {propertyData.offer && (
                 <p className="bg-green-900 w-full max-w-[200px] text-white text-center p-1 rounded-md">
-                  {+propertyData.regularPrice?.toLocaleString("en-US") -
-                    +propertyData.discountPrice?.toLocaleString("en-US")}{" "}
+                  {+(propertyData.regularPrice?.toLocaleString("en-US") ?? 0) -
+                    +(
+                      propertyData.discountPrice?.toLocaleString("en-US") ?? 0
+                    )}{" "}
                   $ OFF
                 </p>
               )}

@@ -31,20 +31,6 @@ const Home: React.FC = () => {
 
   return (
     <Layout>
-      {/* <section className="relative h-screen w-screen bg-home-wallpaper bg-cover bg-top aspect-auto">
-        <div className="absolute left-[20%] top-1/4 gap-6 flex flex-col items-start justify-start p-16 rounded-2xl bg-slate-300">
-          <h1 className="text-slate-700 font-bold text-3xl lg:text-6xl">
-            Find your next <span className="text-slate-500">perfect</span>
-            <br /> place with ease
-          </h1>
-          <Link
-            to={"/search"}
-            className="regular-12 sm:regular-14 lg:regular-16 text-blue-700 font-bold hover:underline transition-all ease-in-out"
-          >
-            Let's get started ...
-          </Link>
-        </div>
-      </section> */}
       <section className="padding-container bg-white">
         <div className="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
           <div className="mr-auto place-self-center lg:col-span-7">
@@ -111,7 +97,7 @@ const Home: React.FC = () => {
             Show more renting propertyes
           </Link>
         </div>
-        <article className="gap-2.5 md:gap-4 flex flex-col md:flex-row flex-wrap max-container">
+        <article className="gap-4 md:gap-6 flex flex-col md:flex-row flex-wrap max-container">
           {rentListing !== null &&
             rentListing.length > 0 &&
             rentListing.map((item) => {
@@ -131,7 +117,7 @@ const Home: React.FC = () => {
             Show more sales posts
           </Link>
         </div>
-        <article className="gap-2.5 md:gap-4 flex flex-col md:flex-row flex-wrap max-container">
+        <article className="gap-4 md:gap-6 flex flex-col md:flex-row flex-wrap max-container">
           {salesListing !== null &&
             salesListing.length > 0 &&
             salesListing.map((item) => {

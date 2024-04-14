@@ -167,9 +167,9 @@ const CreateListing: React.FC = () => {
       if (data.success === false) {
         setError(data.message);
       }
-      // navigate(`/listing/${data._id}`);
+      navigate(`/listing/${data._id}`);
     } catch (error) {
-      setError(error);
+      setError(false);
       setLoading(false);
       throw new Error(JSON.stringify(error));
     }

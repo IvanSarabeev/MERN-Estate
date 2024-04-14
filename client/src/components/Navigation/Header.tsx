@@ -8,33 +8,17 @@ import { HiMiniXMark } from "react-icons/hi2";
 import { headerLinks, userNavigation, userProfile } from "components/constants";
 import { NavLink, useNavigate } from "react-router-dom";
 import MobileNav from "./MobileNav";
-import {
-  motion,
-  AnimatePresence,
-  useScroll,
-  useMotionValueEvent,
-} from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { scrollTop } from "utils/scrollTop";
 import { store } from "store/store";
 
 const Header = () => {
-  const { scrollY } = useScroll();
-
   const [show, setShow] = useToggle();
-  const [hidden, setHidden] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
 
   const { currentUser } = store.getState().user;
 
   const navigate = useNavigate();
-
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    const previous: number | undefined = scrollY.getPrevious();
-
-    if (latest > previous) {
-      setHidden(true);
-    } else setHidden(false);
-  });
 
   const handleInputSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
@@ -63,9 +47,8 @@ const Header = () => {
   return (
     <motion.header
       variants={{ visibility: { y: 0 }, hidden: { y: "-100%" } }}
-      animate={hidden ? "block" : "visible"}
       onClick={() => scrollTop()}
-      className="sticky top-0 h-fit w-full z-50 bg-slate-200 shadow-md transition-all"
+      className="fixed top-0 h-fit w-full z-50 bg-slate-200 shadow-md transition-all"
     >
       <nav className="max-container flexBetween padding-container py-3">
         <NavLink to={"/"}>
@@ -175,7 +158,7 @@ const Header = () => {
               })}
         </menu>
         <AnimatePresence mode="wait">
-          {show ? <MobileNav /> : hidden}
+          {show ? <MobileNav isOpen={show} /> : ""}
         </AnimatePresence>
       </nav>
     </motion.header>

@@ -28,10 +28,18 @@ export const socialMedia = [
     {id: 5, label: 'Dribble', href: 'https://dribbble.com/', icon: FaDribbble},
 ] as const;
 
-
 export const achievmentTestimonial = [
     {id: 1, label: 'Completed Contracts', icon: TbUserStar, review: 2500},
     {id: 2, label: 'Property Sales', icon: BsHouseGear, review: 3500},
     {id: 3, label: 'Apartment Rent', icon: PiWarehouseLight, review: 8500},
     {id: 4, label: 'Happy Clients', icon: RiSecurePaymentFill, review: 4500},
+] as const;
+
+export const mobileNavigation = [
+    {id: 1, label: 'Home', link: '/', text: 'Home'},
+    {id: 2, label: 'About', link: '/about', text: 'About'},
+    {id: 3, label: 'Contact', link: '/contact', text: 'Contact'},
+    {id: 4, label: 'Search', link: '/search', text: 'Search'},
+    {id: 5, label: 'Login', link: '/sign-in', text: 'Login'},
+    {id: 5, label: 'Register', link: '/sign-up', text: 'Register'},
 ] as const;

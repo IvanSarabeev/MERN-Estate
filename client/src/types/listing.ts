@@ -20,7 +20,7 @@ export interface CreateListingIntf {
 export interface PropertysData {
     _id: string,
     name: string,
-    imageUrls: [],
+    imageUrls: string[],
     description: string,
     createdAt?: Date,
     type: string
