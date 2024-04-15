@@ -89,15 +89,11 @@ export const getUser = async ({listing}: ApiUserListingProps) => {
     try {
         const response = await fetch(`${urlGetUser}/${listing.userRef}`);
 
-        console.log(response);
-
         if (!response.ok) {
             throw new Error(`Status code: ${response.status}, status message: ${response.statusText}`);
         }
 
         const data = await response.json();
-
-        console.log(data);
 
         return data;
     } catch (error) {

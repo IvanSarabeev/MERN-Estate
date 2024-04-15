@@ -6,6 +6,8 @@ import authRouter from "./routes/auth.route.js";
 import listingRouter from "./routes/listing.route.js";
 import cookieParser from "cookie-parser";
 import path from "path";
+import { createServer } from "http";
+import { Server } from "socket.io";
 dotenv.config();
 
 const PORT = process.env.PORT_KEY;
@@ -22,6 +24,25 @@ mongoose.connect(DB_URL)
 const __dirname = path.resolve();
 
 const app = express();
+const httpServer = createServer(app);
+const socketIo = new Server(httpServer, {
+    cors: {
+        origin: '*',
+        methods: ["GET", "POST"]
+    }
+});
+
+socketIo.on('connection', (socket) => {
+    console.log('New client connected');
+
+    // Send cookie reminder message to the client
+    socket.emit('cookieReminder', 'Please accept our cookies.');
+
+    socket.on('disconnect', () => {
+        console.log('Client disconnected');
+    });
+});
+
 
 app.use(express.json());
 
@@ -31,6 +52,10 @@ app.listen(PORT, () => {
     console.log("Server is running up");
 }).on("error", (error) => {
     throw new Error(error.message);
+});
+
+httpServer.listen(3001, () => {
+    console.log('Server Websocket is running correctly');
 });
 
 app.use('/api/user', userRouter);
