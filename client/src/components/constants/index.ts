@@ -43,3 +43,10 @@ export const mobileNavigation = [
     {id: 5, label: 'Login', link: '/sign-in', text: 'Login'},
     {id: 5, label: 'Register', link: '/sign-up', text: 'Register'},
 ] as const;
+
+export const avatarList = [
+    {id: 1, src: 'https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png', alt: 'Bonnie-Green'},
+    {id: 2, src: 'https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png', alt: 'Jese-Leos'},
+    {id: 3, src: 'https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/roberta-casas.png', alt: 'Roberta-Casas'},
+    {id: 4, src: 'https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/thomas-lean.png', alt: 'Thomas-Lean'},
+] as const;

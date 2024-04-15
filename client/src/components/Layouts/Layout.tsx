@@ -10,7 +10,9 @@ const Layout = ({ children }: LayoutProp) => {
   return (
     <>
       <Header />
-      <main className="min-h-screen w-full overflow-x-hidden">{children}</main>
+      <main className="min-h-screen w-full mt-12 md:mt-14 overflow-x-hidden">
+        {children}
+      </main>
       <Footer />
     </>
   );

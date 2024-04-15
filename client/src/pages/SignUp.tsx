@@ -1,19 +1,18 @@
 import Input from "components/HTML/Input";
 import Button from "components/HTML/Button";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import React, { useState } from "react";
 import { UserSignUpData } from "types/user";
 import { registerUser } from "../services/apiAuth";
 import GoogleAuth from "components/OAuth/GoogleAuth";
 import Layout from "components/Layouts/Layout";
+import { avatarList } from "components/constants";
 
-const SignUp = () => {
+const SignUp: React.FC = () => {
   const [formData, setFormData] = useState<UserSignUpData>({
     email: "",
     username: "",
     password: "",
-    // TODO: add retypePassword to the DB scheme
-    // repassword: "",
   });
 
   const [error, setError] = useState<null>(null);
@@ -50,75 +49,133 @@ const SignUp = () => {
 
   return (
     <Layout>
-      <section className="padding-container max-w-xl mx-auto">
-        <h2 className="text-center text-3xl font-semibold my-7">
-          Sign Up Page
-        </h2>
-        <form
-          action=""
-          onSubmit={handleFormSubmit}
-          className="gap-4 flex flex-col"
-        >
-          <Input
-            id="username"
-            type="text"
-            name="username"
-            value={formData.username}
-            placeholder="Username"
-            className="border p-3 rounded-lg"
-            onChange={handleInputChange}
-            required
-          />
-          <Input
-            id="email"
-            type="email"
-            name="email"
-            value={formData.email}
-            placeholder="Email"
-            className="border p-3 rounded-lg"
-            onChange={handleInputChange}
-            required
-          />
-          <Input
-            id="password"
-            type="password"
-            name="password"
-            value={formData.password}
-            placeholder="Password"
-            className="border p-3 rounded-lg"
-            onChange={handleInputChange}
-            required
-          />
-          {/* <Input
-            id="repassword"
-            type="password"
-            name="repassword"
-            value={formData.repassword}
-            placeholder="Re-password"
-            className="border p-3 rounded-lg"
-            onChange={handleInputChange}
-            required
-          /> */}
-          <Button
-            type="submit"
-            disabled={loading}
-            title="submit-button"
-            className="bg-slate-700 text-white p-3 rounded-lg hover:opacity-95 disabled:opacity-80"
+      <section className="w-full flex flex-col md:flex-row items-center justify-center">
+        <div className="h-screen w-full lg:w-1/2 padding-container bg-white">
+          <h2 className="regular-18 lg:bold-20 font-semibold text-left drop-shadow">
+            Your Best Work Starts Here
+          </h2>
+          <div className="gap-2 flex flex-col md:flex-row items-center justify-center lg:justify-start mt-3">
+            <GoogleAuth title="Sign up with Google" />
+            <GoogleAuth title="Sign up with GitHub" />
+          </div>
+          <span className="flex items-center my-4">
+            <span className="h-px flex-1 bg-[#e5e7eb]"></span>
+            <span className="shrink-0 px-5 text-slate-500">or</span>
+            <span className="h-px flex-1 bg-[#e5e7eb]"></span>
+          </span>
+          <form
+            action=""
+            onSubmit={handleFormSubmit}
+            className="gap-2 flex flex-col"
           >
-            {loading ? "Loading ..." : "Sign up"}
-          </Button>
-          <span className="size-auto relative mx-auto">OR</span>
-          <GoogleAuth />
-        </form>
-        <div className="flex justify-center mt-3">
-          <p className="text-slate-900">Have an account ?</p>
-          <u className="ml-1">
-            <Link to={"/sign-in"} className="text-blue-700">
-              Login
+            <div className="w-full gap-2 flex flex-col items-start justify-start">
+              <label
+                htmlFor="username"
+                className="regular-16 font-semibold text-slate-900"
+              >
+                What should we call you?
+              </label>
+              <Input
+                id="username"
+                type="text"
+                name="username"
+                placeholder="e.g. Boonie Green"
+                className="w-full border p-3 rounded-lg"
+                value={formData.username}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div className="w-full gap-2 flex flex-col items-start justify-start">
+              <label
+                htmlFor="email"
+                className="regular-16 font-semibold text-slate-900"
+              >
+                Your email
+              </label>
+              <Input
+                id="email"
+                type="email"
+                name="email"
+                placeholder="name@company.com"
+                className="w-full border p-3 rounded-lg"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div className="w-full gap-2 flex flex-col items-start justify-start">
+              <label
+                htmlFor="password"
+                className="regular-16 font-semibold text-slate-900"
+              >
+                Your password
+              </label>
+              <Input
+                id="password"
+                type="password"
+                name="password"
+                placeholder="••••••"
+                className="w-full border p-3 rounded-lg"
+                value={formData.password}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <Button
+              type="submit"
+              disabled={loading}
+              title="submit-button"
+              className="bg-[#0284c7] font-semibold mt-3 text-white p-3 rounded-lg hover:opacity-95 disabled:opacity-80"
+            >
+              {loading ? "Loading ..." : "Create an account"}
+            </Button>
+          </form>
+          {error && (
+            <p className="regular-14 font-semibold text-red-500 my-2">
+              {error}
+            </p>
+          )}
+          <p className="regular-14 text-[#9297a2] font-light mt-2.5">
+            Already have an account?
+            <Link to={`/sign-in`} className="text-[#319ad1] ml-1.5 font-medium">
+              Login here
             </Link>
-          </u>
+          </p>
         </div>
-        {error && <p className="text-red-500 mt-3"> {error} </p>}
+        <div className="h-full md:h-screen w-full lg:w-1/2 flex flex-col items-start justify-center padding-container bg-[#0284c7]">
+          <h1 className="text-white text-3xl lg:text-5xl font-extrabold mb-4">
+            Explore the world’s leading MERN estate application.
+          </h1>
+          <p className="text-[#fde6ba] opacity-80 font-light mb-4">
+            Millions of people and agencies around the world use our work on
+            MERN/Estate - the home to the world’s best real estate and
+            professional employees.
+          </p>
+          <div className="flex items-center justify-start">
+            <div className="flex -space-x-4 rtl:space-x-reverse pr-3">
+              {avatarList.map((item) => {
+                return (
+                  <img
+                    key={item.id}
+                    src={item.src}
+                    alt={item.alt}
+                    className="size-10 border-2 border-white rounded-full dark:border-gray-800"
+                  />
+                );
+              })}
+            </div>
+            <Link to={`/search`} className="border-l border-[0284c7]">
+              <span className="regular-14 leading-5 font-light text-white/80 pl-3">
+                Over
+                <span className="font-medium text-white opacity-100 px-1">
+                  15.7k
+                </span>
+                Happy Customers
+              </span>
+            </Link>
+          </div>
+        </div>
       </section>
     </Layout>
   );

@@ -100,7 +100,7 @@ const SignIn = () => {
               OR
             </span>
           </span>
-          <GoogleAuth />
+          <GoogleAuth title="Sign in with Google" />
         </form>
         <div className="flex justify-center mt-3">
           <p className="text-slate-900">Don't have an account ?</p>

@@ -4,7 +4,11 @@ import { googleAuth } from "../../services/apiGoogle";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const GoogleAuth = () => {
+type GoogleProps = {
+  title: string;
+};
+
+const GoogleAuth = ({ title }: GoogleProps) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -23,11 +27,11 @@ const GoogleAuth = () => {
       onClick={handleGoogleSubmit}
       aria-label="Google Auth"
       title="Google Auth Modal"
-      className="h-10 w-auto min-w-[420px] max-w-[520px] relative flex items-center justify-center whitespace-nowrap regular-16 text-center rounded-[20px] border border-solid border-[#747775] outline-none px-3 shadow-md cursor-pointer bg-white transition-all ease-in hover:opacity-95 hover:scale105"
+      className="w-full md:w-56 inline-flex items-center justify-center font-medium regular-14 text-black border rounded-lg px-5 py-2.5 text-center bg-white hover:bg-[#f3f4f6]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50"
     >
-      <FcGoogle height={20} width={20} className="mx-3" />
-      Continue with Google
-      <span className="sr-only">Continue with Google</span>
+      <FcGoogle className="size-5 mr-2" />
+      {title}
+      <span className="sr-only">Google Sign Authentication</span>
     </Button>
   );
 };
