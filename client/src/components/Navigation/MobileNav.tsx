@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 import { motion, Variants, AnimatePresence } from "framer-motion";
-import { Link } from "react-scroll";
+import { Link } from "react-router-dom";
 import { mobileNavigation } from "components/constants";
 
 type MobileProps = {
@@ -65,13 +65,12 @@ const MobileNav: FunctionComponent<MobileProps> = ({ isOpen }: MobileProps) => {
               {mobileNavigation.map((item) => {
                 return (
                   <motion.li
-                    variants={itemVariants}
                     key={item.id}
+                    variants={itemVariants}
                     className="flex flex-col items-center mx-auto mt-0 mb-5"
                   >
                     <Link
                       to={item.link}
-                      smooth={true}
                       className="inline-block relative p-2 cursor-pointer hover:text-green"
                     >
                       {item.text}

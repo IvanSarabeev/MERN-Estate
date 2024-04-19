@@ -49,14 +49,14 @@ const Header = () => {
     <motion.header
       variants={{ visibility: { y: 0 }, hidden: { y: "-100%" } }}
       onClick={() => scrollTop()}
-      className="fixed top-0 h-fit w-full z-50 bg-slate-200 shadow-md transition-all"
+      className="header-container"
     >
-      <nav className="max-container flexBetween padding-container py-3">
-        <NavLink to={"/"}>
-          <h2 className="flex flex-wrap font-bold text-sm sm:text-lg md:text-2xl lg:text-3xl">
+      <nav className="w-full max-container flexBetween padding-container py-3 z-20">
+        <div className="relative z-10 size-fit ease-in-out transition-all">
+          <NavLink to={"/"}>
             <img src={Logo} alt="logo" className="h-14 w-32 aspect-auto" />
-          </h2>
-        </NavLink>
+          </NavLink>
+        </div>
         <form
           action=""
           method="get"
@@ -75,19 +75,7 @@ const Header = () => {
             <FaSearch className="text-slate-500" />
           </Button>
         </form>
-        <Button
-          type="button"
-          onClick={() => setShow()}
-          className="flex md:hidden p-1 rounded transition-all ease-in-out"
-        >
-          <span className="sr-only">Hamburger Icon</span>
-          {show ? (
-            <HiMiniXMark height={24} width={24} />
-          ) : (
-            <IoMenu height={24} width={24} />
-          )}
-        </Button>
-        <menu className=" hidden gap-4 md:flex ">
+        <menu className="hidden gap-4 md:flex ">
           {headerLinks.map((item) => {
             return (
               <motion.li
@@ -124,12 +112,24 @@ const Header = () => {
                     }}
                     key={item.id}
                   >
-                    <NavLink to={item.href} aria-label={"Profile"}>
+                    <NavLink
+                      to={item.href}
+                      aria-label={"Profile"}
+                      className="relative group"
+                    >
                       <img
                         src={currentUser?.avatar}
                         alt={item.label}
-                        className="size-7 rounded-full object-cover aspect-auto"
+                        id="tooltip-bottom"
+                        className="avatar-img"
+                        data-tooltip-placement="bottom"
                       />
+                      <div
+                        id="tooltip-bottom"
+                        className="hidden absolute group-hover:block"
+                      >
+                        {currentUser?.username}
+                      </div>
                     </NavLink>
                   </motion.li>
                 );
@@ -157,9 +157,23 @@ const Header = () => {
                 );
               })}
         </menu>
-        <AnimatePresence mode="wait">
-          {show ? <MobileNav isOpen={show} /> : ""}
-        </AnimatePresence>
+        <div className="block md:hidden pr-2.5">
+          <Button
+            type="button"
+            onClick={() => setShow()}
+            className="mobile-btn"
+          >
+            <span className="sr-only">Hamburger Icon</span>
+            {show ? (
+              <HiMiniXMark className="size-6 aspect-auto object-cover" />
+            ) : (
+              <IoMenu className="size-5 aspect-auto object-cover" />
+            )}
+          </Button>
+          <AnimatePresence mode="wait">
+            {show ? <MobileNav isOpen={show} /> : ""}
+          </AnimatePresence>
+        </div>
       </nav>
     </motion.header>
   );

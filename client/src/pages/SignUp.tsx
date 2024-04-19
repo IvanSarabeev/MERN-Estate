@@ -3,7 +3,7 @@ import Button from "components/HTML/Button";
 import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import { UserSignUpData } from "types/user";
-import { registerUser } from "../services/apiAuth";
+import { registerUser } from "services/apiAuth";
 import GoogleAuth from "components/OAuth/GoogleAuth";
 import Layout from "components/Layouts/Layout";
 import { avatarList } from "components/constants";
@@ -50,7 +50,7 @@ const SignUp: React.FC = () => {
   return (
     <Layout>
       <section className="w-full flex flex-col md:flex-row items-center justify-center">
-        <div className="h-screen w-full lg:w-1/2 padding-container bg-white">
+        <div className="h-fit lg:h-screen w-full lg:w-1/2 form-padding-container bg-white">
           <h2 className="regular-18 lg:bold-20 font-semibold text-left drop-shadow">
             Your Best Work Starts Here
           </h2>

@@ -10,64 +10,96 @@ body {
     .max-container {
         @apply max-w-[1440px] mx-auto;
     }
+    
+    .form-container {
+        @apply p-6 lg:p-12;
+    }
+    
+    .padding-container {
+        @apply p-6 md:p-12 lg:px-16 xl:px-20 xl:py-16;
+    }
+    
+    .active-link {
+        @apply pr-4 lg:pr-7 text-slate-800 font-bold hover:text-slate-500;
+    }
+    
+    .passive-link {
+        @apply font-medium pr-4 lg:pr-7 hover:font-semibold transition-all ease-in-out;
+    }
+    
+    .flexCenter {
+        @apply flex items-center justify-center;
+    }
+    
+    .flexStart {
+        @apply flex items-start justify-start;
+    }
+    
+    .flexEnd {
+        @apply flex items-end justify-end;
+    }
+    
+    .flexBetween {
+        @apply flex items-center justify-between;
+    }
+    
+    .flexEvenly {
+        @apply flex items-center justify-evenly;
+    }
+    
+    .flexAround {
+        @apply flex items-center justify-around;
+    }
+    
+    .bold-20 {
+        @apply text-xl font-bold;
+    }
+    
+    .regular-18 {
+        @apply text-lg font-medium;
+    }
+    
+    .regular-16 {
+        @apply text-base font-normal;
+    }
+    
+    .regular-14 {
+        @apply text-sm font-normal;
+    }
+    
+    .regular-12 {
+        @apply text-xs font-normal;
+    }
+    
+    .active-nav {
+        @apply pr-4 lg:pr-7 text-custom-black font-bold hover:text-[#FF8C38] underline;
+    }
+    
+    .passive-nav {
+        @apply font-medium pr-4 lg:pr-7 hover:underline hover:font-semibold transition-all;
+    }
+
+    .mobile-btn {
+        @apply relative z-30 w-fit h-fit flex items-center justify-center text-inherit p-4 -mr-4 border-0 bg-transparent ease-linear transition-opacity cursor-pointer;
+    }
+
+    .mobile-menu {
+        @apply fixed top-0 right-0 bottom-0 z-10 h-screen min-w-[75vw] max-w-[400px] flex items-center justify-center py-12 px-3 outline-none visible translate-x-[0vw] transition-all;
+    }
+
+    .mobile-nav {
+        @apply w-full flex flex-col items-center justify-between text-center;
+    }
+
+    .avatar-img {
+        @apply size-7 rounded-full aspect-auto object-cover;
+    }
 
     .form-container {
         @apply p-6 lg:p-12;
     }
 
-    .padding-container {
-        @apply p-6 md:p-12 lg:px-16 xl:px-20 xl:py-16;
-    }
-
-    .active-link {
-        @apply pr-4 lg:pr-7 text-slate-800 font-bold hover:text-slate-500;
-    }
-
-    .passive-link {
-        @apply font-medium pr-4 lg:pr-7 hover:font-semibold transition-all ease-in-out;
-    }
-
-    .flexCenter {
-        @apply flex items-center justify-center;
-    }
-
-    .flexStart {
-        @apply flex items-start justify-start;
-    }
-
-    .flexEnd {
-        @apply flex items-end justify-end;
-    }
-
-    .flexBetween {
-        @apply flex items-center justify-between;
-    }
-
-    .flexEvenly {
-        @apply flex items-center justify-evenly;
-    }
-
-    .flexAround {
-        @apply flex items-center justify-around;
-    }
-
-    .bold-20 {
-        @apply text-xl font-bold;
-    }
-
-    .regular-18 {
-        @apply text-lg font-medium;
-    }
-
-    .regular-16 {
-        @apply text-base font-normal;
-    }
-
-    .regular-14 {
-        @apply text-sm font-normal;
-    }
-
-    .regular-12 {
-        @apply text-xs font-normal;
+    .form-padding-container {
+        @apply px-6 py-10 md:p-12;
     }
 }

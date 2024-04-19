@@ -5,7 +5,7 @@ import Layout from "components/Layouts/Layout";
 import { UserSignInData } from "types/user";
 import GoogleAuth from "components/OAuth/GoogleAuth";
 import { Link, useNavigate } from "react-router-dom";
-import { signInUser } from "../services/apiAuth";
+import { signInUser } from "services/apiAuth";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "store/store";
 import { loginList } from "components/constants";
@@ -46,7 +46,7 @@ const SignIn: React.FC = () => {
 
   return (
     <Layout>
-      <section className="w-full h-screen flex flex-col md:flex-row items-center justify-around bg-[#f9fafb]">
+      <section className="w-full h-fit lg:h-screen flex flex-col md:flex-row items-center justify-around form-padding-container bg-[#f9fafb]">
         <div className="hidden md:flex flex-col items-start justify-start">
           <img
             src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"

@@ -12,8 +12,8 @@ export const headerLinks = [
 ] as const;
 
 export const userNavigation = [
-    {id: 1, label: "Login", href: "/sign-in", cssAttribute: 'rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow'},
-    {id: 2, label: "Register", href: "/sign-up", cssAttribute: 'rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600'},
+    {id: 1, label: "Login", href: "/sign-in", cssAttribute: 'rounded-md bg-[#0284c7] px-5 py-2.5 text-sm font-medium text-white shadow'},
+    {id: 2, label: "Register", href: "/sign-up", cssAttribute: 'rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-[#0284c7]'},
 ] as const;
 
 export const userProfile = [
@@ -41,7 +41,7 @@ export const mobileNavigation = [
     {id: 3, label: 'Contact', link: '/contact', text: 'Contact'},
     {id: 4, label: 'Search', link: '/search', text: 'Search'},
     {id: 5, label: 'Login', link: '/sign-in', text: 'Login'},
-    {id: 5, label: 'Register', link: '/sign-up', text: 'Register'},
+    {id: 6, label: 'Register', link: '/sign-up', text: 'Register'},
 ] as const;
 
 export const avatarList = [

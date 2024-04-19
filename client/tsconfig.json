@@ -7,6 +7,8 @@
     "skipLibCheck": true,
     "baseUrl": "",
     "paths": {
+      "@/*": ["./src/*"],
+      "lib/*": ["./src/lib/*"],
       "components/*":["./src/components/*"],
       "constants/*":["./src/constants/*"],
       "hooks/*":["./src/hooks/*"],
@@ -14,6 +16,7 @@
       "types/*":["./src/types/*"],
       "utils/*":["./src/utils/*"],
       "store/*":["./src/store/*"],
+      "services/*":["./src/services/*"],
     },
 
     /* Bundler mode */

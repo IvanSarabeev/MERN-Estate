@@ -17,9 +17,6 @@ module.exports = {
       },
     },
     extend: {
-      backgroundImage: {
-        "home-wallpaper": "url(../src/assets/images/real-estate-bg.avif)",
-      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },

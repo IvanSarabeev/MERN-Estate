@@ -18,6 +18,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.relative(__dirname, "./src"),
+      "lib": resolve(rootPath, "./lib"),
       "components": resolve(rootPath, "components"),
       "constants": resolve(rootPath, "constants"),
       "hooks": resolve(rootPath, "hooks"),
