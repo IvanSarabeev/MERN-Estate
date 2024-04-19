@@ -50,3 +50,9 @@ export const avatarList = [
     {id: 3, src: 'https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/roberta-casas.png', alt: 'Roberta-Casas'},
     {id: 4, src: 'https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/thomas-lean.png', alt: 'Thomas-Lean'},
 ] as const;
+
+export const loginList = [
+    {id: 1, title: "Get started quickly", text: "Browse thought the system flow easily."},
+    {id: 2, title: "Chose the property that suits your expectation", text: "You'r on the right place, you have a very rich choise to make."},
+    {id: 3, title: "Join millions of businesses", text: "MERN Estate is trusted by thousends of ambitions people from around the globe."},
+] as const;

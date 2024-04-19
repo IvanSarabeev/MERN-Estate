@@ -1,17 +1,17 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import Input from "components/HTML/Input";
 import Button from "components/HTML/Button";
+import Layout from "components/Layouts/Layout";
 import { UserSignInData } from "types/user";
+import GoogleAuth from "components/OAuth/GoogleAuth";
 import { Link, useNavigate } from "react-router-dom";
 import { signInUser } from "../services/apiAuth";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "store/store";
-import GoogleAuth from "components/OAuth/GoogleAuth";
-import { FaRegUserCircle } from "react-icons/fa";
-import { IoLockOpenOutline } from "react-icons/io5";
-import Layout from "components/Layouts/Layout";
+import { loginList } from "components/constants";
+import { IoIosCheckmarkCircle } from "react-icons/io";
 
-const SignIn = () => {
+const SignIn: React.FC = () => {
   const [formData, setFormData] = useState<UserSignInData>({
     email: "",
     password: "",
@@ -46,75 +46,119 @@ const SignIn = () => {
 
   return (
     <Layout>
-      <section className="max-w-xl padding-container mx-auto">
-        <h1 className="text-3xl text-center font-semibold my-7">Sign In</h1>
-        <form
-          action=""
-          onSubmit={handleSubmit}
-          method="post"
-          className="gap-4 flex flex-col"
-        >
-          <div className="flex">
-            <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border rounded-e-0 border-gray-300 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
-              <FaRegUserCircle height={16} width={16} />
-              <span className="sr-only">User Icon</span>
-            </span>
-            <Input
-              type="text"
-              required
-              id="email"
-              name="email"
-              onChange={handleInputChange}
-              title="Username Input"
-              placeholder="Enter your email"
-              className="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            />
-          </div>
-          <div className="flex">
-            <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border rounded-e-0 border-gray-300 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
-              <IoLockOpenOutline height={16} width={16} />
-              <span className="sr-only">Pasword Icon</span>
-            </span>
-            <Input
-              type="password"
-              required
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleInputChange}
-              title="Password Input"
-              placeholder="Enter your password"
-              className="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            />
-          </div>
-          <Button
-            type="submit"
-            title="Sign in"
-            className="px-3 py-2 2xl:p-3 rounded-lg uppercase text-white bg-slate-700 scale-105 transition-all hover:ease-out hover:opacity-95 disabled:opacity-80"
-          >
-            {loading ? "Loading..." : "Sign In"}
-          </Button>
-          <span className="relative flex justify-center">
-            <div className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-transparent bg-gradient-to-r from-transparent via-gray-500 to-transparent opacity-75"></div>
-            <span className="relative z-10 size-auto px-6 rounded-full mx-auto bg-[#f1f5f1]">
-              OR
-            </span>
-          </span>
-          <GoogleAuth title="Sign in with Google" />
-        </form>
-        <div className="flex justify-center mt-3">
-          <p className="text-slate-900">Don't have an account ?</p>
-          <u className="ml-1">
-            <Link to={"/sign-up"} className="text-blue-700">
-              Sign Up
-            </Link>
-          </u>
+      <section className="w-full h-screen flex flex-col md:flex-row items-center justify-around bg-[#f9fafb]">
+        <div className="hidden md:flex flex-col items-start justify-start">
+          <img
+            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
+            alt="logo"
+            className="size-8 mb-6 aspect-auto object-contain"
+          />
+          {loginList.map((item) => {
+            return (
+              <div key={item.id} className="group gap-x-2 flex items-center">
+                <IoIosCheckmarkCircle className="size-5 fill-[#0284c7]" />
+                <div className="flex flex-col items-start justify-start pt-6">
+                  <h3 className="regular-18 lg:bold-20 font-bold">
+                    {item.title}
+                  </h3>
+                  <p className="max-w-md regular-14 lg:regular-16 font-light mb-2 opacity-60">
+                    {item.text}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
         </div>
-        {error ? (
-          <p className="text-red-500 mt-3"> {JSON.stringify(error)} </p>
-        ) : (
-          ""
-        )}
+        <div className="w-full max-w-xl flex flex-col justify-center rounded-lg shadow md:shadow-xl form-container bg-transparent md:bg-white">
+          <h1 className="regular-18 lg:bold-20 font-semibold text-left mb-4 drop-shadow">
+            Welcome back
+          </h1>
+          <form
+            action=""
+            method="post"
+            onSubmit={handleSubmit}
+            className="gap-2 flex flex-col"
+          >
+            <div className="gap-2 md:gap-x-4 flex items-center justify-center">
+              <GoogleAuth title="Log in with Google" />
+              <GoogleAuth title="Log in with GitHub" />
+            </div>
+            <span className="flex items-center mt-4 mb-2">
+              <span className="h-px flex-1 bg-[#e5e7eb]"></span>
+              <span className="shrink-0 px-5 text-slate-500">or</span>
+              <span className="h-px flex-1 bg-[#e5e7eb]"></span>
+            </span>
+            <div className="w-full gap-2 flex flex-col items-start justify-start">
+              <label
+                htmlFor="email"
+                className="regular-14 lg:regular-16 font-semibold text-slate-900"
+              >
+                Email
+              </label>
+              <Input
+                type="email"
+                required
+                id="email"
+                name="email"
+                title="User email"
+                value={formData.email}
+                onChange={handleInputChange}
+                placeholder="Enter your email"
+                className="w-full border p-3 rounded-lg"
+              />
+            </div>
+            <div className="w-full gap-2 flex flex-col items-start justify-start">
+              <label
+                htmlFor="password"
+                className="regular-14 lg:regular-16 font-semibold text-slate-900"
+              >
+                Password
+              </label>
+              <Input
+                type="password"
+                required
+                id="password"
+                name="password"
+                title="User password"
+                placeholder="••••••"
+                value={formData.password}
+                onChange={handleInputChange}
+                className="w-full border p-3 rounded-lg"
+              />
+            </div>
+            <div className="flex items-center justify-between mt-3 mb-1.5">
+              <span className="flex gap-1 items-center justify-start">
+                <Input
+                  type="checkbox"
+                  id="checkbox"
+                  name="checkbox"
+                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                />
+                <label htmlFor="checkbox" className="regular-14 font-medium">
+                  Remember me
+                </label>
+              </span>
+              <Link
+                to={"/forgot-password"}
+                className="regular-14 font-medium text-[#0284c7] transition-colors ease-in hover:underline"
+              >
+                Forgot password?
+              </Link>
+            </div>
+            <Button
+              title="submit-button"
+              className="bg-[#0284c7] font-semibold mt-3 text-white p-3 rounded-lg hover:opacity-95 disabled:opacity-80"
+            >
+              {loading ? "Loading.." : "Sign in to your account"}
+            </Button>
+          </form>
+          <p className="regular-14 text-[#9297a2] font-light mt-4">
+            Don't have an account yet?
+            <Link to={`/sign-up`} className="text-[#319ad1] ml-1.5 font-medium">
+              Sign up here
+            </Link>
+          </p>
+        </div>
       </section>
     </Layout>
   );

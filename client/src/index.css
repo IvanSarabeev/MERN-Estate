@@ -11,6 +11,10 @@ body {
         @apply max-w-[1440px] mx-auto;
     }
 
+    .form-container {
+        @apply p-6 lg:p-12;
+    }
+
     .padding-container {
         @apply p-6 md:p-12 lg:px-16 xl:px-20 xl:py-16;
     }
