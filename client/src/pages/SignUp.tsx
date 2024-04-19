@@ -7,6 +7,7 @@ import { registerUser } from "services/apiAuth";
 import GoogleAuth from "components/OAuth/GoogleAuth";
 import Layout from "components/Layouts/Layout";
 import { avatarList } from "components/constants";
+import AlertBadge, { AlertBadgeProps } from "components/AlertBadge";
 
 const SignUp: React.FC = () => {
   const [formData, setFormData] = useState<UserSignUpData>({
@@ -17,6 +18,7 @@ const SignUp: React.FC = () => {
 
   const [error, setError] = useState<null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const [alertBadge, setAlertBadge] = useState<AlertBadgeProps | null>(null);
 
   const navigate = useNavigate();
 
@@ -37,12 +39,27 @@ const SignUp: React.FC = () => {
 
       if (formData !== null) {
         registerUser(formData);
+
+        setAlertBadge({
+          type: "success",
+          title: "Registration Successful",
+          description: "Your account has been created successfully!",
+        });
+
         setError(null);
-        navigate("/sign-in");
+
+        setTimeout(() => {
+          navigate("/sign-in"); // Navigate after 2000ms
+        }, 2000);
       }
     } catch (catchError) {
       setLoading(false);
 
+      setAlertBadge({
+        type: "error",
+        title: "Registration Failed",
+        description: error || "An error occurred while registering.",
+      });
       throw new Error(`Unexpected error ${error}`);
     }
   };
@@ -143,6 +160,13 @@ const SignUp: React.FC = () => {
             </Link>
           </p>
         </div>
+        {alertBadge && (
+          <AlertBadge
+            type={alertBadge.type}
+            title={alertBadge.title}
+            description={alertBadge.description}
+          />
+        )}
         <div className="h-full md:h-screen w-full lg:w-1/2 flex flex-col items-start justify-center padding-container bg-[#0284c7]">
           <h1 className="text-white text-3xl lg:text-5xl font-extrabold mb-4">
             Explore the world’s leading MERN estate application.
