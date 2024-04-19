@@ -8,6 +8,7 @@ import { HiMiniXMark } from "react-icons/hi2";
 import { headerLinks, userNavigation, userProfile } from "components/constants";
 import { NavLink, useNavigate } from "react-router-dom";
 import MobileNav from "./MobileNav";
+import Logo from "assets/images/logo.png";
 import { motion, AnimatePresence } from "framer-motion";
 import { scrollTop } from "utils/scrollTop";
 import { store } from "store/store";
@@ -53,8 +54,7 @@ const Header = () => {
       <nav className="max-container flexBetween padding-container py-3">
         <NavLink to={"/"}>
           <h2 className="flex flex-wrap font-bold text-sm sm:text-lg md:text-2xl lg:text-3xl">
-            <span className="text-slate-500">MERN</span>
-            <span className="text-slate-700">Estate</span>
+            <img src={Logo} alt="logo" className="h-14 w-32 aspect-auto" />
           </h2>
         </NavLink>
         <form
