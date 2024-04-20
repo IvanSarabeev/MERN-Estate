@@ -126,4 +126,16 @@ body {
     .accept-btn {
         @apply font-medium regular-14 text-white py-2 px-4 rounded-lg opacity-80 cursor-pointer bg-[#0284c7] transition-all ease-in-out hover:scale-105 hover:opacity-95;
     }
+
+    .contact-label {
+        @apply block regular-14 font-medium text-slate-800 mb-2;
+    }
+
+    .contact-input {
+        @apply regular-14 p-3 border border-[#d1d5db] rounded-lg shadow-sm bg-[#f9fafb];
+    }
+
+    .icon-container {
+        @apply size-16 flexCenter rounded-lg shadow-md bg-[#f3f4f6] mb-4 mx-auto transition-all ease-in-out duration-150 hover:scale-105;
+    }
 }

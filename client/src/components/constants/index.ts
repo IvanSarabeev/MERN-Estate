@@ -1,8 +1,9 @@
-import { FaFacebook, FaInstagram, FaTwitter, FaGithub, FaDribbble } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaTwitter, FaGithub, FaDribbble, FaPhoneAlt  } from "react-icons/fa";
 import { TbUserStar } from "react-icons/tb";
 import { BsHouseGear } from "react-icons/bs";
 import { PiWarehouseLight } from "react-icons/pi";
 import { RiSecurePaymentFill } from "react-icons/ri";
+import { MdEmail, MdSupport  } from "react-icons/md";
 
 export const headerLinks = [
     {id: 1, label: "Home", href: "/"},
@@ -55,4 +56,10 @@ export const loginList = [
     {id: 1, title: "Get started quickly", text: "Browse thought the system flow easily."},
     {id: 2, title: "Chose the property that suits your expectation", text: "You'r on the right place, you have a very rich choise to make."},
     {id: 3, title: "Join millions of businesses", text: "MERN Estate is trusted by thousends of ambitions people from around the globe."},
+] as const;
+
+export const boxSection = [
+    {id: 1, title:'Email us', text: 'Email us for general queries, including marketing and partnership opportunities.', icon: FaPhoneAlt},
+    {id: 2, title:'Call us', text: 'Call us to speak to a member of our team. We are always happy to help.', icon: MdEmail},
+    {id: 3, title:'Support', text: 'Email us for general queries, including marketing and partnership opportunities.', icon: MdSupport},
 ] as const;

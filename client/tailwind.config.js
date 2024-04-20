@@ -17,6 +17,12 @@ module.exports = {
       },
     },
     extend: {
+      grayscale: {
+        50: '50%',
+      },
+      backgroundImage: {
+        "contact": "url(https://flowbite.s3.amazonaws.com/blocks/marketing-ui/contact/laptop-human.jpg)",
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
