@@ -13,6 +13,7 @@ import { CreateListingIntf } from "types/listing";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "store/store";
+import FileInput from "components/FormComp/FileInput";
 
 const UpdateListing: React.FC = () => {
   const { currentUser } = useSelector((state: RootState) => state.user);
@@ -43,6 +44,7 @@ const UpdateListing: React.FC = () => {
   const [uploading, setUploading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
+  const [track, setTrack] = useState<string>("");
 
   const navigate = useNavigate();
 
@@ -59,6 +61,7 @@ const UpdateListing: React.FC = () => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           console.log(`Upload is ${progress}% done`);
+          setTrack(progress.toFixed(2));
         },
         (error) => {
           reject(error);
@@ -356,24 +359,31 @@ const UpdateListing: React.FC = () => {
             </div>
           </div>
           <div className="flex flex-col flex-1 gap-6">
-            <p className="font-semibold regular-16">
-              Images:
-              <span className="regular-14 font-normal text-gray-700 ml-2">
-                First image cover, total 6(max)
-              </span>
-            </p>
-            <div className="gap-4 flex">
-              <Input
+            <div className="w-full flexBetween pb-2 border-b rounded-md border-gray-400/85">
+              <p className="font-semibold regular-16">
+                Images:
+                <span className="regular-14 font-normal text-gray-700 ml-2">
+                  First image cover, total 6(max)
+                </span>
+              </p>
+              {track ? (
+                <p className="regular-14 font-normal">
+                  Uploading files:{" "}
+                  <strong className="regular-14 md:regular-16 text-green-500 font-bold">
+                    {JSON.stringify(track)} %
+                  </strong>
+                </p>
+              ) : (
+                <></>
+              )}
+            </div>
+            <div className="gap-4 flex flex-col">
+              <FileInput
                 onChange={(e) => {
                   if (e.target.files) {
-                    setFiles(Array.from(e.target.files)); // Convert FileList to an array
+                    setFiles(Array.from(e.target.files));
                   }
                 }}
-                id="images"
-                type="file"
-                accept="images/*"
-                multiple
-                className="w-fit lg:w-full p-3 border border-gray-300 rounded-lg"
               />
               <Button
                 type="button"
