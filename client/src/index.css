@@ -92,7 +92,7 @@ body {
     }
 
     .mobile-nav {
-        @apply w-full flex flex-col items-center justify-between text-center;
+        @apply w-full flex flex-col items-center justify-between text-center shadow-xl;
     }
 
     .avatar-img {
