@@ -79,12 +79,16 @@ body {
         @apply font-medium pr-4 lg:pr-7 hover:underline hover:font-semibold transition-all;
     }
 
+    .header-container {
+        @apply sticky z-30 top-0 h-fit w-full shadow-md bg-slate-200;
+    }
+
     .mobile-btn {
         @apply relative z-30 w-fit h-fit flex items-center justify-center text-inherit p-4 -mr-4 border-0 bg-transparent ease-linear transition-opacity cursor-pointer;
     }
 
     .mobile-menu {
-        @apply fixed top-0 right-0 bottom-0 z-10 h-screen min-w-[75vw] max-w-[400px] flex items-center justify-center py-12 px-3 outline-none visible translate-x-[0vw] transition-all;
+        @apply fixed top-0 right-0 bottom-0 z-10 h-screen min-w-[65vw] max-w-[400px] flex items-center justify-center py-12 px-3 outline-none visible translate-x-[0vw] transition-all bg-slate-200;
     }
 
     .mobile-nav {
@@ -92,7 +96,7 @@ body {
     }
 
     .avatar-img {
-        @apply size-7 rounded-full aspect-auto object-cover;
+        @apply size-8 rounded-full aspect-auto object-cover;
     }
 
     .form-container {

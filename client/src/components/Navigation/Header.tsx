@@ -12,6 +12,7 @@ import Logo from "assets/images/logo.png";
 import { motion, AnimatePresence } from "framer-motion";
 import { scrollTop } from "utils/scrollTop";
 import { store } from "store/store";
+import Avatar from "components/Avatar";
 
 const Header = () => {
   const [show, setShow] = useToggle();
@@ -54,7 +55,13 @@ const Header = () => {
       <nav className="w-full max-container flexBetween padding-container py-3 z-20">
         <div className="relative z-10 size-fit ease-in-out transition-all">
           <NavLink to={"/"}>
-            <img src={Logo} alt="logo" className="h-14 w-32 aspect-auto" />
+            <img
+              src={Logo}
+              alt="logo"
+              decoding="async"
+              loading="eager"
+              className="h-14 w-32 aspect-auto object-cover"
+            />
           </NavLink>
         </div>
         <form
@@ -117,13 +124,8 @@ const Header = () => {
                       aria-label={"Profile"}
                       className="relative group"
                     >
-                      <img
-                        src={currentUser?.avatar}
-                        alt={item.label}
-                        id="tooltip-bottom"
-                        className="avatar-img"
-                        data-tooltip-placement="bottom"
-                      />
+                      <Avatar src={currentUser?.avatar} alt={item.label} />
+                      <span className="sr-only">Avatar Icon</span>
                       <div
                         id="tooltip-bottom"
                         className="hidden absolute group-hover:block"
