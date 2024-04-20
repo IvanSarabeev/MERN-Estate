@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { UserSignUpData } from "types/user";
 import { registerUser } from "services/apiAuth";
 import GoogleAuth from "components/OAuth/GoogleAuth";
+import GitHubAuth from "components/OAuth/GitHubAuth";
 import Layout from "components/Layouts/Layout";
 import { avatarList } from "components/constants";
 import AlertBadge, { AlertBadgeProps } from "components/Messages/AlertBadge";
@@ -73,7 +74,7 @@ const SignUp: React.FC = () => {
           </h2>
           <div className="gap-2 flex flex-col md:flex-row items-center justify-center lg:justify-start mt-3">
             <GoogleAuth title="Sign up with Google" />
-            <GoogleAuth title="Sign up with GitHub" />
+            <GitHubAuth title="Sign up with GitHub" />
           </div>
           <span className="flex items-center my-4">
             <span className="h-px flex-1 bg-[#e5e7eb]"></span>

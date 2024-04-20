@@ -4,6 +4,7 @@ import Button from "components/HTML/Button";
 import Layout from "components/Layouts/Layout";
 import { UserSignInData } from "types/user";
 import GoogleAuth from "components/OAuth/GoogleAuth";
+import GitHubAuth from "components/OAuth/GitHubAuth";
 import { Link, useNavigate } from "react-router-dom";
 import { signInUser } from "services/apiAuth";
 import { useDispatch, useSelector } from "react-redux";
@@ -98,7 +99,7 @@ const SignIn: React.FC = () => {
           >
             <div className="gap-2 md:gap-x-4 flex flex-col md:flex-row items-center justify-center">
               <GoogleAuth title="Log in with Google" />
-              <GoogleAuth title="Log in with GitHub" />
+              <GitHubAuth title="Log in via GitHub" />
             </div>
             <span className="flex items-center mt-4 mb-2">
               <span className="h-px flex-1 bg-[#e5e7eb]"></span>

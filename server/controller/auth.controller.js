@@ -51,7 +51,7 @@ export const signIn = async (req, res, next) => {
 
 export const googleAuth = async (req, res, next) => {
     try {
-        const user = await User.findOne({email: req.body.email});
+        let user = await User.findOne({email: req.body.email});
 
         if (user) {
             const jwtToken = Jwt.sign({id: user._id}, process.env.JWT_SECRET);
@@ -96,6 +96,49 @@ export const signOut = async (req, res, next) => {
     try {
         res.clearCookie('access_token');
         res.status(200).json('User has been logged out!');
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const githubAuth = async (req, res, next) => {
+    try {
+        let user = await User.findOne({email: req.body.email});
+
+        if (user) {
+            const jwtToken = Jwt.sign({id: user._id}, process.env.JWT_SECRET);
+
+            const { password: pass, ...rest} = user._doc;
+
+            res.cookie('access_token', jwtToken, {
+                httpOnly: true,
+            })
+            .status(200)
+            .json(rest)
+        } else {
+            // Create password because the provider doesn't gives us the user password because of security reasson
+            const generateRandPassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8);
+            // Random password from 36 num & letters, then get the last eight digits to total of 16
+            const hashedPassword = bcryptjs.hashSync(generateRandPassword, 12);
+
+            const newUser = new User({
+                username: req.body.name.split(" ").join("").toLowerCase(),
+                email: req.body.email,
+                password: hashedPassword, 
+                avatar: req.body.photo
+            });
+
+            await newUser.save();
+
+            const jwtToken = Jwt.sign({id: newUser._id}, process.env.JWT_SECRET);
+            const { password: pass, ...rest } = newUser._doc;
+
+            res.cookie('access_token', jwtToken, {
+                httpOnly: true,
+            })
+            .status(200)
+            .json(rest)
+        }
     } catch (error) {
         next(error);
     }
