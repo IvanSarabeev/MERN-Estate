@@ -107,7 +107,23 @@ body {
         @apply px-6 py-10 md:p-12;
     }
 
+    .cookie-container {
+        @apply fixed z-30 right-4 bottom-4 max-w-[544px] rounded-lg shadow-xl bg-white/85;
+    }
+
     .auth-btn {
         @apply w-full md:w-56 inline-flex items-center justify-center font-medium regular-14 text-black border rounded-lg px-5 py-2.5 text-center bg-white hover:bg-[#f3f4f6]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50;
+    }
+
+    .choices-btn {
+        @apply regular-14 font-medium text-white text-center px-4 py-2 rounded-lg cursor-pointer opacity-85 bg-[#0284c7] transition-all ease-in-out duration-150 hover:scale-105 hover:opacity-95;
+    }
+
+    .reject-btn {
+        @apply font-medium regular-14 text-black py-2 px-4 border opacity-60 border-slate-600/20 rounded-lg cursor-pointer transition-all ease-out duration-150 hover:scale-105 hover:opacity-95 hover:border-opacity-95;
+    }
+
+    .accept-btn {
+        @apply font-medium regular-14 text-white py-2 px-4 rounded-lg opacity-80 cursor-pointer bg-[#0284c7] transition-all ease-in-out hover:scale-105 hover:opacity-95;
     }
 }
