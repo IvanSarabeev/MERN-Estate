@@ -10,12 +10,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "store/store";
 import { loginList } from "components/constants";
 import { IoIosCheckmarkCircle } from "react-icons/io";
+import AlertBadge, { AlertBadgeProps } from "components/Messages/AlertBadge";
 
 const SignIn: React.FC = () => {
   const [formData, setFormData] = useState<UserSignInData>({
     email: "",
     password: "",
   });
+  const [alertBadge, setAlertBadge] = useState<AlertBadgeProps | null>(null);
 
   const { loading, error } = useSelector((state: RootState) => state.user);
 
@@ -37,9 +39,24 @@ const SignIn: React.FC = () => {
     try {
       if (formData) {
         await signInUser(formData, dispatch);
-        navigate("/profile");
+
+        setAlertBadge({
+          type: "success",
+          title: "Login successfully !",
+          description: `Welcome back ${formData.email}.`,
+        });
+
+        setTimeout(() => {
+          navigate("/profile");
+        }, 4000);
       }
     } catch (catchError) {
+      setAlertBadge({
+        type: "warning",
+        title: "Unauthorized access",
+        description: "Credentials don't match!",
+      });
+
       throw new Error(`Error occur, cound't sign in ${JSON.stringify(error)}`);
     }
   };
@@ -79,7 +96,7 @@ const SignIn: React.FC = () => {
             onSubmit={handleSubmit}
             className="gap-2 flex flex-col"
           >
-            <div className="gap-2 md:gap-x-4 flex items-center justify-center">
+            <div className="gap-2 md:gap-x-4 flex flex-col md:flex-row items-center justify-center">
               <GoogleAuth title="Log in with Google" />
               <GoogleAuth title="Log in with GitHub" />
             </div>
@@ -159,6 +176,13 @@ const SignIn: React.FC = () => {
             </Link>
           </p>
         </div>
+        {alertBadge && (
+          <AlertBadge
+            type={alertBadge.type}
+            title={alertBadge.title}
+            description={alertBadge.description}
+          />
+        )}
       </section>
     </Layout>
   );

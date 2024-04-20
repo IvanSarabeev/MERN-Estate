@@ -7,7 +7,7 @@ import { registerUser } from "services/apiAuth";
 import GoogleAuth from "components/OAuth/GoogleAuth";
 import Layout from "components/Layouts/Layout";
 import { avatarList } from "components/constants";
-import AlertBadge, { AlertBadgeProps } from "components/AlertBadge";
+import AlertBadge, { AlertBadgeProps } from "components/Messages/AlertBadge";
 
 const SignUp: React.FC = () => {
   const [formData, setFormData] = useState<UserSignUpData>({

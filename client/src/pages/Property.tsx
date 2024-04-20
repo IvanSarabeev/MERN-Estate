@@ -17,7 +17,7 @@ import {
 } from "react-icons/fa";
 import { store } from "store/store";
 import { ReduxUserState } from "types/redux";
-import MessageModal from "components/MessageModal";
+import MessageModal from "components/Messages/MessageModal";
 
 const Property: React.FC = () => {
   const { id } = useParams();

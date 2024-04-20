@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getUser } from "../services/apiUser";
+import { getUser } from "../../services/apiUser";
 import { CreateListingIntf } from "types/listing";
 import { Link } from "react-router-dom";
 
