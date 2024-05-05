@@ -4,7 +4,7 @@ import Input from "components/HTML/Input";
 import Button from "components/HTML/Button";
 import { CreateListingIntf, SearchDataIntf } from "types/listing";
 import { useNavigate } from "react-router-dom";
-import Loader from "components/Loader";
+import Loader from "components/__comp/Loader";
 import ListingCard from "components/Listings/ListingCard";
 
 const SearchPage: React.FC = () => {

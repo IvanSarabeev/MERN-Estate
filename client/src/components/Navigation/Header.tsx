@@ -1,50 +1,18 @@
-import { useEffect, useState } from "react";
+import React from "react";
 import Button from "components/HTML/Button";
-import Input from "components/HTML/Input";
 import useToggle from "hooks/useToggle";
 import { IoMenu } from "react-icons/io5";
-import { FaSearch } from "react-icons/fa";
 import { HiMiniXMark } from "react-icons/hi2";
-import { headerLinks, userNavigation, userProfile } from "components/constants";
-import { NavLink, useNavigate } from "react-router-dom";
+import { headerLinks } from "components/constants";
+import { NavLink } from "react-router-dom";
 import MobileNav from "./MobileNav";
 import Logo from "assets/images/logo.png";
 import { motion, AnimatePresence } from "framer-motion";
 import { scrollTop } from "utils/scrollTop";
-import { store } from "store/store";
-import Avatar from "components/Avatar";
+import DropdownProfile from "components/__comp/ProfileDropdown";
 
-const Header = () => {
+const Header: React.FC = () => {
   const [show, setShow] = useToggle();
-  const [searchTerm, setSearchTerm] = useState<string>("");
-
-  const { currentUser } = store.getState().user;
-
-  const navigate = useNavigate();
-
-  const handleInputSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(event.target.value);
-  };
-
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-
-    const urlParams = new URLSearchParams(window.location.search);
-
-    urlParams.set("searchTerm", searchTerm);
-
-    const searchQuery = urlParams.toString();
-    navigate(`/search?${searchQuery}`);
-  };
-
-  useEffect(() => {
-    const urlParam = new URLSearchParams(location.search);
-    const searchTermFromUrl = urlParam.get("searchTerm");
-
-    if (searchTermFromUrl) {
-      setSearchTerm(searchTermFromUrl);
-    }
-  }, []);
 
   return (
     <motion.header
@@ -64,24 +32,7 @@ const Header = () => {
             />
           </NavLink>
         </div>
-        <form
-          action=""
-          method="get"
-          onSubmit={handleSubmit}
-          className="hidden md:flex items-center p-3 rounded-lg bg-slate-100"
-        >
-          <Input
-            type="text"
-            placeholder="Search..."
-            aria-label="Search input"
-            value={searchTerm}
-            onChange={handleInputSearch}
-            className="bg-transparent focus:outline-none w-20 md:w-64 lg:w-72 xl:w-80 xxl:w-96"
-          />
-          <Button>
-            <FaSearch className="text-slate-500" />
-          </Button>
-        </form>
+        {/* Custom Navigation */}
         <menu className="hidden gap-4 md:flex ">
           {headerLinks.map((item) => {
             return (
@@ -106,62 +57,14 @@ const Header = () => {
               </motion.li>
             );
           })}
-          {currentUser
-            ? userProfile.map((item) => {
-                return (
-                  <motion.li
-                    initial={{ opacity: 0, translateX: -50, translateY: -50 }}
-                    animate={{ opacity: 1, translateX: 0, translateY: 0 }}
-                    transition={{
-                      duration: 0.5,
-                      type: "spring",
-                      ease: "easeInOut",
-                    }}
-                    key={item.id}
-                  >
-                    <NavLink
-                      to={item.href}
-                      aria-label={"Profile"}
-                      className="relative group"
-                    >
-                      <Avatar src={currentUser?.avatar} alt={item.label} />
-                      <span className="sr-only">Avatar Icon</span>
-                      <div
-                        id="tooltip-bottom"
-                        className="hidden absolute group-hover:block"
-                      >
-                        {currentUser?.username}
-                      </div>
-                    </NavLink>
-                  </motion.li>
-                );
-              })
-            : userNavigation.map((item) => {
-                return (
-                  <motion.li
-                    initial={{ opacity: 0, translateX: -50, translateY: -50 }}
-                    animate={{ opacity: 1, translateX: 0, translateY: 0 }}
-                    transition={{
-                      duration: 0.5,
-                      type: "spring",
-                      ease: "easeInOut",
-                    }}
-                    key={item.id}
-                  >
-                    <NavLink
-                      to={item.href}
-                      type="button"
-                      className={`${item.cssAttribute}`}
-                    >
-                      {item.label}
-                    </NavLink>
-                  </motion.li>
-                );
-              })}
         </menu>
+        <div className="hidden md:flex gap-4 items-center justify-end">
+          <DropdownProfile />
+        </div>
         <div className="block md:hidden pr-2.5">
           <Button
             type="button"
+            title="Mobile button"
             onClick={() => setShow()}
             className="mobile-btn"
           >

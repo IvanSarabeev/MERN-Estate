@@ -79,8 +79,12 @@ body {
         @apply font-medium pr-4 lg:pr-7 hover:underline hover:font-semibold transition-all;
     }
 
+    .header-absolute {
+        @apply absolute top-0 right-0 left-0 z-50;
+    }
+
     .header-container {
-        @apply sticky z-30 top-0 h-fit w-full shadow-md bg-slate-200;
+        @apply sticky z-30 top-0 h-fit w-full flex items-center justify-between shadow-md bg-[#f1f5f1];
     }
 
     .mobile-btn {
@@ -108,7 +112,7 @@ body {
     }
 
     .cookie-container {
-        @apply fixed z-30 right-4 bottom-4 max-w-[544px] rounded-lg shadow-xl bg-white/85;
+        @apply fixed z-30 right-4 bottom-4 hidden md:block max-w-[544px] rounded-lg shadow-xl bg-white/85;
     }
 
     .auth-btn {
@@ -127,6 +131,10 @@ body {
         @apply font-medium regular-14 text-white py-2 px-4 rounded-lg opacity-80 cursor-pointer bg-[#0284c7] transition-all ease-in-out hover:scale-105 hover:opacity-95;
     }
 
+    .contact-item-row {
+        @apply col-span-2 md:col-span-1 flex flex-col;
+    }
+
     .contact-label {
         @apply block regular-14 font-medium text-slate-800 mb-2;
     }
@@ -137,5 +145,13 @@ body {
 
     .icon-container {
         @apply size-16 flexCenter rounded-lg shadow-md bg-[#f3f4f6] mb-4 mx-auto transition-all ease-in-out duration-150 hover:scale-105;
+    }
+
+    .btn-search {
+        @apply w-fit regular-14 text-white font-semibold text-center py-3 px-5 rounded-lg shadow-md opacity-90 cursor-pointer bg-blue-600 hover:opacity-100 focus:ring-4 focus:ring-red-500;
+    }
+
+    .btn-contact-submit {
+        @apply w-fit regular-14 text-white font-semibold text-center py-3 px-5 rounded-lg shadow-md opacity-95 cursor-pointer bg-[#0284c7] hover:opacity-100;
     }
 }

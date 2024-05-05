@@ -2,7 +2,7 @@ import React from "react";
 
 type AvatarProps = {
   src: string | undefined;
-  alt: string;
+  alt: string | undefined;
 };
 
 const Avatar: React.FC<AvatarProps> = ({ src, alt }) => {

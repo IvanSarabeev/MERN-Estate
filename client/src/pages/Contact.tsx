@@ -24,9 +24,10 @@ const Contact: React.FC = () => {
         <div className="max-w-7xl pt-8 lg:pt-24 px-4 lg:px-5 pb-16 lg:pb-32 -mt-80 mx-auto">
           <form
             action=""
+            method="post"
             className="max-w-4xl gap-8 grid grid-cols-1 md:grid-cols-2 p-6 border border-white/85 rounded-lg shadow-lg mx-auto mb-16 bg-white"
           >
-            <div className="flex flex-col">
+            <div className="contact-item-row">
               <label htmlFor="fName" className="contact-label">
                 First Name
               </label>
@@ -37,7 +38,7 @@ const Contact: React.FC = () => {
                 className="contact-input"
               />
             </div>
-            <div className="flex flex-col">
+            <div className="contact-item-row">
               <label htmlFor="lName" className="contact-label">
                 Last Name
               </label>
@@ -48,7 +49,7 @@ const Contact: React.FC = () => {
                 className="contact-input"
               />
             </div>
-            <div className="flex flex-col">
+            <div className="contact-item-row">
               <label htmlFor="email" className="contact-label">
                 Your Email
               </label>
@@ -59,7 +60,7 @@ const Contact: React.FC = () => {
                 className="contact-input"
               />
             </div>
-            <div className="flex flex-col">
+            <div className="contact-item-row">
               <label htmlFor="phone" className="contact-label">
                 Your Phone
               </label>
@@ -99,7 +100,7 @@ const Contact: React.FC = () => {
               type="button"
               aria-label="Contact Form"
               title="Submit Contact Form"
-              className="w-fit regular-14 text-white font-semibold text-center py-3 px-5 rounded-lg shadow-md opacity-90 cursor-pointer bg-[#0284c7] hover:opacity-100"
+              className="btn-contact-submit"
             >
               Send message
             </Button>

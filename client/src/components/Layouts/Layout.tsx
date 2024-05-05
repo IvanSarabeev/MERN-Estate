@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "components/Navigation/Header";
 import Footer from "components/Footer/Footer.tsx";
-import CookieReminder from "components/CookieReminder";
+import CookieReminder from "components/__comp/CookieReminder";
 import useToggle from "hooks/useToggle";
 
 type LayoutProp = {

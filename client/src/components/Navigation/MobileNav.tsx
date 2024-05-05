@@ -1,9 +1,9 @@
 import { FunctionComponent } from "react";
 import { motion, Variants, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import { mobileNavigation } from "components/constants";
 import { store } from "store/store";
-import Avatar from "components/Avatar";
+import { mobileNavigation } from "components/constants";
+import Avatar from "components/__comp/Avatar";
 
 type MobileProps = {
   isOpen: boolean;

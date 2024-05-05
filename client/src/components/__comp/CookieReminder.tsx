@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import socket from "../services/socket";
-import Button from "./HTML/Button";
+import React, { useState, useCallback } from "react";
+import socket from "services/socket";
+import Button from "components/HTML/Button";
 
 interface CookieProps {
   handleCookie: () => void;
@@ -9,7 +9,7 @@ interface CookieProps {
 const CookieReminder: React.FC<CookieProps> = ({ handleCookie }) => {
   const [isConnected, setIsConnected] = useState<boolean>(false);
 
-  useEffect(() => {
+  useCallback(() => {
     socket.on("cookieReminder", (message: string) => {
       // alert(message);
       console.log(message);

@@ -9,7 +9,6 @@ import Profile from "./pages/Profile";
 import ErrorPage from "./pages/ErrorPage";
 import CreateListing from "./pages/CreateListing";
 import UpdateListing from "./pages/UpdateListing";
-import Property from "./pages/Property";
 import SearchPage from "./pages/SearchPage";
 
 function App() {
@@ -19,7 +18,6 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/listing/:id" element={<Property />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />

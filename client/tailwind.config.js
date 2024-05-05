@@ -22,6 +22,7 @@ module.exports = {
       },
       backgroundImage: {
         "contact": "url(https://flowbite.s3.amazonaws.com/blocks/marketing-ui/contact/laptop-human.jpg)",
+        "home": "url(https://res.cloudinary.com/dplqrjsty/image/upload/v1713689912/homepage_fjssvr.jpg)",
       },
       keyframes: {
         "accordion-down": {

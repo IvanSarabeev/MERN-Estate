@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import Layout from "components/Layouts/Layout";
 import { achievmentTestimonial } from "components/constants";
 import { Link } from "react-router-dom";
-import { fetchRentListing, fetchSalesListing } from "../services/apiListing";
+import { fetchRentListing, fetchSalesListing } from "services/apiListing";
 import { CreateListingIntf } from "types/listing";
 import RentListing from "components/Listings/ListingTypes/RentListing";
 import SalesListing from "components/Listings/ListingTypes/SalesListing";
+import SearchHeader from "components/FormComp/SearchHeader";
 
 const Home: React.FC = () => {
   const [rentListing, setRentListing] = useState<CreateListingIntf[]>([]);
   const [salesListing, setSalesListing] = useState<CreateListingIntf[]>([]);
 
-  useEffect(() => {
+  useCallback(() => {
     const handleFetchRentListing = async () => {
       const rentData = await fetchRentListing();
 
@@ -31,30 +32,24 @@ const Home: React.FC = () => {
 
   return (
     <Layout>
-      <section className="padding-container bg-white">
+      <section className="h-screen w-full padding-container bg-home aspect-auto object-cover">
         <div className="flex flex-col lg:flex-row max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16">
-          <div className="mr-auto place-self-center lg:col-span-7">
-            <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl">
+          <div className="mt-48 mr-auto place-self-center lg:col-span-7">
+            {/* <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl">
               Find your next <span className="text-slate-500">perfect</span>
               <br /> place with ease
-            </h1>
-            <p className="max-w-xl md:regular-16 xl:regular-18 mb-6 font-light text-gray-500 lg:mb-8">
+            </h1> */}
+            {/* <p className="max-w-xl md:regular-16 xl:regular-18 mb-6 font-light text-gray-500 lg:mb-8">
               From checkout to global sales tax compliance, companies around the
               world use Flowbite to simplify their payment stack.
-            </p>
-            <Link
+            </p> */}
+            {/* <Link
               to={"/search"}
               className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800 regular-12 sm:regular-14 lg:regular-16 text-blue-700 hover:underline transition-all ease-in-out hover:text-gray-600"
             >
               Let's get started ...
-            </Link>
-          </div>
-          <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
-            <img
-              src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/hero/phone-mockup.png"
-              alt="mockup"
-              className="size-96 aspect-auto object-contain"
-            />
+            </Link> */}
+            <SearchHeader />
           </div>
         </div>
       </section>
