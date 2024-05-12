@@ -13,8 +13,12 @@ const BoxSection: React.FC<BoxProps> = ({ title, text, Icon }) => {
       <div className="icon-container">
         <Icon className="size-8 aspect-auto object-cover" />
       </div>
-      <h3 className="regular-18 lg:bold-20 font-bold mb-2">{title}</h3>
-      <p className="text-[#6b7280] opacity-85 mb-3">{text}</p>
+      <h3 className="regular-18 lg:bold-20 2xl:bold-24 font-bold mb-2">
+        {title}
+      </h3>
+      <p className="text-[#6b7280] regular-14 lg:regular-16 opacity-85 mb-3">
+        {text}
+      </p>
     </div>
   );
 };

@@ -50,6 +50,10 @@ body {
     .flexAround {
         @apply flex items-center justify-around;
     }
+
+    .bold-24 {
+        @apply text-2xl font-bold;
+    }
     
     .bold-20 {
         @apply text-xl font-bold;
@@ -136,22 +140,26 @@ body {
     }
 
     .contact-label {
-        @apply block regular-14 font-medium text-slate-800 mb-2;
+        @apply block regular-14 xl:regular-16 font-medium xl:font-semibold text-slate-800 mb-2;
     }
 
     .contact-input {
-        @apply regular-14 p-3 border border-[#d1d5db] rounded-lg shadow-sm bg-[#f9fafb];
+        @apply regular-14 xl:regular-16 p-3 border border-[#d1d5db] rounded-lg shadow-sm bg-[#f9fafb];
     }
 
     .icon-container {
-        @apply size-16 flexCenter rounded-lg shadow-md bg-[#f3f4f6] mb-4 mx-auto transition-all ease-in-out duration-150 hover:scale-105;
+        @apply size-16 2xl:size-20 flexCenter rounded-lg shadow-md bg-[#f3f4f6] mb-4 mx-auto transition-all ease-in-out duration-150 hover:scale-105;
     }
 
     .btn-search {
         @apply w-fit regular-14 text-white font-semibold text-center py-3 px-5 rounded-lg shadow-md opacity-90 cursor-pointer bg-blue-600 hover:opacity-100 focus:ring-4 focus:ring-red-500;
     }
 
+    .contact-form {
+        @apply max-w-4xl gap-8 grid grid-cols-1 md:grid-cols-2 p-6 border border-white/85 rounded-lg shadow-lg mx-auto mb-16 bg-white;
+    }
+
     .btn-contact-submit {
-        @apply w-fit regular-14 text-white font-semibold text-center py-3 px-5 rounded-lg shadow-md opacity-95 cursor-pointer bg-[#0284c7] hover:opacity-100;
+        @apply min-w-fit w-fit regular-14 2xl:regular-16 text-white font-semibold text-center py-3 px-5 rounded-lg shadow-md opacity-95 cursor-pointer bg-[#0284c7] hover:opacity-100 hover:scale-105 transition-all ease-out duration-150;
     }
 }
