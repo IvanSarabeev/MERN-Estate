@@ -23,6 +23,16 @@ module.exports = {
       backgroundImage: {
         "contact": "url(https://flowbite.s3.amazonaws.com/blocks/marketing-ui/contact/laptop-human.jpg)",
         "home": "url(https://res.cloudinary.com/dplqrjsty/image/upload/v1713689912/homepage_fjssvr.jpg)",
+        "test": "url(https://media.assettype.com/outlooktraveller%2F2023-08%2Fc3c25578-1ade-424d-8ce9-80b48ff0fdf9%2Fshutterstock_2050060145.jpeg)",
+
+        // Bento Grid Images
+        "first-el": "url(../src/assets/images/banner.png)",
+        "second-el": "url(https://static.photocdn.pt/images/articles/2021/01/07/quality_real_estate_photos.webp)",
+        "third-el": "url(https://img.freepik.com/premium-vector/five-stars-customer-product-rating-review-badge-design-with-star-label-modern-vector-illustration_172533-1985.jpg)",
+        "fourth-el": "url(../src/assets/images/sell_property.jpg)",
+        "fifth-el": "url(../src/assets/images/luxury_rent.jpg)",
+        "sixst-el": "url(https://img.freepik.com/premium-vector/exclusive-offer-label-badge-shop-now-vector-stock-illustration_100456-11056.jpg?w=360)",
+        "sevent-el": "url(../src/assets/images/virtual-tour.png)",
       },
       keyframes: {
         "accordion-down": {

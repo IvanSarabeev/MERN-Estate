@@ -162,4 +162,9 @@ body {
     .btn-contact-submit {
         @apply min-w-fit w-fit regular-14 2xl:regular-16 text-white font-semibold text-center py-3 px-5 rounded-lg shadow-md opacity-95 cursor-pointer bg-[#0284c7] hover:opacity-100 hover:scale-105 transition-all ease-out duration-150;
     }
+
+    .home-hero {
+        /* Between 800 and 1200 px-s */
+        @apply h-screen max-h-[800px] w-10/12 rounded-2xl padding-container bg-left md:bg-center bg-test bg-no-repeat aspect-auto bg-cover object-cover mx-auto;
+    }
 }

@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import Layout from "components/Layouts/Layout";
-import { achievmentTestimonial } from "components/constants";
+import { achievmentTestimonial, bentoGridInfo } from "components/constants";
 import { Link } from "react-router-dom";
 import { fetchRentListing, fetchSalesListing } from "services/apiListing";
 import { CreateListingIntf } from "types/listing";
@@ -32,24 +32,28 @@ const Home: React.FC = () => {
 
   return (
     <Layout>
-      <section className="h-screen w-full padding-container bg-home aspect-auto object-cover">
-        <div className="flex flex-col lg:flex-row max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16">
-          <div className="mt-48 mr-auto place-self-center lg:col-span-7">
-            {/* <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl">
-              Find your next <span className="text-slate-500">perfect</span>
-              <br /> place with ease
-            </h1> */}
-            {/* <p className="max-w-xl md:regular-16 xl:regular-18 mb-6 font-light text-gray-500 lg:mb-8">
-              From checkout to global sales tax compliance, companies around the
-              world use Flowbite to simplify their payment stack.
-            </p> */}
-            {/* <Link
-              to={"/search"}
-              className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800 regular-12 sm:regular-14 lg:regular-16 text-blue-700 hover:underline transition-all ease-in-out hover:text-gray-600"
-            >
-              Let's get started ...
-            </Link> */}
-            <SearchHeader />
+      <section className="py-10">
+        <div className="home-hero">
+          {/* TODO: Align the box content the same as the dribble site */}
+          <div className="pt-[14%]">
+            {/* pt-[14%] */}
+            <h1 className="bold-24 xl:text-5xl 2xl:text-6xl font-semibold text-balance">
+              Find the{" "}
+              <strong className="text-blue-700 underline underline-offset-4">
+                perfect
+              </strong>
+              <br />
+              paradise in your home
+            </h1>
+            <p className="regular-16 xl:regular-18 2xl:bold-20 text-slate-700 font-medium mt-10 first-letter:bold-24">
+              Find a luxury residence that suits you, we will help <br />
+              you to find the most suitable residence for you
+            </p>
+          </div>
+          <div className="flex flex-col lg:flex-row max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16">
+            <div className="mt-48 mr-auto place-self-center lg:col-span-7">
+              <SearchHeader />
+            </div>
           </div>
         </div>
       </section>
@@ -81,6 +85,34 @@ const Home: React.FC = () => {
           </div>
         </div>
       </section>
+      <section className="h-screen w-full padding-container mx-auto bg-white">
+        <div className="max-w-screen-xl grid grid-cols-2 xl:grid-cols-3 gap-4 p-4 mx-auto">
+          {/* !Make the BentoGrid Adaptive and structure the css properly */}
+          {bentoGridInfo.map((item, index) => {
+            return (
+              <div key={item.id} className={`${item.style}`}>
+                <div className="relative w-full">
+                  <img
+                    src={item.imageSrc}
+                    className={`${item.imageStyle} rounded-lg bg-center bg-no-repeat bg-cover object-cover aspect-auto`}
+                    alt={item.title}
+                  />
+                </div>
+                <h4 className="font-sans regular-18 lg:bold-20 2xl:bold-24 text-slate-400 font-semibold mt-2">
+                  {item.title}
+                </h4>
+                <p
+                  className={`font-serif regular-14 lg:regular-16 2xl:regular-18 text-slate-700 font-medium leading-3 text-balance mt-2 ${
+                    index === 5 ? "first-letter:text-3xl font-bold" : ""
+                  }`}
+                >
+                  {item.text}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+      </section>
       <section className="gap-6 flex flex-col py-3 md:py-8 padding-container mx-auto bg-white">
         <div className="gap-2 flex flex-col items-start justify-start">
           <h2 className="text-2xl lg:text-4xl font-semibold text-slate-600">
@@ -94,7 +126,7 @@ const Home: React.FC = () => {
           </Link>
         </div>
         <article className="gap-4 md:gap-6 flex flex-col md:flex-row flex-wrap max-container">
-          {rentListing !== null &&
+          {rentListing &&
             rentListing.length > 0 &&
             rentListing.map((item) => {
               return <RentListing key={item._id} item={item} />;
