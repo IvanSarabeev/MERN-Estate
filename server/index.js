@@ -8,6 +8,9 @@ import cookieParser from "cookie-parser";
 import path from "path";
 import { createServer } from "http";
 import { Server } from "socket.io";
+import helmet from "helmet";
+import ExpressMongoSanitize from "express-mongo-sanitize";
+
 dotenv.config();
 
 const PORT = process.env.PORT_KEY;
@@ -24,6 +27,13 @@ mongoose.connect(DB_URL)
 const __dirname = path.resolve();
 
 const app = express();
+
+// Secure HEADER HTTP
+app.use(helmet());
+
+// DATE SANITIZATION against NoSQL query injection
+app.use(ExpressMongoSanitize());
+
 const httpServer = createServer(app);
 const socketIo = new Server(httpServer, {
     cors: {
