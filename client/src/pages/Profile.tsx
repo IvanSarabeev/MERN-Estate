@@ -12,7 +12,7 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import { app } from "../fireStore/firebase";
-import { signOutUser } from "../services/apiAuth";
+import { signOutUser } from "services/apiAuth";
 import { updateUser, deleteUser } from "../services/apiUser";
 import { Link, useNavigate } from "react-router-dom";
 import Layout from "components/Layouts/Layout";

@@ -32,12 +32,11 @@ const Home: React.FC = () => {
 
   return (
     <Layout>
-      <section className="py-10">
+      <section className="padding-container mx-auto">
         <div className="home-hero">
           {/* TODO: Align the box content the same as the dribble site */}
-          <div className="pt-[14%]">
-            {/* pt-[14%] */}
-            <h1 className="bold-24 xl:text-5xl 2xl:text-6xl font-semibold text-balance">
+          <div className="absolute top-1/4 padding-container">
+            <h1 className="home-heading">
               Find the{" "}
               <strong className="text-blue-700 underline underline-offset-4">
                 perfect
@@ -45,16 +44,12 @@ const Home: React.FC = () => {
               <br />
               paradise in your home
             </h1>
-            <p className="regular-16 xl:regular-18 2xl:bold-20 text-slate-700 font-medium mt-10 first-letter:bold-24">
+            <p className="sub-paragraph">
               Find a luxury residence that suits you, we will help <br />
               you to find the most suitable residence for you
             </p>
           </div>
-          <div className="flex flex-col lg:flex-row max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16">
-            <div className="mt-48 mr-auto place-self-center lg:col-span-7">
-              <SearchHeader />
-            </div>
-          </div>
+          <SearchHeader />
         </div>
       </section>
       <section className="w-screen padding-container bg-white">

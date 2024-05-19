@@ -31,8 +31,6 @@ export const registerUser = async (formData: UserSignUpData) => {
 
         const data = await response.json();
 
-        console.log('User created successfully');
-
         return data;
     } catch (error) {
         throw new Error(`Error message occur: ${error}`);

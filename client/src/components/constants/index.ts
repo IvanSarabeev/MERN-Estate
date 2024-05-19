@@ -68,6 +68,12 @@ export const boxSection = [
     {id: 3, title:'Support', text: 'Email us for general queries, including marketing and partnership opportunities.', icon: MdSupport},
 ] as const;
 
+export const buttonGroup = [
+    {id: 1, label: "Buy", ariaLabel: "Buy Input", style: "btn-group rounded-bl-md rounded-tl-lg"},
+    {id: 2, label: "Rent", ariaLabel: "Rent Input", style: "btn-group"},
+    {id: 3, label: "Sell", ariaLabel: "Sell Input", style: "btn-group rounded-br-md rounded-tr-lg"},
+] as const;
+
 export const bentoGridInfo = [
     {
         id: 1,

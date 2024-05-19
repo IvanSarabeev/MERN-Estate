@@ -49,7 +49,7 @@ const SignIn: React.FC = () => {
 
         setTimeout(() => {
           navigate("/profile");
-        }, 4000);
+        }, 2500);
       }
     } catch (catchError) {
       setAlertBadge({

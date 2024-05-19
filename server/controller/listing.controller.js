@@ -1,10 +1,21 @@
 import Listing from "../model/listing.model.js";
+import xssFilters from "xss-filters";
 import { errorHandler } from './../utils/error.js';
 
 export const createListing = async (req, res, next) => {
     try {
-        // TODO: sanitize each individual data inside the Client
-        const listing = await Listing.create(req.body);
+        const sanitizedData = [];
+
+        // Iterate over each property in formData body
+        for (const key in req.body) {
+            if (Object.hasOwnProperty.call(req.body, key)) {
+
+                // Sanitize each individual property by it's key value
+                sanitizedData[key] = xssFilters.inHTMLData(req.body[key]);
+            }
+        }
+
+        const listing = await Listing.create(sanitizedData);
 
         return res().status(201).json(listing);
     } catch (error) {

@@ -16,7 +16,7 @@
       "types/*":["./src/types/*"],
       "utils/*":["./src/utils/*"],
       "store/*":["./src/store/*"],
-      "services/*":["./src/services/*"],
+      "services/*":["./src/services/*"]
     },
 
     /* Bundler mode */

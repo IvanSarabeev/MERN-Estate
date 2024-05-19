@@ -152,7 +152,7 @@ body {
     }
 
     .btn-search {
-        @apply w-fit regular-14 text-white font-semibold text-center py-3 px-5 rounded-lg shadow-md opacity-90 cursor-pointer bg-blue-600 hover:opacity-100 focus:ring-4 focus:ring-red-500;
+        @apply w-fit regular-18 text-white font-semibold text-center py-4 px-6 rounded-lg shadow-md opacity-90 cursor-pointer bg-blue-600 hover:opacity-100 focus:ring-4 focus:ring-red-500;
     }
 
     .contact-form {
@@ -164,7 +164,22 @@ body {
     }
 
     .home-hero {
-        /* Between 800 and 1200 px-s */
-        @apply h-screen max-h-[800px] w-10/12 rounded-2xl padding-container bg-left md:bg-center bg-test bg-no-repeat aspect-auto bg-cover object-cover mx-auto;
+        @apply relative h-96 md:h-[540px] lg:h-[620px] xl:h-[725px] max-w-7xl rounded-xl xl:rounded-2xl py-28 mx-auto bg-center bg-test bg-no-repeat aspect-auto bg-cover object-cover;
+    }
+
+    .home-heading {
+        @apply text-3xl md:text-4xl xl:text-5xl 2xl:text-6xl font-bold font-sans text-balance;
+    }
+
+    .sub-paragraph {
+        @apply regular-16 md:regular-18 xl:bold-20 2xl:bold-24 text-slate-700 font-medium mt-10 first-letter:bold-24;
+    }
+
+    .btn-group {
+        @apply text-gray-900 regular-18 font-semibold px-8 py-2.5 border border-gray-200 outline-none transition-all duration-150 ease-in-out hover:text-blue-700  hover:bg-gray-100 hover:underline focus:ring-2 focus:ring-blue-400 focus:text-blue-700;
+    }
+
+    .btn-sell {
+        @apply rounded-br-md rounded-tr-lg;
     }
 }

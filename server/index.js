@@ -29,7 +29,10 @@ const __dirname = path.resolve();
 const app = express();
 
 // Secure HEADER HTTP
-app.use(helmet());
+app.use(helmet({
+    // TODO: Secure the content
+    contentSecurityPolicy: false,
+}));
 
 // DATE SANITIZATION against NoSQL query injection
 app.use(ExpressMongoSanitize());

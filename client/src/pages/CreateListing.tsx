@@ -151,6 +151,8 @@ const CreateListing: React.FC = () => {
       setLoading(true);
       setError(false);
 
+      // TODO: Fix Listing POST
+
       const res = await fetch("/api/listing/create", {
         method: "POST",
         headers: {
@@ -169,6 +171,7 @@ const CreateListing: React.FC = () => {
       if (data.success === false) {
         setError(data.message);
       }
+
       navigate(`/listing/${data._id}`);
     } catch (error) {
       setError(false);
