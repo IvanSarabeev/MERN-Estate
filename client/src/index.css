@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-    background-color: rgb(241, 245,241)
+    background-color: rgb(248, 248, 248)
 }
 
 @layer components {
@@ -179,7 +179,15 @@ body {
         @apply text-gray-900 regular-18 font-semibold px-8 py-2.5 border border-gray-200 outline-none transition-all duration-150 ease-in-out hover:text-blue-700  hover:bg-gray-100 hover:underline focus:ring-2 focus:ring-blue-400 focus:text-blue-700;
     }
 
-    .btn-sell {
-        @apply rounded-br-md rounded-tr-lg;
+    .accent-container {
+        @apply gap-y-2 md:gap-y-0 md:gap-x-4 flex flex-col md:flex-row items-center text-center md:text-left border border-gray-400 md:border-0 rounded-lg p-4;
+    }
+
+    .accent-title {
+        @apply text-5xl font-semibold xl:text-6xl xl:font-medium text-[#252525] opacity-90;
+    }
+
+    .accent-label {
+        @apply regular-18 leading-6 font-medium text-balance 2xl:leading-7 text-slate-400/85;
     }
 }

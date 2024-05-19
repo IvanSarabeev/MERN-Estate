@@ -53,30 +53,6 @@ const SearchHeader: React.FC = () => {
               </Button>
             );
           })}
-          {/* <Button
-            type="button"
-            title="Rent"
-            aria-label="Buy Input"
-            className="text-gray-900 regular-18 font-semibold px-8 py-2.5 rounded-bl-md rounded-tl-lg border border-gray-200 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 hover:bg-gray-100"
-          >
-            Buy
-          </Button>
-          <Button
-            type="button"
-            title="Rent"
-            aria-label="Rent Input"
-            className="text-gray-900 regular-18 font-semibold px-8 py-2.5 border border-gray-200 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 hover:bg-gray-100"
-          >
-            Rent
-          </Button>
-          <Button
-            type="button"
-            title="Sales"
-            aria-label="Sell Input"
-            className="text-gray-900 regular-18 font-semibold px-8 py-2.5 rounded-br-md rounded-tr-lg border border-gray-200 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 hover:bg-gray-100 hover:underline transition-all duration-150 ease-in-out"
-          >
-            Sell
-          </Button> */}
         </div>
         <form
           action=""

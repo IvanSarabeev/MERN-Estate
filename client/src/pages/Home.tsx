@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import Layout from "components/Layouts/Layout";
-import { achievmentTestimonial, bentoGridInfo } from "components/constants";
+import { accents, bentoGridInfo } from "components/constants";
 import { Link } from "react-router-dom";
 import { fetchRentListing, fetchSalesListing } from "services/apiListing";
 import { CreateListingIntf } from "types/listing";
@@ -34,7 +34,6 @@ const Home: React.FC = () => {
     <Layout>
       <section className="padding-container mx-auto">
         <div className="home-hero">
-          {/* TODO: Align the box content the same as the dribble site */}
           <div className="absolute top-1/4 padding-container">
             <h1 className="home-heading">
               Find the{" "}
@@ -52,33 +51,15 @@ const Home: React.FC = () => {
           <SearchHeader />
         </div>
       </section>
-      <section className="w-screen padding-container bg-white">
-        <div className="flex flex-col text-center items-center justify-center mx-auto">
-          <h2 className="text-2xl xl:text-5xl text-slate-900 font-bold">
-            Achievement
-          </h2>
-          <p className="max-w-lg text-[#252525] regular-14 lg:regular-16 xl:regular-18 mt-4 xl:mt-6 font-semibold">
-            Mentioned began rural, oval that developed from trial and
-            successful.
-          </p>
-          <div className="gap-20 flex flex-wrap items-center self-center justify-around 2xl:flex-nowrap mx-auto py-12">
-            {achievmentTestimonial.map((item) => {
-              const Icon = item.icon;
-              return (
-                <div
-                  className="flex flex-col items-center justify-center mx-auto"
-                  key={item.id}
-                >
-                  <Icon className="size-14" />
-                  <h3 className="bold-20 lg:text-2xl font-bold">
-                    {item.review}+
-                  </h3>
-                  <p className="text-slate-600 font-medium">{item.label}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
+      <section className="gap-y-6 flex flex-col md:flex-row flex-wrap md:flex-nowrap justify-between max-w-7xl padding-container mx-auto">
+        {accents.map((item) => {
+          return (
+            <div key={item.id} className="accent-container">
+              <h3 className="accent-title">{item.title}</h3>
+              <p className="accent-label">{item.label}</p>
+            </div>
+          );
+        })}
       </section>
       <section className="h-screen w-full padding-container mx-auto bg-white">
         <div className="max-w-screen-xl grid grid-cols-2 xl:grid-cols-3 gap-4 p-4 mx-auto">

@@ -33,6 +33,12 @@ export const socialMedia = [
     {id: 5, label: 'Dribble', href: 'https://dribbble.com/', icon: FaDribbble},
 ] as const;
 
+export const accents = [
+    {id: 1, title: "120k", label: "People believe in our service"},
+    {id: 2, title: "3200", label: "Property and house ready for occupancy"},
+    {id: 3, title: "45k", label: "Partners who have worked with us"},
+] as const;
+
 export const achievmentTestimonial = [
     {id: 1, label: 'Completed Contracts', icon: TbUserStar, review: 2500},
     {id: 2, label: 'Property Sales', icon: BsHouseGear, review: 3500},
