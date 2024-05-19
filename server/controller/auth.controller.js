@@ -1,11 +1,15 @@
 import User from './../model/user.model.js';
 import bcryptjs from "bcryptjs";
 import Jwt from 'jsonwebtoken';
+import xssFilters from 'xss-filters';
 import { errorHandler } from '../utils/error.js';
+import { cookieOptions } from '../utils/cookie.js';
 
 export const signUp = async (req, res, next) => {
     // Sanitized User Data
-   const {username, email, password} = req.body;
+   const username = xssFilters.inHTMLData(req.body.username);
+   const email = xssFilters.inHTMLData(req.body.email);
+   const password = xssFilters.inHTMLData(req.body.password);
 
    // Hashing password to 12 rounds
    const hashedPassword = bcryptjs.hashSync(password, 12);
@@ -21,7 +25,9 @@ export const signUp = async (req, res, next) => {
 };
 
 export const signIn = async (req, res, next) => {
-    const { email, password } = req.body;
+    // Sanitized User Data
+    const email = xssFilters.inHTMLData(req.body.email);
+    const password = xssFilters.inHTMLData(req.body.password);
 
     try {
         const validUser = await User.findOne({email}); 
@@ -42,7 +48,7 @@ export const signIn = async (req, res, next) => {
         const {password: pass, ...rest} = validUser._doc;
 
         // Set the session cookie, to not allow 3-rd party reading cookie & expiration time
-        res.cookie('acces_token', jwtToken, { httpOnly: true })
+        res.cookie('access_token', jwtToken, cookieOptions)
         .status(200)
         .json(rest);
     } catch (error) {
@@ -82,9 +88,7 @@ export const googleAuth = async (req, res, next) => {
             const jwtToken = Jwt.sign({id: newUser._id}, process.env.JWT_SECRET);
             const { password: pass, ...rest } = newUser._doc;
 
-            res.cookie('access_token', jwtToken, {
-                httpOnly: true,
-            })
+            res.cookie('access_token', jwtToken, cookieOptions)
             .status(200)
             .json(rest)
         }
@@ -111,9 +115,7 @@ export const githubAuth = async (req, res, next) => {
 
             const { password: pass, ...rest} = user._doc;
 
-            res.cookie('access_token', jwtToken, {
-                httpOnly: true,
-            })
+            res.cookie('access_token', jwtToken, cookieOptions)
             .status(200)
             .json(rest)
         } else {
@@ -134,9 +136,7 @@ export const githubAuth = async (req, res, next) => {
             const jwtToken = Jwt.sign({id: newUser._id}, process.env.JWT_SECRET);
             const { password: pass, ...rest } = newUser._doc;
 
-            res.cookie('access_token', jwtToken, {
-                httpOnly: true,
-            })
+            res.cookie('access_token', jwtToken, cookieOptions)
             .status(200)
             .json(rest)
         }

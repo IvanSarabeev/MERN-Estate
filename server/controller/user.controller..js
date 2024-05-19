@@ -3,7 +3,11 @@ import User from './../model/user.model.js';
 import { errorHandler } from "../utils/error.js";
 import Listing from './../model/listing.model.js';
 
-export const updateUser = async (req, res, next) => { 
+export const updateUser = async (req, res, next) => {
+    // TODO: sanitize each individual data inside the Client
+
+    const username = xssFilters.inHTMLData(req.user.id);
+
     if (req.user.id !== req.params.id) {
         return next(errorHandler(401, 'You can only update your account!'));
     } 
