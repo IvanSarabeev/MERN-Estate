@@ -68,8 +68,8 @@ const SignUp: React.FC = () => {
   return (
     <Layout>
       <section className="w-full flex flex-col md:flex-row items-center justify-center">
-        <div className="h-fit lg:h-screen w-full lg:w-1/2 form-padding-container bg-white">
-          <h2 className="regular-18 lg:bold-20 font-semibold text-left drop-shadow">
+        <div className="h-fit lg:h-screen w-full lg:w-1/2 flex flex-col justify-center form-padding-container bg-white">
+          <h2 className="regular-18 lg:bold-20 2xl:bold-24 font-semibold text-left drop-shadow mb-3">
             Your Best Work Starts Here
           </h2>
           <div className="gap-2 flex flex-col md:flex-row items-center justify-center lg:justify-start mt-3">
@@ -89,7 +89,7 @@ const SignUp: React.FC = () => {
             <div className="w-full gap-2 flex flex-col items-start justify-start">
               <label
                 htmlFor="username"
-                className="regular-16 font-semibold text-slate-900"
+                className="regular-16 xl:regular-18 font-semibold text-slate-900"
               >
                 What should we call you?
               </label>
@@ -104,10 +104,10 @@ const SignUp: React.FC = () => {
                 required
               />
             </div>
-            <div className="w-full gap-2 flex flex-col items-start justify-start">
+            <div className="w-full gap-2 flex flex-col items-start justify-start xl:mt-2">
               <label
                 htmlFor="email"
-                className="regular-16 font-semibold text-slate-900"
+                className="regular-16 xl:regular-18 font-semibold text-slate-900"
               >
                 Your email
               </label>
@@ -122,10 +122,10 @@ const SignUp: React.FC = () => {
                 required
               />
             </div>
-            <div className="w-full gap-2 flex flex-col items-start justify-start">
+            <div className="w-full gap-2 flex flex-col items-start justify-start xl:mt-2">
               <label
                 htmlFor="password"
-                className="regular-16 font-semibold text-slate-900"
+                className="regular-16 xl:regular-18 font-semibold text-slate-900"
               >
                 Your password
               </label>
@@ -144,7 +144,7 @@ const SignUp: React.FC = () => {
               type="submit"
               disabled={loading}
               title="submit-button"
-              className="bg-[#0284c7] font-semibold mt-3 text-white p-3 rounded-lg hover:opacity-95 disabled:opacity-80"
+              className="bg-[#0284c7] font-semibold mt-3 text-white p-3 rounded-lg hover:opacity-95 disabled:opacity-80 xl:mt-5"
             >
               {loading ? "Loading ..." : "Create an account"}
             </Button>
@@ -169,10 +169,10 @@ const SignUp: React.FC = () => {
           />
         )}
         <div className="h-full md:h-screen w-full lg:w-1/2 flex flex-col items-start justify-center padding-container bg-[#0284c7]">
-          <h1 className="text-white text-3xl lg:text-5xl font-extrabold mb-4">
+          <h1 className="text-white text-3xl lg:text-5xl xl:text-6xl font-extrabold mb-4">
             Explore the world’s leading MERN estate application.
           </h1>
-          <p className="text-[#fde6ba] opacity-80 font-light mb-4">
+          <p className="text-[#fde6ba] regular-16 md:regular-18 xl:bold-20 opacity-80 font-light mb-4">
             Millions of people and agencies around the world use our work on
             MERN/Estate - the home to the world’s best real estate and
             professional employees.
@@ -185,15 +185,17 @@ const SignUp: React.FC = () => {
                     key={item.id}
                     src={item.src}
                     alt={item.alt}
-                    className="size-10 border-2 border-white rounded-full dark:border-gray-800"
+                    loading='lazy'
+                    decoding='async'
+                    className="size-10 xl:size-12 border-2 border-white rounded-full dark:border-gray-800 aspect-auto object-cover object-center"
                   />
                 );
               })}
             </div>
             <Link to={`/search`} className="border-l border-[0284c7]">
-              <span className="regular-14 leading-5 font-light text-white/80 pl-3">
+              <span className="regular-14 md:regular-16 xl:regular-18 leading-5 font-light text-white/80 md:pl-3">
                 Over
-                <span className="font-medium text-white opacity-100 px-1">
+                <span className="font-medium md:font-bold text-white opacity-100 px-1">
                   15.7k
                 </span>
                 Happy Customers
