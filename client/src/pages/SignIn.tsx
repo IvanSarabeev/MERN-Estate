@@ -43,43 +43,43 @@ const SignIn: React.FC = () => {
 
         setAlertBadge({
           type: "success",
-          title: "Login successfully !",
+          title: "Authentication successful!",
           description: `Welcome back ${formData.email}.`,
         });
 
         setTimeout(() => {
           navigate("/profile");
-        }, 2500);
+        }, 2000);
       }
     } catch (catchError) {
       setAlertBadge({
         type: "warning",
         title: "Unauthorized access",
-        description: "Credentials don't match!",
+        description: "Can't authenticate!",
       });
 
-      throw new Error(`Error occur, cound't sign in ${JSON.stringify(error)}`);
+      throw new Error(`Error occur, couldn't sign in ${JSON.stringify(error)}`);
     }
   };
 
   return (
     <Layout>
       <section className="w-full h-fit lg:h-screen flex flex-col md:flex-row items-center justify-around form-padding-container bg-[#f9fafb]">
-        <div className="hidden md:flex flex-col items-start justify-start">
+        <div className="hidden lg:flex flex-col items-start justify-start">
           <img
             src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
             alt="logo"
-            className="size-8 mb-6 aspect-auto object-contain"
+            className="size-8 lg:size-10 xl:size-12 2xl:size-16 mb-6 aspect-auto object-contain object-center"
           />
           {loginList.map((item) => {
             return (
               <div key={item.id} className="group gap-x-2 flex items-center">
-                <IoIosCheckmarkCircle className="size-5 fill-[#0284c7]" />
+                <IoIosCheckmarkCircle className="size-5 md:size-7 xl:size-9 fill-[#0284c7]" />
                 <div className="flex flex-col items-start justify-start pt-6">
-                  <h3 className="regular-18 lg:bold-20 font-bold">
+                  <h3 className="regular-18 lg:bold-20 xl:bold-24 font-bold">
                     {item.title}
                   </h3>
-                  <p className="max-w-md regular-14 lg:regular-16 font-light mb-2 opacity-60">
+                  <p className="max-w-md regular-14 lg:regular-16 xl:regular-18 font-light mb-2 opacity-60">
                     {item.text}
                   </p>
                 </div>
@@ -87,8 +87,8 @@ const SignIn: React.FC = () => {
             );
           })}
         </div>
-        <div className="w-full max-w-xl flex flex-col justify-center rounded-lg shadow md:shadow-xl form-container bg-transparent md:bg-white">
-          <h1 className="regular-18 lg:bold-20 font-semibold text-left mb-4 drop-shadow">
+        <div className="w-full max-w-xl xl:max-w-2xl 2xl:max-w-3xl flex flex-col justify-center rounded-lg shadow md:shadow-xl form-container bg-transparent md:bg-white">
+          <h1 className="regular-18 lg:bold-20 xl:bold-24 font-semibold text-left mb-4 drop-shadow">
             Welcome back
           </h1>
           <form
@@ -109,7 +109,7 @@ const SignIn: React.FC = () => {
             <div className="w-full gap-2 flex flex-col items-start justify-start">
               <label
                 htmlFor="email"
-                className="regular-14 lg:regular-16 font-semibold text-slate-900"
+                className="regular-14 lg:regular-16 2xl:regular-18 font-semibold text-slate-900"
               >
                 Email
               </label>
@@ -128,7 +128,7 @@ const SignIn: React.FC = () => {
             <div className="w-full gap-2 flex flex-col items-start justify-start">
               <label
                 htmlFor="password"
-                className="regular-14 lg:regular-16 font-semibold text-slate-900"
+                className="regular-14 lg:regular-16 2xl:regular-18 font-semibold text-slate-900"
               >
                 Password
               </label>
@@ -150,15 +150,15 @@ const SignIn: React.FC = () => {
                   type="checkbox"
                   id="checkbox"
                   name="checkbox"
-                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                  className="size-4 lg:size-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                 />
-                <label htmlFor="checkbox" className="regular-14 font-medium">
+                <label htmlFor="checkbox" className="regular-14 lg:regular-16 font-medium">
                   Remember me
                 </label>
               </span>
               <Link
                 to={"/forgot-password"}
-                className="regular-14 font-medium text-[#0284c7] transition-colors ease-in hover:underline"
+                className="regular-14 lg:regular-16 font-medium text-[#0284c7] transition-colors ease-in hover:underline"
               >
                 Forgot password?
               </Link>
@@ -170,7 +170,7 @@ const SignIn: React.FC = () => {
               {loading ? "Loading.." : "Sign in to your account"}
             </Button>
           </form>
-          <p className="regular-14 text-[#9297a2] font-light mt-4">
+          <p className="regular-14 lg:regular-16 text-[#9297a2] font-light mt-4">
             Don't have an account yet?
             <Link to={`/sign-up`} className="text-[#319ad1] ml-1.5 font-medium">
               Sign up here
