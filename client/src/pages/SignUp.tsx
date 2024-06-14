@@ -150,13 +150,13 @@ const SignUp: React.FC = () => {
             </Button>
           </form>
           {error && (
-            <p className="regular-14 font-semibold text-red-500 my-2">
+            <p className="regular-14 md:regular-16 font-semibold text-red-500 my-2">
               {error}
             </p>
           )}
-          <p className="regular-14 text-[#9297a2] font-light mt-2.5">
+          <p className="regular-14 md:regular-16 text-[#9297a2] font-light mt-2.5 md:mt-4">
             Already have an account?
-            <Link to={`/sign-in`} className="text-[#319ad1] ml-1.5 font-medium">
+            <Link to={`/sign-in`} className="text-[#319ad1] ml-1.5 font-medium hover:font-semibold hover:underline hover:underline-offset-auto">
               Login here
             </Link>
           </p>
