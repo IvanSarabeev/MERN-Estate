@@ -136,3 +136,10 @@ export const socialItem = [
     {id: 2, href: '#', label: 'X', icon: FaSquareXTwitter, iconBg: 'fill-[#252525]'},
     {id: 3, href: '#', label: 'Github', icon: FaGithub, iconBg: 'size-10 fill-slate-700'}
 ] as const;
+
+export const internalNavigation = [
+    {id: 1, href: "/dashboard", label: "Dashboard"},
+    {id: 2, href: "/orders", label: "Orders"},
+    {id: 3, href: "/products", label: "Products"},
+    {id: 4, href: "/analytics", label: "Analytics"},
+]
