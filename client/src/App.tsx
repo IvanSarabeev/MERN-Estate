@@ -12,6 +12,7 @@ import UpdateListing from "./pages/UpdateListing";
 import SearchPage from "./pages/SearchPage";
 import Property from "./pages/Property";
 import AccountLayout from "components/Layouts/AccountLayout.tsx";
+import Dashboard from "components/account/Dashboard.tsx";
 
 function App() {
   return (
@@ -24,10 +25,12 @@ function App() {
         <Route path="/listing/:id" element={<Property />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/account">
-          {/*TODO: Add the remaining routes: Dashboard, Orders, Products, Analytics */}
-          <Route index element={<AccountLayout />}/>
-        </Route>
+          {/*TODO: Add Middleware to protected routes*/}
+          <Route path="/account" element={<AccountLayout />}>
+            {/*TODO: Add the remaining routes: Dashboard, Orders, Products, Analytics */}
+            <Route index element={<Dashboard />}/>
+            {/*  TODO: Create Custom ErrorPage for account*/}
+          </Route>
         <Route element={<AuthRequiredRoute />}>
           <Route path="/profile" element={<Profile />} />
           <Route path="/create-listing" element={<CreateListing />} />
