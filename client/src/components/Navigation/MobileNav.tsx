@@ -82,7 +82,7 @@ const MobileNav: FunctionComponent<MobileProps> = ({ isOpen }: MobileProps) => {
                   </motion.li>
                 );
               })}
-              {currentUser ? (
+              {currentUser && (
                 <motion.li
                   variants={itemVariants}
                   className="flex flex-col items-center mx-auto mt-0 mb-5"
@@ -91,8 +91,6 @@ const MobileNav: FunctionComponent<MobileProps> = ({ isOpen }: MobileProps) => {
                     <Avatar src={currentUser?.avatar} alt="profile" />
                   </Link>
                 </motion.li>
-              ) : (
-                <></>
               )}
             </ol>
           </motion.ul>

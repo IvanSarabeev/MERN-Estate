@@ -11,6 +11,7 @@ import CreateListing from "./pages/CreateListing";
 import UpdateListing from "./pages/UpdateListing";
 import SearchPage from "./pages/SearchPage";
 import Property from "./pages/Property";
+import AccountLayout from "components/Layouts/AccountLayout.tsx";
 
 function App() {
   return (
@@ -23,6 +24,10 @@ function App() {
         <Route path="/listing/:id" element={<Property />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/account">
+          {/*TODO: Add the remaining routes: Dashboard, Orders, Products, Analytics */}
+          <Route index element={<AccountLayout />}/>
+        </Route>
         <Route element={<AuthRequiredRoute />}>
           <Route path="/profile" element={<Profile />} />
           <Route path="/create-listing" element={<CreateListing />} />
