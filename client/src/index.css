@@ -190,4 +190,8 @@ body {
     .accent-label {
         @apply regular-18 leading-6 font-medium text-balance 2xl:leading-7 text-slate-400/85;
     }
+
+    .account-container {
+        @apply flex flex-1 flex-col gap-4 md:gap-8 p-4 md:p-8;
+    }
 }
