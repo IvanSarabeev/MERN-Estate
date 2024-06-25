@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { CircleUser, Menu, Package2, Search } from "lucide-react";
 import { internalNavigation } from "../constants";
 import { Sheet, SheetContent, SheetTrigger } from "components/ui/sheet.tsx";
@@ -16,6 +16,12 @@ import {
 import Footer from "components/Footer/Footer.tsx";
 
 const AccountLayout: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    navigate("/");
+  };
+
   return (
     <div className="flex min-h-screen w-full flex-col">
       <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
@@ -86,7 +92,11 @@ const AccountLayout: React.FC = () => {
               <DropdownMenuItem>Settings</DropdownMenuItem>
               <DropdownMenuItem>Support</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
+              <DropdownMenuItem>
+                <Button type="button" onClick={handleLogout}>
+                  Logout
+                </Button>
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
