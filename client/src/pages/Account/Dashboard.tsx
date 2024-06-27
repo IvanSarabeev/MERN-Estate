@@ -12,10 +12,10 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "components/ui/card";
-import { Button } from "components/ui/button";
+} from "components/ui/card.tsx";
+import { Button } from "components/ui/button.tsx";
 import { Link } from "react-router-dom";
-import { Badge } from "components/ui/badge";
+import { Badge } from "components/ui/badge.tsx";
 import {
   Table,
   TableBody,
@@ -23,8 +23,8 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "components/ui/table";
-import { Avatar, AvatarFallback } from "components/ui/avatar";
+} from "components/ui/table.tsx";
+import { Avatar, AvatarFallback } from "components/ui/avatar.tsx";
 import { AvatarImage } from "@radix-ui/react-avatar";
 
 const Dashboard: React.FC = () => {

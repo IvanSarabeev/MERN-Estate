@@ -12,7 +12,9 @@ import UpdateListing from "./pages/UpdateListing";
 import SearchPage from "./pages/SearchPage";
 import Property from "./pages/Property";
 import AccountLayout from "components/Layouts/AccountLayout.tsx";
-import Dashboard from "./pages/Dashboard";
+import Dashboard from "./pages/Account/Dashboard.tsx";
+import ProfileLayout from "components/Layouts/ProfileLayout.tsx";
+import Settings from "./pages/Account/Profile/Settings.tsx";
 
 function App() {
   return (
@@ -29,6 +31,9 @@ function App() {
         <Route path="/account" element={<AccountLayout />}>
           {/*TODO: Add the remaining routes: Your Listings, Products, Analytics */}
           <Route index element={<Dashboard />} />
+          <Route path="profiles" element={<ProfileLayout />}>
+            <Route index element={<Settings />}/>
+          </Route>
           {/*  TODO: Create Custom ErrorPage for account*/}
         </Route>
         <Route element={<AuthRequiredRoute />}>
