@@ -15,6 +15,7 @@ import AccountLayout from "components/Layouts/AccountLayout.tsx";
 import Dashboard from "./pages/Account/Dashboard.tsx";
 import ProfileLayout from "components/Layouts/ProfileLayout.tsx";
 import Settings from "./pages/Account/Profile/Settings.tsx";
+import ProfileAccount from "./pages/Account/Profile/ProfileAccount.tsx";
 
 function App() {
   return (
@@ -33,6 +34,8 @@ function App() {
           <Route index element={<Dashboard />} />
           <Route path="profiles" element={<ProfileLayout />}>
             <Route index element={<Settings />}/>
+            <Route path="profile-account" element={<ProfileAccount />}/>
+            {/* Remaining Appearance ?Notifications, My Listings */}
           </Route>
           {/*  TODO: Create Custom ErrorPage for account*/}
         </Route>

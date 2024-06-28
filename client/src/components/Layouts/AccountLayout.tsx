@@ -13,7 +13,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "components/ui/dropdown-menu.tsx";
-import Footer from "components/Footer/Footer.tsx";
 
 const AccountLayout: React.FC = () => {
   const navigate = useNavigate();
@@ -94,6 +93,7 @@ const AccountLayout: React.FC = () => {
                   to={"/account/profiles"}
                   title="Profile"
                   aria-label="profile page"
+                  className="size-full"
                 >
                   Settings
                 </Link>
@@ -112,7 +112,6 @@ const AccountLayout: React.FC = () => {
       <main className="account-container">
         <Outlet />
       </main>
-      <Footer />
     </div>
   );
 };

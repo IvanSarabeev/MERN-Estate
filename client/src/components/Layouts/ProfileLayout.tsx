@@ -5,13 +5,12 @@ import Button from "components/HTML/Button.tsx";
 const ProfileLayout: React.FC = () => {
   const location = useLocation();
 
-  // TODO: Add prefix /account to the remaining routes
   const asideNavigation = [
     { id: 1, title: "Profile", href: "/account/profiles" },
-    { id: 2, title: "Account", href: "/account" },
+    { id: 2, title: "Account", href: "profile-account" },
     { id: 3, title: "Appearance", href: "/appearance" },
     { id: 4, title: "Notifications", href: "/notifications" },
-    { id: 5, title: "Display", href: "/display" },
+    { id: 5, title: "My Listing", href: "/my-listings" },
   ];
 
   return (
@@ -26,21 +25,27 @@ const ProfileLayout: React.FC = () => {
         <aside className="md:min-w-64 gap-x-4 md:gap-x-8 flex flex-row flex-wrap md:flex-col justify-around md:justify-start">
           {asideNavigation.map((item) => {
             return (
-              <Button
-                key={item.id}
-                type="button"
-                aria-label={item.title}
-                title={item.title}
-                className={`w-fit lg:w-64 regular-14 xl:regular-16 py-1.5 px-3 text-left font-medium text-slate-900 rounded-md cursor-pointer hover:bg-[#f4f4f5] hover:font-semibold transition-all ease-in-out duration-150 
-                    ${
-                      location.pathname === item.href
-                        ? "font-semibold bg-[#f4f4f5]"
-                        : "bg-transparent"
-                    }`}
+              <Link
+                  key={item.id}
+                  to={item.href}
+                  title={item.title}
+                  aria-label={item.title}
+                  className="w-full h-fit"
               >
-                {/*Use the following background inside the buttons bg-[#f4f4f5] */}
-                <Link to={item.href}>{item.title}</Link>
-              </Button>
+                <Button
+                  type="button"
+                  aria-label={item.title}
+                  title={item.title}
+                  className={`w-fit lg:w-64 regular-14 xl:regular-16 py-1.5 px-3 text-left font-medium text-slate-900 rounded-md cursor-pointer hover:bg-[#f4f4f5] hover:font-semibold transition-all ease-in-out duration-150 
+                      ${
+                        location.pathname === item.href
+                          ? "font-semibold bg-[#f4f4f5]"
+                          : "bg-transparent"
+                      }`}
+                >
+                    {item.title}
+                </Button>
+              </Link>
             );
           })}
         </aside>
