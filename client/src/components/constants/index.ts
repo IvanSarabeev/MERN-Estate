@@ -139,7 +139,8 @@ export const socialItem = [
 
 export const internalNavigation = [
     {id: 1, href: ".", label: "Dashboard"},
-    {id: 2, href: "/orders", label: "Orders"},
-    {id: 3, href: "/products", label: "Products"},
-    {id: 4, href: "/analytics", label: "Analytics"},
+    {id: 2, href: "orders", label: "Orders"},
+    {id: 3, href: "products", label: "Products"},
+    {id: 4, href: "my-listing", label: "Listings"},
+    {id: 5, href: "analytics", label: "Analytics"},
 ]

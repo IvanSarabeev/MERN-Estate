@@ -17,6 +17,7 @@ import ProfileLayout from "components/Layouts/ProfileLayout.tsx";
 import Settings from "./pages/Account/Profile/Settings.tsx";
 import ProfileAccount from "./pages/Account/Profile/ProfileAccount.tsx";
 import Appearance from "./pages/Account/Profile/Appearance.tsx";
+import MyListing from "./pages/Account/MyListing.tsx";
 
 function App() {
   return (
@@ -31,13 +32,15 @@ function App() {
         <Route path="/sign-up" element={<SignUp />} />
         {/*TODO: Add Middleware to protected routes*/}
         <Route path="/account" element={<AccountLayout />}>
-          {/*TODO: Add the remaining routes: Your Listings, Products, Analytics */}
+          {/*TODO: Add the remaining routes:  Products, Analytics */}
           <Route index element={<Dashboard />} />
+          <Route path="my-listing" element={<MyListing />} />
+          {/* Profile Section */}
           <Route path="profiles" element={<ProfileLayout />}>
             <Route index element={<Settings />}/>
             <Route path="profile-account" element={<ProfileAccount />}/>
             <Route path="appearance" element={<Appearance />} />
-            {/* Remaining ?Notifications, My Listings */}
+            {/* Remaining ?Notifications */}
           </Route>
           {/*  TODO: Create Custom ErrorPage for account*/}
         </Route>

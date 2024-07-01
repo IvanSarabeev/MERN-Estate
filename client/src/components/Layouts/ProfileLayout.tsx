@@ -10,7 +10,6 @@ const ProfileLayout: React.FC = () => {
     { id: 2, title: "Account", href: "profile-account" },
     { id: 3, title: "Appearance", href: "appearance" },
     { id: 4, title: "Notifications", href: "/notifications" },
-    { id: 5, title: "My Listing", href: "/my-listings" },
   ];
 
   return (
