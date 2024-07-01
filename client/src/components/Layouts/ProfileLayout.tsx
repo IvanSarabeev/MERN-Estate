@@ -8,7 +8,7 @@ const ProfileLayout: React.FC = () => {
   const asideNavigation = [
     { id: 1, title: "Profile", href: "/account/profiles" },
     { id: 2, title: "Account", href: "profile-account" },
-    { id: 3, title: "Appearance", href: "/appearance" },
+    { id: 3, title: "Appearance", href: "appearance" },
     { id: 4, title: "Notifications", href: "/notifications" },
     { id: 5, title: "My Listing", href: "/my-listings" },
   ];
