@@ -6,7 +6,7 @@ import { HiMiniXMark } from "react-icons/hi2";
 import { headerLinks } from "components/constants";
 import { NavLink } from "react-router-dom";
 import MobileNav from "./MobileNav";
-import Logo from "assets/images/logo.png";
+import EstateLogo from "assets/images/estate-logo.png";
 import { motion, AnimatePresence } from "framer-motion";
 import { scrollTop } from "utils/scrollTop";
 import DropdownProfile from "components/__comp/ProfileDropdown";
@@ -21,43 +21,68 @@ const Header: React.FC = () => {
       className="header-container"
     >
       <nav className="w-full max-container flexBetween padding-container py-3 z-20">
-        <div className="relative z-10 size-fit ease-in-out transition-all">
+        <div className="relative inline-flex items-center z-10 size-fit ease-in-out transition-all">
           <NavLink to={"/"}>
             <img
-              src={Logo}
-              alt="logo"
-              decoding="async"
-              loading="eager"
-              className="h-14 w-32 aspect-auto object-cover"
+                src={EstateLogo}
+                alt="logo"
+                decoding="async"
+                loading="eager"
+                className="h-12 w-20 aspect-auto object-cover mr-5"
             />
           </NavLink>
+          <menu className="hidden gap-4 md:flex ">
+            {headerLinks.map((item) => {
+              return (
+                  <motion.li
+                      initial={{opacity: 0, translateX: -50, translateY: -50}}
+                      animate={{opacity: 1, translateX: 0, translateY: 0}}
+                      transition={{
+                        duration: 0.5,
+                        type: "spring",
+                        ease: "easeInOut",
+                      }}
+                      key={item.id}
+                  >
+                    <NavLink
+                        to={item.href}
+                        className={({isActive}) =>
+                            isActive ? "active-link" : "passive-link"
+                        }
+                    >
+                      {item.label}
+                    </NavLink>
+                  </motion.li>
+              );
+            })}
+          </menu>
         </div>
         {/* Custom Navigation */}
-        <menu className="hidden gap-4 md:flex ">
-          {headerLinks.map((item) => {
-            return (
-              <motion.li
-                initial={{ opacity: 0, translateX: -50, translateY: -50 }}
-                animate={{ opacity: 1, translateX: 0, translateY: 0 }}
-                transition={{
-                  duration: 0.5,
-                  type: "spring",
-                  ease: "easeInOut",
-                }}
-                key={item.id}
-              >
-                <NavLink
-                  to={item.href}
-                  className={({ isActive }) =>
-                    isActive ? "active-link" : "passive-link"
-                  }
-                >
-                  {item.label}
-                </NavLink>
-              </motion.li>
-            );
-          })}
-        </menu>
+        {/*<menu className="hidden gap-4 md:flex ">*/}
+        {/*  {headerLinks.map((item) => {*/}
+        {/*    return (*/}
+        {/*      <motion.li*/}
+        {/*        initial={{ opacity: 0, translateX: -50, translateY: -50 }}*/}
+        {/*        animate={{ opacity: 1, translateX: 0, translateY: 0 }}*/}
+        {/*        transition={{*/}
+        {/*          duration: 0.5,*/}
+        {/*          type: "spring",*/}
+        {/*          ease: "easeInOut",*/}
+        {/*        }}*/}
+        {/*        key={item.id}*/}
+        {/*      >*/}
+        {/*        <NavLink*/}
+        {/*          to={item.href}*/}
+        {/*          className={({ isActive }) =>*/}
+        {/*            isActive ? "active-link" : "passive-link"*/}
+        {/*          }*/}
+        {/*        >*/}
+        {/*          {item.label}*/}
+        {/*        </NavLink>*/}
+        {/*      </motion.li>*/}
+        {/*    );*/}
+        {/*  })}*/}
+        {/*</menu>*/}
         <div className="hidden md:flex gap-4 items-center justify-end">
           <DropdownProfile />
         </div>
