@@ -16,7 +16,10 @@ const Settings: React.FC = () => {
       {/* TODO: Update the Data Model (User), to accept username and description */}
       {/* TODO: Create an service in node.js for updating the user profile */}
       {/* TODO: Add input validation and data sanitaztion, updated the data in the Database*/}
-      <form method="post" className="max-w-3xl flex flex-col items-start justify-start space-y-8 mt-4 text-left">
+      <form
+        method="post"
+        className="max-w-3xl flex flex-col items-start justify-start space-y-8 mt-4 text-left"
+      >
         <div className="w-full space-y-2">
           <Label className="regular-14 xl:regular-16 font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
             Username

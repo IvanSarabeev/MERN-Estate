@@ -45,6 +45,7 @@ const SearchHeader: React.FC = () => {
           {buttonGroup.map((item) => {
             return (
               <Button
+                key={item.id}
                 title={item.label}
                 aria-label={item.ariaLabel}
                 className={`${item.style}`}

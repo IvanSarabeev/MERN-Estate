@@ -20,8 +20,6 @@ const SearchPage: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [showMore, setShowMore] = useState(false);
 
-  console.log(searchData);
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -68,7 +66,7 @@ const SearchPage: React.FC = () => {
     };
 
     fetchListings();
-  }, [location.search]);
+  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
