@@ -1,4 +1,4 @@
-import { FaFacebook, FaInstagram, FaTwitter, FaGithub, FaDribbble, FaPhoneAlt, FaFacebookSquare  } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaTwitter, FaGithub, FaPhoneAlt, FaFacebookSquare  } from "react-icons/fa";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import { TbUserStar } from "react-icons/tb";
 import { BsHouseGear } from "react-icons/bs";
@@ -29,7 +29,20 @@ export const socialMedia = [
     {id: 2, label: 'Instagram', href: 'https://www.instagram.com/', icon: FaInstagram},
     {id: 3, label: 'X / Twitter', href: 'https://twitter.com/?lang=bg', icon: FaTwitter},
     {id: 4, label: 'GitHub', href: 'https://github.com/IvanSarabeev', icon: FaGithub},
-    {id: 5, label: 'Dribble', href: 'https://dribbble.com/', icon: FaDribbble},
+] as const;
+
+export const serviceMenu = [
+    {id: 1, title: 'Help center'},
+    {id: 2, title: 'FAQ'},
+    {id: 3, title: 'Transaction'},
+    {id: 4, title: 'Invitation'},
+] as const;
+
+export const companyMenu = [
+    {id: 1, title: 'About us'},
+    {id: 2, title: 'Career'},
+    {id: 3, title: 'Management'},
+    {id: 4, title: 'Blog'}
 ] as const;
 
 export const accents = [

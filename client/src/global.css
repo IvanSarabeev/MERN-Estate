@@ -51,6 +51,18 @@ body {
         @apply flex items-center justify-around;
     }
 
+    .flexColCenter {
+        @apply flex flex-col justify-center;
+    }
+
+    .flexColStart {
+        @apply flex flex-col justify-start;
+    }
+
+    .flexColEnd {
+        @apply flex flex-col justify-end;
+    }
+
     .bold-24 {
         @apply text-2xl font-bold;
     }

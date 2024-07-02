@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "components/Navigation/Header";
-import Footer from "components/Footer/Footer.tsx";
+import Footer from "components/Footer.tsx";
 // import CookieReminder from "components/__comp/CookieReminder";
 // import useToggle from "hooks/useToggle";
 
