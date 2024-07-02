@@ -3,6 +3,7 @@ import {showListing} from "services/apiListing.ts";
 import {PropertysData} from "types/listing.ts";
 import {store} from "store/store.ts";
 import {ReduxUserState} from "types/redux.ts";
+import ListingList from "./components/ListingList.tsx";
 
 const MyListing: React.FC = () => {
     const user = store.getState().user.currentUser! as ReduxUserState;
@@ -38,8 +39,7 @@ const MyListing: React.FC = () => {
             <p className="text-red-700 mt-5">
                 {showListingError || ""}
             </p>
-            <h2>USer Listings:</h2>
-            {/* TODO: Create View for Property's that the user contains */}
+            <ListingList data={listing}/>
         </>
     )
 };

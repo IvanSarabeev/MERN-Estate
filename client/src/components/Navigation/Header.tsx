@@ -57,32 +57,6 @@ const Header: React.FC = () => {
             })}
           </menu>
         </div>
-        {/* Custom Navigation */}
-        {/*<menu className="hidden gap-4 md:flex ">*/}
-        {/*  {headerLinks.map((item) => {*/}
-        {/*    return (*/}
-        {/*      <motion.li*/}
-        {/*        initial={{ opacity: 0, translateX: -50, translateY: -50 }}*/}
-        {/*        animate={{ opacity: 1, translateX: 0, translateY: 0 }}*/}
-        {/*        transition={{*/}
-        {/*          duration: 0.5,*/}
-        {/*          type: "spring",*/}
-        {/*          ease: "easeInOut",*/}
-        {/*        }}*/}
-        {/*        key={item.id}*/}
-        {/*      >*/}
-        {/*        <NavLink*/}
-        {/*          to={item.href}*/}
-        {/*          className={({ isActive }) =>*/}
-        {/*            isActive ? "active-link" : "passive-link"*/}
-        {/*          }*/}
-        {/*        >*/}
-        {/*          {item.label}*/}
-        {/*        </NavLink>*/}
-        {/*      </motion.li>*/}
-        {/*    );*/}
-        {/*  })}*/}
-        {/*</menu>*/}
         <div className="hidden md:flex gap-4 items-center justify-end">
           <DropdownProfile />
         </div>
