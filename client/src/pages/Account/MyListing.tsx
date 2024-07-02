@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from "react";
+import React, { useEffect, useState} from "react";
 import {showListing} from "services/apiListing.ts";
 import {PropertysData} from "types/listing.ts";
 import {store} from "store/store.ts";
@@ -10,7 +10,7 @@ const MyListing: React.FC = () => {
     const [showListingError, setShowListingError] = useState<boolean>(false);
     const [listing, setListing] = useState<PropertysData[]>([]);
 
-    const handleUserListing = useCallback ( async () => {
+    const handleUserListing = ( async () => {
         try {
             const data = await showListing(user, {setShowListingError});
 
