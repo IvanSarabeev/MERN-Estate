@@ -4,12 +4,15 @@ import dotenv from "dotenv";
 import userRouter from "./routes/user.route.js";
 import authRouter from "./routes/auth.route.js";
 import listingRouter from "./routes/listing.route.js";
+import commonRouter from "./routes/common.route.js";
 import cookieParser from "cookie-parser";
 import path from "path";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import helmet from "helmet";
 import ExpressMongoSanitize from "express-mongo-sanitize";
+import csurf from "csurf";
+import nodemailer from "nodemailer";
 
 dotenv.config();
 
@@ -46,6 +49,8 @@ const socketIo = new Server(httpServer, {
     }
 });
 
+const csrfProtection = csurf({ cookie: true });
+
 socketIo.on('connection', (socket) => {
     console.log('New client connected');
 
@@ -75,6 +80,7 @@ httpServer.listen(3001, () => {
 app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/listing', listingRouter);
+app.use('/api', commonRouter);
 
 app.use(express.static(path.join(__dirname, '/client/dist')));
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "components/Layouts/Layout";
 import { boxSection } from "components/constants";
 import BoxSection from "components/__comp/BoxSection";
@@ -6,8 +6,11 @@ import ContactForm from "./components/ContactForm";
 import { useFormik } from "formik";
 import { ContactFormInterface } from "types/user";
 import { contactSchema } from "utils/formValidation";
+import { sendContactMessage } from "services/common";
 
 const Contact: React.FC = () => {
+  const [loading, setLoading] = useState<boolean>(false);
+
   const initialValues: ContactFormInterface = {
     first_name: "",
     last_name: "",
@@ -21,8 +24,22 @@ const Contact: React.FC = () => {
   const formik = useFormik<ContactFormInterface>({
     initialValues,
     validationSchema,
-    onSubmit: (values) => {
-      alert(values);
+    onSubmit: async (values) => {
+      try {
+        setLoading(true);
+
+        await sendContactMessage(values);
+
+        console.log(values);
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 400);
+      } catch (error) {
+        setLoading(false);
+
+        console.error(`Error occur: ${error}`);
+      }
     },
   });
 
@@ -42,7 +59,7 @@ const Contact: React.FC = () => {
           </div>
         </div>
         <div className="max-w-7xl pt-8 lg:pt-24 px-4 lg:px-5 pb-16 lg:pb-32 -mt-80 mx-auto">
-          <ContactForm formik={formik} />
+          <ContactForm formik={formik} loading={loading} />
           <div className="gap-6 md:gap-12 grid col-span-1 lg:grid-cols-3 justify-center text-center mx-auto">
             {boxSection.map((item) => {
               const Icon = item.icon;

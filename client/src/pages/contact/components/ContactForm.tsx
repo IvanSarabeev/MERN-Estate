@@ -8,9 +8,13 @@ import { MdErrorOutline } from "react-icons/md";
 
 interface ContactFormProps {
   formik: FormikProps<ContactFormInterface>;
+  loading: boolean;
 }
 
-const ContactForm: React.FunctionComponent<ContactFormProps> = ({ formik }) => {
+const ContactForm: React.FunctionComponent<ContactFormProps> = ({
+  formik,
+  loading,
+}) => {
   return (
     <form method="post" onSubmit={formik.handleSubmit} className="contact-form">
       <div className="contact-item-row">
@@ -135,11 +139,12 @@ const ContactForm: React.FunctionComponent<ContactFormProps> = ({ formik }) => {
         <Button
           id="contact-submit"
           type="button"
+          disabled={loading}
           aria-label="Contact Form"
           title="Submit Contact Form"
           className="btn-contact-submit"
         >
-          Send message
+          {loading ? "Sending message." : "Send message"}
         </Button>
       </div>
     </form>
