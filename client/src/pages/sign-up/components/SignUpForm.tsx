@@ -48,7 +48,7 @@ const SignUpForm: React.FunctionComponent<SignUpFormProps> = ({
               htmlFor="username"
               className="regular-14 xl:regular-16 font-semibold text-slate-900"
             >
-              What should we call you?
+              Your username
             </label>
             <Input
               required

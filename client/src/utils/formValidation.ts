@@ -9,7 +9,7 @@ const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$
 export const signInValidationSchema = Yup.object().shape({
     email: Yup.string()
         .min(5, 'Email must be at least 5 characters')
-        .max(25, "Email cannot exceed 25 characters")
+        .max(35, "Email cannot exceed 35 characters")
         .matches(
             emailRegex,
             'Invalid email address !'
@@ -32,7 +32,7 @@ export const signUpSchema = Yup.object().shape({
         .required("Username is required !"),
     email: Yup.string()
         .min(5, 'Email must be at least 5 characters')
-        .max(25, "Email cannot exceed 25 characters")
+        .max(35, "Email cannot exceed 35 characters")
         .matches(
             emailRegex,
             'Invalid email address !'

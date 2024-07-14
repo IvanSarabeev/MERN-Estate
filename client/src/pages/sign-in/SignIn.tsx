@@ -39,7 +39,7 @@ const SignIn: React.FC = () => {
         });
 
         setTimeout(() => {
-          navigate("/profile");
+          navigate("/account");
         }, 2000);
       } catch (error) {
         setAlertBadge({
