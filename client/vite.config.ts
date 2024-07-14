@@ -22,6 +22,7 @@ export default defineConfig({
       "components": resolve(rootPath, "components"),
       "constants": resolve(rootPath, "constants"),
       "hooks": resolve(rootPath, "hooks"),
+      "pages": resolve(rootPath, "pages"),
       "assets": resolve(rootPath, "assets"),
       "types": resolve(rootPath, "types"),
       "utils": resolve(rootPath, "utils"),

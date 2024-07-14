@@ -1,58 +1,66 @@
+import React, { Suspense, lazy } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
-import SignIn from "./pages/SignIn";
-import SignUp from "./pages/SignUp";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import AuthRequiredRoute from "./auth/AuthRequiredRoute";
-import Profile from "./pages/Profile";
-import ErrorPage from "./pages/ErrorPage";
-import CreateListing from "./pages/CreateListing";
-import UpdateListing from "./pages/UpdateListing";
-import SearchPage from "./pages/SearchPage";
-import Property from "./pages/Property";
-import AccountLayout from "components/Layouts/AccountLayout.tsx";
-import Dashboard from "./pages/Account/Dashboard.tsx";
-import ProfileLayout from "components/Layouts/ProfileLayout.tsx";
-import Settings from "./pages/Account/Profile/Settings.tsx";
-import ProfileAccount from "./pages/Account/Profile/ProfileAccount.tsx";
-import Appearance from "./pages/Account/Profile/Appearance.tsx";
-import MyListing from "./pages/Account/MyListing.tsx";
+const Home = lazy(() => import("pages/Home.tsx"));
+const SignIn = lazy(() => import("pages/SignIn"));
+const SignUp = lazy(() => import("pages/SignUp"));
+const About = lazy(() => import("pages/About"));
+const Contact = lazy(() => import("pages/Contact"));
+const AuthRequiredRoute = lazy(() => import("./auth/AuthRequiredRoute"));
+const Profile = lazy(() => import("pages/Profile"));
+const ErrorPage = lazy(() => import("pages/ErrorPage"));
+const CreateListing = lazy(() => import("pages/CreateListing"));
+const UpdateListing = lazy(() => import("pages/UpdateListing"));
+const SearchPage = lazy(() => import("pages/SearchPage"));
+const Property = lazy(() => import("pages/Property"));
+const AccountLayout = lazy(
+  () => import("components/Layouts/AccountLayout.tsx")
+);
+const Dashboard = lazy(() => import("./pages/Account/Dashboard.tsx"));
+const ProfileLayout = lazy(
+  () => import("components/Layouts/ProfileLayout.tsx")
+);
+const Settings = lazy(() => import("./pages/Account/Profile/Settings.tsx"));
+const ProfileAccount = lazy(
+  () => import("./pages/Account/Profile/ProfileAccount.tsx")
+);
+const Appearance = lazy(() => import("./pages/Account/Profile/Appearance.tsx"));
+const MyListing = lazy(() => import("./pages/Account/MyListing.tsx"));
+import TriangleLoader from "components/__comp/Loaders/TriangleLoader.tsx";
 
-function App() {
+const App: React.FC = () => {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/search" element={<SearchPage />} />
-        <Route path="/listing/:id" element={<Property />} />
-        <Route path="/sign-in" element={<SignIn />} />
-        <Route path="/sign-up" element={<SignUp />} />
-        {/*TODO: Add Middleware to protected routes*/}
-        <Route path="/account" element={<AccountLayout />}>
-          {/*TODO: Add the remaining routes:  Products, Analytics */}
-          <Route index element={<Dashboard />} />
-          <Route path="my-listing" element={<MyListing />} />
-          {/* Profile Section */}
-          <Route path="profiles" element={<ProfileLayout />}>
-            <Route index element={<Settings />}/>
-            <Route path="profile-account" element={<ProfileAccount />}/>
-            <Route path="appearance" element={<Appearance />} />
-            {/* Remaining ?Notifications */}
+      <Suspense fallback={<TriangleLoader />}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/search" element={<SearchPage />} />
+          <Route path="/listing/:id" element={<Property />} />
+          <Route path="/sign-in" element={<SignIn />} />
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route element={<AuthRequiredRoute />}>
+            <Route path="/account" element={<AccountLayout />}>
+              {/*TODO: Add the remaining routes:  Products, Analytics */}
+              <Route index element={<Dashboard />} />
+              <Route path="my-listing" element={<MyListing />} />
+              {/* Profile Section */}
+              <Route path="profiles" element={<ProfileLayout />}>
+                <Route index element={<Settings />} />
+                <Route path="profile-account" element={<ProfileAccount />} />
+                <Route path="appearance" element={<Appearance />} />
+              </Route>
+              {/*  TODO: Create Custom ErrorPage for account*/}
+            </Route>
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/create-listing" element={<CreateListing />} />
+            <Route path="/update-listing/:id" element={<UpdateListing />} />
           </Route>
-          {/*  TODO: Create Custom ErrorPage for account*/}
-        </Route>
-        <Route element={<AuthRequiredRoute />}>
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/create-listing" element={<CreateListing />} />
-          <Route path="/update-listing/:id" element={<UpdateListing />} />
-        </Route>
-        <Route path="*" element={<ErrorPage />} />
-      </Routes>
+          <Route path="*" element={<ErrorPage />} />
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
-}
+};
 
 export default App;

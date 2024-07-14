@@ -13,7 +13,7 @@ import ExpressMongoSanitize from "express-mongo-sanitize";
 
 dotenv.config();
 
-const PORT = process.env.PORT_KEY;
+const PORT = process.env.PORT_KEY || 5000;
 const DB_URL = process.env.MONGODB_KEY;
 
 mongoose.connect(DB_URL)
@@ -22,7 +22,8 @@ mongoose.connect(DB_URL)
     })
     .catch((error) => {
         console.log(error);
-    });
+    })
+;
     
 const __dirname = path.resolve();
 

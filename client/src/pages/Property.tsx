@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchListing } from "services/apiListing";
 import Layout from "components/Layouts/Layout";
-import Loader from "components/__comp/Loader";
+import CircleLoader from "components/__comp/Loaders/CircleLoader";
 import { CreateListingIntf } from "types/listing";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
@@ -137,7 +137,7 @@ const Property: React.FC = () => {
           </article>
         </>
       ) : (
-        <Loader />
+        <CircleLoader />
       )}
     </Layout>
   );

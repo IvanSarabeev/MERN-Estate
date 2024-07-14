@@ -12,6 +12,7 @@
       "components/*":["./src/components/*"],
       "constants/*":["./src/constants/*"],
       "hooks/*":["./src/hooks/*"],
+      "pages/*":["./src/pages/*"],
       "assets/*":["./src/assets/*"],
       "types/*":["./src/types/*"],
       "utils/*":["./src/utils/*"],

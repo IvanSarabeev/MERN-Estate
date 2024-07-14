@@ -4,7 +4,7 @@ import Input from "components/HTML/Input";
 import Button from "components/HTML/Button";
 import { CreateListingIntf, SearchDataIntf } from "types/listing";
 import { useNavigate } from "react-router-dom";
-import Loader from "components/__comp/Loader";
+import CircleLoader from "components/__comp/Loaders/CircleLoader";
 import ListingCard from "components/Listings/ListingCard";
 
 const SearchPage: React.FC = () => {
@@ -241,7 +241,7 @@ const SearchPage: React.FC = () => {
               <p className="text-xl text-slate-700">No listing found!</p>
             )}
 
-            {loading && <Loader />}
+            {loading && <CircleLoader />}
             {!loading &&
               listing.map((item, index) => {
                 return <ListingCard key={index} item={item} />;
