@@ -1,7 +1,7 @@
 import React, { Suspense, lazy } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 const Home = lazy(() => import("pages/Home.tsx"));
-const SignIn = lazy(() => import("pages/SignIn"));
+const SignIn = lazy(() => import("pages/sign-in/SignIn"));
 const SignUp = lazy(() => import("pages/SignUp"));
 const About = lazy(() => import("pages/About"));
 const Contact = lazy(() => import("pages/Contact"));
@@ -15,16 +15,16 @@ const Property = lazy(() => import("pages/Property"));
 const AccountLayout = lazy(
   () => import("components/Layouts/AccountLayout.tsx")
 );
-const Dashboard = lazy(() => import("./pages/Account/Dashboard.tsx"));
+const Dashboard = lazy(() => import("pages/Account/Dashboard.tsx"));
 const ProfileLayout = lazy(
   () => import("components/Layouts/ProfileLayout.tsx")
 );
-const Settings = lazy(() => import("./pages/Account/Profile/Settings.tsx"));
+const Settings = lazy(() => import("pages/Account/Profile/Settings.tsx"));
 const ProfileAccount = lazy(
-  () => import("./pages/Account/Profile/ProfileAccount.tsx")
+  () => import("pages/Account/Profile/ProfileAccount.tsx")
 );
-const Appearance = lazy(() => import("./pages/Account/Profile/Appearance.tsx"));
-const MyListing = lazy(() => import("./pages/Account/MyListing.tsx"));
+const Appearance = lazy(() => import("pages/Account/Profile/Appearance.tsx"));
+const MyListing = lazy(() => import("pages/Account/MyListing.tsx"));
 import TriangleLoader from "components/__comp/Loaders/TriangleLoader.tsx";
 
 const App: React.FC = () => {
