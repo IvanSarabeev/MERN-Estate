@@ -2,7 +2,7 @@ import React, { Suspense, lazy } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 const Home = lazy(() => import("pages/Home.tsx"));
 const SignIn = lazy(() => import("pages/sign-in/SignIn"));
-const SignUp = lazy(() => import("pages/SignUp"));
+const SignUp = lazy(() => import("pages/sign-up/SignUp"));
 const About = lazy(() => import("pages/About"));
 const Contact = lazy(() => import("pages/Contact"));
 const AuthRequiredRoute = lazy(() => import("./auth/AuthRequiredRoute"));

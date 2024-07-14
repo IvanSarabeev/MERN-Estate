@@ -1,14 +1,14 @@
 import React from "react";
-import Input from "components/HTML/Input";
-import Button from "components/HTML/Button";
 import { loginList } from "components/constants";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import { MdErrorOutline } from "react-icons/md";
-import GoogleAuth from "components/OAuth/GoogleAuth";
-import GitHubAuth from "components/OAuth/GitHubAuth";
 import { FormikProps } from "formik";
 import { UserSignInData } from "types/user";
 import { Link } from "react-router-dom";
+import Input from "components/HTML/Input";
+import Button from "components/HTML/Button";
+import GoogleAuth from "components/OAuth/GoogleAuth";
+import GitHubAuth from "components/OAuth/GitHubAuth";
 
 interface SignInFormProps {
   formik: FormikProps<UserSignInData>;

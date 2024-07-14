@@ -47,6 +47,12 @@ const SignIn: React.FC = () => {
           title: "Authentication failed!",
           description: `${error}`,
         });
+
+        if (error instanceof TypeError) {
+          console.error(`Type error occur: ${error.message}`);
+        } else if (error instanceof ReferenceError) {
+          console.error(`Reference error occur: ${error.message}`);
+        }
       }
     },
   });
