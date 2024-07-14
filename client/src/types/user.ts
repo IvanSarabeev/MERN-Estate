@@ -22,3 +22,11 @@ export interface CurrentUserInterface {
     'avatar'?: string,
     'createdAt'?: string,
 }
+
+export interface ContactFormInterface {
+    'first_name': string,
+    'last_name': string,
+    'email': string,
+    'phone': string,
+    'text_message': string,
+}

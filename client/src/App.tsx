@@ -4,7 +4,7 @@ const Home = lazy(() => import("pages/Home.tsx"));
 const SignIn = lazy(() => import("pages/sign-in/SignIn"));
 const SignUp = lazy(() => import("pages/sign-up/SignUp"));
 const About = lazy(() => import("pages/About"));
-const Contact = lazy(() => import("pages/Contact"));
+const Contact = lazy(() => import("pages/contact/Contact"));
 const AuthRequiredRoute = lazy(() => import("./auth/AuthRequiredRoute"));
 const Profile = lazy(() => import("pages/Profile"));
 const ErrorPage = lazy(() => import("pages/ErrorPage"));
