@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "components/Navigation/Header";
 import Footer from "components/Footer.tsx";
+import { Toaster } from "../ui/toaster";
 // import CookieReminder from "components/__comp/CookieReminder";
 // import useToggle from "hooks/useToggle";
 
@@ -21,6 +22,7 @@ const Layout = ({ children }: LayoutProp) => {
       <main className="relative h-fit lg:min-h-screen w-full overflow-x-hidden">
         {children}
         {/* {show ? <></> : <CookieReminder handleCookie={handleCookie} />} */}
+        <Toaster />
       </main>
       <Footer />
     </>

@@ -82,4 +82,10 @@ export const contactSchema = object().shape({
         .max(500, 'Description cannot exceed 500 characters')
         .required('Description is required')
     ,
+    // captcha: string()
+    //     .when('$isCaptchaRequired', {
+    //         is: true,
+    //         then: string().required('Captcha is required!'),
+    //         otherwise: string()
+    //     })
 });

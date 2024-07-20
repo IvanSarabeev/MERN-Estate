@@ -3,8 +3,9 @@ import { FormikProps } from "formik";
 import { ContactFormInterface } from "types/user";
 import Input from "components/HTML/Input";
 import Button from "components/HTML/Button";
-import Captcha from "components/__comp/Captcha";
 import { MdErrorOutline } from "react-icons/md";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 interface ContactFormProps {
   formik: FormikProps<ContactFormInterface>;
@@ -107,6 +108,7 @@ const ContactForm: React.FunctionComponent<ContactFormProps> = ({
         <textarea
           required
           rows={6}
+          maxLength={500}
           id="text_message"
           placeholder="Leave a comment..."
           className="block resize-y w-full regular-14 text-slate-700/85 text-justify p-3 border border-[#d1d5db] rounded-lg shadow-lg"
@@ -135,16 +137,32 @@ const ContactForm: React.FunctionComponent<ContactFormProps> = ({
         </p>
       </div>
       <div className="col-span-2 w-full gap-y-3 flex flex-col sm:flex-row-reverse justify-between sm:items-center items-start">
-        <Captcha />
+        <div className="hidden md:block">
+          <HCaptcha
+            sitekey={import.meta.env.VITE_H_CAPTCHA_SITE_KEY}
+            onVerify={(token) => formik.setFieldValue("captcha", token)}
+          />
+        </div>
         <Button
           id="contact-submit"
-          type="button"
+          type="submit"
           disabled={loading}
           aria-label="Contact Form"
           title="Submit Contact Form"
           className="btn-contact-submit"
         >
-          {loading ? "Sending message." : "Send message"}
+          {loading ? (
+            <span
+              title="Sending form"
+              aria-label="Successfully submited "
+              className="inline-flex gap-x-2 items-center justify-center"
+            >
+              Sending{" "}
+              <AiOutlineLoading3Quarters className="size-4 animate-spin" />
+            </span>
+          ) : (
+            "Send message"
+          )}
         </Button>
       </div>
     </form>

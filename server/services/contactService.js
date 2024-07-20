@@ -2,21 +2,28 @@ import nodemailer from 'nodemailer';
 import xssFilters from "xss-filters";
 import dotenv from 'dotenv';
 import Contact from '../model/contact.model.js';
+// import { verifyCaptcha } from './verifyCaptcha.js';
 
 dotenv.config();
 
 const transporter = nodemailer.createTransport({
-    service: process.env.EMAIL_SERVICE,
+    host: process.env.EMAIL_HOST,
+    port: process.env.EMAIL_PORT,
     auth: {
         user: process.env.EMAIL_ADDRESS,
         pass: process.env.EMAIL_PASSWORD
     }
-
 });
 
 export const sendContactEmail = async (formData) => {
     try {
         const { first_name, last_name, email, phone, text_message } = formData;
+
+        // const isCaptchaValid = await verifyCaptcha(captcha);
+
+        // if (!isCaptchaValid) {
+        //     throw new Error(`Invalid captcha!`);
+        // }
 
         const sanitizedData = {
             first_name: xssFilters.inHTMLData(first_name),
@@ -30,8 +37,8 @@ export const sendContactEmail = async (formData) => {
         await contact.save();
 
         const mailOptions = {
-            from: `"Contact Form" <no-reply@yourdomain.com>`,
-            to: process.env.EMAIL_ADDRESS, // Replace with your email
+            from: `"Contact Form from" ${email}`,
+            to: '<no-reply@mern-esatate.com>',
             subject: 'New Contact Form Submission',
             html: `
               <p><strong>Name:</strong> ${sanitizedData.first_name} ${sanitizedData.last_name}</p>
@@ -44,10 +51,10 @@ export const sendContactEmail = async (formData) => {
 
           await transporter.sendMail(mailOptions);
 
-          return { success: true, message: 'Message submitted. Thank you!' };
+          return { success: true, message: 'Message submitted successfully.' };
     } catch (error) {
         console.error(`Error occur: ${error}`);
 
-        return { success: false, message: 'Failed to submit contact form' };
+        return { success: false, message: 'Error occur, failed to submit!' };
     }
 };
