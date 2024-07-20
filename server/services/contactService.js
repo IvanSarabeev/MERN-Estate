@@ -34,24 +34,30 @@ export const sendContactEmail = async (formData) => {
         };
 
         const contact = new Contact(sanitizedData);
-        await contact.save();
-
+        
         const mailOptions = {
-            from: `"Contact Form from" ${email}`,
+            from: `"Contact Form Submission:" ${email}`,
             to: '<no-reply@mern-esatate.com>',
             subject: 'New Contact Form Submission',
             html: `
-              <p><strong>Name:</strong> ${sanitizedData.first_name} ${sanitizedData.last_name}</p>
-              <p><strong>Email:</strong> ${sanitizedData.email}</p>
-              <p><strong>Phone:</strong> ${sanitizedData.phone}</p>
-              <p><strong>Message:</strong></p>
-              <p>${sanitizedData.text_message}</p>
+            <p>Dear Team,</p>
+            <p>You have received a new message from the contact form on your website. Here are the details:</p>
+            <p><strong>Name:</strong> ${sanitizedData.first_name} ${sanitizedData.last_name}</p>
+            <p><strong>Email:</strong> ${sanitizedData.email}</p>
+            <p><strong>Phone:</strong> ${sanitizedData.phone}</p>
+            <p><strong>Message:</strong></p>
+            <p>${sanitizedData.text_message}</p>
+            <p>Best Regards,<br>Your Website</p>
             `,
-          };
+        };
 
-          await transporter.sendMail(mailOptions);
+        if (sanitizedData !== null) {
+            await transporter.sendMail(mailOptions);
+            
+            await contact.save();            
+        }
 
-          return { success: true, message: 'Message submitted successfully.' };
+        return { success: true, message: 'Message submitted successfully.' };
     } catch (error) {
         console.error(`Error occur: ${error}`);
 
