@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { IconType } from "react-icons/lib";
 
 type BoxProps = {
@@ -23,4 +23,6 @@ const BoxSection: React.FC<BoxProps> = ({ title, text, Icon }) => {
   );
 };
 
-export default BoxSection;
+const MemoizedBoxSection = memo(BoxSection);
+
+export default MemoizedBoxSection;

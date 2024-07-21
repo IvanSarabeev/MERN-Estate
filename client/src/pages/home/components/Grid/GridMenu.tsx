@@ -1,6 +1,6 @@
 import React from "react";
-import GridItem from "components/GridItem";
-import { gridItemInfo } from "./constants";
+import GridItem from "./GridItem";
+import { gridItemInfo } from "components/constants";
 
 const GridMenu: React.FC = () => {
   return (

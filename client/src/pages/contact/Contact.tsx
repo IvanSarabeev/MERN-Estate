@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import Layout from "components/Layouts/Layout";
 import { boxSection } from "components/constants";
 import BoxSection from "components/__comp/BoxSection";
@@ -9,6 +9,7 @@ import { contactSchema } from "utils/formValidation";
 import { sendContactMessage } from "services/common";
 import { useToast } from "components/ui/use-toast";
 import { ToastAction } from "components/ui/toast";
+import Loader from "components/__comp/Loaders/CircleLoader";
 
 const Contact: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -62,7 +63,6 @@ const Contact: React.FC = () => {
       <section className="w-full h-fit lg:h-screen overflow-x-hidden">
         <div className="relative bg-contact bg-no-repeat bg-cover bg-center">
           <div className="absolute inset-0 bg-black opacity-50"></div>
-          {/* grayscale-50 contrast-100 mix-blend-multiply */}
           <div className="relative z-10 max-w-2xl pt-8 lg:pt-24 px-4 lg:px-5 pb-72 lg:pb-80 text-center mx-auto">
             <h2 className="text-4xl 2xl:text-5xl font-extrabold text-white/85 mb-4">
               Contact Us
@@ -74,7 +74,9 @@ const Contact: React.FC = () => {
           </div>
         </div>
         <div className="relative z-10 max-w-7xl pt-8 lg:pt-12 px-4 lg:px-5 pb-16 lg:pb-32 -mt-80 mx-auto">
-          <ContactForm formik={formik} loading={loading} />
+          <Suspense fallback={<Loader />}>
+            <ContactForm formik={formik} loading={loading} />
+          </Suspense>
           <div className="gap-6 md:gap-12 grid col-span-1 lg:grid-cols-3 justify-center text-center mx-auto">
             {boxSection.map((item) => {
               const Icon = item.icon;

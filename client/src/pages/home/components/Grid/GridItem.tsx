@@ -1,9 +1,9 @@
 import { FunctionComponent } from "react";
 import { GridItemInterface } from "types/grid";
 import { Link } from "react-router-dom";
-import { socialItem } from "./constants";
-import { Badge } from "./ui/badge";
 import { TbArrowForwardUp } from "react-icons/tb";
+import { Badge } from "components/ui/badge";
+import { socialItem } from "components/constants";
 
 type GridItemProps = {
   item: GridItemInterface;
