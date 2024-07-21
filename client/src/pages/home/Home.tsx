@@ -1,10 +1,11 @@
-import React, { memo } from "react";
+import React from "react";
 import Layout from "components/Layouts/Layout";
 import { accents } from "components/constants";
 import SearchHeader from "components/FormComp/SearchHeader";
 import GridMenu from "./components/Grid/GridMenu";
 import PromoSection from "./components/Promo/PromoSection";
 import AppReviewSection from "./components/AppReview/AppReviewSection";
+import TestimonialSection from "./components/Testimonial/TestimonialSection";
 
 const Home: React.FC = () => {
   return (
@@ -39,19 +40,19 @@ const Home: React.FC = () => {
         })}
       </section>
       <section className="padding-container mx-auto">
-        <MemoPromoSection />
+        <PromoSection />
       </section>
       <section className="h-fit w-full padding-container mx-auto">
-        <MemoGridMenu />
+        <GridMenu />
       </section>
       <section className="flexColCenter gap-y-8 md:flexBetween md:flex-row padding-container max-container ">
         <AppReviewSection />
       </section>
+      <section className="flexColCenter items-center padding-container max-container">
+        <TestimonialSection />
+      </section>
     </Layout>
   );
 };
-
-const MemoGridMenu = memo(GridMenu);
-const MemoPromoSection = memo(PromoSection);
 
 export default Home;

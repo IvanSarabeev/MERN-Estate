@@ -156,4 +156,15 @@ export const internalNavigation = [
     {id: 3, href: "products", label: "Products"},
     {id: 4, href: "my-listing", label: "Listings"},
     {id: 5, href: "analytics", label: "Analytics"},
-]
+];
+
+export const testimonials = [
+    { id: 1, avatar: 'https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png', username: 'Jennifer Doe', alias: '@johndoe', rating: 5, description: 'Very good application. I find it very helpful when using this application, this app helps me to find my new residence.' },
+    { id: 2, avatar: 'https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/thomas-lean.png', username: 'Jonathan Eibraham', alias: '@janedoe', rating: 4, description: 'The contact person is always patient with our frustration, that\'s why we feel very comfortable with this service.' },
+    { id: 3, avatar: 'https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png', username: 'John Smith', alias: '@johnsmith', rating: 5, description: 'I recently rented an apartment through this site and I find it very helpful with the features that are here, thank you.' },
+    { id: 4, avatar: 'https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/roberta-casas.png', username: 'Jane Smith', alias: '@janesmith', rating: 3, description: 'The interface that spoils the user\'s eyes, I feel very comfrotable when using this application.' },
+    { id: 5, avatar: 'https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/thomas-lean.png', username: 'Alexander', alias: '@alex', rating: 5, description: 'Thanks MERN ESTATE, this app helps me to find people to rent my haunted house, hehe, I\'m just kidding.' },
+    { id: 6, avatar: 'https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png', username: 'Barbara', alias: '@barby', rating: 4, description: 'I get many benefits when using this application, this application is very pleasand for me in finding the residence I\'m looking for' },
+    { id: 7, avatar: 'https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png', username: 'Charlie', alias: '@charlie', rating: 4, description: 'WOW, this is the first application that suites my needs from bottom to top!  I\'m looking for next opportunity' },
+    { id: 8, avatar: 'https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/roberta-casas.png', username: 'Dana', alias: '@dana', rating: 5, description: 'I didn\'t believe that there\'s an application that good for the ordinary men. Thanks.' },
+] as const;
