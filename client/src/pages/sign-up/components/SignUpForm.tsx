@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FormikProps } from "formik";
 import { UserSignUpData } from "types/user";
 import { avatarList } from "components/constants";
@@ -7,22 +7,26 @@ import GoogleAuth from "components/OAuth/GoogleAuth";
 import GitHubAuth from "components/OAuth/GitHubAuth";
 import Input from "components/HTML/Input";
 import Button from "components/HTML/Button";
-import AlertBadge, { AlertBadgeProps } from "components/Messages/AlertBadge";
 import { MdErrorOutline } from "react-icons/md";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 interface SignUpFormProps {
   formik: FormikProps<UserSignUpData>;
   loading: boolean;
   error: null;
-  alertBadge: AlertBadgeProps | null;
 }
 
 const SignUpForm: React.FunctionComponent<SignUpFormProps> = ({
   formik,
   loading,
   error,
-  alertBadge,
 }) => {
+  const [togglePass, setTogglePass] = useState<boolean>(false);
+
+  const handlePasswordToggle = () => {
+    setTogglePass(!togglePass);
+  };
+
   return (
     <>
       <div className="h-fit lg:h-screen w-full lg:w-1/2 flex flex-col justify-center form-padding-container bg-white">
@@ -100,14 +104,26 @@ const SignUpForm: React.FunctionComponent<SignUpFormProps> = ({
             >
               Your password
             </label>
-            <Input
-              required
-              id="password"
-              type="password"
-              placeholder="••••••"
-              className="w-full border p-3 rounded-lg"
-              {...formik.getFieldProps("password")}
-            />
+            <div className="relative w-full h-fit">
+              <Input
+                required
+                id="password"
+                type={`${togglePass ? "text" : "password"}`}
+                placeholder="••••••"
+                className="w-full border p-3 rounded-lg"
+                {...formik.getFieldProps("password")}
+              />
+              <div
+                onClick={handlePasswordToggle}
+                className="absolute inset-y-1/3 right-5 group"
+              >
+                {togglePass ? (
+                  <FaRegEye className="size-4 xl:size-5 group-hover:scale-105 group-hover:text-blue-600 group-hover:shadow-lg" />
+                ) : (
+                  <FaRegEyeSlash className="size-4 xl:size-5 group-hover:scale-105 group-hover:text-blue-600 group-hover:shadow-lg" />
+                )}
+              </div>
+            </div>
             {formik.touched.password && formik.errors.password ? (
               <div className="inline-flex gap-x-2 items-center text-red-600">
                 <div>
@@ -142,13 +158,6 @@ const SignUpForm: React.FunctionComponent<SignUpFormProps> = ({
           </Link>
         </p>
       </div>
-      {alertBadge && (
-        <AlertBadge
-          type={alertBadge.type}
-          title={alertBadge.title}
-          description={alertBadge.description}
-        />
-      )}
       <div className="h-full md:h-screen w-full lg:w-1/2 flex flex-col items-start justify-center padding-container bg-[#0284c7]">
         <h1 className="text-white text-3xl lg:text-5xl font-extrabold mb-4 text-balance">
           Explore the world’s leading MERN estate application.

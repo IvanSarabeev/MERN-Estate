@@ -1,6 +1,5 @@
 import { sendContactEmail } from "../services/contactService.js";
 
-
 export const submitContactForm = async (req, res) => {
     try {
         const { first_name, last_name, email, phone, text_message } = req.body;
@@ -13,4 +12,4 @@ export const submitContactForm = async (req, res) => {
 
         res.status(500).json({ success: false, message: 'Internal server error' });
     }
-}
+};

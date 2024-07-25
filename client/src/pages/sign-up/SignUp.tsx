@@ -3,15 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { UserSignUpData } from "types/user";
 import { registerUser } from "services/apiAuth";
 import Layout from "components/Layouts/Layout";
-import { AlertBadgeProps } from "components/Messages/AlertBadge";
 import { useFormik } from "formik";
 import { signUpSchema } from "utils/formValidation";
+import { toast } from "components/ui/use-toast";
+import { ToastAction } from "components/ui/toast";
 import SignUpForm from "./components/SignUpForm";
 
 const SignUp: React.FC = () => {
   const [error, setError] = useState<null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const [alertBadge, setAlertBadge] = useState<AlertBadgeProps | null>(null);
 
   const navigate = useNavigate();
 
@@ -30,27 +30,33 @@ const SignUp: React.FC = () => {
       try {
         setLoading(true);
 
-        await registerUser(values);
+        await registerUser(values).then((response) => {
+          if (response.success) {
+            toast({
+              title: "welcome to the family",
+              description: "Welcome in the MERN Estate",
+            });
+
+            setTimeout(() => {
+              navigate("/account");
+            }, 800);
+          } else {
+            throw new Error("Request failed!");
+          }
+        });
 
         setError(null);
-
-        setAlertBadge({
-          type: "success",
-          title: "Registration Successful",
-          description: "Your account has been created successfully!",
-        });
-
-        setTimeout(() => {
-          navigate("/sign-in");
-        }, 500);
       } catch (err) {
-        setLoading(false);
-
-        setAlertBadge({
-          type: "error",
-          title: "Registration failed!",
-          description: `${err}`,
+        toast({
+          variant: "destructive",
+          title: "Uh oh! Something went wrong.",
+          description: "There was a problem when sending",
+          action: <ToastAction altText="Try again">Try again</ToastAction>,
         });
+
+        setLoading(false);
+      } finally {
+        setLoading(false);
       }
     },
   });
@@ -58,12 +64,7 @@ const SignUp: React.FC = () => {
   return (
     <Layout>
       <section className="w-full flex flex-col md:flex-row items-center justify-center">
-        <SignUpForm
-          formik={formik}
-          loading={loading}
-          error={error}
-          alertBadge={alertBadge}
-        />
+        <SignUpForm formik={formik} loading={loading} error={error} />
       </section>
     </Layout>
   );

@@ -4,23 +4,25 @@ import Jwt from 'jsonwebtoken';
 import xssFilters from 'xss-filters';
 import { errorHandler } from '../utils/error.js';
 import { cookieOptions } from '../utils/cookie.js';
+import { authSignIn, authSignUpUser } from '../services/securityService.js';
 
 export const signUp = async (req, res, next) => {
-    // Sanitized User Data
-   const username = xssFilters.inHTMLData(req.body.username);
-   const email = xssFilters.inHTMLData(req.body.email);
-   const password = xssFilters.inHTMLData(req.body.password);
-
-   // Hashing password to 12 rounds
-   const hashedPassword = bcryptjs.hashSync(password, 12);
-
-   const newUser = new User({username, email, password:hashedPassword});
-
    try {
-       await newUser.save();
-       res.status(201).json("User created successfully!");
+        const {username, email, password} = req.body;
+
+        const result = await authSignUpUser({username, email, password });
+
+        if (result.success) {
+            res.status(200).json(result);
+        } else {
+            res.status(400).json(result);
+        }
    } catch (error) {
+        console.error('Error occur:', error);
+
         next(error);
+
+        res.status(500).json({success: false, message: 'Internal Server Error'});
    }
 };
 
