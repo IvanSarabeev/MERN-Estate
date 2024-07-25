@@ -48,7 +48,7 @@ const Home: React.FC = () => {
       <section className="flexColCenter gap-y-8 md:flexBetween md:flex-row padding-container max-container ">
         <AppReviewSection />
       </section>
-      <section className="flexColCenter items-center padding-container max-container">
+      <section className="flexColCenter items-stretch md:items-center padding-container max-container">
         <TestimonialSection />
       </section>
     </Layout>

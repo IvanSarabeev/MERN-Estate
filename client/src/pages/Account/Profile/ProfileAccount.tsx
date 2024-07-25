@@ -1,8 +1,14 @@
 import React from "react";
 import {Label} from "@radix-ui/react-dropdown-menu";
 import Input from "components/HTML/Input.tsx";
+// import {Popover, PopoverContent, PopoverTrigger} from "components/ui/popover.tsx";
+// import {Button} from "components/ui/button.tsx";
+// import {CalendarIcon} from "lucide-react";
+// import {Calendar} from "components/ui/calendar.tsx";
 
 const ProfileAccount: React.FC = () => {
+    // const [date, setDate] = useState<Date>();
+
     return (
         <>
             <div className="pb-6 border-b border-slate-300">
@@ -37,6 +43,29 @@ const ProfileAccount: React.FC = () => {
                     >
                         Date of birth
                     </Label>
+                    {/*<Popover>*/}
+                    {/*    <PopoverTrigger asChild>*/}
+                    {/*        <Button*/}
+                    {/*            variant={"outline"}*/}
+                    {/*            className={`w-[240px] justify-start text-left font-normal ${date && 'text-muted-foreground'}`}*/}
+                    {/*        >*/}
+                    {/*            <CalendarIcon className="size-4"/>*/}
+                    {/*            {date*/}
+                    {/*                // TODO: Add format from date-fns*/}
+                    {/*                ? format(date, "PPP")*/}
+                    {/*                : <span aria-label="Pick Date">Pick date</span>*/}
+                    {/*            }*/}
+                    {/*        </Button>*/}
+                    {/*    </PopoverTrigger>*/}
+                    {/*    <PopoverContent className="w-auto p-0 hover:shodow-md transition-shadow duration-75">*/}
+                    {/*        <Calendar*/}
+                    {/*            mode="single"*/}
+                    {/*            selected={date}*/}
+                    {/*            onSelect={setDate}*/}
+                    {/*            initialFocus*/}
+                    {/*        />*/}
+                    {/*    </PopoverContent>*/}
+                    {/*</Popover>*/}
                     {/* TODO: Add React/Date-picker */}
                     <p className="regular-12 lg:regular-14 text-[#86868e]">
                         Your date of birth is used to calculate your age.
