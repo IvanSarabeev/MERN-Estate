@@ -6,6 +6,7 @@ import GridMenu from "./components/Grid/GridMenu";
 import PromoSection from "./components/Promo/PromoSection";
 import AppReviewSection from "./components/AppReview/AppReviewSection";
 import TestimonialSection from "./components/Testimonial/TestimonialSection";
+import SubscribeSection from "pages/home/components/Subscribe/SubscribeSection.tsx";
 
 const Home: React.FC = () => {
   return (
@@ -50,6 +51,9 @@ const Home: React.FC = () => {
       </section>
       <section className="flexColCenter items-stretch md:items-center padding-container max-container">
         <TestimonialSection />
+      </section>
+      <section className="padding-container max-container">
+        <SubscribeSection />
       </section>
     </Layout>
   );
