@@ -9,6 +9,7 @@ import Input from "components/HTML/Input";
 import Button from "components/HTML/Button";
 import { MdErrorOutline } from "react-icons/md";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import OtpDialog from "./OtpDialog";
 
 interface SignUpFormProps {
   formik: FormikProps<UserSignUpData>;
@@ -22,10 +23,15 @@ const SignUpForm: React.FunctionComponent<SignUpFormProps> = ({
   error,
 }) => {
   const [togglePass, setTogglePass] = useState<boolean>(false);
+  const [showOtpDialog, setShowOtpDialog] = useState<boolean>(false);
 
   const handlePasswordToggle = () => {
     setTogglePass(!togglePass);
   };
+
+  const email = formik.values.email;
+
+  console.log(email);
 
   return (
     <>
@@ -138,11 +144,16 @@ const SignUpForm: React.FunctionComponent<SignUpFormProps> = ({
             type="submit"
             disabled={loading}
             title="submit-button"
+            onClick={() => setShowOtpDialog(!setShowOtpDialog)}
             className="bg-[#0284c7] font-semibold mt-3 text-white p-3 rounded-lg hover:opacity-95 disabled:opacity-80 xl:mt-5"
           >
-            {loading ? "Loading ..." : "Create an account"}
+            {loading ? "Creating account..." : "Create an account"}
           </Button>
         </form>
+        {/* Render the OtpDialog */}
+        {showOtpDialog ? <OtpDialog email={email} /> : null}
+        <OtpDialog email={email} />
+        {/* Show error */}
         {error && (
           <p className="regular-14 md:regular-16 font-semibold text-red-500 my-2">
             {error}

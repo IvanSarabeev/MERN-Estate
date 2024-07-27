@@ -1,40 +1,59 @@
 import User from "../models/user.model.js";
 
 /**
+ * Verifies the OTP provided by the user.
  * 
- * @param {Request} req 
- * @param {Response} res 
- * @param {Middleware} next 
- * @returns 
+ * @param {Object} req - The Express request object.
+ * @param {Object} req.body - The body of the request containing the OTP data.
+ * @param {string} req.body.email - The email address of the user.
+ * @param {string} req.body.otp - The OTP provided by the user.
+ * @param {Object} res - The Express response object.
+ * @param {Function} next - The Express next middleware function.
+ * 
+ * @returns {Promise<void>} - Sends a JSON response with the result of the OTP verification.
  */
 export const verifyOtp = async (req, res, next) => {
     try {
-        let { email, otp } = req.body;
+        const { email, otp } = req.body;
 
-        email = email.trim();
-        otp = otp.trim();
+        const SanitizeData = {
+            email: xssFilters.inHTMLData(email),
+            otp: xssFilters.inHTMLData(otp)
+        };
 
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ email: SanitizeData.email });
 
         if (!user) {
             return res.status(404).json({ success: false, message: 'User not found' });
         }
 
-        if (user.otp !== otp) {
-            return res.status(400).json({ success: false, message: 'Invalid OTP' });
-        }
+        // if (user.otp !== otp) {
+        //     return res.status(400).json({ success: false, message: 'Invalid OTP' });
+        // }
 
-        if (user.otpExpires < Date.now()) {
-            return res.status(400).json({ success: false, message: 'OTP has expired' });
-        }
+        // if (user.otpExpires < Date.now()) {
+        //     return res.status(400).json({ success: false, message: 'OTP has expired' });
+        // }
 
-        user.verified = true;
-        user.otp = undefined;
-        user.otpExpires = undefined;
+        // user.verified = true;
+        // user.otp = undefined;
+        // user.otpExpires = undefined;
         
-        await user.save();
+        // await user.save();
 
-        res.status(200).json({ success: true, message: "Email verified successfully" });
+        // res.status(200).json({ success: true, message: "Email verified successfully" });
+        if (user.otp === otp && user.otpExpires > Date.now()) {
+            // OTP is valid
+            user.otp = null; // Clear OTP after successful verification
+            user.otpExpires = null;
+
+            await user.save();
+            
+            return res.status(200).json({ success: true, message: 'OTP verified successfully' });
+        } else {
+            // OTP is invalid or expired
+            return res.status(400).json({ success: false, message: 'Invalid or expired OTP' });
+        }
     } catch (error) {
         console.error('Error occur:', error);
 

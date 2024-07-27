@@ -19,6 +19,7 @@ export default defineConfig({
     alias: {
       "@": path.relative(__dirname, "./src"),
       "lib": resolve(rootPath, "./lib"),
+      "api": resolve(rootPath, "./api"),
       "components": resolve(rootPath, "components"),
       "constants": resolve(rootPath, "constants"),
       "hooks": resolve(rootPath, "hooks"),
