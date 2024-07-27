@@ -50,7 +50,9 @@ export const signInUser = async (formData: UserSignInData, dispatch: AppDispatch
         });
         
         if (!response.ok) {
-            throw new Error(`Status code: ${response.status}, status message: ${response.statusText}`);
+            const errorData = await response.json();
+
+            throw new Error(`Error ${response.status}: ${errorData.message || response.statusText}`);
         }
         
         const data = await response.json();

@@ -1,17 +1,30 @@
 import User from './../model/user.model.js';
 import bcryptjs from "bcryptjs";
 import Jwt from 'jsonwebtoken';
-import xssFilters from 'xss-filters';
-import { errorHandler } from '../utils/error.js';
 import { cookieOptions } from '../utils/cookie.js';
-import { authSignIn, authSignUpUser } from '../services/securityService.js';
+import { authenticateUser, authSignUpUser } from '../services/securityService.js';
 
+/**
+ * Handles user sign-up by creating a new user account.
+ * 
+ * @param {Object} req - The Express request object.
+ * @param {Object} req.body - The body of the request containing user data.
+ * @param {string} req.body.username - The username provided by the user.
+ * @param {string} req.body.email - The email provided by the user.
+ * @param {string} req.body.password - The password provided by the user.
+ * @param {Object} res - The Express response object.
+ * @param {Function} next - The Express next middleware function.
+ * 
+ * @returns {Promise<void>} - Sends a JSON response with the result of the sign-up process.
+ */
 export const signUp = async (req, res, next) => {
    try {
         const {username, email, password} = req.body;
 
+        // Proceed business logic through service
         const result = await authSignUpUser({username, email, password });
 
+        // Check result and send appropriate response
         if (result.success) {
             res.status(200).json(result);
         } else {
@@ -26,35 +39,36 @@ export const signUp = async (req, res, next) => {
    }
 };
 
+/**
+ * Authenticate user based on their email and password
+ * 
+ * @param {Object} req - The Express request object.
+ * @param {Object} req.body - The body of the request containing user data.
+ * @param {string} req.body.email - The email provided by the user.
+ * @param {string} req.body.password - The password provided by the user.
+ * @param {Object} res - The Express response object.
+ * @param {Function} next - The Express next middleware function.
+ * 
+ * @returns {Promise<void>} - Sends a JSON response with cookie and 
+ * the result of the sign-in process.
+ */
 export const signIn = async (req, res, next) => {
-    // Sanitized User Data
-    const email = xssFilters.inHTMLData(req.body.email);
-    const password = xssFilters.inHTMLData(req.body.password);
+    const {email, password} = req.body;
 
     try {
-        const validUser = await User.findOne({email}); 
+       const { jwtToken, userWithoutPassword } = await authenticateUser(email, password);
 
-        if (!validUser) {
-            return next(errorHandler(404, 'User not found!'));
-        }
-
-        const validUserPassword = bcryptjs.compareSync(password, validUser.password);
-
-        if (!validUserPassword) {
-            return next(errorHandler(401, 'Wrong credentials!'));
-        }
-
-        // Set the jwtToken on the user id
-        const jwtToken = Jwt.sign({id: validUser._id}, process.env.JWT_SECRET);
-
-        const {password: pass, ...rest} = validUser._doc;
-
-        // Set the session cookie, to not allow 3-rd party reading cookie & expiration time
-        res.cookie('access_token', jwtToken, cookieOptions)
-        .status(200)
-        .json(rest);
+       res.cookie('access_token', jwtToken, userWithoutPassword)
+            .status(200)
+            .json({user: userWithoutPassword, token: jwtToken });
     } catch (error) {
-        next(error);
+        console.error('Sign-in error:', error.message);
+
+        // Determine error status code
+        const statusCode = error.statusCode || 500;
+        const errorMessage = error.message || 'Internal Server Error';
+
+        res.status(statusCode).json({ success: false, message: errorMessage });
     }
 };
 
@@ -99,6 +113,15 @@ export const googleAuth = async (req, res, next) => {
     }
 };
 
+/**
+ * Signout User from the system
+ * 
+ * @param {Object} req - The Express request object.
+ * @param {Object} res - The Express response object.
+ * @param {Function} next - The Express next middleware function.
+ * @returns {Promise<void>} - Clear cookie and send status with message
+ *
+*/
 export const signOut = async (req, res, next) => {
     try {
         res.clearCookie('access_token');

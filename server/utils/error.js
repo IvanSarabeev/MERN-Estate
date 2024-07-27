@@ -1,5 +1,12 @@
+/**
+ * Custom ErrorHandler 
+ * @param {*} statusCode: number 
+ * @param {*} message: string
+ * @returns 
+ */
 export const errorHandler = (statusCode, message) => {
     const error = new Error();
+
     error.statusCode = statusCode;
     error.message = message;
 

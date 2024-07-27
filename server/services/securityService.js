@@ -7,28 +7,47 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-export const authSignIn = async (formData) => {
+/**
+ * Authenticates a user by sanitizing input data, validating credentials,
+ * and generating a JWT token upon successful authentication.
+ * 
+ * @param {object} formData - User provided data for creating an authentication
+ * @param {string} formData.email - The email address of the user
+ * @param {string} formData.password - The password of the user
+ * @throws {Error} - Throws an error if an issue occur during the process.
+ * @returns {Promise<Object>} - An object containing JWT Token and user data
+ */
+export const authenticateUser= async (formData) => {
     try {
         const { email, password } = formData;
 
+        // Sanitize input data to prevent XSS atacks 
         const sanitizeData = {
             email: xssFilters.inHTMLData(email),
             password: xssFilters.inHTMLData(password)
         };
 
-        const validateUser = await User.findOne({email});
+        // Find user by their email
+        const validUser = await User.findOne({email: sanitizeData.email});
 
-        if (!validateUser) {
+        if (!validUser) {
             return errorHandler(404, "User not found!");
-        };
-
-        const validatePassword = bcryptjs.compareSync(password, validateUser.password);
-
-        if (!validatePassword) {
-            return errorHandler(401, 'Invalid username/password');
         }
 
-        return { success: true, message: 'Successful login', response: 200 };
+        // Validate user password
+        const isPasswordValid = bcryptjs.compareSync(sanitizeData.password, validUser.password);
+
+        if (!isPasswordValid) {
+            return errorHandler(401, "Invalid credentials!");
+        }
+
+        // Generate JWT token
+        const jwtToken = Jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
+
+        // Exclude password from user data
+        const { password: pass, ...userWithoutPassword } = validUser._doc;
+
+        return { jwtToken, userWithoutPassword };
     } catch (error) {
         console.error(`Error occur: ${error}`);
 
@@ -36,9 +55,16 @@ export const authSignIn = async (formData) => {
     }
 };
 
-/*
-* Contains formData representing interface of username, email, password -> typeof String
-*/
+/**
+ * Login user by sanitizing their input data, validating credentials,
+ * hashing their password and saving their information in the Database
+ * 
+ * @param {object} formData - User provided data for signing in the system
+ * @param {string} formData.username - The username of the user
+ * @param {string} formData.email - The email address of the user
+ * @param {string} formData.password - The password of the user
+ * @returns {Promise<Object>} - An object containing status with message
+ */
 export const authSignUpUser = async (formData) => {
     try {
         const {username, email, password } = formData;
@@ -49,7 +75,7 @@ export const authSignUpUser = async (formData) => {
             password: xssFilters.inHTMLData(password)
         };
 
-        const hashedPassword = bcryptjs.hashSync(password, 12);
+        const hashedPassword = bcryptjs.hashSync(sanitizeData.password, 12);
 
         const newUser = new User({
             username: sanitizeData.username,
