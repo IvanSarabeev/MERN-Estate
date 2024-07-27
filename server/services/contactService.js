@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer';
 import xssFilters from "xss-filters";
 import dotenv from 'dotenv';
-import Contact from '../model/contact.model.js';
+import Contact from '../models/contact.model.js';
 // import { verifyCaptcha } from './verifyCaptcha.js';
 
 dotenv.config();

@@ -1,4 +1,4 @@
-import User from './../model/user.model.js';
+import User from './../models/user.model.js';
 import bcryptjs from "bcryptjs";
 import Jwt from 'jsonwebtoken';
 import { cookieOptions } from '../utils/cookie.js';
@@ -19,7 +19,11 @@ import { authenticateUser, authSignUpUser } from '../services/securityService.js
  */
 export const signUp = async (req, res, next) => {
    try {
-        const {username, email, password} = req.body;
+        let {username, email, password} = req.body;
+
+        username = username.trim();
+        email = email.trim();
+        password = password.trim();
 
         // Proceed business logic through service
         const result = await authSignUpUser({username, email, password });

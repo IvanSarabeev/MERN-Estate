@@ -1,9 +1,11 @@
 import xssFilters from "xss-filters";
-import User from "../model/user.model.js";
+import User from "../models/user.model.js";
 import bcryptjs from "bcryptjs";
 import { errorHandler } from "../utils/error.js";
 import Jwt from 'jsonwebtoken';
 import dotenv from "dotenv";
+import crypto from "crypto";
+import { sendVerificationEmail } from './verifyEmailService.js';
 
 dotenv.config();
 
@@ -77,13 +79,22 @@ export const authSignUpUser = async (formData) => {
 
         const hashedPassword = bcryptjs.hashSync(sanitizeData.password, 12);
 
+        // Generate OTP
+        const otp = crypto.randomInt(100000, 999999).toString();
+        const otpExpires = Date.now() + 5 * 60 * 1000; // OTP expiration time 5 min
+
         const newUser = new User({
             username: sanitizeData.username,
             email: sanitizeData.email,
-            password: hashedPassword
+            password: hashedPassword,
+            otp,
+            otpExpires
         });
 
         await newUser.save();
+
+        // Send OTP via email
+        await sendVerificationEmail(email, otp);
 
         return { success: true, message: 'User registered successfully'};
     } catch (error) {

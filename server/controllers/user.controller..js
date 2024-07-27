@@ -1,7 +1,7 @@
 import bcryptjs from 'bcryptjs';
-import User from './../model/user.model.js';
+import User from '../models/user.model.js';
 import { errorHandler } from "../utils/error.js";
-import Listing from './../model/listing.model.js';
+import Listing from '../models/listing.model.js';
 
 export const updateUser = async (req, res, next) => {
     // TODO: sanitize each individual data inside the Client

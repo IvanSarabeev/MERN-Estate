@@ -12,7 +12,6 @@ import { Server } from "socket.io";
 import helmet from "helmet";
 import ExpressMongoSanitize from "express-mongo-sanitize";
 import csurf from "csurf";
-import nodemailer from "nodemailer";
 
 dotenv.config();
 

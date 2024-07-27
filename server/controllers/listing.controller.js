@@ -1,4 +1,4 @@
-import Listing from "../model/listing.model.js";
+import Listing from "../models/listing.model.js";
 import xssFilters from "xss-filters";
 import { errorHandler } from './../utils/error.js';
 

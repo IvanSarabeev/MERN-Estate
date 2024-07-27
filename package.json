@@ -28,6 +28,7 @@
     "mongoose": "^8.2.3",
     "nodemailer": "^6.9.14",
     "nodemon": "^3.1.0",
+    "otp-generator": "^4.0.1",
     "socket.io": "^4.7.5",
     "xss": "^1.0.15",
     "xss-filters": "^1.2.7"

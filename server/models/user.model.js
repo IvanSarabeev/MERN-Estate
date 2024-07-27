@@ -18,9 +18,23 @@ const userSchema = new mongoose.Schema({
     avatar: {
         type: String,
         default: "https://res.cloudinary.com/dplqrjsty/image/upload/v1711815567/hmkxg5swcu0ssfiwlasf.jpg",
+    },
+    role: {
+        type: String,
+        enum: ['Admin', 'User'],
+        default: "User"
+    },
+    verified: {
+        type: Boolean,
+        default: false
+    },
+    otp: {
+        type: String,
+    },
+    otpExpires: {
+        type: Date,
     }
-},
-{ timestamps: true }
+}, { timestamps: true }
 );
 
 // creating user schema inside MongoDB
