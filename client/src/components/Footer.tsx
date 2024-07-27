@@ -4,8 +4,8 @@ import Logo from "assets/images/estate-logo.png";
 
 const Footer = () => {
   return (
-    <footer className="w-full h-fit padding-container bg-white">
-      <article className="max-container grid grid-cols-1 md:grid-cols-2 justify-around md:justify-between py-4 xl:pb-12">
+    <footer className="w-full h-fit py-4 xl:pb-8 bg-white">
+      <article className="max-container padding-container grid grid-cols-1 md:grid-cols-2 justify-around md:justify-between">
         <div className="flex items-center md:flex-col md:items-start">
           <img
               src={Logo}

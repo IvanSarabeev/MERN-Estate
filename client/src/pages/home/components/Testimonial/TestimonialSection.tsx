@@ -38,14 +38,14 @@ const TestimonialSection: React.FC = () => {
   }, [scrollRow1, scrollRow2]);
 
   return (
-    <div>
+    <>
       <h3 className="w-fit text-3xl lg:text-4xl 2xl:text-5xl leading-10 md:leading-[3.35rem] px-4 pb-4 lg:pb-8 2xl:pb-12 text-center font-semibold text-slate-900 mx-auto">
         What's users say about our service
       </h3>
-      <div className="w-full flexColCenter items-center overflow-hidden">
+      <div className="w-full flexColCenter items-center">
         <TestimonialSlider row1Ref={row1Ref} row2Ref={row2Ref} />
       </div>
-    </div>
+    </>
   );
 };
 
