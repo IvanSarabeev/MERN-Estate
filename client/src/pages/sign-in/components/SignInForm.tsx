@@ -9,15 +9,20 @@ import Input from "components/HTML/Input";
 import Button from "components/HTML/Button";
 import GoogleAuth from "components/OAuth/GoogleAuth";
 import GitHubAuth from "components/OAuth/GitHubAuth";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 interface SignInFormProps {
   formik: FormikProps<UserSignInData>;
   loading: boolean | undefined;
+  show: boolean;
+  handleToggle: () => void;
 }
 
 const SignInForm: React.FunctionComponent<SignInFormProps> = ({
   formik,
   loading,
+  show,
+  handleToggle,
 }) => {
   return (
     <>
@@ -97,15 +102,29 @@ const SignInForm: React.FunctionComponent<SignInFormProps> = ({
             >
               Password
             </label>
-            <Input
-              type="password"
-              required
-              id="password"
-              title="User password"
-              placeholder="••••••"
-              {...formik.getFieldProps("password")}
-              className="w-full border p-3 rounded-lg"
-            />
+            <div className="relative w-full h-fit">
+              <Input
+                type={show ? "text" : "password"}
+                required
+                id="password"
+                title="User password"
+                placeholder="••••••"
+                {...formik.getFieldProps("password")}
+                className="w-full border p-3 rounded-lg"
+              />
+              <div
+                title="check password"
+                aria-label="password visibility"
+                onClick={() => handleToggle()}
+                className="absolute inset-y-1/3 right-5 group"
+              >
+                {show ? (
+                  <FaRegEyeSlash className="size-4 xl:size-5 group-hover:scale-105 group-hover:text-blue-600 group-hover:shadow-lg" />
+                ) : (
+                  <FaRegEye className="size-4 xl:size-5 group-hover:scale-105 group-hover:text-blue-600 group-hover:shadow-lg" />
+                )}
+              </div>
+            </div>
             {formik.touched.password && formik.errors.password ? (
               <div className="inline-flex gap-x-2 items-center text-red-600">
                 <div>

@@ -118,9 +118,9 @@ const SignUpForm: React.FunctionComponent<SignUpFormProps> = ({
                 className="absolute inset-y-1/3 right-5 group"
               >
                 {togglePass ? (
-                  <FaRegEye className="size-4 xl:size-5 group-hover:scale-105 group-hover:text-blue-600 group-hover:shadow-lg" />
-                ) : (
                   <FaRegEyeSlash className="size-4 xl:size-5 group-hover:scale-105 group-hover:text-blue-600 group-hover:shadow-lg" />
+                ) : (
+                  <FaRegEye className="size-4 xl:size-5 group-hover:scale-105 group-hover:text-blue-600 group-hover:shadow-lg" />
                 )}
               </div>
             </div>

@@ -3,13 +3,12 @@ import Button from "components/HTML/Button";
 import useToggle from "hooks/useToggle";
 import { IoMenu } from "react-icons/io5";
 import { HiMiniXMark } from "react-icons/hi2";
-import { headerLinks } from "components/constants";
-import { NavLink } from "react-router-dom";
+import { headerLinks, userNavigation } from "components/constants";
+import { Link, NavLink } from "react-router-dom";
 import MobileNav from "./MobileNav";
 import EstateLogo from "assets/images/estate-logo.png";
 import { motion, AnimatePresence } from "framer-motion";
 import { scrollTop } from "utils/scrollTop";
-import DropdownProfile from "components/__comp/ProfileDropdown";
 
 const Header: React.FC = () => {
   const [show, setShow] = useToggle();
@@ -24,41 +23,52 @@ const Header: React.FC = () => {
         <div className="relative inline-flex items-center z-10 size-fit ease-in-out transition-all">
           <NavLink to={"/"}>
             <img
-                src={EstateLogo}
-                alt="logo"
-                decoding="async"
-                loading="eager"
-                className="h-12 w-20 aspect-auto object-cover mr-5"
+              src={EstateLogo}
+              alt="logo"
+              decoding="async"
+              loading="eager"
+              className="h-12 w-20 aspect-auto object-cover mr-5"
             />
           </NavLink>
           <menu className="hidden gap-4 md:flex ">
             {headerLinks.map((item) => {
               return (
-                  <motion.li
-                      initial={{opacity: 0, translateX: -50, translateY: -50}}
-                      animate={{opacity: 1, translateX: 0, translateY: 0}}
-                      transition={{
-                        duration: 0.5,
-                        type: "spring",
-                        ease: "easeInOut",
-                      }}
-                      key={item.id}
+                <motion.li
+                  initial={{ opacity: 0, translateX: -50, translateY: -50 }}
+                  animate={{ opacity: 1, translateX: 0, translateY: 0 }}
+                  transition={{
+                    duration: 0.5,
+                    type: "spring",
+                    ease: "easeInOut",
+                  }}
+                  key={item.id}
+                >
+                  <NavLink
+                    to={item.href}
+                    className={({ isActive }) =>
+                      isActive ? "active-link" : "passive-link"
+                    }
                   >
-                    <NavLink
-                        to={item.href}
-                        className={({isActive}) =>
-                            isActive ? "active-link" : "passive-link"
-                        }
-                    >
-                      {item.label}
-                    </NavLink>
-                  </motion.li>
+                    {item.label}
+                  </NavLink>
+                </motion.li>
               );
             })}
           </menu>
         </div>
         <div className="hidden md:flex gap-4 items-center justify-end">
-          <DropdownProfile />
+          {userNavigation.map((item) => {
+            return (
+              <Link
+                key={item.id}
+                to={item.href}
+                type="button"
+                className={`${item.cssAttribute}`}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
         </div>
         <div className="block md:hidden pr-2.5">
           <Button

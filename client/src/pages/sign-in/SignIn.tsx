@@ -10,9 +10,12 @@ import SignInForm from "./components/SignInForm";
 import { signInValidationSchema } from "utils/formValidation";
 import { toast } from "components/ui/use-toast";
 import { ToastAction } from "components/ui/toast";
+import useToggle from "hooks/useToggle";
 
 const SignIn: React.FC = () => {
   const { loading } = useSelector((state: RootState) => state.user);
+
+  const [show, setShow] = useToggle();
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -58,10 +61,19 @@ const SignIn: React.FC = () => {
     },
   });
 
+  const handleToggle = () => {
+    setShow();
+  };
+
   return (
     <Layout>
       <section className="w-full h-fit lg:h-screen flex flex-col md:flex-row items-center justify-around form-padding-container bg-[#f9fafb]">
-        <SignInForm formik={formik} loading={loading} />
+        <SignInForm
+          formik={formik}
+          loading={loading}
+          show={show}
+          handleToggle={handleToggle}
+        />
       </section>
     </Layout>
   );
