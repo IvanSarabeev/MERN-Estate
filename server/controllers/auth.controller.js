@@ -19,11 +19,7 @@ import { authenticateUser, authSignUpUser } from '../services/securityService.js
  */
 export const signUp = async (req, res, next) => {
    try {
-        let {username, email, password} = req.body;
-
-        username = username.trim();
-        email = email.trim();
-        password = password.trim();
+        const {username, email, password} = req.body;
 
         // Proceed business logic through service
         const result = await authSignUpUser({username, email, password });

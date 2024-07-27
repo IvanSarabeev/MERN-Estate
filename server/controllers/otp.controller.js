@@ -1,4 +1,5 @@
 import User from "../models/user.model.js";
+import xssFilters from 'xss-filters';
 
 /**
  * Verifies the OTP provided by the user.
@@ -6,13 +7,13 @@ import User from "../models/user.model.js";
  * @param {Object} req - The Express request object.
  * @param {Object} req.body - The body of the request containing the OTP data.
  * @param {string} req.body.email - The email address of the user.
- * @param {string} req.body.otp - The OTP provided by the user.
+ * @param {string} req.body.otp - The OTP code provided by the user.
  * @param {Object} res - The Express response object.
  * @param {Function} next - The Express next middleware function.
  * 
  * @returns {Promise<void>} - Sends a JSON response with the result of the OTP verification.
  */
-export const verifyOtp = async (req, res, next) => {
+export const verifyOtp = async (req, res) => {
     try {
         const { email, otp } = req.body;
 
@@ -27,21 +28,6 @@ export const verifyOtp = async (req, res, next) => {
             return res.status(404).json({ success: false, message: 'User not found' });
         }
 
-        // if (user.otp !== otp) {
-        //     return res.status(400).json({ success: false, message: 'Invalid OTP' });
-        // }
-
-        // if (user.otpExpires < Date.now()) {
-        //     return res.status(400).json({ success: false, message: 'OTP has expired' });
-        // }
-
-        // user.verified = true;
-        // user.otp = undefined;
-        // user.otpExpires = undefined;
-        
-        // await user.save();
-
-        // res.status(200).json({ success: true, message: "Email verified successfully" });
         if (user.otp === otp && user.otpExpires > Date.now()) {
             // OTP is valid
             user.otp = null; // Clear OTP after successful verification

@@ -6,32 +6,35 @@ import { Link } from "react-router-dom";
 import GoogleAuth from "components/OAuth/GoogleAuth";
 import GitHubAuth from "components/OAuth/GitHubAuth";
 import Input from "components/HTML/Input";
-import Button from "components/HTML/Button";
 import { MdErrorOutline } from "react-icons/md";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { Button } from "components/ui/button";
 import OtpDialog from "./OtpDialog";
 
 interface SignUpFormProps {
   formik: FormikProps<UserSignUpData>;
   loading: boolean;
-  error: null;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  error: string | null;
+  setError: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
 const SignUpForm: React.FunctionComponent<SignUpFormProps> = ({
   formik,
   loading,
+  setLoading,
   error,
+  setError,
 }) => {
   const [togglePass, setTogglePass] = useState<boolean>(false);
   const [showOtpDialog, setShowOtpDialog] = useState<boolean>(false);
+  const [otp, setOtp] = useState<string>("");
 
   const handlePasswordToggle = () => {
     setTogglePass(!togglePass);
   };
 
   const email = formik.values.email;
-
-  console.log(email);
 
   return (
     <>
@@ -144,15 +147,23 @@ const SignUpForm: React.FunctionComponent<SignUpFormProps> = ({
             type="submit"
             disabled={loading}
             title="submit-button"
-            onClick={() => setShowOtpDialog(!setShowOtpDialog)}
+            onClick={() => setShowOtpDialog(true)}
             className="bg-[#0284c7] font-semibold mt-3 text-white p-3 rounded-lg hover:opacity-95 disabled:opacity-80 xl:mt-5"
           >
             {loading ? "Creating account..." : "Create an account"}
           </Button>
+          <OtpDialog
+            open={showOtpDialog}
+            onOpenChange={setShowOtpDialog}
+            email={email}
+            otp={otp}
+            setOtp={setOtp}
+            error={error}
+            setError={setError}
+            loading={loading}
+            setLoading={setLoading}
+          />
         </form>
-        {/* Render the OtpDialog */}
-        {showOtpDialog ? <OtpDialog email={email} /> : null}
-        <OtpDialog email={email} />
         {/* Show error */}
         {error && (
           <p className="regular-14 md:regular-16 font-semibold text-red-500 my-2">

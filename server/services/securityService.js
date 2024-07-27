@@ -91,10 +91,12 @@ export const authSignUpUser = async (formData) => {
             otpExpires
         });
 
+        console.log(newUser);
+
         await newUser.save();
 
         // Send OTP via email
-        await sendVerificationEmail(email, otp);
+        await sendVerificationEmail(sanitizeData.email, otp);
 
         return { success: true, message: 'User registered successfully'};
     } catch (error) {

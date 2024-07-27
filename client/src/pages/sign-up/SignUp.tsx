@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { UserSignUpData } from "types/user";
 import { registerUser } from "services/apiAuth";
 import Layout from "components/Layouts/Layout";
@@ -10,15 +9,13 @@ import { ToastAction } from "components/ui/toast";
 import SignUpForm from "./components/SignUpForm";
 
 const SignUp: React.FC = () => {
-  const [error, setError] = useState<null>(null);
+  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const navigate = useNavigate();
-
   const initialValues: UserSignUpData = {
-    username: "",
-    email: "",
-    password: "",
+    username: "BenJohnson",
+    email: "benjamin@gmail.com",
+    password: "uSOf8wj@o3!",
   };
 
   const validationSchema = signUpSchema;
@@ -31,15 +28,13 @@ const SignUp: React.FC = () => {
         setLoading(true);
 
         await registerUser(values).then((response) => {
+          console.log(response);
+
           if (response.success) {
             toast({
-              title: "welcome to the family",
-              description: "Welcome in the MERN Estate",
+              title: "Email sended",
+              description: "Confirmation code sended to email",
             });
-
-            setTimeout(() => {
-              navigate("/account");
-            }, 800);
           } else {
             throw new Error("Request failed!");
           }
@@ -64,7 +59,13 @@ const SignUp: React.FC = () => {
   return (
     <Layout>
       <section className="w-full flex flex-col md:flex-row items-center justify-center">
-        <SignUpForm formik={formik} loading={loading} error={error} />
+        <SignUpForm
+          formik={formik}
+          loading={loading}
+          setLoading={setLoading}
+          error={error}
+          setError={setError}
+        />
       </section>
     </Layout>
   );

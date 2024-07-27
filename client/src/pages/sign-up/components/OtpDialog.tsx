@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Dialog,
   DialogClose,
@@ -7,7 +7,6 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "components/ui/dialog";
 import { InputOTP, InputOTPSlot, InputOTPGroup } from "components/ui/input-otp";
 import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
@@ -15,16 +14,32 @@ import { Button } from "components/ui/button";
 import { verifyOtpEmail } from "api/verifyOtp";
 import { redirect } from "react-router-dom";
 import { MdError } from "react-icons/md";
+import { toast } from "components/ui/use-toast";
+import { ToastAction } from "components/ui/toast";
 
 type OtpDialogProps = {
   email: string;
+  otp: string;
+  open: boolean;
+  onOpenChange: React.Dispatch<React.SetStateAction<boolean>>;
+  setOtp: React.Dispatch<React.SetStateAction<string>>;
+  loading: boolean;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  error: string | null;
+  setError: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
-const OtpDialog: React.FunctionComponent<OtpDialogProps> = ({ email }) => {
-  const [otp, setOtp] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
-
+const OtpDialog: React.FunctionComponent<OtpDialogProps> = ({
+  email,
+  open,
+  otp,
+  setOtp,
+  onOpenChange,
+  error,
+  setError,
+  loading,
+  setLoading,
+}) => {
   const handleOtpChange = (value: string) => {
     setOtp(value);
   };
@@ -37,13 +52,16 @@ const OtpDialog: React.FunctionComponent<OtpDialogProps> = ({ email }) => {
     try {
       const response = await verifyOtpEmail({ email, otp });
 
-      if (response && !response.success) {
-        throw new Error(response.message || "An error occurred!");
+      if (response.success) {
+        toast({
+          title: "Code Verified",
+          description: "Successfully verified OTP",
+        });
+
+        return redirect("/account");
+      } else {
+        throw new Error("Request failed!");
       }
-
-      console.log(response, "OTP Verified");
-
-      return redirect("/account");
     } catch (err: unknown) {
       if (err instanceof Error) {
         if (err.message.includes("Type error")) {
@@ -56,6 +74,13 @@ const OtpDialog: React.FunctionComponent<OtpDialogProps> = ({ email }) => {
           setError("An unexpected error occurred.");
         }
       } else {
+        toast({
+          variant: "destructive",
+          title: "OTP invalid",
+          description: "There was a problem when proceeding",
+          action: <ToastAction altText="Try again">Try again</ToastAction>,
+        });
+
         // Handle cases where err is not an instance of Error
         setError("An unknown error occurred.");
       }
@@ -65,10 +90,7 @@ const OtpDialog: React.FunctionComponent<OtpDialogProps> = ({ email }) => {
   };
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="outline">Open Modal</Button>
-      </DialogTrigger>
+    <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-lg">
         <DialogHeader className="flexColCenter items-center">
           <DialogTitle className="regular-18 xl:bold-24">
