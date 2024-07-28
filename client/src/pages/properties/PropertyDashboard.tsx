@@ -8,7 +8,7 @@ const PropertyDashboard: React.FC = () => {
   const [layout, setLayout] = useState<string>(() => {
     return localStorage.getItem("layout") ?? "grid";
   });
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  // const [currentPage, setCurrentPage] = useState<number>(1);
 
   const changeLayoutAppearance = (newLayout: string) => {
     setLayout(newLayout);
