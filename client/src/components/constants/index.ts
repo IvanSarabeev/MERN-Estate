@@ -11,8 +11,9 @@ import DeviceMockup from "assets/images/signup-page-mockup.png";
 export const headerLinks = [
     {id: 1, label: "Home", href: "/"},
     {id: 2, label: "About", href: "/about"},
-    {id: 3, label: "Blog", href: "/blog"},
-    {id: 4, label: "Contact", href: "/contact"},
+    {id: 3, label: "Properties", href: "/properties"},
+    {id: 4, label: "Blog", href: "/blog"},
+    {id: 5, label: "Contact", href: "/contact"},
 ] as const;
 
 export const userNavigation = [

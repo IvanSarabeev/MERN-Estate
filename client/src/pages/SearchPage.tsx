@@ -55,6 +55,9 @@ const SearchPage: React.FC = () => {
       setLoading(true);
       const searchQuery = urlParams.toString();
       const res = await fetch(`/api/listing/get?${searchQuery}`);
+
+      console.log(res);
+
       const data = await res.json();
       if (data.length > 8) {
         setShowMore(true);

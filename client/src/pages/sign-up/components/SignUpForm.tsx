@@ -143,15 +143,26 @@ const SignUpForm: React.FunctionComponent<SignUpFormProps> = ({
               </div>
             ) : null}
           </div>
-          <Button
-            type="submit"
-            disabled={loading}
-            title="submit-button"
-            onClick={() => setShowOtpDialog(true)}
-            className="bg-[#0284c7] font-semibold mt-3 text-white p-3 rounded-lg hover:opacity-95 disabled:opacity-80 xl:mt-5"
-          >
-            {loading ? "Creating account..." : "Create an account"}
-          </Button>
+          <div className="flexColStart md:flex-row md:items-center md:justify-between">
+            <Button
+              type="submit"
+              disabled={loading}
+              title="submit-button"
+              onClick={() => setShowOtpDialog(true)}
+              className="w-fit bg-[#0284c7] font-semibold mt-3 text-white py-3 md:py-5 rounded-lg hover:opacity-95 disabled:opacity-80 xl:mt-5"
+            >
+              {loading ? "Creating account..." : "Create an account"}
+            </Button>
+            <p className="regular-14 md:regular-16 text-[#9297a2] font-light mt-2.5 md:mt-4">
+              Already have an account?
+              <Link
+                to={`/sign-in`}
+                className="text-[#319ad1] ml-1.5 font-medium hover:font-semibold hover:underline hover:underline-offset-auto"
+              >
+                Login here
+              </Link>
+            </p>
+          </div>
           <OtpDialog
             open={showOtpDialog}
             onOpenChange={setShowOtpDialog}
@@ -170,15 +181,6 @@ const SignUpForm: React.FunctionComponent<SignUpFormProps> = ({
             {error}
           </p>
         )}
-        <p className="regular-14 md:regular-16 text-[#9297a2] font-light mt-2.5 md:mt-4">
-          Already have an account?
-          <Link
-            to={`/sign-in`}
-            className="text-[#319ad1] ml-1.5 font-medium hover:font-semibold hover:underline hover:underline-offset-auto"
-          >
-            Login here
-          </Link>
-        </p>
       </div>
       <div className="h-full md:h-screen w-full lg:w-1/2 flex flex-col items-start justify-center padding-container bg-[#0284c7]">
         <h1 className="text-white text-3xl lg:text-5xl font-extrabold mb-4 text-balance">

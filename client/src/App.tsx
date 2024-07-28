@@ -26,6 +26,9 @@ const ProfileAccount = lazy(
 const Appearance = lazy(() => import("pages/Account/Profile/Appearance.tsx"));
 const MyListing = lazy(() => import("pages/Account/MyListing.tsx"));
 import TriangleLoader from "components/__comp/Loaders/TriangleLoader.tsx";
+const PropertyDashboard = lazy(
+  () => import("./pages/properties/PropertyDashboard")
+);
 
 const App: React.FC = () => {
   return (
@@ -35,6 +38,7 @@ const App: React.FC = () => {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/properties" element={<PropertyDashboard />} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/listing/:id" element={<Property />} />
           <Route path="/sign-in" element={<SignIn />} />
@@ -50,7 +54,6 @@ const App: React.FC = () => {
                 <Route path="profile-account" element={<ProfileAccount />} />
                 <Route path="appearance" element={<Appearance />} />
               </Route>
-              {/*  TODO: Create Custom ErrorPage for account*/}
             </Route>
             <Route path="/profile" element={<Profile />} />
             <Route path="/create-listing" element={<CreateListing />} />

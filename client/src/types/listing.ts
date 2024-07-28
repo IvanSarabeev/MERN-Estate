@@ -17,6 +17,25 @@ export interface CreateListingIntf {
     furnished?: boolean,
 }
 
+export interface AvailableProperties {
+    _id?: string,
+    imageUrls: string[],
+    name?: string,
+    description?: string,
+    address?: string,
+    userRef?: string,
+    type?: 'rent' | 'sell',
+    bedroom?: number,
+    bathroom?: number,
+    regularPrice?: number,
+    discountPrice?: number,
+    yearBuild?: number,
+    rooms?: number,
+    offer?: boolean,
+    parking?: boolean,
+    furnished?: boolean,
+}
+
 export interface PropertysData {
     _id: string,
     name: string,

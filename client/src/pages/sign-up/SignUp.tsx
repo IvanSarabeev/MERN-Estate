@@ -1,21 +1,21 @@
 import React, { useState } from "react";
 import { UserSignUpData } from "types/user";
 import { registerUser } from "services/apiAuth";
-import Layout from "components/Layouts/Layout";
 import { useFormik } from "formik";
 import { signUpSchema } from "utils/formValidation";
 import { toast } from "components/ui/use-toast";
 import { ToastAction } from "components/ui/toast";
 import SignUpForm from "./components/SignUpForm";
+import Header from "components/Navigation/Header";
 
 const SignUp: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
   const initialValues: UserSignUpData = {
-    username: "BenJohnson",
-    email: "benjamin@gmail.com",
-    password: "uSOf8wj@o3!",
+    username: "",
+    email: "",
+    password: "",
   };
 
   const validationSchema = signUpSchema;
@@ -28,8 +28,6 @@ const SignUp: React.FC = () => {
         setLoading(true);
 
         await registerUser(values).then((response) => {
-          console.log(response);
-
           if (response.success) {
             toast({
               title: "Email sended",
@@ -57,7 +55,8 @@ const SignUp: React.FC = () => {
   });
 
   return (
-    <Layout>
+    <>
+      <Header />
       <section className="w-full flex flex-col md:flex-row items-center justify-center">
         <SignUpForm
           formik={formik}
@@ -67,7 +66,7 @@ const SignUp: React.FC = () => {
           setError={setError}
         />
       </section>
-    </Layout>
+    </>
   );
 };
 

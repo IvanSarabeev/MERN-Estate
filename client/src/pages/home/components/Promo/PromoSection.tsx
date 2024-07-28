@@ -27,10 +27,7 @@ const PromoSection: React.FC = () => {
           We are a trusted real estate agent with more <br />
           than a decade of experience. You can trust us
         </p>
-        <ul
-          role="list"
-          className="flexCol list-none pl-5 space-y-3 text-slate-500"
-        >
+        <ul className="flexCol list-none pl-5 space-y-3 text-slate-500">
           <li>
             <span className="group inline-flex items-center gap-x-4 justify-start">
               <div className="p-2.5 rounded-full shadow-md group-hover:scale-105 bg-[#f0f5fd] transition-all ease-in-out duration-150 group-hover:bg-[#0066ff]">

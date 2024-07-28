@@ -19,11 +19,7 @@ const SubscribeSection: React.FC = () => {
         <h3 className="size-fit text-3xl lg:text-4xl 2xl:text-5xl leading-10 md:leading-[3.35rem] px-4 pb-4 lg:pb-8 2xl:pb-12 text-center md:text-left font-semibold text-white">
           Get the latest news and special offers for you
         </h3>
-        <form
-          action=""
-          method="post"
-          className="min-w-md max-w-lg mt-2 lg:mt-4"
-        >
+        <form action="" method="post" className="min-w-md max-w-lg mt-2">
           <div className="relative">
             <Input
               type="email"
@@ -31,7 +27,7 @@ const SubscribeSection: React.FC = () => {
               autoComplete={"false"}
               placeholder="Fill your email here"
               aria-label="Email for subscribtion"
-              className="w-full min-w-96 max-w-lg h-fit px-6 py-4 xl:px-8 xl:py-5 text-slate-900 rounded-2xl bg-white"
+              className="w-80 sm:w-96 md:[448px] max-w-md h-fit px-6 py-4 xl:px-8 xl:py-5 text-slate-900 rounded-2xl bg-white"
             />
             <button
               type="button"
