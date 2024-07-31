@@ -3,6 +3,7 @@ import { FcGoogle } from "react-icons/fc";
 import { googleAuth } from "services/apiGoogle";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from "components/ui/use-toast";
 
 type GoogleProps = {
   title: string;
@@ -16,8 +17,23 @@ const GoogleAuth = ({ title }: GoogleProps) => {
     try {
       await googleAuth(dispatch);
 
-      navigate("/");
+      toast({
+        title: "Authenticated",
+        description: "Authentication Successful",
+      });
+
+      setTimeout(() => {
+        navigate("/account");
+
+        console.log("Navigate worked");
+      }, 800);
     } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Authenticated",
+        description: "Authentication Successful",
+      });
+
       throw new Error(`You can't login via Google: ${error}`);
     }
   };

@@ -7,9 +7,9 @@ import { UserSignInData } from "types/user";
 import { Link } from "react-router-dom";
 import Input from "components/HTML/Input";
 import Button from "components/HTML/Button";
-import GoogleAuth from "components/OAuth/GoogleAuth";
-import GitHubAuth from "components/OAuth/GitHubAuth";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import GoogleAuth from "auth/GoogleAuth";
+import GitHubAuth from "auth/GitHubAuth";
 
 interface SignInFormProps {
   formik: FormikProps<UserSignInData>;

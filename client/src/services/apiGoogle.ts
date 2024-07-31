@@ -25,7 +25,7 @@ export const googleAuth = async (dispatch: AppDispatch) => {
                 email: result.user.email,
                 photo: result.user.photoURL 
             }),
-        })
+        });
 
         if (!response.ok) {
             throw new Error(`Unable to get Google credentials!
@@ -33,6 +33,8 @@ export const googleAuth = async (dispatch: AppDispatch) => {
         }
 
         const data = await response.json();
+
+        // const { token, rest } = data;
 
         if (data === false) {
             dispatch(signInFailure(data));

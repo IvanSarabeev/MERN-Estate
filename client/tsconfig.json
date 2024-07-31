@@ -10,6 +10,7 @@
       "@/*": ["./src/*"],
       "lib/*": ["./src/lib/*"],
       "api/*": ["./src/api/*"],
+      "auth/*": ["./src/auth/*"],
       "components/*":["./src/components/*"],
       "constants/*":["./src/constants/*"],
       "hooks/*":["./src/hooks/*"],

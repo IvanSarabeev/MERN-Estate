@@ -1,8 +1,10 @@
 import Button from "components/HTML/Button";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { redirect } from "react-router-dom";
 import { FaGithub } from "react-icons/fa";
 import { gitHubAuth } from "services/apiGitHub";
+import { toast } from "components/ui/use-toast";
+import { ToastAction } from "components/ui/toast";
 
 type GitHubProps = {
   title: string;
@@ -10,14 +12,27 @@ type GitHubProps = {
 
 const GitHubAuth = ({ title }: GitHubProps) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const hangleGitHubSubmit = async () => {
     try {
       await gitHubAuth(dispatch);
 
-      navigate("/profile");
+      toast({
+        title: "Authenticated",
+        description: "Authentication Successful",
+      });
+
+      setTimeout(() => {
+        redirect("/account");
+      }, 800);
     } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Invalid credentials",
+        description: "Uh oh! Something went wrong.",
+        action: <ToastAction altText="Try again">Try again</ToastAction>,
+      });
+
       throw new Error(`You can't login via GitHub: ${error}`);
     }
   };
