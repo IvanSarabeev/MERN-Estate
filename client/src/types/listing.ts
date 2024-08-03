@@ -53,3 +53,10 @@ export interface SearchDataIntf {
     sort: string,
     order: string,
 }
+
+export interface ListingsResponse {
+    total: number;
+    listings: AvailableProperties[];
+    success: boolean;
+    message: string;
+}

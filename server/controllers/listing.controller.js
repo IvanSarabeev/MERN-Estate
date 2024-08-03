@@ -114,6 +114,13 @@ export const getListings = async (req, res, next) => {
 
         const order = req.query.order || 'desc';
 
+        const totalListings = await Listing.countDocuments({
+            name: { $regex: searchTerm, $options: 'i' },
+            furnished,
+            parking,
+            type 
+        });
+
         const listings = await Listing.find({
             name: { $regex: searchTerm, $options: 'i' },
             furnished,
@@ -123,7 +130,10 @@ export const getListings = async (req, res, next) => {
             {[sort]: order}
         ).limit(limit).skip(startIndex);
     
-        return res.status(200).json(listings);
+        return res.status(200).json({
+            total: totalListings,
+            listings: listings
+        });
     } catch (error) {
         next(error);
     }

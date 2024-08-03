@@ -1,4 +1,4 @@
-import { TypeError, RuntimeError, ExpirationError } from "utils/customErrors";
+import { TypeError, RuntimeError } from "utils/customErrors";
 
 const methodPOST = "POST";
 
@@ -31,9 +31,6 @@ export const fetchAvailableListings = async () => {
         } else if (error instanceof RuntimeError) {
             // Handle RuntimeError
             return { success: false, message: 'Runtime error occurred.' };
-        } else if (error instanceof ExpirationError) {
-            // Handle ExpirationError
-            return { success: false, message: 'OTP expired.' };
         } else {
             // Handle generic errors
             return { success: false, message: 'An unexpected error occurred.' };

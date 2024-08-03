@@ -1,6 +1,6 @@
 import React, { Suspense, useCallback, useEffect, useState } from "react";
 import { fetchAvailableListings } from "api/listings";
-import { AvailableProperties } from "types/listing";
+import { AvailableProperties, ListingsResponse } from "types/listing";
 import MemoGridProperties from "./../propety-layouts/GridProperties";
 import MemoListProperties from "./../propety-layouts/ListProperties";
 import MemoSkeletonItem from "components/__comp/SkeletonItem";
@@ -9,11 +9,15 @@ import { handlePropertySorting } from "utils/sortData";
 type PropertyListingProps = {
   systemLayout: string;
   sortOption: string;
+  currentPage: number;
+  getTotalPages: (totalItems: number) => void;
 };
 
 const PropertyListings: React.FC<PropertyListingProps> = ({
   systemLayout,
   sortOption,
+  currentPage,
+  getTotalPages,
 }) => {
   const [itemsData, setItemsData] = useState<AvailableProperties[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -22,18 +26,40 @@ const PropertyListings: React.FC<PropertyListingProps> = ({
     setError(null);
 
     try {
-      const response =
-        (await fetchAvailableListings()) as AvailableProperties[];
+      const limit = systemLayout === "grid" ? 6 : 5;
 
-      if (response && typeof response === "object") {
-        const responseToArray = Object.values(response);
+      const response: ListingsResponse = await fetchAvailableListings();
+
+      const { total, listings } = response;
+
+      if (listings && typeof listings === "object") {
+        const responseToArray = Object.values(listings);
 
         if (responseToArray !== null) {
           setItemsData(responseToArray);
+        } else {
+          throw new Error("Fatal Error: No listings found!");
         }
-      } else {
-        throw new Error("Error when getting listings");
       }
+
+      if (response.total !== null) {
+        getTotalPages(Math.ceil(response.total / limit));
+      }
+
+      const sortedListings = sortOption
+        ? handlePropertySorting({ item: listings, options: sortOption })
+        : listings; // Sort based on the select item
+
+      // Handle pagination
+      const startIndex = (currentPage - 1) * limit;
+
+      const paginatedListings = sortedListings.slice(
+        startIndex,
+        startIndex + limit
+      ); // Get the sliced values from the array, depending on the limit
+
+      setItemsData(paginatedListings);
+      getTotalPages(Math.ceil(total / limit));
     } catch (err: unknown) {
       if (err instanceof Error) {
         if (err.message.includes("Type error")) {
@@ -46,11 +72,10 @@ const PropertyListings: React.FC<PropertyListingProps> = ({
           setError("An unexpected error occurred.");
         }
       } else {
-        // Handle cases where err is not an instance of Error
-        setError("An unknown error occurred.");
+        setError("Error: Unable to receive propertyes");
       }
     }
-  }, []);
+  }, [currentPage, getTotalPages, sortOption, systemLayout]);
 
   useEffect(() => {
     fetchListingCallback();
@@ -63,7 +88,9 @@ const PropertyListings: React.FC<PropertyListingProps> = ({
   return (
     <Suspense fallback={<MemoSkeletonItem />}>
       {error ? (
-        <div>{error}</div>
+        <div className="flex items-center justify-center my-8">
+          <h2 className="bold-20 2xl:bold-24 text-red-600">{error}</h2>
+        </div>
       ) : (
         sortProperties.length > 0 &&
         sortProperties.map((item, index) => {

@@ -4,6 +4,7 @@ import SideMenu from "./components/navigation/SideMenu";
 import PropertyListings from "./components/listings/PropertyListings";
 import MemoListingLayout from "./components/navigation/ListingLayout";
 import MemoSortingMenu from "./components/navigation/SortingMenu";
+import MemoPageNavigator from "./components/pagination/PageNavigator";
 
 const PropertyDashboard: React.FC = () => {
   const [layout, setLayout] = useState<string>(() => {
@@ -11,6 +12,8 @@ const PropertyDashboard: React.FC = () => {
   });
 
   const [sortOption, setSortOption] = useState<string>("");
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number>(1);
 
   const changeLayoutAppearance = (newLayout: string) => {
     setLayout(newLayout);
@@ -22,6 +25,14 @@ const PropertyDashboard: React.FC = () => {
     } else {
       setSortOption(newSortOption);
     }
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const getTotalPages = (totalItems: number) => {
+    setTotalPages(totalItems);
   };
 
   useEffect(() => {
@@ -46,9 +57,18 @@ const PropertyDashboard: React.FC = () => {
             aria-label="Properties container"
             className={layout === "grid" ? "grid-container" : "list-container"}
           >
-            <PropertyListings systemLayout={layout} sortOption={sortOption} />
+            <PropertyListings
+              systemLayout={layout}
+              sortOption={sortOption}
+              currentPage={currentPage}
+              getTotalPages={getTotalPages}
+            />
           </div>
-          {/* TODO: Implement Pagination */}
+          <MemoPageNavigator
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
         </div>
       </section>
     </Layout>
