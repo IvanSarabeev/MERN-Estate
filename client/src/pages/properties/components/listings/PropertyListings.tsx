@@ -1,9 +1,14 @@
 import React, { Suspense, useCallback, useEffect, useState } from "react";
 import { fetchAvailableListings } from "api/listings";
 import { AvailableProperties } from "types/listing";
-import PropertyItem from "./PropertyItem";
+import GridProperties from "../propety-layouts/GridProperties";
+import ListProperties from "../propety-layouts/ListProperties";
 
-const PropertyListings: React.FC = () => {
+type PropertyListingProps = {
+  systemLayout: string;
+};
+
+const PropertyListings: React.FC<PropertyListingProps> = ({ systemLayout }) => {
   const [itemsData, setItemsData] = useState<AvailableProperties[]>([]);
   const [error, setError] = useState<string | null>(null);
 
@@ -51,10 +56,18 @@ const PropertyListings: React.FC = () => {
         <div>{error}</div>
       ) : (
         itemsData.length > 0 &&
-        itemsData.map((item) => {
+        itemsData.map((item, index) => {
           return (
             <Suspense key={item._id} fallback={<div>Loading item...</div>}>
-              <PropertyItem data={item} />
+              {systemLayout !== null && systemLayout === "list" ? (
+                <ListProperties
+                  data={item}
+                  index={index}
+                  layout={systemLayout}
+                />
+              ) : (
+                <GridProperties layout={systemLayout} data={item} />
+              )}
             </Suspense>
           );
         })

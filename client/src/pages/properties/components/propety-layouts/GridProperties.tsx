@@ -2,13 +2,14 @@ import React from "react";
 import { AvailableProperties } from "types/listing";
 import { Badge } from "components/ui/badge";
 import { MdOutlineLocationOn } from "react-icons/md";
-import ListingDetails from "./ListingDetails";
+import MemoizeListingDetails from "../listings/ListingDetails";
 
-type PropertyItemProps = {
+type GridPropertiesrops = {
   data: AvailableProperties;
+  layout: string;
 };
 
-const PropertyItem: React.FC<PropertyItemProps> = ({ data }) => {
+const GridProperties: React.FC<GridPropertiesrops> = ({ data, layout }) => {
   return (
     <div className="w-80 md:w-96 2xl:w-[414px] max-w-xl h-fit min-h-[448px] flexColStart bg-transparent">
       <img
@@ -46,8 +47,8 @@ const PropertyItem: React.FC<PropertyItemProps> = ({ data }) => {
             </span>
           </div>
         </div>
-        <div className="w-full h-full flexBetween border-b border-slate-300 p-4">
-          <ListingDetails data={data} />
+        <div className="size-full flexBetween border-b border-slate-300 p-4">
+          <MemoizeListingDetails data={data} layout={layout} />
         </div>
         <div className="flex items-center justify-start space-x-2 xl:space-x-3 px-4 pt-4">
           <img
@@ -69,4 +70,4 @@ const PropertyItem: React.FC<PropertyItemProps> = ({ data }) => {
   );
 };
 
-export default PropertyItem;
+export default GridProperties;

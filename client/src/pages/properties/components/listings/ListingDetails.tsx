@@ -5,12 +5,19 @@ import { AvailableProperties } from "types/listing";
 
 type ListingDetailsProps = {
   data: AvailableProperties;
+  layout: string;
 };
 
-const ListingDetails: React.FC<ListingDetailsProps> = ({ data }) => {
+const ListingDetails: React.FC<ListingDetailsProps> = ({ data, layout }) => {
+  const activeLayout = layout === "grid" ? "" : "border-slate-300";
+
   return (
     <>
-      <span className="inline-flex items-center gap-x-0.5 md:gap-x-1">
+      <span
+        className={`gap-x-0.5 md:gap-x-1 inline-flex flex-1 items-center justify-center ${
+          activeLayout && "border-r"
+        }`}
+      >
         <GiCryoChamber
           title="Square icon"
           aria-label="Square icon"
@@ -21,7 +28,7 @@ const ListingDetails: React.FC<ListingDetailsProps> = ({ data }) => {
           {""}room
         </p>
       </span>
-      <span className="inline-flex items-center gap-x-0.5 md:gap-x-1">
+      <span className="gap-x-0.5 md:gap-x-1 inline-flex flex-1 items-center justify-center">
         <MdOutlineBed
           title="Bed icon"
           aria-label="bed icon"
@@ -32,7 +39,11 @@ const ListingDetails: React.FC<ListingDetailsProps> = ({ data }) => {
           {""}bed.
         </p>
       </span>
-      <span className="inline-flex items-center gap-x-0.5 md:gap-x-1">
+      <span
+        className={`gap-x-0.5 md:gap-x-1 inline-flex flex-1 items-center justify-center ${
+          activeLayout && "border-l"
+        }`}
+      >
         <MdOutlineShower
           title="Shower icon"
           aria-label="shower icon"
