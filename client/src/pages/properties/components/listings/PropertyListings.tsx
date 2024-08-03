@@ -1,8 +1,9 @@
 import React, { Suspense, useCallback, useEffect, useState } from "react";
 import { fetchAvailableListings } from "api/listings";
 import { AvailableProperties } from "types/listing";
-import GridProperties from "../propety-layouts/GridProperties";
-import ListProperties from "../propety-layouts/ListProperties";
+import MemoGridProperties from "./../propety-layouts/GridProperties";
+import MemoListProperties from "./../propety-layouts/ListProperties";
+import MemoSkeletonItem from "components/__comp/SkeletonItem";
 
 type PropertyListingProps = {
   systemLayout: string;
@@ -51,7 +52,7 @@ const PropertyListings: React.FC<PropertyListingProps> = ({ systemLayout }) => {
   }, [fetchListingCallback]);
 
   return (
-    <Suspense fallback={<div>Loading Data...</div>}>
+    <Suspense fallback={<MemoSkeletonItem />}>
       {error ? (
         <div>{error}</div>
       ) : (
@@ -60,13 +61,13 @@ const PropertyListings: React.FC<PropertyListingProps> = ({ systemLayout }) => {
           return (
             <Suspense key={item._id} fallback={<div>Loading item...</div>}>
               {systemLayout !== null && systemLayout === "list" ? (
-                <ListProperties
+                <MemoListProperties
                   data={item}
                   index={index}
                   layout={systemLayout}
                 />
               ) : (
-                <GridProperties layout={systemLayout} data={item} />
+                <MemoGridProperties layout={systemLayout} data={item} />
               )}
             </Suspense>
           );

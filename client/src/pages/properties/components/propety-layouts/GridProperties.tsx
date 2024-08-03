@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { AvailableProperties } from "types/listing";
 import { Badge } from "components/ui/badge";
 import { MdOutlineLocationOn } from "react-icons/md";
@@ -70,4 +70,6 @@ const GridProperties: React.FC<GridPropertiesrops> = ({ data, layout }) => {
   );
 };
 
-export default GridProperties;
+const MemoGridProperties = memo(GridProperties);
+
+export default MemoGridProperties;

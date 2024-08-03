@@ -3,6 +3,7 @@ import Layout from "components/Layouts/Layout";
 import SideMenu from "./components/navigation/SideMenu";
 import PropertyListings from "./components/listings/PropertyListings";
 import ListingLayout from "./components/navigation/ListingLayout";
+import MemoSortingMenu from "./components/navigation/SortingMenu";
 
 const PropertyDashboard: React.FC = () => {
   const [layout, setLayout] = useState<string>(() => {
@@ -22,12 +23,15 @@ const PropertyDashboard: React.FC = () => {
       <section className="flex">
         <MemoSideMenu />
         <div className="flex flex-col padding-container max-container">
-          <nav className="w-full hidden lg:flexEnd py-6">
-            <ListingLayout
-              layout={layout}
-              changeLayoutAppearance={changeLayoutAppearance}
-            />
-          </nav>
+          <div className="w-full hidden md:flexBetween">
+            <MemoSortingMenu />
+            <nav className="lg:flexEnd py-6">
+              <ListingLayout
+                layout={layout}
+                changeLayoutAppearance={changeLayoutAppearance}
+              />
+            </nav>
+          </div>
           <div
             aria-label="Properties container"
             className={layout === "grid" ? "grid-container" : "list-container"}

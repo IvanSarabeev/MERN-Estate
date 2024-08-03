@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { AvailableProperties } from "types/listing";
 import { CiStar } from "react-icons/ci";
 import { Button } from "components/ui/button";
@@ -87,4 +87,6 @@ const ListProperties: React.FC<ListPropertiesProps> = ({
   );
 };
 
-export default ListProperties;
+const MemoListProperties = memo(ListProperties);
+
+export default MemoListProperties;
