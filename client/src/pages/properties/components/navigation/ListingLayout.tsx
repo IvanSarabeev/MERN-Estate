@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { MdOutlineGridView, MdFormatListBulleted } from "react-icons/md";
 import { Button } from "components/ui/button";
 import {
@@ -81,4 +81,6 @@ const ListingLayout: React.FC<ListingLayoutProps> = ({
   );
 };
 
-export default ListingLayout;
+const MemoListingLayout = memo(ListingLayout);
+
+export default MemoListingLayout;

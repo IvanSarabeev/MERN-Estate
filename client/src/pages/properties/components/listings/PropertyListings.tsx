@@ -4,12 +4,17 @@ import { AvailableProperties } from "types/listing";
 import MemoGridProperties from "./../propety-layouts/GridProperties";
 import MemoListProperties from "./../propety-layouts/ListProperties";
 import MemoSkeletonItem from "components/__comp/SkeletonItem";
+import { handlePropertySorting } from "utils/sortData";
 
 type PropertyListingProps = {
   systemLayout: string;
+  sortOption: string;
 };
 
-const PropertyListings: React.FC<PropertyListingProps> = ({ systemLayout }) => {
+const PropertyListings: React.FC<PropertyListingProps> = ({
+  systemLayout,
+  sortOption,
+}) => {
   const [itemsData, setItemsData] = useState<AvailableProperties[]>([]);
   const [error, setError] = useState<string | null>(null);
 
@@ -51,13 +56,17 @@ const PropertyListings: React.FC<PropertyListingProps> = ({ systemLayout }) => {
     fetchListingCallback();
   }, [fetchListingCallback]);
 
+  const sortProperties = sortOption
+    ? handlePropertySorting({ item: itemsData, options: sortOption })
+    : itemsData;
+
   return (
     <Suspense fallback={<MemoSkeletonItem />}>
       {error ? (
         <div>{error}</div>
       ) : (
-        itemsData.length > 0 &&
-        itemsData.map((item, index) => {
+        sortProperties.length > 0 &&
+        sortProperties.map((item, index) => {
           return (
             <Suspense key={item._id} fallback={<div>Loading item...</div>}>
               {systemLayout !== null && systemLayout === "list" ? (
