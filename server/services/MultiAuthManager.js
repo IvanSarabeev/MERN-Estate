@@ -72,3 +72,61 @@ export const googleAuthProviderService = async (data) => {
         return { success: false, message: "Try again later" };
     }
 };
+
+export const githubAuthProvider = async (data) => {
+    const { email, name, photo } = data;
+
+    const SanitizeData = {
+        email: xssFilters.inHTMLData(email),
+        name: xssFilters.inHTMLData(name),
+        photo: xssFilters.inHTMLData(photo)
+    };
+
+    try {
+        let user = await User.findOne({ email: SanitizeData.email });
+
+        if (user) {
+            const jwtToken = Jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+
+            const { password: pass, ...rest } = user._doc;
+
+            return { jwtToken, rest };
+        } else {
+            const generatePassword = Math.random().toString(36).slice(8) + Math.random().toString(36).slice(8);
+
+            const hashPassword = bcryptjs.hashSync(generatePassword, 12);
+
+            let uniqueUser = SanitizeData.name.trim();
+            let userExists = await User.findOne({ name: uniqueUser });
+
+             // Check if the username already exists and generate a unique one if necessary
+            let incrementNum = 1;
+
+            while (userExists) {
+                uniqueUser = SanitizedData.name.trim() + Math.floor(incrementNum++);
+
+                userExists = await User.findOne({ username: uniqueUser });
+            }
+
+            const newUser = await User({
+                username: uniqueUser,
+                email: SanitizeData.email.trim(),
+                password: hashPassword,
+                avatar: SanitizeData.photo,
+                verified: true
+            });
+
+            await newUser.save();
+
+            const jwtToken = Jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
+
+            const { password: pass, ...rest } = newUser._doc;
+
+            return { jwtToken, rest };
+        }
+    } catch (error) {
+        console.error(`Internal Server Error: ${error}`);
+
+        return { success: false, message: "Error: Failed authentication!" };
+    }
+};

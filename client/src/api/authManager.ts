@@ -1,9 +1,8 @@
 import { app } from "../fireStore/firebase";
 import { AppDispatch } from "store/store";
 import { signInFailure, signInStart, signInSucces } from "store/user/userSlice";
-import { GithubAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+import { GoogleAuthProvider, GithubAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 
-const githubUrl = "/api/auth/github";
 const methodPOST = "POST";
 
 interface GitHubProp {
@@ -12,7 +11,52 @@ interface GitHubProp {
     email: string,
 }
 
-export const gitHubAuth = async (dispatch: AppDispatch) => {
+export const googleAuthentication = async (dispatch: AppDispatch) => {
+    const googleUrl = "/api/auth/google";
+
+    try {
+        const provider = new GoogleAuthProvider();
+        const auth = getAuth(app);
+
+        const result = await signInWithPopup(auth, provider);
+
+        dispatch(signInStart());
+
+        const response = await fetch(googleUrl, {
+            method: methodPOST,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                name: result.user.displayName,
+                email: result.user.email,
+                photo: result.user.photoURL 
+            }),
+        });
+
+        if (!response.ok) {
+            throw new Error(`Unable to get Google credentials!
+             Status: ${response.status}, message: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+
+        if (data === false) {
+            dispatch(signInFailure(data));
+            return;
+        }
+
+        dispatch(signInSucces(data));
+
+        return data;
+    } catch (error) {
+        throw new Error(`Unable to fetch, error message occur: ${JSON.stringify(error)}`);
+    }
+}
+
+export const githubAuthentication = async (dispatch: AppDispatch) => {
+    const githubUrl = "/api/auth/github";
+
     try {
         const provider = new GithubAuthProvider();
         const auth = getAuth(app);

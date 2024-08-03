@@ -1,4 +1,4 @@
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useState, memo } from "react";
 import Layout from "components/Layouts/Layout";
 import { boxSection } from "components/constants";
 import BoxSection from "components/__comp/BoxSection";
@@ -6,7 +6,7 @@ import ContactForm from "./components/ContactForm";
 import { useFormik } from "formik";
 import { ContactFormInterface } from "types/user";
 import { contactSchema } from "utils/formValidation";
-import { sendContactMessage } from "services/common";
+import { sendContactMessage } from "api/common";
 import { useToast } from "components/ui/use-toast";
 import { ToastAction } from "components/ui/toast";
 import Loader from "components/__comp/Loaders/CircleLoader";
@@ -81,7 +81,7 @@ const Contact: React.FC = () => {
             {boxSection.map((item) => {
               const Icon = item.icon;
               return (
-                <BoxSection
+                <MemoBoxSection
                   key={item.id}
                   text={item.text}
                   title={item.title}
@@ -95,5 +95,7 @@ const Contact: React.FC = () => {
     </Layout>
   );
 };
+
+const MemoBoxSection = memo(BoxSection);
 
 export default Contact;

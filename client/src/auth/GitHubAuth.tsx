@@ -2,7 +2,7 @@ import Button from "components/HTML/Button";
 import { useDispatch } from "react-redux";
 import { redirect } from "react-router-dom";
 import { FaGithub } from "react-icons/fa";
-import { gitHubAuth } from "services/apiGitHub";
+import { githubAuthentication } from "api/authManager";
 import { toast } from "components/ui/use-toast";
 import { ToastAction } from "components/ui/toast";
 
@@ -15,7 +15,7 @@ const GitHubAuth = ({ title }: GitHubProps) => {
 
   const hangleGitHubSubmit = async () => {
     try {
-      await gitHubAuth(dispatch);
+      await githubAuthentication(dispatch);
 
       toast({
         title: "Authenticated",

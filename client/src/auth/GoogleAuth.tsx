@@ -1,6 +1,6 @@
 import Button from "components/HTML/Button";
 import { FcGoogle } from "react-icons/fc";
-import { googleAuth } from "services/apiGoogle";
+import { googleAuthentication } from "api/authManager";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "components/ui/use-toast";
@@ -15,7 +15,7 @@ const GoogleAuth = ({ title }: GoogleProps) => {
 
   const handleGoogleSubmit = async () => {
     try {
-      await googleAuth(dispatch);
+      await googleAuthentication(dispatch);
 
       toast({
         title: "Authenticated",
@@ -24,8 +24,6 @@ const GoogleAuth = ({ title }: GoogleProps) => {
 
       setTimeout(() => {
         navigate("/account");
-
-        console.log("Navigate worked");
       }, 800);
     } catch (error) {
       toast({
