@@ -28,7 +28,7 @@ const PropertyPage: React.FC = () => {
 
   return (
     <Layout>
-      <section className="padding-container max-container">
+      <section className="space-y-2 md:space-y-4 xl:space-y-6 padding-container max-container">
         <PropertyItem data={itemData} />
       </section>
     </Layout>

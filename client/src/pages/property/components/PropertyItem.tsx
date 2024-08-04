@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { SingleListingResponse } from "types/listing";
 import MemoImageGallery from "./ImageGallery";
+import MemoPropertyInfo from "./PropertyInfo";
+import MemoQuestionForm from "./Question";
 
 type PropertyItemProps = {
   data: SingleListingResponse | null;
@@ -34,9 +36,9 @@ const PropertyItem: React.FC<PropertyItemProps> = ({ data }) => {
         setCurrentImage={setCurrentImage}
         handleImageClick={handleImageClick}
       />
-      <article>
-        <div></div>
-        <aside></aside>
+      <article className="w-full h-fit gap-y-4 sm:gap-y-6 flexColCenter md:flex-row md:flexBetween pt-4 md:pt-6 lg:pt-8">
+        <MemoPropertyInfo data={data} />
+        <MemoQuestionForm data={data} />
       </article>
     </>
   );
