@@ -8,7 +8,7 @@ import MemoPageNavigator from "./components/pagination/PageNavigator";
 
 const PropertyDashboard: React.FC = () => {
   const [layout, setLayout] = useState<string>(() => {
-    return localStorage.getItem("layout") ?? "grid";
+    return localStorage.getItem("layout") ?? "list";
   });
 
   const [sortOption, setSortOption] = useState<string>("");

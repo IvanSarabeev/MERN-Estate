@@ -1,7 +1,7 @@
 import express from "express";
-import { signUp, signIn, googleAuthentication, signOut, githubAuth } from "../controllers/auth.controller.js";
+import { signUp, signIn, googleAuthentication, signOut, githubAuth } from "../controllers/AuthenticationController.js";
 import { validationSignUpData, validateUserAuthentication, validate } from "../helpers/constaintValidation.js";
-import { verifyOtp } from "../controllers/otp.controller.js";
+import { verifyOtp } from "../controllers/OtpController.js";
 
 const router = express.Router();
 

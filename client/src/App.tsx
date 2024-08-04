@@ -10,8 +10,6 @@ const Profile = lazy(() => import("pages/Profile"));
 const ErrorPage = lazy(() => import("pages/ErrorPage"));
 const CreateListing = lazy(() => import("pages/CreateListing"));
 const UpdateListing = lazy(() => import("pages/UpdateListing"));
-const SearchPage = lazy(() => import("pages/SearchPage"));
-const Property = lazy(() => import("pages/Property"));
 const AccountLayout = lazy(
   () => import("components/Layouts/AccountLayout.tsx")
 );
@@ -29,6 +27,7 @@ import TriangleLoader from "components/__comp/Loaders/TriangleLoader.tsx";
 const PropertyDashboard = lazy(
   () => import("./pages/properties/PropertyDashboard")
 );
+const PropertyItem = lazy(() => import("pages/property/PropertyItem"));
 
 const App: React.FC = () => {
   return (
@@ -39,8 +38,7 @@ const App: React.FC = () => {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/properties" element={<PropertyDashboard />} />
-          <Route path="/search" element={<SearchPage />} />
-          <Route path="/listing/:id" element={<Property />} />
+          <Route path="/property/:id" element={<PropertyItem />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route element={<AuthRequiredRoute />}>

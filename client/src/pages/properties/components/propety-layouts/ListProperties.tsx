@@ -20,7 +20,7 @@ const ListProperties: React.FC<ListPropertiesProps> = ({
     <div className="w-full h-fit min-h-96 flex flex-col lg:flex-row lg:even:flex-row-reverse justify-center space-y-4 lg:space-y-0 px-0 md:px-6 py-8 2xl:p-8 border-t border-slate-300">
       <div className="flex flex-col lg:flex-row">
         <aside className="h-full w-fit block pr-0 pl-2 pb-2 lg:pr-4 xl:pr-5 2xl:pr-6">
-          <div className="size-12 xl:size-14 flexCenter border border-slate-500 rounded-full bg-transparent">
+          <div className="size-12 xl:size-14 flexCenter border border-slate-500 rounded-full bg-transparent transition-all duration-150 hover:border-2 hover:border-slate-900/60 hover:text-white ease-in hover:bg-blue-600">
             <h2 className="regular-18 xl:bold-20">0{index + 1}</h2>
           </div>
         </aside>
@@ -70,7 +70,7 @@ const ListProperties: React.FC<ListPropertiesProps> = ({
                 </p>
               </div>
             </div>
-            <Link to={`/listing/${data._id}`}>
+            <Link to={`/property/${data._id}`}>
               <Button variant="outline">Details &rarr;</Button>
             </Link>
           </div>
@@ -80,7 +80,7 @@ const ListProperties: React.FC<ListPropertiesProps> = ({
         <img
           src={data.imageUrls[0]}
           alt={data.name}
-          className="h-80 xl:max-h-80 min-w-80 xl:min-w-96 rounded-2xl shadow-md mx-auto xl:mx-0 aspect-auto object-cover object-center transition-shadow duration-150 hover:shadow-lg"
+          className="h-80 xl:max-h-80 min-w-80 xl:min-w-96 rounded-2xl shadow-md mx-auto xl:mx-0 aspect-auto object-cover object-center transition-all duration-150 hover:rounded-3xl hover:scale-105 hover:shadow-lg"
         />
       </div>
     </div>

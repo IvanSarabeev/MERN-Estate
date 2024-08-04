@@ -1,6 +1,7 @@
 import Listing from "../models/listing.model.js";
 import xssFilters from "xss-filters";
-import { errorHandler } from './../utils/error.js';
+import { errorHandler } from '../utils/error.js';
+import { getProduct } from "../services/listings/productService.js";
 
 export const createListing = async (req, res, next) => {
     try {
@@ -84,6 +85,30 @@ export const getListing = async (req, res, next) => {
         next(error)
     }
 };
+
+/**
+ * Get available property by it's unique id
+ * 
+ * @param {Request} req 
+ * @param {Response} res 
+ * @param {Function} next - The Express next middleware function.
+ * @returns {Promise<void>} - Get Listing by it's unique id.
+ */
+export const getListingById = async (req, res, next) => {
+    try {
+        const id = req.params.id;
+
+        const response = await getProduct(id);
+
+        if (!response.success) {
+            return res.status(response.statusCode).json({ message: response.message });
+        }
+
+        return res.status(response.statusCode).json(response.data);
+    } catch (error) {
+        next(errorHandler(404, `Fatal Error: Not Found! ${error}`));
+    }
+}
 
 export const getListings = async (req, res, next) => {
     try {

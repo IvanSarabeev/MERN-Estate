@@ -3,6 +3,8 @@ import { AvailableProperties } from "types/listing";
 import { Badge } from "components/ui/badge";
 import { MdOutlineLocationOn } from "react-icons/md";
 import MemoizeListingDetails from "../listings/ListingDetails";
+import { Link } from "react-router-dom";
+import { Button } from "components/ui/button";
 
 type GridPropertiesrops = {
   data: AvailableProperties;
@@ -50,20 +52,25 @@ const GridProperties: React.FC<GridPropertiesrops> = ({ data, layout }) => {
         <div className="size-full flexBetween border-b border-slate-300 p-4">
           <MemoizeListingDetails data={data} layout={layout} />
         </div>
-        <div className="flex items-center justify-start space-x-2 xl:space-x-3 px-4 pt-4">
-          <img
-            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
-            alt="avatar"
-            loading="lazy"
-            decoding="async"
-            className="size-8 rounded-full shadow-md aspect-auto object-cover object-center"
-          />
-          <div className="flexColStart text-left whitespace-normal">
-            <h4 className="text-xs xl:text-sm font-bold">Jennifer Bloom</h4>
-            <p className="regular-12 xl:regular-14 text-slate-600 mt-2">
-              +44 235 123 312
-            </p>
+        <div className="w-full h-fit gap-y-4 flexBetween items-center border-t border-slate-300">
+          <div className="group flex items-center justify-start space-x-1 md:space-x-2 xl:space-x-3 p-2 md:p-4">
+            <img
+              src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
+              alt="avatar"
+              loading="lazy"
+              decoding="async"
+              className="size-8 xl:size-10 rounded-full shadow-md aspect-auto object-cover object-center hover:border-2 hover:border-white hover:shadow-md hover:scale-110"
+            />
+            <div className="flexColStart text-left whitespace-normal">
+              <h4 className="text-xs xl:text-sm font-bold">Jennifer Bloom</h4>
+              <p className="regular-12 xl:regular-14 text-slate-600 mt-2">
+                +44 235 123 312
+              </p>
+            </div>
           </div>
+          <Link to={`/property/${data._id}`}>
+            <Button variant="outline">Details &rarr;</Button>
+          </Link>
         </div>
       </article>
     </div>
