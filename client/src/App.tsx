@@ -27,7 +27,7 @@ import TriangleLoader from "components/__comp/Loaders/TriangleLoader.tsx";
 const PropertyDashboard = lazy(
   () => import("./pages/properties/PropertyDashboard")
 );
-const PropertyItem = lazy(() => import("pages/property/PropertyItem"));
+const PropertyPage = lazy(() => import("pages/property/PropertyPage"));
 
 const App: React.FC = () => {
   return (
@@ -38,7 +38,7 @@ const App: React.FC = () => {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/properties" element={<PropertyDashboard />} />
-          <Route path="/property/:id" element={<PropertyItem />} />
+          <Route path="/property/:id" element={<PropertyPage />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route element={<AuthRequiredRoute />}>
