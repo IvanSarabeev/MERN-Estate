@@ -3,24 +3,23 @@ import { loginList } from "components/constants";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import { MdErrorOutline } from "react-icons/md";
 import { FormikProps } from "formik";
-import { UserSignInData } from "types/user";
+import { SignInCredentials } from "types/user";
 import { Link } from "react-router-dom";
 import Input from "components/HTML/Input";
 import Button from "components/HTML/Button";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import GoogleAuth from "auth/GoogleAuth";
 import GitHubAuth from "auth/GitHubAuth";
+import { userStore } from "stores/userStore";
 
 interface SignInFormProps {
-  formik: FormikProps<UserSignInData>;
-  loading: boolean | undefined;
+  formik: FormikProps<SignInCredentials>;
   show: boolean;
   handleToggle: () => void;
 }
 
 const SignInForm: React.FunctionComponent<SignInFormProps> = ({
   formik,
-  loading,
   show,
   handleToggle,
 }) => {
@@ -112,18 +111,18 @@ const SignInForm: React.FunctionComponent<SignInFormProps> = ({
                 {...formik.getFieldProps("password")}
                 className="w-full border p-3 rounded-lg"
               />
-              <div
+              <button
                 title="check password"
                 aria-label="password visibility"
                 onClick={() => handleToggle()}
-                className="absolute inset-y-1/3 right-5 group"
+                className="absolute inset-y-1/3 right-5 group border-none p-0 cursor-pointer bg-transparent"
               >
                 {show ? (
                   <FaRegEyeSlash className="size-4 xl:size-5 group-hover:scale-105 group-hover:text-blue-600 group-hover:shadow-lg" />
                 ) : (
                   <FaRegEye className="size-4 xl:size-5 group-hover:scale-105 group-hover:text-blue-600 group-hover:shadow-lg" />
                 )}
-              </div>
+              </button>
             </div>
             {formik.touched.password && formik.errors.password ? (
               <div className="inline-flex gap-x-2 items-center text-red-600">
@@ -160,9 +159,9 @@ const SignInForm: React.FunctionComponent<SignInFormProps> = ({
           <Button
             type="submit"
             title="submit-button"
-            className="bg-[#0284c7] font-semibold mt-3 text-white p-3 rounded-lg hover:opacity-95 disabled:opacity-80"
+            className="bg-[#0284c7] font-semibold mt-3 text-white p-3 rounded-lg hover:opacity-95 disabled:opacity-80 ring-4 ring:slate-900"
           >
-            {loading ? "Loading.." : "Sign in to your account"}
+            {userStore.loading ? "Loading.." : "Sign in to your account"}
           </Button>
         </form>
         <p className="regular-14 lg:regular-16 text-[#9297a2] font-light mt-4">

@@ -29,6 +29,8 @@ export default defineConfig({
       "types": resolve(rootPath, "types"),
       "utils": resolve(rootPath, "utils"),
       "store": resolve(rootPath, "store"),
+      "stores": resolve(rootPath, "stores"),
+      "defines": resolve(rootPath, "defines"),
       "services": resolve(rootPath, "services"),
     }
   }

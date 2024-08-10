@@ -4,9 +4,9 @@ export interface UserSignUpData {
     'password': string,
 }
 
-export interface UserSignInData {
+export interface SignInCredentials {
     'email': string,
-    'password': string,
+    'password': string
 }
 
 export interface UserUploadData {
@@ -29,4 +29,13 @@ export interface ContactFormInterface {
     'email': string,
     'phone': string,
     'text_message': string,
+}
+
+export interface UserDetails {
+    id: string;
+    username: string;
+    email: string;
+    avatar: string;
+    role: string;
+    verified: boolean
 }

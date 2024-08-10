@@ -1,4 +1,4 @@
-import { cookieOptions } from '../utils/cookie.js';
+import { cookieAuthOptions, cookieOptions } from '../utils/cookie.js';
 import { authenticateUser, authSignUpUser } from '../services/securityService.js';
 import { githubAuthProvider, googleAuthProviderService } from '../services/MultiAuthManager.js';
 import { errorHandler } from '../utils/error.js';
@@ -55,19 +55,23 @@ export const signIn = async (req, res, next) => {
     const {email, password} = req.body;
 
     try {
-       const { jwtToken, userWithoutPassword } = await authenticateUser(email, password);
+       const { success, token, user } = await authenticateUser({ email, password });
 
-       res.cookie('access_token', jwtToken, userWithoutPassword)
+        if (success) {
+            console.log("User Authenticated", user);
+        } else {
+            console.error("Authentication Failed");
+        }
+
+        console.log(success, token, user);
+
+       res.cookie('access_token', token, cookieAuthOptions)
             .status(200)
-            .json({user: userWithoutPassword, token: jwtToken });
+            .json({ success: success, userData: user, token: token, message: "Authentication Successful" });
     } catch (error) {
         console.error('Sign-in error:', error.message);
 
-        // Determine error status code
-        const statusCode = error.statusCode || 500;
-        const errorMessage = error.message || 'Internal Server Error';
-
-        res.status(statusCode).json({ success: false, message: errorMessage });
+        res.status(500).json({ success: false, message: "Internal Server Error" });
     }
 };
 

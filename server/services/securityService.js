@@ -21,12 +21,10 @@ dotenv.config();
  */
 export const authenticateUser= async (formData) => {
     try {
-        const { email, password } = formData;
-
         // Sanitize input data to prevent XSS atacks 
         const sanitizeData = {
-            email: xssFilters.inHTMLData(email),
-            password: xssFilters.inHTMLData(password)
+            email: xssFilters.inHTMLData(formData.email).trim(),
+            password: xssFilters.inHTMLData(formData.password).trim()
         };
 
         // Find user by their email
@@ -49,7 +47,7 @@ export const authenticateUser= async (formData) => {
         // Exclude password from user data
         const { password: pass, ...userWithoutPassword } = validUser._doc;
 
-        return { jwtToken, userWithoutPassword };
+        return { success: true, token: jwtToken, user: userWithoutPassword };
     } catch (error) {
         console.error(`Error occur: ${error}`);
 

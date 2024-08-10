@@ -12,7 +12,8 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import { app } from "../fireStore/firebase";
-import { signOutUser } from "services/apiAuth";
+// import { signOutUser } from "services/apiAuth";
+import { signOutUser } from "api/auth";
 import { updateUser, deleteUser } from "../services/apiUser";
 import { Link, useNavigate } from "react-router-dom";
 import Layout from "components/Layouts/Layout";
@@ -102,7 +103,7 @@ const Profile: React.FC = () => {
   };
 
   const handleSignOut = async () => {
-    await signOutUser(dispatch);
+    await signOutUser();
     navigation("/sign-in");
   };
 
