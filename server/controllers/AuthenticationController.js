@@ -2,6 +2,7 @@ import { cookieAuthOptions, cookieOptions } from '../utils/cookie.js';
 import { authenticateUser, authSignUpUser } from '../services/securityService.js';
 import { githubAuthProvider, googleAuthProviderService } from '../services/MultiAuthManager.js';
 import { errorHandler } from '../utils/error.js';
+import { AUTHENTICATION_SUCCESS, AUTHENTICATION_FAILURE, SERVER_ERROR } from '../helpers/ResponseStatus.js';
 
 /**
  * Handles user sign-up by creating a new user account.
@@ -55,23 +56,27 @@ export const signIn = async (req, res, next) => {
     const {email, password} = req.body;
 
     try {
-       const { success, token, user } = await authenticateUser({ email, password });
-
+        
+        const { success, token, user } = await authenticateUser({ email, password });
+        
         if (success) {
-            console.log("User Authenticated", user);
+            req.session.user = user;
+            req.session.visited = true;
+
+            
+            res.cookie('access_token', token, cookieAuthOptions)
+                .status(200)
+                .json({ success: success, userData: user, token: token, message: AUTHENTICATION_SUCCESS })
+            ;
         } else {
-            console.error("Authentication Failed");
+            res.status(401)
+                .json({ success: false, message: AUTHENTICATION_FAILURE })
+            ;
         }
-
-        console.log(success, token, user);
-
-       res.cookie('access_token', token, cookieAuthOptions)
-            .status(200)
-            .json({ success: success, userData: user, token: token, message: "Authentication Successful" });
     } catch (error) {
         console.error('Sign-in error:', error.message);
 
-        res.status(500).json({ success: false, message: "Internal Server Error" });
+        res.status(500).json({ success: false, message: SERVER_ERROR });
     }
 };
 

@@ -115,8 +115,6 @@ class UserStore {
     loadUserAuthentication = async (UserCredentials: SignInCredentials) => {
         return await authenticateUser(UserCredentials)
             .then(response => {
-                console.log(response);
-
                 if (!response.success) {
                     return Promise.reject(new Error(response.message ?? AUTHENTICATION_FAILED));
                 }

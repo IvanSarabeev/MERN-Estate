@@ -1,3 +1,9 @@
+import dotenv from "dotenv";
+
+dotenv.config();
+
+const sessionLifeTime = process.env.ENV === "production" ? 6000 * 60 : 3600000;
+
 // Cookie Configuration
 export const cookieOptions = {
     httpOnly: true,
@@ -8,10 +14,8 @@ export const cookieOptions = {
 
 
 export const cookieAuthOptions = {
+    maxAge: sessionLifeTime,
     httpOnly: true,
-    secure: true,
-    // signed: true,
-    // secret: 's%3Al3ozSdvQ83TtC5RvJ.CibaQoHtaY0H3QOB1kqR8H2A',
-    sameSite: 'Strict',
-    maxAge: 3600000,
+    sameSite: 'lax',
+    secure: process.env.NODE_ENV === "production",
 };

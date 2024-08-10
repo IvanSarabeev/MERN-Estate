@@ -4,6 +4,13 @@ import { AUTHENTICATION_FAILED, COMMON_ERROR_MESSAGE, COMMON_EXCEPTION, COMMON_H
 import { userStore } from "stores/userStore";
 import { AuthResponse, UserAuthResponse } from "types/api";
 
+const api = axios.create({
+    baseURL: import.meta.env.VITE_NODE_ENV === "production"
+        ? import.meta.env.VITE_DOMAIN_ORIGIN
+        : import.meta.env.VITE_LOCAL_DOMAIN,
+        withCredentials: true // Important ! For sending cookies
+});
+
 /**
  * 
  * @param formData : UserSignUpData
@@ -44,7 +51,7 @@ export const authenticateUser = async (UserCredentials: SignInCredentials): Prom
     userStore.signInStart();
 
     try {
-        const response = await axios.post<UserAuthResponse>(url, UserCredentials, {
+        const response = await api.post<UserAuthResponse>(url, UserCredentials, {
             headers: COMMON_HEADERS,
         });    
 
@@ -67,6 +74,7 @@ export const authenticateUser = async (UserCredentials: SignInCredentials): Prom
 };
 
 /**
+ * Logout the user from the system
  * 
  * @returns <Promise | void>
  */

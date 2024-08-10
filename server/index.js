@@ -12,6 +12,9 @@ import { Server } from "socket.io";
 import helmet from "helmet";
 import ExpressMongoSanitize from "express-mongo-sanitize";
 import csurf from "csurf";
+import session from "express-session";
+import { cookieAuthOptions } from "./utils/cookie.js";
+import cors from "cors";
 
 dotenv.config();
 
@@ -26,6 +29,11 @@ mongoose.connect(DB_URL)
         console.log(error);
     })
 ;
+
+const allowedOrigins = [
+    process.env.LOCAL_DOMAIN,
+    process.env.ORIGIN_DOMAIN
+];
     
 const __dirname = path.resolve();
 
@@ -63,8 +71,17 @@ socketIo.on('connection', (socket) => {
 
 
 app.use(express.json());
-
 app.use(cookieParser());
+app.use(session({
+    secret: process.env.SESSION_SECRET || "default_secret", // Session Secret Key
+    saveUninitialized: false, // prevent random Session Objects, living in the Session Store
+    resave: false,
+    cookie: cookieAuthOptions
+}));
+app.use(cors({
+    origin: allowedOrigins,
+    credentials: true // Allow cookies to be sent
+}));
 
 app.listen(PORT, () => {
     console.log("Server is running up");
