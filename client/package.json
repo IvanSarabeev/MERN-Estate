@@ -31,7 +31,6 @@
     "framer-motion": "^11.0.20",
     "input-otp": "^1.2.4",
     "localforage": "^1.10.0",
-    "lodash": "^4.17.21",
     "lucide-react": "^0.363.0",
     "mobx": "^6.13.1",
     "mobx-react-lite": "^4.0.7",
@@ -51,7 +50,6 @@
     "yup": "^1.4.0"
   },
   "devDependencies": {
-    "@types/lodash": "^4.17.7",
     "@types/node": "^20.12.7",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
