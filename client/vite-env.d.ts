@@ -15,3 +15,7 @@ interface ImportMetaEnv {
     readonly VITE_DOMAIN_ORIGIN: string;
     readonly VITE_LOCAL_DOMAIN: string;
 }
+
+interface ImportMeta {
+    readonly env: ImportMetaEnv;
+}

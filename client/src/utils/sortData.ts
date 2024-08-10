@@ -1,7 +1,6 @@
-import { AvailableProperties } from "@/types/listing";
 import _clone from "lodash/clone";
 import orderBy from "lodash/orderBy";
-import _OrderBy from "lodash/orderBy";
+import { AvailableProperties } from "types/listing";
 
 type SortProps = {
     item: AvailableProperties[],
@@ -21,11 +20,11 @@ export const handlePropertySorting = ({item, options}: SortProps) => {
         }
 
         case "Price: lowest cost" : {
-            return _OrderBy(sortedItem, ['regularPrice'], ['asc']);
+            return orderBy(sortedItem, ['regularPrice'], ['asc']);
         }
 
         case "Price: highest cost" : {
-            return _OrderBy(sortedItem, ['regularPrice'], ['desc']);
+            return orderBy(sortedItem, ['regularPrice'], ['desc']);
         }
 
         default:
