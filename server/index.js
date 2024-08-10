@@ -14,7 +14,6 @@ import ExpressMongoSanitize from "express-mongo-sanitize";
 import csurf from "csurf";
 import session from "express-session";
 import { cookieAuthOptions } from "./utils/cookie.js";
-import cors from "cors";
 
 dotenv.config();
 
@@ -77,10 +76,6 @@ app.use(session({
     saveUninitialized: false, // prevent random Session Objects, living in the Session Store
     resave: false,
     cookie: cookieAuthOptions
-}));
-app.use(cors({
-    origin: allowedOrigins,
-    credentials: true // Allow cookies to be sent
 }));
 
 app.listen(PORT, () => {
