@@ -59,11 +59,7 @@ export const signIn = async (req, res, next) => {
         
         const { success, token, user } = await authenticateUser({ email, password });
         
-        if (success) {
-            req.session.user = user;
-            req.session.visited = true;
-
-            
+        if (success) {            
             res.cookie('access_token', token, cookieAuthOptions)
                 .status(200)
                 .json({ success: success, userData: user, token: token, message: AUTHENTICATION_SUCCESS })
