@@ -4,10 +4,13 @@ import { AUTHENTICATION_FAILED, COMMON_ERROR_MESSAGE, COMMON_EXCEPTION, COMMON_H
 import { userStore } from "stores/userStore";
 import { AuthResponse, UserAuthResponse } from "types/api";
 
+const productionDomain = import.meta.env.VITE_DOMAIN_ORIGIN;
+const localDomain = import.meta.env.VITE_LOCAL_DOMAIN;
+
 const api = axios.create({
     baseURL: import.meta.env.VITE_NODE_ENV === "production"
-        ? import.meta.env.VITE_DOMAIN_ORIGIN
-        : import.meta.env.VITE_LOCAL_DOMAIN,
+        ? productionDomain
+        : localDomain,
         withCredentials: true // Important ! For sending cookies
 });
 

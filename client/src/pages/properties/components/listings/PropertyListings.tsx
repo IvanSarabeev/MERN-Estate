@@ -93,7 +93,7 @@ const PropertyListings: React.FC<PropertyListingProps> = ({
         </div>
       ) : (
         sortProperties.length > 0 &&
-        sortProperties.map((item, index) => {
+        sortProperties.map((item, index: number) => {
           return (
             <Suspense key={item._id} fallback={<div>Loading item...</div>}>
               {systemLayout !== null && systemLayout === "list" ? (
