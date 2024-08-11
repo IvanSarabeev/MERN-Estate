@@ -2,7 +2,15 @@ import { cookieAuthOptions, cookieOptions } from '../utils/cookie.js';
 import { authenticateUser, authSignUpUser } from '../services/securityService.js';
 import { githubAuthProvider, googleAuthProviderService } from '../services/MultiAuthManager.js';
 import { errorHandler } from '../utils/error.js';
-import { AUTHENTICATION_SUCCESS, AUTHENTICATION_FAILURE, SERVER_ERROR } from '../helpers/ResponseStatus.js';
+import { 
+    AUTHENTICATION_SUCCESS,
+    AUTHENTICATION_FAILURE,
+    SERVER_ERROR,
+    USER_SESSION_EXPIRED,
+    TOKEN_FAILURE,
+    TOKEN_SUCCESS 
+}
+    from '../helpers/ResponseStatus.js';
 
 /**
  * Handles user sign-up by creating a new user account.
@@ -35,7 +43,7 @@ export const signUp = async (req, res, next) => {
 
         next(error);
 
-        res.status(500).json({success: false, message: 'Internal Server Error'});
+        res.status(500).json({success: false, message: SERVER_ERROR });
    }
 };
 
@@ -91,18 +99,19 @@ export const googleAuthentication = async (req, res) => {
         const { jwtToken, rest } = await googleAuthProviderService({ email, name, photo });
 
         if (!jwtToken) {
-            next(errorHandler(400, "JWT Token generation failed!"));
+            next(errorHandler(400, TOKEN_FAILURE));
         }
 
         res.cookie("access_token", jwtToken, cookieOptions)
             .status(200)
             .json({ token: jwtToken, rest })
+            // Add to the JsonResponse message: TOKEN_SUCCESS
         ;
     } catch (error) {
         console.error(error);
 
         const statusCode = error.statusCode || 500;
-        const statusMessage = error.message || "Internal Server Error";
+        const statusMessage = error.message || SERVER_ERROR;
 
         res.status(statusCode).json({ success: false, message: statusMessage });
     }
@@ -123,17 +132,17 @@ export const githubAuth = async (req, res) => {
         const { jwtToken, rest } = await githubAuthProvider({ email, name, photo });
 
         if (!jwtToken) {
-            next(errorHandler(400, "JWT Token generation failed!"));
+            next(errorHandler(400, TOKEN_FAILURE));
         }
 
         res.cookie("access_token", jwtToken, cookieOptions)
             .status(200)
-            .json({ token: jwtToken, rest });
+            .json({ token: jwtToken, rest, message: TOKEN_SUCCESS });
     } catch (error) {
         console.error(error);
 
         const statusCode = error.statusCode || 500;
-        const statusMessage = error.message || "Internal Server Error";
+        const statusMessage = error.message || SERVER_ERROR;
 
         res.status(statusCode).json({ success: false, message: statusMessage });
     }
@@ -151,7 +160,7 @@ export const githubAuth = async (req, res) => {
 export const signOut = async (req, res, next) => {
     try {
         res.clearCookie('access_token');
-        res.status(200).json('User has been logged out!');
+        res.status(200).json(USER_SESSION_EXPIRED);
     } catch (error) {
         next(error);
     }

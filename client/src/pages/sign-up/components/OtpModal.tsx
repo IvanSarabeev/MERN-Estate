@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import {
   Dialog,
   DialogClose,
@@ -16,12 +16,12 @@ import { redirect } from "react-router-dom";
 import { MdError } from "react-icons/md";
 import { toast } from "components/ui/use-toast";
 import { ToastAction } from "components/ui/toast";
+import Logo from "assets/images/estate-logo.png";
 
-type OtpDialogProps = {
+type OtpModalProps = {
   email: string;
   otp: string;
   open: boolean;
-  onOpenChange: React.Dispatch<React.SetStateAction<boolean>>;
   setOtp: React.Dispatch<React.SetStateAction<string>>;
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
@@ -29,12 +29,11 @@ type OtpDialogProps = {
   setError: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
-const OtpDialog: React.FunctionComponent<OtpDialogProps> = ({
+const OtpModal: React.FunctionComponent<OtpModalProps> = ({
   email,
   open,
   otp,
   setOtp,
-  onOpenChange,
   error,
   setError,
   loading,
@@ -90,14 +89,23 @@ const OtpDialog: React.FunctionComponent<OtpDialogProps> = ({
   };
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-lg">
+    // onOpenChange={handleModal}
+    <Dialog open={open}>
+      <DialogContent className="h-fit w-80 sm:w-96 md:w-[448px] space-y-2 rounded-lg">
         <DialogHeader className="flexColCenter items-center">
+          <img
+            src={Logo}
+            alt="logo"
+            decoding="async"
+            loading="lazy"
+            className="size-fit max-w-20 sm:max-w-24 md:max-w-28"
+          />
           <DialogTitle className="regular-18 xl:bold-24">
             Verify Email
           </DialogTitle>
-          <DialogDescription className="regular-16">
-            We have sent you an email containing the key
+          <DialogDescription className="regular-16 max-w-sm text-balance text-center">
+            Please check your email. We've sent you a one-time passcode (OTP) to
+            verify your account.
           </DialogDescription>
         </DialogHeader>
         <div className="flexColCenter items-center space-x-2 mx-auto">
@@ -126,19 +134,23 @@ const OtpDialog: React.FunctionComponent<OtpDialogProps> = ({
             <p aria-label="error message"> {error} </p>
           </span>
         )}
-        <DialogFooter className="gap-x-4 flexColCenter items-center mx-auto">
+        <DialogFooter className="gap-x-4 flex flex-row items-center justify-center mx-auto">
           <Button
             type="button"
-            variant="secondary"
+            variant="primary"
+            title="Verify Account"
             onClick={handleEmailVerification}
             disabled={loading}
           >
             {loading ? "Verifying..." : "Submit"}
           </Button>
-          <DialogClose>
-            <Button type="button" variant="destructive">
-              Close
-            </Button>
+          <DialogClose
+            type="button"
+            title="Cancel Verification"
+            aria-label="Close modal button"
+            className="h-9 flexCenter px-4 py-2 rounded-md text-center border border-slate-200 bg-white shadow-sm hover:text-slate-900 hover:bg-red-500 hover:scale-105 transition-all ease-in-out duration-150"
+          >
+            Close
           </DialogClose>
         </DialogFooter>
       </DialogContent>
@@ -146,4 +158,6 @@ const OtpDialog: React.FunctionComponent<OtpDialogProps> = ({
   );
 };
 
-export default OtpDialog;
+const MemoOtpModal = memo(OtpModal);
+
+export default MemoOtpModal;

@@ -1,6 +1,5 @@
-import React, { memo, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "components/Layouts/Layout";
-import SideMenu from "./components/navigation/SideMenu";
 import PropertyListings from "./components/listings/PropertyListings";
 import MemoListingLayout from "./components/navigation/ListingLayout";
 import MemoSortingMenu from "./components/navigation/SortingMenu";
@@ -42,11 +41,10 @@ const PropertyDashboard: React.FC = () => {
   return (
     <Layout>
       <section className="flex">
-        <MemoSideMenu />
-        <div className="flex flex-col padding-container max-container">
-          <div className="w-full hidden md:flexBetween">
+        <div className="flex flex-col md:padding-container max-container">
+          <div className="w-full hidden md:py-4 xl:py-6 md:flexBetween">
             <MemoSortingMenu handleSortingOption={handleSortingOption} />
-            <nav className="lg:flexEnd py-6">
+            <nav className="lg:flexEnd">
               <MemoListingLayout
                 layout={layout}
                 changeLayoutAppearance={changeLayoutAppearance}
@@ -74,7 +72,5 @@ const PropertyDashboard: React.FC = () => {
     </Layout>
   );
 };
-
-const MemoSideMenu = memo(SideMenu);
 
 export default PropertyDashboard;

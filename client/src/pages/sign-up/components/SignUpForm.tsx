@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import { FormikProps } from "formik";
 import { UserSignUpData } from "types/user";
-import { avatarList } from "components/constants";
 import { Link } from "react-router-dom";
-import GoogleAuth from "auth/GoogleAuth";
-import GitHubAuth from "auth/GitHubAuth";
 import Input from "components/HTML/Input";
 import { MdErrorOutline } from "react-icons/md";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { Button } from "components/ui/button";
-import OtpDialog from "./OtpDialog";
+import MemoOtpModal from "./OtpModal";
+import MemoAuthOptions from "./AuthOptions";
+import MemoFeaturedContent from "./FeaturedContent";
 
 interface SignUpFormProps {
   formik: FormikProps<UserSignUpData>;
@@ -34,7 +33,10 @@ const SignUpForm: React.FunctionComponent<SignUpFormProps> = ({
     setTogglePass(!togglePass);
   };
 
-  const email = formik.values.email;
+  const { username, email, password } = formik.values;
+
+  const isFormInvalid =
+    !username || !email || !password || Object.keys(formik.errors).length > 0;
 
   return (
     <>
@@ -42,18 +44,19 @@ const SignUpForm: React.FunctionComponent<SignUpFormProps> = ({
         <h2 className="regular-18 xl:bold-20 font-semibold text-left drop-shadow mb-3">
           Your Best Work Starts Here
         </h2>
-        <div className="gap-2 flex flex-col md:flex-row items-center justify-center lg:justify-start mt-3">
-          <GoogleAuth title="Sign up with Google" />
-          <GitHubAuth title="Sign up with GitHub" />
-        </div>
-        <span className="flex items-center my-4">
-          <span className="h-px flex-1 bg-[#e5e7eb]"></span>
-          <span className="shrink-0 px-5 text-slate-500">or</span>
-          <span className="h-px flex-1 bg-[#e5e7eb]"></span>
-        </span>
+        <MemoAuthOptions />
         <form
           method="post"
-          onSubmit={formik.handleSubmit}
+          onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
+            e.preventDefault();
+
+            if (isFormInvalid) {
+              setShowOtpDialog(false);
+            } else {
+              setShowOtpDialog(true);
+              formik.handleSubmit(e);
+            }
+          }}
           className="gap-2 flex flex-col"
         >
           <div className="w-full gap-2 flex flex-col items-start justify-start">
@@ -122,7 +125,7 @@ const SignUpForm: React.FunctionComponent<SignUpFormProps> = ({
                 className="w-full border p-3 rounded-lg"
                 {...formik.getFieldProps("password")}
               />
-              <div
+              <button
                 onClick={handlePasswordToggle}
                 className="absolute inset-y-1/3 right-5 group"
               >
@@ -131,7 +134,7 @@ const SignUpForm: React.FunctionComponent<SignUpFormProps> = ({
                 ) : (
                   <FaRegEye className="size-4 xl:size-5 group-hover:scale-105 group-hover:text-blue-600 group-hover:shadow-lg" />
                 )}
-              </div>
+              </button>
             </div>
             {formik.touched.password && formik.errors.password ? (
               <div className="inline-flex gap-x-2 items-center text-red-600">
@@ -148,7 +151,6 @@ const SignUpForm: React.FunctionComponent<SignUpFormProps> = ({
               type="submit"
               disabled={loading}
               title="submit-button"
-              onClick={() => setShowOtpDialog(true)}
               className="w-fit bg-[#0284c7] font-semibold mt-3 text-white py-3 md:py-5 rounded-lg hover:opacity-95 disabled:opacity-80 xl:mt-5"
             >
               {loading ? "Creating account..." : "Create an account"}
@@ -163,9 +165,8 @@ const SignUpForm: React.FunctionComponent<SignUpFormProps> = ({
               </Link>
             </p>
           </div>
-          <OtpDialog
+          <MemoOtpModal
             open={showOtpDialog}
-            onOpenChange={setShowOtpDialog}
             email={email}
             otp={otp}
             setOtp={setOtp}
@@ -175,48 +176,13 @@ const SignUpForm: React.FunctionComponent<SignUpFormProps> = ({
             setLoading={setLoading}
           />
         </form>
-        {/* Show error */}
         {error && (
           <p className="regular-14 md:regular-16 font-semibold text-red-500 my-2">
             {error}
           </p>
         )}
       </div>
-      <div className="h-full md:h-screen w-full lg:w-1/2 flex flex-col items-start justify-center padding-container bg-[#0284c7]">
-        <h1 className="text-white text-3xl lg:text-5xl font-extrabold mb-4 text-balance">
-          Explore the world’s leading MERN estate application.
-        </h1>
-        <p className="text-[#fde6ba] regular-16 lg:regular-18 opacity-80 font-light mb-4 text-wrap max-w-3xl">
-          Millions of people and agencies around the world use our work on
-          MERN/Estate - the home to the world’s best real estate and
-          professional employees.
-        </p>
-        <div className="flex items-center justify-start">
-          <div className="flex -space-x-4 rtl:space-x-reverse pr-3">
-            {avatarList.map((item) => {
-              return (
-                <img
-                  key={item.id}
-                  src={item.src}
-                  alt={item.alt}
-                  loading="lazy"
-                  decoding="async"
-                  className="size-10 2xl:size-12 border-2 border-white rounded-full dark:border-gray-800 aspect-auto object-cover object-center"
-                />
-              );
-            })}
-          </div>
-          <Link to={`/search`} className="border-l border-[0284c7]">
-            <span className="regular-14 md:regular-16 leading-5 font-light text-white/80 md:pl-3">
-              Over
-              <span className="font-medium md:font-bold text-white opacity-100 px-1">
-                15.7k
-              </span>
-              Happy Customers
-            </span>
-          </Link>
-        </div>
-      </div>
+      <MemoFeaturedContent />
     </>
   );
 };

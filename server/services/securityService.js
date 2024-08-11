@@ -6,6 +6,7 @@ import Jwt from 'jsonwebtoken';
 import dotenv from "dotenv";
 import crypto from "crypto";
 import { sendVerificationEmail } from './verifyEmailService.js';
+import { INVALID_CREDENTIALS, OTP_SUCCESS, USER_NOT_FOUND } from './../helpers/ResponseStatus.js';
 
 dotenv.config();
 
@@ -31,14 +32,14 @@ export const authenticateUser= async (formData) => {
         const validUser = await User.findOne({email: sanitizeData.email});
 
         if (!validUser) {
-            return errorHandler(404, "User not found!");
+            return errorHandler(404, USER_NOT_FOUND);
         }
 
         // Validate user password
         const isPasswordValid = bcryptjs.compareSync(sanitizeData.password, validUser.password);
 
         if (!isPasswordValid) {
-            return errorHandler(401, "Invalid credentials!");
+            return errorHandler(401, INVALID_CREDENTIALS);
         }
 
         // Generate JWT token
@@ -51,7 +52,7 @@ export const authenticateUser= async (formData) => {
     } catch (error) {
         console.error(`Error occur: ${error}`);
 
-        return { success: false, message: 'Invalid usernarme/password !' };
+        return { success: false, message: INVALID_CREDENTIALS };
     }
 };
 
@@ -89,17 +90,15 @@ export const authSignUpUser = async (formData) => {
             otpExpires
         });
 
-        console.log(newUser);
-
         await newUser.save();
 
         // Send OTP via email
         await sendVerificationEmail(sanitizeData.email, otp);
 
-        return { success: true, message: 'User registered successfully'};
+        return { success: true, message: OTP_SUCCESS};
     } catch (error) {
         console.error(`Error occur: ${error}`);
 
-        return { success: false, message: 'Invalid usernarme/password !' };
+        return { success: false, message: INVALID_CREDENTIALS };
     }
 };

@@ -1,6 +1,4 @@
 import React from "react";
-import { loginList } from "components/constants";
-import { IoIosCheckmarkCircle } from "react-icons/io";
 import { MdErrorOutline } from "react-icons/md";
 import { FormikProps } from "formik";
 import { SignInCredentials } from "types/user";
@@ -11,6 +9,7 @@ import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import GoogleAuth from "auth/GoogleAuth";
 import GitHubAuth from "auth/GitHubAuth";
 import { userStore } from "stores/userStore";
+import MemoOnboardInfo from "./OnboardingInfo";
 
 interface SignInFormProps {
   formik: FormikProps<SignInCredentials>;
@@ -25,30 +24,7 @@ const SignInForm: React.FunctionComponent<SignInFormProps> = ({
 }) => {
   return (
     <>
-      <div className="hidden lg:flex flex-col items-start justify-start">
-        <img
-          src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
-          alt="logo"
-          loading="lazy"
-          decoding="async"
-          className="size-8 lg:size-10 xl:size-12 2xl:size-14 mb-6 aspect-auto object-contain object-center"
-        />
-        {loginList.map((item) => {
-          return (
-            <div key={item.id} className="group gap-x-2 flex items-center">
-              <IoIosCheckmarkCircle className="size-5 sm:size-6 md:size-7 xl:size-8 fill-[#0284c7]" />
-              <div className="flex flex-col items-start justify-start pt-6">
-                <h3 className="regular-18 xl:bold-20 font-bold">
-                  {item.title}
-                </h3>
-                <p className="max-w-md regular-14 lg:regular-16 font-light mb-2 opacity-60">
-                  {item.text}
-                </p>
-              </div>
-            </div>
-          );
-        })}
-      </div>
+      <MemoOnboardInfo />
       <div className="w-full max-w-xl xl:max-w-2xl 2xl:max-w-3xl flex flex-col justify-center rounded-lg shadow md:shadow-xl form-container bg-transparent md:bg-white">
         <h1 className="regular-18 lg:bold-20 font-semibold text-left mb-4 drop-shadow">
           Welcome back

@@ -229,6 +229,6 @@ body {
     }
 
     .list-container {
-        @apply w-full md:gap-y-4 lg:gap-y-6 xl:gap-y-8 flex flex-col items-center flex-nowrap justify-center
+        @apply w-full md:gap-y-4 lg:gap-y-6 xl:gap-y-8 flex flex-col items-center flex-nowrap justify-center mx-auto;
     }
 }

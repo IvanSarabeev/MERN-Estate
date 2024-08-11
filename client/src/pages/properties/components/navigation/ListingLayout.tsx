@@ -30,7 +30,7 @@ const ListingLayout: React.FC<ListingLayoutProps> = ({
   }`;
 
   return (
-    <ul className="w-fit max-w-16 xl:max-w-24 gap-x-1 flex items-center justify-center text-[#1A3760] p-1 rounded-md bg-white border border-slate-500/50">
+    <ul className="w-fit max-w-16 xl:max-w-24 gap-x-1 flex items-center justify-center text-[#1A3760] bg-transparent">
       <li>
         <TooltipProvider>
           <Tooltip>

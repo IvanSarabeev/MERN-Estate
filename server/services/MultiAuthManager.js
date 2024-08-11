@@ -3,6 +3,7 @@ import User from '../models/user.model.js';
 import Jwt from 'jsonwebtoken';
 import bcryptjs from 'bcryptjs';
 import dotenv from "dotenv";
+import { INVALID_CREDENTIALS, SERVER_ERROR } from '../helpers/ResponseStatus.js';
 
 dotenv.config();
 
@@ -67,9 +68,9 @@ export const googleAuthProviderService = async (data) => {
             return { jwtToken, rest };
         }
     } catch (error) {
-        console.error(`Internal Server Error: ${error}`);
+        console.error(`${SERVER_ERROR} ${error}`);
 
-        return { success: false, message: "Try again later" };
+        return { success: false, message: INVALID_CREDENTIALS };
     }
 };
 
@@ -125,8 +126,8 @@ export const githubAuthProvider = async (data) => {
             return { jwtToken, rest };
         }
     } catch (error) {
-        console.error(`Internal Server Error: ${error}`);
+        console.error(`${SERVER_ERROR} ${error}`);
 
-        return { success: false, message: "Error: Failed authentication!" };
+        return { success: false, message: INVALID_CREDENTIALS };
     }
 };
