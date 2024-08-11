@@ -1,10 +1,8 @@
+import axios from "axios";
+import { COMMON_ERROR_MESSAGE, COMMON_HEADERS } from "./../defines";
 import { TypeError, RuntimeError } from "utils/customErrors";
 
 const methodPOST = "POST";
-
-const headerOptions = {
-    'Content-Type': 'application-json'
-};
 
 export const fetchAvailableListings = async () => {
     try {
@@ -12,7 +10,7 @@ export const fetchAvailableListings = async () => {
         
         const response = await fetch(url, {
             method: methodPOST,
-            headers: headerOptions
+            headers: COMMON_HEADERS
         });
 
         if (!response.ok) {
@@ -44,7 +42,7 @@ export const fetchListingById = async (id: string | undefined) => {
     try {
         const response = await fetch(url, {
             method: methodPOST,
-            headers: headerOptions,
+            headers: COMMON_HEADERS,
         });
 
         if (!response.ok) {
@@ -67,5 +65,21 @@ export const fetchListingById = async (id: string | undefined) => {
             // Handle generic errors
             return { success: false, message: 'An unexpected error occurred.' };
         }
+    }
+};
+
+export const fetchLatestProperties = async () => {
+    const url = "/api/listing/available-listings?limit=3";
+
+    try {
+        const response = await axios.post(url, [], {
+            headers: COMMON_HEADERS
+        });
+
+        return response.data;
+    } catch (error) {
+        console.error(error);
+
+        throw new Error(`${COMMON_ERROR_MESSAGE}: ${JSON.stringify(error)}`)
     }
 };

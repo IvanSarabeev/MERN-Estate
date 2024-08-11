@@ -15,7 +15,7 @@ const QuestionForm: React.FC<QuestionFormProps> = ({ formik }) => {
     <form
       method="post"
       onSubmit={formik.handleSubmit}
-      className="flex flex-col gap-2 space-y-2 xl:space-y-4"
+      className="flex flex-col gap-2 space-y-2 xl:space-y-4 py-4 md:py-2"
     >
       <div className="w-full gap-2 flex flex-col items-start justify-start">
         <label htmlFor="name" className="hidden">
