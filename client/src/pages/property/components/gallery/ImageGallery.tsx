@@ -25,16 +25,12 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
       navigation
       modules={[Navigation, Pagination, Autoplay, EffectFade]}
       spaceBetween={20}
-      slidesPerView={3}
       autoplay={{ delay: 5000 }}
       pagination={{ clickable: true }}
       loop={true}
       breakpoints={{
-        450: {
-          slidesPerView: 2,
-        },
         640: {
-          slidesPerView: 3,
+          slidesPerView: 2,
         },
         1024: {
           slidesPerView: 4,
@@ -52,7 +48,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
           style={{ cursor: "pointer" }}
         >
           <div
-            className={`h-32 w-full rounded-md ${
+            className={`h-32 w-full xl:min-w-60 rounded-md ${
               currentImage === image ? "opacity-40" : ""
             }`}
             style={{

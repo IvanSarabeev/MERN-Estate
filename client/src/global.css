@@ -21,7 +21,7 @@ body {
     position: relative;
     z-index: 2; /* Ensure content is above the overlay */
     color: white; /* Adjust text color for contrast */
-  }
+}
 
 @layer components {
     .max-container {

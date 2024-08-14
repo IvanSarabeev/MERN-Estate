@@ -12,9 +12,6 @@ const FeaturedListings: React.FC = () => {
   const handleLatestListings = useCallback(async () => {
     const { listings }: ListingsResponse = await fetchLatestProperties();
 
-    console.log(listings);
-    console.log(Array.isArray(listings));
-
     try {
       if (Array.isArray(listings)) {
         setItemData(listings);

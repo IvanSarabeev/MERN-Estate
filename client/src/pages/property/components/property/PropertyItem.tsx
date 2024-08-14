@@ -43,9 +43,9 @@ const PropertyItem: React.FC<PropertyItemProps> = ({ data }) => {
         <MemoQuestionForm data={data} />
       </section>
       <section className="w-full h-fit gap-y-4 sm:gap-y-6 flexColCenter pt-4 md:pt-6 lg:pt-8">
-        <h3 className="bold-20 md:bold-24 xl:text-3xl xl:font-bold capitalize whitespace-normal">
+        <h4 className="bold-20 md:bold-24 xl:text-3xl xl:font-bold capitalize whitespace-normal">
           Property Overview
-        </h3>
+        </h4>
         <div className="w-full h-fit space-y-4 md:space-y-0 flexColCenter md:flex-row md:flexBetween md:items-start gap-x-8">
           <MemoPropertyOverview data={data} />
           <FeaturedListings />

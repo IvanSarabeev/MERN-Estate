@@ -19,7 +19,7 @@ const ListingItem: React.FC<ListingItemProps> = ({ data }) => {
           alt={data.name}
           decoding="async"
           loading="lazy"
-          className="size-18 md:size-20 lg:size-24 rounded-md aspect-auto object-cover object-center basic-transition"
+          className="w-32 h-fit sm:size-18 md:size-20 lg:size-24 rounded-md aspect-auto object-cover object-center basic-transition"
         />
         <div className="absolute inset-0 z-0 size-full rounded-md group-hover:bg-black group-hover:opacity-50 basic-transition" />
         <LinkIcon className="absolute -z-20 group-hover:z-20 size-10 inset-x-1/4 inset-y-1/4 group-hover:text-yellow-500 opacity-100 basic-transition" />
