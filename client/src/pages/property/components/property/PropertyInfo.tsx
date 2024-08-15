@@ -10,8 +10,8 @@ type PropertyInfoProps = {
 
 const PropertyInfo: React.FC<PropertyInfoProps> = ({ data }) => {
   return (
-    <div className="flexColStart space-y-4 xl:space-y-6 text-left">
-      <div className="w-fit h-fit space-x-1 space-y-2 md:space-y-0 md:space-x-2 md:inline-flex md:items-center justify-start">
+    <section className="flexColStart space-y-4 xl:space-y-6 text-left">
+      <div className="size-fit space-x-1 space-y-2 md:space-y-0 md:space-x-2 md:inline-flex md:items-center justify-start">
         <Button
           title="Feature"
           aria-label="feature"
@@ -43,14 +43,10 @@ const PropertyInfo: React.FC<PropertyInfoProps> = ({ data }) => {
       <h2 className="bold-20 md:bold-24 xl:text-3xl xl:font-bold capitalize whitespace-normal">
         About This Property
       </h2>
-      <p className="regular-16 xl:regular-16 max-w-3xl text-balance text-slate-700 whitespace-normal">
+      <p className="regular-16 xl:regular-16 max-w-4xl text-balance text-slate-700 whitespace-normal">
         {data?.description}
       </p>
-      <p className="regular-16 xl:regular-16 max-w-3xl text-balance text-slate-700 whitespace-normal">
-        {/* TODO: Add Additional Description */}
-        {data?.description}
-      </p>
-    </div>
+    </section>
   );
 };
 

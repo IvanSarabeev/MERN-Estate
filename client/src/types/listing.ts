@@ -79,3 +79,5 @@ export interface SingleListingResponse {
     parking: boolean,
     furnished: boolean,
 }
+
+export type SingleListingKeys = keyof SingleListingResponse;

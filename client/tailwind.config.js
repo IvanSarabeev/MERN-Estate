@@ -24,6 +24,7 @@ module.exports = {
         "contact": "url(https://flowbite.s3.amazonaws.com/blocks/marketing-ui/contact/laptop-human.jpg)",
         "home": "url(https://res.cloudinary.com/dplqrjsty/image/upload/v1713689912/homepage_fjssvr.jpg)",
         "test": "url(https://media.assettype.com/outlooktraveller%2F2023-08%2Fc3c25578-1ade-424d-8ce9-80b48ff0fdf9%2Fshutterstock_2050060145.jpeg)",
+        "contact-info": "url(../src/assets/images/real-estate-bg.avif)",
 
         // Bento Grid Images
         "first-el": "url(../src/assets/images/banner.png)",

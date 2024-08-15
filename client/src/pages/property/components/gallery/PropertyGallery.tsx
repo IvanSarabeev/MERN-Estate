@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import "react-photo-view/dist/react-photo-view.css";
 
@@ -8,7 +8,7 @@ type PropertyGalleryProps = {
 
 const PropertyGallery: React.FC<PropertyGalleryProps> = ({ images }) => {
   return (
-    <div className="flex flex-col space-y-4 md:space-y-6 lg:space-y-8">
+    <div className="flex flex-col space-y-4 xl:space-y-6">
       <h4 className="bold-20 md:bold-24 xl:text-3xl xl:font-bold capitalize whitespace-normal">
         From Our Gallery
       </h4>
@@ -52,4 +52,6 @@ const PropertyGallery: React.FC<PropertyGalleryProps> = ({ images }) => {
   );
 };
 
-export default PropertyGallery;
+const MemoPropertyGallery = memo(PropertyGallery);
+
+export default MemoPropertyGallery;

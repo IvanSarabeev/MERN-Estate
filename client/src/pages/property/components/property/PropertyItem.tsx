@@ -5,6 +5,9 @@ import MemoPropertyInfo from "./PropertyInfo";
 import MemoQuestionForm from "../Question";
 import MemoPropertyOverview from "./PropertyOverview";
 import FeaturedListings from "./FeaturedListings";
+import LeftSection from "../LeftSection";
+import RightSection from "../RightSection";
+import MemoPropertyGallery from "../gallery/PropertyGallery";
 
 type PropertyItemProps = {
   data: SingleListingResponse | null;
@@ -23,6 +26,8 @@ const PropertyItem: React.FC<PropertyItemProps> = ({ data }) => {
     setCurrentImage(data?.imageUrls[0]);
   }, [data]);
 
+  const images = data?.imageUrls;
+
   return (
     <>
       <img
@@ -38,11 +43,22 @@ const PropertyItem: React.FC<PropertyItemProps> = ({ data }) => {
         setCurrentImage={setCurrentImage}
         handleImageClick={handleImageClick}
       />
-      <section className="w-full h-fit gap-y-4 sm:gap-y-6 flexColCenter md:flex-row md:flexBetween pt-4 md:pt-6 lg:pt-8">
+      <section className="gap-x-4 flex flex-col items-start justify-center lg:flex-row lg:justify-between">
+        <LeftSection>
+          <MemoPropertyInfo data={data} />
+          <MemoPropertyOverview data={data} />
+          <MemoPropertyGallery images={images} />
+        </LeftSection>
+        <RightSection>
+          <MemoQuestionForm data={data} />
+          <FeaturedListings />
+        </RightSection>
+      </section>
+      {/* <section className="w-full h-fit gap-y-4 sm:gap-y-6 flexColCenter md:flex-row md:flexBetween pt-4 md:pt-6 lg:pt-8">
         <MemoPropertyInfo data={data} />
         <MemoQuestionForm data={data} />
-      </section>
-      <section className="w-full h-fit gap-y-4 sm:gap-y-6 flexColCenter pt-4 md:pt-6 lg:pt-8">
+      </section> */}
+      {/* <section className="w-full h-fit gap-y-4 sm:gap-y-6 flexColCenter pt-4 md:pt-6 lg:pt-8">
         <h4 className="bold-20 md:bold-24 xl:text-3xl xl:font-bold capitalize whitespace-normal">
           Property Overview
         </h4>
@@ -50,7 +66,7 @@ const PropertyItem: React.FC<PropertyItemProps> = ({ data }) => {
           <MemoPropertyOverview data={data} />
           <FeaturedListings />
         </div>
-      </section>
+      </section> */}
     </>
   );
 };

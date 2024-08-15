@@ -7,6 +7,20 @@ import { RiSecurePaymentFill } from "react-icons/ri";
 import { MdEmail, MdSupport  } from "react-icons/md";
 import SellProperty from "assets/images/sell_property.jpg";
 import DeviceMockup from "assets/images/signup-page-mockup.png";
+import {
+    Bath,
+    BedDouble,
+    BookOpenCheck,
+    Building,
+    LucideIcon,
+    MonitorPlay,
+    ParkingCircle,
+    Ruler,
+    StickyNote,
+    Tag,
+    Wifi,
+  } from "lucide-react";
+import { SingleListingKeys } from "types/listing";
 
 export const headerLinks = [
     {id: 1, label: "Home", href: "/"},
@@ -168,4 +182,22 @@ export const testimonials = [
     { id: 6, avatar: 'https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png', username: 'Barbara', alias: '@barby', rating: 4, description: 'I get many benefits when using this application, this application is very pleasand for me in finding the residence I\'m looking for' },
     { id: 7, avatar: 'https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png', username: 'Charlie', alias: '@charlie', rating: 4, description: 'WOW, this is the first application that suites my needs from bottom to top!  I\'m looking for next opportunity' },
     { id: 8, avatar: 'https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/roberta-casas.png', username: 'Dana', alias: '@dana', rating: 5, description: 'I didn\'t believe that there\'s an application that good for the ordinary men. Thanks.' },
+] as const;
+
+export const propertyOverview: Array<{
+    id: number;
+    icon: LucideIcon;
+    label: string;
+    key: SingleListingKeys | null;
+}> = [
+    {id: 1, icon: Tag, label: "ID NO.", key: "_id"},
+    {id: 2, icon: Building, label: "Type", key: "type"},
+    {id: 3, icon: MonitorPlay, label: "Room", key: "rooms"},
+    {id: 4, icon: BedDouble, label: "Bedroom", key: "bedroom"},
+    {id: 5, icon: Bath, label: "Bath", key: "bathroom"},
+    {id: 6, icon: StickyNote, label: "Purpose", key: "type"},
+    {id: 7, icon: Ruler, label: "Purpose", key: "yearBuild"},
+    {id: 8, icon: ParkingCircle, label: "Parking", key: "parking"},
+    {id: 9, icon: BookOpenCheck, label: "Offer", key: "offer"},
+    {id: 10, icon: Wifi, label: "Wifi", key: null},
 ] as const;
