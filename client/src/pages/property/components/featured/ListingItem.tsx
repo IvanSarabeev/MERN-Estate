@@ -19,19 +19,22 @@ const ListingItem: React.FC<ListingItemProps> = ({ data }) => {
           alt={data.name}
           decoding="async"
           loading="lazy"
-          className="w-32 h-fit sm:size-18 md:size-20 lg:size-24 rounded-md aspect-auto object-cover object-center basic-transition"
+          className="w-[220px] h-fit rounded-md object-cover object-center basic-transition"
         />
         <div className="absolute inset-0 z-0 size-full rounded-md group-hover:bg-black group-hover:opacity-50 basic-transition" />
-        <LinkIcon className="absolute -z-20 group-hover:z-20 size-10 inset-x-1/4 inset-y-1/4 group-hover:text-yellow-500 opacity-100 basic-transition" />
+        <LinkIcon className="absolute -z-20 group-hover:z-20 size-8 left-[35%] top-[35%] group-hover:text-yellow-500 opacity-100 basic-transition" />
       </Link>
-      <div className="space-y-2 flexColStart text-white">
-        <h4 className="regular-18 xl:text-xl capitalize text-balance hover:text-orange-300 basic-transition">
+      <div className="size-full space-y-2 flexColStart text-white">
+        <h4 className="w-full regular-18 xl:bold-20 capitalize hover:text-orange-300 basic-transition">
           Exploring The {data.name}
         </h4>
-        <span className="flexStart items-center gap-x-1 md:gap-x-1.5 hover:text-orange-300 basic-transition">
-          <Calendar className="size-4" />
-          <p className=":regular-16">22/6/2024</p>
-        </span>
+        <div className="flexStart items-center gap-x-1 md:gap-x-1.5 hover:text-orange-300 basic-transition">
+          <span>
+            <span className="sr-only">Calendar Icon</span>
+            <Calendar className="size-4 md:size-5" />
+          </span>
+          <p className="regular-14 md:regular-16">22/6/2024</p>
+        </div>
       </div>
     </div>
   );

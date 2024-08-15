@@ -2,7 +2,7 @@ import React, { memo } from "react";
 import { SingleListingResponse } from "types/listing";
 import { QuestionFormType } from "types/forms";
 import { useFormik } from "formik";
-import QuestionForm from "./forms/QuestionForm";
+import QuestionForm from "../forms/QuestionForm";
 import Button from "components/HTML/Button";
 
 type QuestionFormProps = {
@@ -24,7 +24,7 @@ const Question: React.FC<QuestionFormProps> = ({ data }) => {
   });
 
   return (
-    <aside className="size-full md:max-w-md pb-2 md:pb-4 lg:pb-6 rounded-lg bg-slate-900/90">
+    <aside className="size-full pb-2 md:pb-4 lg:pb-6 rounded-lg bg-slate-900/90">
       <div className="w-full h-fit flexBetween flex-row-reverse items-center md:flex-row p-4 lg:px-6 border-b border-white">
         <Button className="size-fit px-4 py-2 regular-16 font-semibold text-white border border-white rounded-full bg-transparent">
           For {data?.type}

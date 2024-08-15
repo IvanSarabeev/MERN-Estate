@@ -40,7 +40,7 @@ const FeaturedListings: React.FC = () => {
   }, [handleLatestListings]);
 
   return (
-    <div className="w-full h-fit md:w-2/5 p-4 xl:px-8 xl:py-6 space-y-4 rounded-md shadow-md bg-slate-900/90">
+    <div className="size-full p-4 xl:px-8 xl:py-6 space-y-4 rounded-md shadow-md bg-slate-900/90">
       <div className="relative border-b border-slate-500">
         <h3 className="bold-20 2xl:bold-24 text-white pb-4 whitespace-normal">
           Featured Listing

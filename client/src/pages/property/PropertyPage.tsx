@@ -3,7 +3,7 @@ import Layout from "components/Layouts/Layout";
 import { useParams } from "react-router-dom";
 import { fetchListingById } from "api/listings";
 import { SingleListingResponse } from "types/listing";
-import PropertyItem from "./components/property/PropertyItem";
+import PropertyItem from "./components/PropertyItem";
 import SwiperCore from "swiper";
 import { Navigation } from "swiper/modules";
 
