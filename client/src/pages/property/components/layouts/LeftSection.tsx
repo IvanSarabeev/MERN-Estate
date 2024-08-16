@@ -3,6 +3,7 @@ import { SingleListingResponse } from "types/listing";
 import MemoPropertyInfo from "../property/PropertyInfo";
 import MemoPropertyOverview from "../property/PropertyOverview";
 import MemoPropertyGallery from "../gallery/PropertyGallery";
+import PropertyVideo from "../property/PropertyVideo";
 
 type LeftSectionProps = {
   data: SingleListingResponse | null;
@@ -16,6 +17,8 @@ const LeftSection: React.FC<LeftSectionProps> = ({ data }) => {
       <MemoPropertyInfo data={data} />
       <MemoPropertyOverview data={data} />
       <MemoPropertyGallery images={images} />
+      {/* Add React Leaflet */}
+      <PropertyVideo />
     </div>
   );
 };

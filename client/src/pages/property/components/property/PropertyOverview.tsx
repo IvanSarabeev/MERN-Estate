@@ -22,8 +22,6 @@ const getPropertyValue = (
     return label === "Wifi" ? "Yes" : undefined;
   }
 
-  console.log(key);
-
   switch (key) {
     case "_id":
       return data._id.slice(0, 4);

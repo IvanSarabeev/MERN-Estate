@@ -28,6 +28,7 @@ const PropertyDashboard = lazy(
   () => import("./pages/properties/PropertyDashboard")
 );
 const PropertyPage = lazy(() => import("pages/property/PropertyPage"));
+import "cloudinary-video-player/cld-video-player.min.css";
 
 const App: React.FC = () => {
   return (
