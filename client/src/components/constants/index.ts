@@ -201,3 +201,10 @@ export const propertyOverview: Array<{
     {id: 9, icon: BookOpenCheck, label: "Offer", key: "offer"},
     {id: 10, icon: Wifi, label: "Wifi", key: null},
 ] as const;
+
+export const customerOverview = [
+    {id: 1, label: "Quality real estate services"},
+    {id: 2, label: "100% Satisfaction guarantee"},
+    {id: 3, label: "Highly professional team"},
+    {id: 4, label: "Dealing always on time"},
+] as const;
