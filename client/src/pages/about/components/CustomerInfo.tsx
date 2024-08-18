@@ -61,7 +61,7 @@ const CustomerInfo: React.FC = () => {
       </div>
       <div className="md:gap-x-16 lg:gap-x-20 2xl:gap-x-24 flexColCenter space-y-4 lg:space-y-6 md:flex-row md:flexBetween">
         <div className="size-full flexColStart">
-          <p className="w-full regular-14 lg:regular-16 max-w-3xl first-letter:regular-18">
+          <p className="w-full regular-14 lg:regular-16 max-w-3xl first-letter:regular-16 lg:first-letter:regular-18">
             That’s why we build every home like it’s our own. Building locally
             since 1988, we hold ourselves to the highest standards of quality
             and construction integrity. In addition to the 28 required county
@@ -70,7 +70,7 @@ const CustomerInfo: React.FC = () => {
             inspections on every Inland Home, by choice. Our goal is that each
             home will serve your family, and others, for generations to come.
           </p>
-          <div className="flex mt-10">
+          <div className="flexColCenter md:flex-row space-y-4 mt-4 md:mt-6 lg:mt-8 xl:mt-10">
             <ul className="flexColStart space-y-2 pr-10 regular-16 md:regular-18 font-sans">
               {customerOverview.map((item) => {
                 return (
@@ -84,7 +84,7 @@ const CustomerInfo: React.FC = () => {
                 );
               })}
             </ul>
-            <div className="flexColStart space-y-2 md:space-y-3 pl-10 border-l border-slate-600 ">
+            <div className="flexColStart space-y-2 md:space-y-3 pl-4 md:pl-10 border-0 md:border-l border-slate-600 ">
               <div className="group size-14 flexCenter border border-slate-50 rounded-full shadow-md bg-slate-600 basic-transition scale-95 hover:border-slate-900 hover:bg-transparent hover:scale-100">
                 <span className="sr-only">Phone Icon</span>
                 <PhoneCall className="size-6 text-white group-hover:text-black" />
