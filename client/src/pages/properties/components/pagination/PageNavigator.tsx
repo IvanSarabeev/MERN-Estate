@@ -7,6 +7,16 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "components/ui/pagination";
+import listingStore from "stores/listingStore";
+import { cn } from "lib/utils";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "components/ui/select";
 
 type PageNavigatorProps = {
   currentPage: number;
@@ -25,11 +35,22 @@ const PageNavigator: React.FC<PageNavigatorProps> = ({
     }
   };
 
+  const total = listingStore.getTotalPagesResults();
+  const pageLimit = listingStore.getPageLimit();
+
   return (
-    <Pagination className="py-2 xl:py-8 mx-auto">
+    <Pagination className="flex items-center justify-between px-0 md:px-6 2xl:p-8 py-2 md:py-4 lg:py-6 xl:py-8">
+      {currentPage !== 0 ? (
+        <p className="regular-14 2xl:regular-16 font-normal">
+          Results 1 of {pageLimit} from{" "}
+          <strong className="font-medium">{total}</strong>
+        </p>
+      ) : (
+        <p className="regular-14 2xl:regular-16 font-normal">Empty</p>
+      )}
       <PaginationContent>
+        {/* Previous Button */}
         <PaginationItem>
-          {/* Previous Button */}
           <PaginationPrevious
             href="#"
             onClick={() => handlePageChange(currentPage - 1)}
@@ -56,6 +77,28 @@ const PageNavigator: React.FC<PageNavigatorProps> = ({
           />
         </PaginationItem>
       </PaginationContent>
+      {/* Migrate the PropertyListings into the store */}
+      {currentPage !== 0 && (
+        <div className="size-fit flexCenter gap-x-1.5 regular-16">
+          <p className="size-full">Results per page:</p>
+          <Select>
+            <SelectTrigger
+              className={cn(
+                "gap-x-1 text-blue-600 px-4 py-2 rounded-full border border-slate-300 bg-white",
+                "font-semibold size-fit focus:ring-blue-600"
+              )}
+            >
+              <SelectValue placeholder="10" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup className="text-blue-600">
+                <SelectItem value="total pages: 16">16</SelectItem>
+                <SelectItem value="total pages: 20">20</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
+      )}
     </Pagination>
   );
 };

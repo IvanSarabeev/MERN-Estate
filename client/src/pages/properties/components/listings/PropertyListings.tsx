@@ -5,6 +5,7 @@ import MemoGridProperties from "./../propety-layouts/GridProperties";
 import MemoListProperties from "./../propety-layouts/ListProperties";
 import MemoSkeletonItem from "components/__comp/SkeletonItem";
 import { handlePropertySorting } from "utils/sortData";
+import listingStore from "stores/listingStore";
 
 type PropertyListingProps = {
   systemLayout: string;
@@ -28,9 +29,13 @@ const PropertyListings: React.FC<PropertyListingProps> = ({
     try {
       const limit = systemLayout === "grid" ? 6 : 5;
 
+      listingStore.setPageLimit(limit);
+
       const response: ListingsResponse = await fetchAvailableListings();
 
       const { total, listings } = response;
+
+      listingStore.setTotalPagesResult(total);
 
       if (listings && typeof listings === "object") {
         const responseToArray = Object.values(listings);

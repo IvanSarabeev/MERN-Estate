@@ -1,10 +1,10 @@
 import { makeObservable, observable, action } from "mobx";
 import { SignInCredentials, UserDetails, UserSignUpData } from "types/user";
-import { authenticateUser, registerNewUser } from './../api/auth';
-import { AUTHENTICATION_FAILED, COMMON_ERROR_MESSAGE, USER_REGISTRATION_FAILED } from "./../defines";
+import { authenticateUser, registerNewUser } from '../api/auth';
+import { AUTHENTICATION_FAILED, COMMON_ERROR_MESSAGE, USER_REGISTRATION_FAILED } from "../defines";
 import { UserAuthResponse } from "types/api";
 
-class UserStore {
+class AuthStore {
     currentUser: UserDetails | null = null;
     error: string | null = null;
     loading: boolean = false;
@@ -130,4 +130,4 @@ class UserStore {
     }
 }
 
-export const userStore = new UserStore();
+export const authStore = new AuthStore();

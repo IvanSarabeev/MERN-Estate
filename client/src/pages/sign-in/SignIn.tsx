@@ -8,7 +8,7 @@ import { signInValidationSchema } from "utils/formValidation";
 import { toast } from "components/ui/use-toast";
 import { ToastAction } from "components/ui/toast";
 import useToggle from "hooks/useToggle";
-import { userStore } from "stores/userStore";
+import { authStore } from "stores/authStore";
 
 const SignIn: React.FC = () => {
   const [show, setShow] = useToggle();
@@ -27,7 +27,7 @@ const SignIn: React.FC = () => {
     validationSchema,
     onSubmit: async (values) => {
       try {
-        const response = await userStore.loadUserAuthentication(values);
+        const response = await authStore.loadUserAuthentication(values);
 
         if (response.success) {
           toast({

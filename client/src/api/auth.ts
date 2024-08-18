@@ -1,7 +1,7 @@
 import axios from "axios";
 import { SignInCredentials, UserSignUpData } from "types/user";
 import { AUTHENTICATION_FAILED, COMMON_ERROR_MESSAGE, COMMON_EXCEPTION, COMMON_HEADERS } from "./../defines";
-import { userStore } from "stores/userStore";
+import { authStore } from "stores/authStore";
 import { AuthResponse, UserAuthResponse } from "types/api";
 
 /**
@@ -12,20 +12,20 @@ import { AuthResponse, UserAuthResponse } from "types/api";
 export const registerNewUser = async (formData: UserSignUpData): Promise<AuthResponse> => {
     const url = "/api/auth/signup";
     
-    userStore.signInStart();
+    authStore.signInStart();
 
     try {
         const { data } = await axios.post(url, formData, {
             headers: COMMON_HEADERS
         });
 
-        userStore.UserSuccessSignIn(data);
+        authStore.UserSuccessSignIn(data);
 
         return data;
     } catch (error) {
         console.error(error);
 
-        userStore.signInFailure(`${COMMON_EXCEPTION}, ${error}`);
+        authStore.signInFailure(`${COMMON_EXCEPTION}, ${error}`);
 
         throw new Error(`${COMMON_EXCEPTION}, ${error}`);
     }
@@ -41,7 +41,7 @@ export const registerNewUser = async (formData: UserSignUpData): Promise<AuthRes
 export const authenticateUser = async (UserCredentials: SignInCredentials): Promise<UserAuthResponse> => {
     const url = "/api/auth/signin";
 
-    userStore.signInStart();
+    authStore.signInStart();
 
     try {
         const response = await axios.post<UserAuthResponse>(url, UserCredentials, {
@@ -54,13 +54,13 @@ export const authenticateUser = async (UserCredentials: SignInCredentials): Prom
             throw new Error(`${AUTHENTICATION_FAILED}: ${data.message}`);
         }
 
-        userStore.UserSuccessSignIn(data);
+        authStore.UserSuccessSignIn(data);
 
         return data;
     } catch (error) {
         console.error(error);
 
-        userStore.signInFailure(`${COMMON_ERROR_MESSAGE}, ${JSON.stringify(error)}`);
+        authStore.signInFailure(`${COMMON_ERROR_MESSAGE}, ${JSON.stringify(error)}`);
 
         throw new Error(`${COMMON_ERROR_MESSAGE}: ${JSON.stringify(error)}`);
     }
@@ -74,7 +74,7 @@ export const authenticateUser = async (UserCredentials: SignInCredentials): Prom
 export const signOutUser = async () => {
     const url = "/api/auth/signout";
 
-    userStore.signOutUserStart();
+    authStore.signOutUserStart();
     
     try {
         const { data } = await axios.get(url);
@@ -83,14 +83,14 @@ export const signOutUser = async () => {
             return data;
         }
 
-        userStore.signOutUserSuccess(data);
+        authStore.signOutUserSuccess(data);
 
         return data;
 
     } catch (error) {
         console.error(error);
 
-        userStore.signOutUserFailure(`${COMMON_ERROR_MESSAGE}, ${JSON.stringify(error)}`);
+        authStore.signOutUserFailure(`${COMMON_ERROR_MESSAGE}, ${JSON.stringify(error)}`);
 
         throw new Error(`Error message: ${JSON.stringify(error)}`);
     }

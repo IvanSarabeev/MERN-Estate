@@ -8,7 +8,7 @@ import Button from "components/HTML/Button";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import GoogleAuth from "auth/GoogleAuth";
 import GitHubAuth from "auth/GitHubAuth";
-import { userStore } from "stores/userStore";
+import { authStore } from "stores/authStore";
 import MemoOnboardInfo from "./OnboardingInfo";
 
 interface SignInFormProps {
@@ -137,7 +137,7 @@ const SignInForm: React.FunctionComponent<SignInFormProps> = ({
             title="submit-button"
             className="bg-[#0284c7] font-semibold mt-3 text-white p-3 rounded-lg hover:opacity-95 disabled:opacity-80 ring-4 ring:slate-900"
           >
-            {userStore.loading ? "Loading.." : "Sign in to your account"}
+            {authStore.loading ? "Loading.." : "Sign in to your account"}
           </Button>
         </form>
         <p className="regular-14 lg:regular-16 text-[#9297a2] font-light mt-4">
