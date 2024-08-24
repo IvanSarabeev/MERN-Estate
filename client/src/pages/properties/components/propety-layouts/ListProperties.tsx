@@ -37,16 +37,16 @@ const ListProperties: React.FC<ListPropertiesProps> = ({
             <h3 className="bold-20 2xl:bold-24 whitespace-normal">
               ${data.regularPrice?.toFixed(2)}
             </h3>
-            <div className="gap-x-4 inline-flex items-center justify-end">
+            <div className="gap-x-4 inline-flex items-center justify-end regular-12 xl:regular-14 text-slate-600">
               <span className="group inline-flex items-center gap-x-1 py-1 pl-1 pr-2 rounded-md border border-slate-600/30 shadow-sm bg-transparent transition-all ease-in-out duration-150 hover:scale-105 hover:shadow-md">
                 <CiStar
                   title="Star icon"
                   aria-label="star icon"
                   className="size-4 aspect-auto object-contain group-hover:fill-slate-800"
                 />
-                <p className="regular-12 xl:regular-14 text-slate-600">4.9</p>
+                <p className="">4.9</p>
               </span>
-              <p className="regular-12 xl:regular-14 text-slate-600">
+              <p className="">
                 <strong className="mr-0.5 text-slate-900">10</strong>Review
               </p>
             </div>
@@ -63,11 +63,9 @@ const ListProperties: React.FC<ListPropertiesProps> = ({
                 decoding="async"
                 className="size-8 xl:size-10 rounded-full shadow-md aspect-auto object-cover object-center hover:border-2 hover:border-white hover:shadow-md hover:scale-110"
               />
-              <div className="flexColStart text-left whitespace-normal">
-                <h4 className="text-xs xl:text-sm font-bold">Jennifer Bloom</h4>
-                <p className="regular-12 xl:regular-14 text-slate-600 mt-2">
-                  +44 235 123 312
-                </p>
+              <div className="flexColStart regular-12 xl:regular-14 text-left whitespace-normal">
+                <h4 className="font-bold">Jennifer Bloom</h4>
+                <p className="text-slate-600 mt-2">+44 235 123 312</p>
               </div>
             </div>
             <Link to={`/property/${data._id}`}>

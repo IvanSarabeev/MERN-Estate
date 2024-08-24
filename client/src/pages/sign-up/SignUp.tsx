@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { UserSignUpData } from "types/user";
-import { registerUser } from "services/apiAuth";
+import { registerNewUser } from "api/auth";
 import { useFormik } from "formik";
 import { signUpSchema } from "utils/formValidation";
 import { toast } from "components/ui/use-toast";
@@ -27,27 +27,32 @@ const SignUp: React.FC = () => {
       try {
         setLoading(true);
 
-        await registerUser(values).then((response) => {
+        await registerNewUser(values).then((response) => {
           if (response.success) {
             toast({
-              title: "Email sended",
-              description: "Confirmation code sended to email",
+              variant: "success",
+              title: "Success",
+              description:
+                response.message ?? "Code sended successfully to email",
             });
           } else {
-            throw new Error("Request failed!");
+            throw new Error(response.message || "Request failed!");
           }
         });
 
         setError(null);
       } catch (err) {
+        const errorMessage =
+          err instanceof Error ? err.message : "An unexpected error occurred.";
+
         toast({
           variant: "destructive",
-          title: "Uh oh! Something went wrong.",
-          description: "There was a problem when sending",
+          title: "Something went wrong",
+          description: errorMessage,
           action: <ToastAction altText="Try again">Try again</ToastAction>,
         });
 
-        setLoading(false);
+        setError(errorMessage);
       } finally {
         setLoading(false);
       }

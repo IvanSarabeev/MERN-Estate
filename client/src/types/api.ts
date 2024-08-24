@@ -15,3 +15,8 @@ export interface AuthResponse {
 export interface UserAuthResponse extends AuthResponse {
     userData: UserDetails;
 }
+
+export interface OtpAuthResponse {
+    success: boolean;
+    message: string;
+}

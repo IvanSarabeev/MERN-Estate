@@ -1,6 +1,6 @@
 import axios from "axios";
 import { SignInCredentials, UserSignUpData } from "types/user";
-import { AUTHENTICATION_FAILED, COMMON_ERROR_MESSAGE, COMMON_EXCEPTION, COMMON_HEADERS } from "./../defines";
+import { AUTHENTICATION_FAILED, COMMON_ERROR_MESSAGE, COMMON_EXCEPTION, COMMON_HEADERS, SIGN_IN_API, SIGN_OUT_API, SIGN_UP_API } from "./../defines";
 import { authStore } from "stores/authStore";
 import { AuthResponse, UserAuthResponse } from "types/api";
 
@@ -9,25 +9,25 @@ import { AuthResponse, UserAuthResponse } from "types/api";
  * @param formData : UserSignUpData
  * @returns <Promise>
  */
-export const registerNewUser = async (formData: UserSignUpData): Promise<AuthResponse> => {
-    const url = "/api/auth/signup";
-    
+export const registerNewUser = async (formData: UserSignUpData): Promise<AuthResponse> => {    
     authStore.signInStart();
 
     try {
-        const { data } = await axios.post(url, formData, {
+        const response = await axios.post(SIGN_UP_API, formData, {
             headers: COMMON_HEADERS
         });
+
+        const data = response.data;
 
         authStore.UserSuccessSignIn(data);
 
         return data;
     } catch (error) {
-        console.error(error);
+        const errorMessage = error instanceof Error ? error.message : COMMON_EXCEPTION;
 
-        authStore.signInFailure(`${COMMON_EXCEPTION}, ${error}`);
+        authStore.signInFailure(errorMessage);
 
-        throw new Error(`${COMMON_EXCEPTION}, ${error}`);
+        throw new Error(errorMessage);
     }
 };
 
@@ -39,12 +39,10 @@ export const registerNewUser = async (formData: UserSignUpData): Promise<AuthRes
  * @throws {Error} - Throws an error if the authentication fails.
  */
 export const authenticateUser = async (UserCredentials: SignInCredentials): Promise<UserAuthResponse> => {
-    const url = "/api/auth/signin";
-
     authStore.signInStart();
 
     try {
-        const response = await axios.post<UserAuthResponse>(url, UserCredentials, {
+        const response = await axios.post<UserAuthResponse>(SIGN_IN_API, UserCredentials, {
             headers: COMMON_HEADERS,
         });    
 
@@ -72,12 +70,10 @@ export const authenticateUser = async (UserCredentials: SignInCredentials): Prom
  * @returns <Promise | void>
  */
 export const signOutUser = async () => {
-    const url = "/api/auth/signout";
-
     authStore.signOutUserStart();
     
     try {
-        const { data } = await axios.get(url);
+        const { data } = await axios.get(SIGN_OUT_API);
 
         if (data.success === false) {
             return data;

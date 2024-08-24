@@ -9,6 +9,11 @@ export interface SignInCredentials {
     'password': string
 }
 
+export interface UserOtpCredendials {
+    'email': string,
+    'otp': string,
+}
+
 export interface UserUploadData {
     'username': string,
     'email': string,

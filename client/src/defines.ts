@@ -10,3 +10,8 @@ export const USER_REGISTRATION_FAILED = "User Registration Failed";
 export const COMMON_HEADERS = {
     'Content-Type': "application/json"
 };
+
+// Region API Endpoints
+export const SIGN_UP_API = "/api/auth/signup";
+export const SIGN_IN_API = "/api/auth/signin";
+export const SIGN_OUT_API = "/api/auth/signout";

@@ -38,6 +38,42 @@ const SignUpForm: React.FunctionComponent<SignUpFormProps> = ({
   const isFormInvalid =
     !username || !email || !password || Object.keys(formik.errors).length > 0;
 
+  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+
+  //   if (isFormInvalid) {
+  //     return setShowOtpDialog(false);
+  //   } else {
+  //     try {
+  //       await formik.handleSubmit(e);
+  //       // Assume form submission triggers OTP request
+  //       setShowOtpDialog(true);
+  //     } catch (submitError) {
+  //       const message =
+  //         submitError instanceof Error
+  //           ? submitError.message
+  //           : "An unexpted error occurred.";
+
+  //       setError(message);
+  //       setShowOtpDialog(false);
+  //     }
+  //   }
+  // };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (isFormInvalid) {
+      // Form is invalid, don't show OTP dialog
+      setShowOtpDialog(false);
+      return;
+    }
+
+    // Form is valid, submit the form and show OTP dialog
+    formik.handleSubmit();
+    setShowOtpDialog(true);
+  };
+
   return (
     <>
       <div className="h-fit lg:h-screen w-full lg:w-1/2 flex flex-col justify-center form-padding-container bg-white">
@@ -47,16 +83,7 @@ const SignUpForm: React.FunctionComponent<SignUpFormProps> = ({
         <MemoAuthOptions />
         <form
           method="post"
-          onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
-            e.preventDefault();
-
-            if (isFormInvalid) {
-              setShowOtpDialog(false);
-            } else {
-              setShowOtpDialog(true);
-              formik.handleSubmit(e);
-            }
-          }}
+          onSubmit={handleSubmit}
           className="gap-2 flex flex-col"
         >
           <div className="w-full gap-2 flex flex-col items-start justify-start">
@@ -174,6 +201,7 @@ const SignUpForm: React.FunctionComponent<SignUpFormProps> = ({
             setError={setError}
             loading={loading}
             setLoading={setLoading}
+            setShowDialog={setShowOtpDialog}
           />
         </form>
         {error && (

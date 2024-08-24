@@ -1,5 +1,6 @@
-import User from "../models/user.model.js";
 import xssFilters from 'xss-filters';
+import User from "../models/user.model.js";
+import { OTP_FAILED, OTP_VERIFIED_SUCCESS, SERVER_ERROR, USER_NOT_FOUND } from "../helpers/ResponseStatus.js";
 
 /**
  * Verifies the OTP provided by the user.
@@ -25,7 +26,7 @@ export const verifyOtp = async (req, res) => {
         const user = await User.findOne({ email: SanitizeData.email });
 
         if (!user) {
-            return res.status(404).json({ success: false, message: 'User not found' });
+            return res.status(404).json({ success: false, message: USER_NOT_FOUND });
         }
 
         if (user.otp === otp && user.otpExpires > Date.now()) {
@@ -35,14 +36,14 @@ export const verifyOtp = async (req, res) => {
 
             await user.save();
             
-            return res.status(200).json({ success: true, message: 'OTP verified successfully' });
+            return res.status(200).json({ success: true, message: OTP_VERIFIED_SUCCESS });
         } else {
             // OTP is invalid or expired
-            return res.status(400).json({ success: false, message: 'Invalid or expired OTP' });
+            return res.status(400).json({ success: false, message: OTP_FAILED });
         }
     } catch (error) {
         console.error('Error occur:', error);
 
-        res.status(500).json({ success: false, message: "Internal Server Error" });
+        res.status(500).json({ success: false, message: SERVER_ERROR });
     }
 }

@@ -6,7 +6,7 @@ import Jwt from 'jsonwebtoken';
 import dotenv from "dotenv";
 import crypto from "crypto";
 import { sendVerificationEmail } from './verifyEmailService.js';
-import { INVALID_CREDENTIALS, OTP_SUCCESS, USER_NOT_FOUND } from './../helpers/ResponseStatus.js';
+import { EXISTING_EMAIL, EXISTING_USERNAME, INVALID_CREDENTIALS, OTP_SUCCESS, USER_NOT_FOUND } from './../helpers/ResponseStatus.js';
 
 dotenv.config();
 
@@ -90,10 +90,23 @@ export const authSignUpUser = async (formData) => {
             otpExpires
         });
 
-        await newUser.save();
+        const existingUser = await User.findOne({
+            $or: [
+                { email: sanitizeData.email },
+                { username: sanitizeData.username }
+            ]
+        });
+
+        if (existingUser) {
+            if (existingUser.email === sanitizeData.email) return { success: false, message: EXISTING_EMAIL };
+            if (existingUser.username === sanitizeData.username) return { success: false, message: EXISTING_USERNAME };
+            else return true;
+        }
 
         // Send OTP via email
         await sendVerificationEmail(sanitizeData.email, otp);
+        
+        await newUser.save();
 
         return { success: true, message: OTP_SUCCESS};
     } catch (error) {

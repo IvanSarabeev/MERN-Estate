@@ -31,8 +31,9 @@ const SignIn: React.FC = () => {
 
         if (response.success) {
           toast({
-            title: "Authentication succesful",
-            description: `Redirecting to your account`,
+            variant: "success",
+            title: response.message,
+            description: "Woh! Everthing seems great",
           });
 
           setTimeout(() => {

@@ -11,7 +11,7 @@ import {
 import { InputOTP, InputOTPSlot, InputOTPGroup } from "components/ui/input-otp";
 import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
 import { Button } from "components/ui/button";
-import { verifyOtpEmail } from "api/verifyOtp";
+import { verifyOtpEmail } from "api/otp";
 import { redirect } from "react-router-dom";
 import { MdError } from "react-icons/md";
 import { toast } from "components/ui/use-toast";
@@ -27,6 +27,7 @@ type OtpModalProps = {
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   error: string | null;
   setError: React.Dispatch<React.SetStateAction<string | null>>;
+  setShowDialog: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const OtpModal: React.FunctionComponent<OtpModalProps> = ({
@@ -38,6 +39,7 @@ const OtpModal: React.FunctionComponent<OtpModalProps> = ({
   setError,
   loading,
   setLoading,
+  setShowDialog,
 }) => {
   const handleOtpChange = (value: string) => {
     setOtp(value);
@@ -53,8 +55,9 @@ const OtpModal: React.FunctionComponent<OtpModalProps> = ({
 
       if (response.success) {
         toast({
-          title: "Code Verified",
-          description: "Successfully verified OTP",
+          variant: "success",
+          title: "Verified Successfuly",
+          description: "Welcome to the family",
         });
 
         return redirect("/account");
@@ -74,9 +77,9 @@ const OtpModal: React.FunctionComponent<OtpModalProps> = ({
         }
       } else {
         toast({
-          variant: "destructive",
-          title: "OTP invalid",
-          description: "There was a problem when proceeding",
+          variant: "error",
+          title: "Invalid Code",
+          description: "There was a problem with your request.",
           action: <ToastAction altText="Try again">Try again</ToastAction>,
         });
 
@@ -89,7 +92,6 @@ const OtpModal: React.FunctionComponent<OtpModalProps> = ({
   };
 
   return (
-    // onOpenChange={handleModal}
     <Dialog open={open}>
       <DialogContent className="h-fit w-80 sm:w-96 md:w-[448px] space-y-2 rounded-lg">
         <DialogHeader className="flexColCenter items-center">
@@ -148,6 +150,7 @@ const OtpModal: React.FunctionComponent<OtpModalProps> = ({
             type="button"
             title="Cancel Verification"
             aria-label="Close modal button"
+            onClick={() => setShowDialog(false)}
             className="h-9 flexCenter px-4 py-2 rounded-md text-center border border-slate-200 bg-white shadow-sm hover:text-slate-900 hover:bg-red-500 hover:scale-105 transition-all ease-in-out duration-150"
           >
             Close

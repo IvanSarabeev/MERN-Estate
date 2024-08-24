@@ -30,7 +30,7 @@ export const signUp = async (req, res, next) => {
         const {username, email, password} = req.body;
 
         // Proceed business logic through service
-        const result = await authSignUpUser({username, email, password });
+        const result = await authSignUpUser({ username, email, password });
 
         // Check result and send appropriate response
         if (result.success) {
