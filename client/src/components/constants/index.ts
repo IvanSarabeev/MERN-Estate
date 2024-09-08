@@ -19,7 +19,10 @@ import {
     StickyNote,
     Tag,
     Wifi,
-  } from "lucide-react";
+    Building2,
+    HandCoins,
+    CandlestickChart
+} from "lucide-react";
 import { SingleListingKeys } from "types/listing";
 
 export const headerLinks = [
@@ -207,4 +210,10 @@ export const customerOverview = [
     {id: 2, label: "100% Satisfaction guarantee"},
     {id: 3, label: "Highly professional team"},
     {id: 4, label: "Dealing always on time"},
+] as const;
+
+export const servicesOverviewData = [
+    {id: 1, icon: HandCoins, title: "Property Valuation", description: "Generous amounts of south facing glazing maximize the solar gains for most of the year.", imgSrc: "image/outdoor-look"},
+    {id: 2, icon: Building2, title: "Property Management", description: "All living, dining, kitchen and play areas were devised by attached to the home.", imgSrc: "image/garage-look"},
+    {id: 3, icon: CandlestickChart, title: "Invest Opportunities", description: "All-inclusive real estate services to facilitate the easy management of your properties.", imgSrc: "image/living-room"},
 ] as const;

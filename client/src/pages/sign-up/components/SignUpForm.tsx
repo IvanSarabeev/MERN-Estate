@@ -38,28 +38,6 @@ const SignUpForm: React.FunctionComponent<SignUpFormProps> = ({
   const isFormInvalid =
     !username || !email || !password || Object.keys(formik.errors).length > 0;
 
-  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-
-  //   if (isFormInvalid) {
-  //     return setShowOtpDialog(false);
-  //   } else {
-  //     try {
-  //       await formik.handleSubmit(e);
-  //       // Assume form submission triggers OTP request
-  //       setShowOtpDialog(true);
-  //     } catch (submitError) {
-  //       const message =
-  //         submitError instanceof Error
-  //           ? submitError.message
-  //           : "An unexpted error occurred.";
-
-  //       setError(message);
-  //       setShowOtpDialog(false);
-  //     }
-  //   }
-  // };
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 

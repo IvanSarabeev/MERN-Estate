@@ -10,9 +10,9 @@ const CustomerInfo: React.FC = () => {
     <section className="size-full flexColCenter space-y-8 sm:space-y-10 md:space-y-16 lg:space-y-20 padding-container max-container">
       <div className="md:gap-x-16 lg:gap-x-20 2xl:gap-x-24 flexColCenter space-y-4 lg:space-y-6 md:flex-row md:flexBetween">
         <div className="size-full flexColStart">
-          <h2 className="bold-24 lg:text-3xl xl:text-4xl mb-4 font-sans whitespace-normal">
+          <h1 className="bold-24 lg:text-3xl xl:text-4xl mb-4 font-sans whitespace-normal">
             Realar Vission & Mission
-          </h2>
+          </h1>
           <p className="w-full regular-14 lg:regular-16 max-w-2xl">
             You are the center of our process. Your needs, your wants, and your
             goals. We actively listen, always keep it even keel — never rushing
