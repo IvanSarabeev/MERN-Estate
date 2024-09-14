@@ -66,7 +66,7 @@ const CarouselTestimonial = () => {
             <CarouselItem key={item.id} className="basis-full">
               <MemoImage
                 imgFormat="jpg"
-                altText="property"
+                altText={item.imgAlt}
                 imageName={item.imgSrc}
                 className="relative size-full max-h-96 max-w-xl md:max-w-xl rounded-3xl aspect-auto bg-center object-cover object-center shadow-sm shadow-slate-600 basic-transition"
               />
@@ -92,7 +92,7 @@ const CarouselTestimonial = () => {
                 <div className="flexStart gap-x-4 p-4">
                   <MemoImage
                     imgFormat="jpg"
-                    altText="smiling-man"
+                    altText={item.pImgAlt}
                     imageName={item.personImg}
                     className="size-16 rounded-full"
                   />

@@ -1,3 +1,5 @@
+import { LucideIcon } from "lucide-react";
+
 export interface CreateListingIntf {
     _id?: string,
     imageUrls: string[],
@@ -81,3 +83,10 @@ export interface SingleListingResponse {
 }
 
 export type SingleListingKeys = keyof SingleListingResponse;
+
+export interface PropertyOverviewType {
+    id: number;
+    icon: LucideIcon;
+    label: string;
+    key: SingleListingKeys | null;
+}

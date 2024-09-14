@@ -12,7 +12,6 @@ import {
     BedDouble,
     BookOpenCheck,
     Building,
-    LucideIcon,
     MonitorPlay,
     ParkingCircle,
     Ruler,
@@ -23,7 +22,7 @@ import {
     HandCoins,
     CandlestickChart
 } from "lucide-react";
-import { SingleListingKeys } from "types/listing";
+import { PropertyOverviewType } from "types/listing";
 
 export const headerLinks = [
     {id: 1, label: "Home", href: "/"},
@@ -187,12 +186,7 @@ export const testimonials = [
     { id: 8, avatar: 'https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/roberta-casas.png', username: 'Dana', alias: '@dana', rating: 5, description: 'I didn\'t believe that there\'s an application that good for the ordinary men. Thanks.' },
 ] as const;
 
-export const propertyOverview: Array<{
-    id: number;
-    icon: LucideIcon;
-    label: string;
-    key: SingleListingKeys | null;
-}> = [
+export const propertyOverview: PropertyOverviewType[] = [
     {id: 1, icon: Tag, label: "ID NO.", key: "_id"},
     {id: 2, icon: Building, label: "Type", key: "type"},
     {id: 3, icon: MonitorPlay, label: "Room", key: "rooms"},
@@ -219,7 +213,15 @@ export const servicesOverviewData = [
 ] as const;
 
 export const aboutCarouselTestimonial = [
-    {id: 1, imgSrc: "image/garage-look", description: "Home is where love resides, memories are created, and dreams are nurtured. I have found my sanctuary in this beautiful property. Finding the perfect that tresonates with your own", personImg: "samples/people/kitchen-bar", personName: "Ralph Edwards", personTitle: "Property Expert"},
-    {id: 2, imgSrc: "ïmage/garage-look", description: "Home is where love resides, memories are created, and dreams are nurtured. I have found my sanctuary in this beautiful property. Finding the perfect that tresonates with your own", personImg: "samples/people/kitchen-bar", personName: "Ralph Edwards", personTitle: "Property Expert"},
-    {id: 3, imgSrc: "ïmage/garage-look", description: "Home is where love resides, memories are created, and dreams are nurtured. I have found my sanctuary in this beautiful property. Finding the perfect that tresonates with your own", personImg: "samples/people/kitchen-bar", personName: "Ralph Edwards", personTitle: "Property Expert"}
+    {id: 1, imgSrc: "image/garage-look", imgAlt: "garage", description: "Home is where love resides, memories are created, and dreams are nurtured. I have found my sanctuary in this beautiful property. Finding the perfect that tresonates with your own", personImg: "samples/people/kitchen-bar", pImgAlt: "man", personName: "Ralph Edwards", personTitle: "Property Expert"},
+    {id: 2, imgSrc: "ïmage/garage-look", imgAlt: "garage", description: "Home is where love resides, memories are created, and dreams are nurtured. I have found my sanctuary in this beautiful property. Finding the perfect that tresonates with your own", personImg: "samples/people/kitchen-bar", pImgAlt: "man", personName: "Ralph Edwards", personTitle: "Property Expert"},
+    {id: 3, imgSrc: "ïmage/garage-look", imgAlt: "garage", description: "Home is where love resides, memories are created, and dreams are nurtured. I have found my sanctuary in this beautiful property. Finding the perfect that tresonates with your own", personImg: "samples/people/kitchen-bar", pImgAlt: "man", personName: "Ralph Edwards", personTitle: "Property Expert"}
+] as const;
+
+export const propertyTypesImgs = [
+    {id: 1, format: "jpg", imgSrc: "logos/real2", alt: "Stone Estate"},
+    {id: 2, format: "jpg", imgSrc: "logos/real3", alt: "EchoHome"},
+    {id: 3, format: "jpg", imgSrc: "logos/real4", alt: "Solutions"},
+    {id: 4, format: "jpg", imgSrc: "logos/real5", alt: "Real Estate"},
+    {id: 5, format: "jpg", imgSrc: "logos/real6", alt: "Realer's"},
 ] as const;
