@@ -37,7 +37,6 @@ const ChoseUs: React.FC = () => {
         <article className="size-full gap-4 flexColCenter md:flex-row md:flexBetween">
           {servicesOverviewData.map((item) => {
             const Icon = item.icon;
-            console.log(item.imgSrc);
             return (
               <ChoseUsServiceOverview
                 key={item.id}

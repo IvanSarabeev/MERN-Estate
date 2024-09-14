@@ -217,3 +217,9 @@ export const servicesOverviewData = [
     {id: 2, icon: Building2, title: "Property Management", description: "All living, dining, kitchen and play areas were devised by attached to the home.", imgSrc: "image/garage-look"},
     {id: 3, icon: CandlestickChart, title: "Invest Opportunities", description: "All-inclusive real estate services to facilitate the easy management of your properties.", imgSrc: "image/living-room"},
 ] as const;
+
+export const aboutCarouselTestimonial = [
+    {id: 1, imgSrc: "image/garage-look", description: "Home is where love resides, memories are created, and dreams are nurtured. I have found my sanctuary in this beautiful property. Finding the perfect that tresonates with your own", personImg: "samples/people/kitchen-bar", personName: "Ralph Edwards", personTitle: "Property Expert"},
+    {id: 2, imgSrc: "ïmage/garage-look", description: "Home is where love resides, memories are created, and dreams are nurtured. I have found my sanctuary in this beautiful property. Finding the perfect that tresonates with your own", personImg: "samples/people/kitchen-bar", personName: "Ralph Edwards", personTitle: "Property Expert"},
+    {id: 3, imgSrc: "ïmage/garage-look", description: "Home is where love resides, memories are created, and dreams are nurtured. I have found my sanctuary in this beautiful property. Finding the perfect that tresonates with your own", personImg: "samples/people/kitchen-bar", personName: "Ralph Edwards", personTitle: "Property Expert"}
+] as const;
