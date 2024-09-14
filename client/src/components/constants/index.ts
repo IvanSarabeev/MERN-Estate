@@ -225,3 +225,10 @@ export const propertyTypesImgs = [
     {id: 4, format: "jpg", imgSrc: "logos/real5", alt: "Real Estate"},
     {id: 5, format: "jpg", imgSrc: "logos/real6", alt: "Realer's"},
 ] as const;
+
+export const teamMembersData = [
+    {id: 1, imgSrc: "people/empl1", format: "jpg", imgAlt: "zarin", name: "Zarin Wilson", jobDesc: "Consultant", phone: "+44 7802 0239"},
+    {id: 2, imgSrc: "people/empl3", format: "jpg", imgAlt: "michail", name: "Michail Smith", jobDesc: "Property Expert", phone: "+359 028 321"},
+    {id: 3, imgSrc: "people/empl1", format: "jpg", imgAlt: "janny", name: "Janny Wilson", jobDesc: "Manager", phone: "+359 982 923"},
+    // {id: 4, imgSrc: "people/empl3", format: "jpg", imgAlt: "andrew", name: "Andrew Richard", jobDesc: "Property Expert", phone: "+39 9292 4024"},
+];

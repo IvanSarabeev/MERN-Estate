@@ -3,6 +3,7 @@ import Button from "components/HTML/Button";
 import { ArrowRight, LucideIcon } from "lucide-react";
 import { servicesOverviewData } from "components/constants";
 import MemoImage from "components/Image";
+import { Link } from "react-router-dom";
 
 const ChoseUs: React.FC = () => {
   return (
@@ -20,19 +21,24 @@ const ChoseUs: React.FC = () => {
               customized solutions.
             </p>
           </div>
-          <Button
-            type="button"
-            title="Cta"
-            aria-label="contact us"
-            autoFocus
-            className="flexCenter gap-x-2 px-6 py-3 regular-16 border border-white rounded-full bg-transparent basic-transition duration-150 hover:text-black hover:scale-105 hover:bg-white"
+          <Link
+            to={"/contact"}
+            className="size-fit border-none outline-none ring-0"
           >
-            Contact Us{" "}
-            <span>
-              <span className="sr-only">Arrow Right</span>
-              <ArrowRight className="size-4" />
-            </span>
-          </Button>
+            <Button
+              type="button"
+              title="Cta"
+              aria-label="contact us"
+              autoFocus
+              className="flexCenter gap-x-2 px-6 py-3 regular-16 border border-white rounded-full bg-transparent basic-transition duration-150 hover:text-black hover:scale-105 hover:bg-white"
+            >
+              Contact Us{" "}
+              <span>
+                <span className="sr-only">Arrow Right</span>
+                <ArrowRight className="size-4" />
+              </span>
+            </Button>
+          </Link>
         </div>
         <article className="size-full gap-4 flexColCenter md:flex-row md:flexBetween">
           {servicesOverviewData.map((item) => {

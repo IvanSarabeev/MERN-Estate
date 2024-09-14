@@ -3,6 +3,7 @@ import MemoCustomerInfo from "./components/CustomerInfo";
 import MemoChoseUs from "./components/ChoseUs";
 import MemoTestimonial from "./components/Testimonial";
 import MemoPropertyTypes from "./components/PropertyTypes";
+import MemoTeamMembers from "./components/TeamMembers";
 
 const About = () => {
   return (
@@ -10,6 +11,7 @@ const About = () => {
       <MemoCustomerInfo />
       <MemoChoseUs />
       <MemoTestimonial />
+      <MemoTeamMembers />
       <MemoPropertyTypes />
     </Layout>
   );
