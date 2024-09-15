@@ -1,6 +1,6 @@
 import { makeObservable, observable, action } from "mobx";
 import { SignInCredentials, UserDetails, UserSignUpData } from "types/user";
-import { authenticateUser, registerNewUser } from '../api/auth';
+import { authenticateUser, registerNewUser } from 'api/auth';
 import { AUTHENTICATION_FAILED, COMMON_ERROR_MESSAGE, USER_REGISTRATION_FAILED } from "../defines";
 import { UserAuthResponse } from "types/api";
 
