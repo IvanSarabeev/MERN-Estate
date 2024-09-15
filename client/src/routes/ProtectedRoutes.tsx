@@ -1,6 +1,6 @@
 import React, { lazy, Suspense, memo } from "react";
 import TriangleLoader from "components/__comp/Loaders/TriangleLoader";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 const AuthRequiredRoute = lazy(() => import("auth/AuthRequiredRoute"));
 const AccountLayout = lazy(
@@ -18,8 +18,6 @@ const Appearance = lazy(() => import("pages/Account/Profile/Appearance.tsx"));
 const MyListing = lazy(() => import("pages/Account/MyListing.tsx"));
 
 const ProtectedRoutes: React.FC = memo(() => {
-  const location = useLocation();
-  console.log("Current location:", location.pathname);
   return (
     <Suspense fallback={<TriangleLoader />}>
       <Routes>
