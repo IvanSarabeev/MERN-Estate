@@ -7,7 +7,7 @@ const OnboardingRoutes: React.FC = () => {
   return (
     <Suspense fallback={<TriangleLoader />}>
       <Routes>
-        <Route path="/onboarding" element={<MemoOnboarding />} />
+        <Route path="/" element={<MemoOnboarding />} />
       </Routes>
     </Suspense>
   );

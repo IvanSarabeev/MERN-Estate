@@ -31,6 +31,14 @@ body {
     .form-container {
         @apply p-6 lg:p-12;
     }
+
+    .form-padding-container {
+        @apply px-6 py-10 md:p-12;
+    }
+
+    .cookie-container {
+        @apply fixed z-30 right-4 bottom-4 hidden md:block max-w-[544px] rounded-lg shadow-xl bg-white/85;
+    }
     
     .padding-container {
         @apply p-6 md:p-12 lg:px-16 xl:px-20 xl:py-16;
@@ -134,18 +142,6 @@ body {
 
     .avatar-img {
         @apply size-8 rounded-full aspect-auto object-cover;
-    }
-
-    .form-container {
-        @apply p-6 lg:p-12;
-    }
-
-    .form-padding-container {
-        @apply px-6 py-10 md:p-12;
-    }
-
-    .cookie-container {
-        @apply fixed z-30 right-4 bottom-4 hidden md:block max-w-[544px] rounded-lg shadow-xl bg-white/85;
     }
 
     .auth-btn {
