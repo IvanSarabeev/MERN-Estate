@@ -2,17 +2,27 @@
   "name": "mern-estate",
   "version": "1.0.0",
   "description": "��#\u0000 \u0000M\u0000E\u0000R\u0000N\u0000-\u0000E\u0000s\u0000t\u0000a\u0000t\u0000e\u0000\r\u0000 \u0000\r\u0000 \u0000T\u0000h\u0000i\u0000s\u0000 \u0000w\u0000i\u0000l\u0000l\u0000 \u0000b\u0000e\u0000 \u0000a\u0000 \u0000c\u0000o\u0000u\u0000r\u0000s\u0000e\u0000 \u0000p\u0000r\u0000o\u0000j\u0000e\u0000c\u0000t\u0000,\u0000 \u0000i\u0000n\u0000 \u0000w\u0000h\u0000i\u0000c\u0000h\u0000 \u0000I\u0000 \u0000w\u0000i\u0000l\u0000l\u0000 \u0000b\u0000u\u0000i\u0000l\u0000d\u0000 \u0000a\u0000 \u0000f\u0000u\u0000l\u0000l\u0000s\u0000t\u0000a\u0000c\u0000k\u0000 \u0000w\u0000e\u0000b\u0000 \u0000a\u0000p\u0000p\u0000l\u0000i\u0000c\u0000a\u0000t\u0000i\u0000o\u0000n\u0000,\u0000 \u0000w\u0000h\u0000i\u0000c\u0000h\u0000 \u0000w\u0000i\u0000l\u0000l\u0000 \u0000c\u0000o\u0000n\u0000t\u0000a\u0000i\u0000n\u0000 \u0000t\u0000h\u0000e\u0000 \u0000f\u0000o\u0000l\u0000l\u0000o\u0000w\u0000i\u0000n\u0000g\u0000 \u0000t\u0000e\u0000c\u0000h\u0000n\u0000o\u0000l\u0000o\u0000g\u0000y\u0000 \u0000s\u0000t\u0000a\u0000c\u0000k\u0000:\u0000\r\u0000 \u0000\r\u0000 \u00001\u0000.\u0000 \u0000F\u0000r\u0000o\u0000n\u0000t\u0000-\u0000e\u0000n\u0000d\u0000 \u0000R\u0000e\u0000a\u0000c\u0000t\u0000 \u0000+\u0000 \u0000T\u0000y\u0000p\u0000e\u0000S\u0000c\u0000r\u0000i\u0000p\u0000t\u0000,\u0000 \u0000T\u0000a\u0000i\u0000l\u0000w\u0000i\u0000n\u0000d\u0000 \u0000+\u0000 \u0000S\u0000h\u0000a\u0000d\u0000c\u0000n\u0000U\u0000I\u0000\r\u0000 \u00002\u0000.\u0000 \u0000B\u0000a\u0000c\u0000k\u0000-\u0000e\u0000n\u0000d\u0000 \u0000N\u0000o\u0000d\u0000e\u0000.\u0000j\u0000s\u0000 \u0000+\u0000 \u0000E\u0000x\u0000p\u0000r\u0000e\u0000s\u0000s\u0000\r\u0000 \u00003\u0000.\u0000 \u0000D\u0000a\u0000t\u0000a\u0000b\u0000a\u0000s\u0000e\u0000 \u0000M\u0000o\u0000n\u0000g\u0000o\u0000D\u0000B\u0000\r\u0000 \u00004\u0000.\u0000 \u0000O\u0000R\u0000M\u0000 \u0000M\u0000o\u0000n\u0000g\u0000o\u0000o\u0000s\u0000e\u0000\r\u0000 \u00005\u0000.\u0000 \u0000V\u0000e\u0000r\u0000c\u0000e\u0000l\u0000 \u0000+\u0000 \u0000A\u0000n\u0000a\u0000l\u0000y\u0000t\u0000i\u0000c\u0000s\u0000",
-  "main": "index.js",
-  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server/index.js",
-    "start": "node server/index.js",
-    "build": "npm install && npm install --prefix client && npm run build --prefix client"
+    "build": "npm install && npm install --prefix client && npm run build --prefix client && tsc --project ./server/tsconfig.json",
+    "dev": "ts-node-dev --respawn --transpile-only ./server/src/index.ts",
+    "start": "ts-node ./dist/index.ts"
   },
   "keywords": [],
-  "author": "",
+  "author": "Ivan Sarabeev",
   "license": "ISC",
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cookie-parser": "^1.4.7",
+    "@types/csurf": "^1.11.5",
+    "@types/express": "^5.0.0",
+    "@types/jsonwebtoken": "^9.0.7",
+    "@types/node": "^22.7.4",
+    "@types/nodemailer": "^6.4.16",
+    "@types/xss-filters": "^1.2.0",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.6.2"
+  },
   "dependencies": {
     "axios": "^1.7.2",
     "bcryptjs": "^2.4.3",
