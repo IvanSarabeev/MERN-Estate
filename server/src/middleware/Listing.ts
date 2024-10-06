@@ -12,7 +12,6 @@ import { verifyToken } from 'utils/AuthUserCookie';
 const router = express.Router();
 
 router.get('/get/:id', getListing);
-// router.get('/get', getListings);
 router.post('/get-listing/:id', getListingById);
 router.post('/available-listings', getListings);
 router.post('/create', verifyToken, createListing);

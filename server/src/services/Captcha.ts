@@ -2,11 +2,11 @@ import axios from "axios";
 
 export const verifyCaptcha = async (token: string) => {
     try {
-        const secret = process.env.CAPTCHA_SECRET;
+        const secret = process.env.CAPTCHA_SECRET ?? '';
         
         const response = await axios.post(
             `https://hcaptcha.com/siteverify`, new URLSearchParams({
-                secret: "",
+                secret: secret,
                 response: token
             }).toString(),
             {

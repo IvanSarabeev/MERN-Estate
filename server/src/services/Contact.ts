@@ -1,7 +1,7 @@
 import xssFilters from "xss-filters";
-import Contact from '../models/Contact.js';
+import Contact from 'models/Contact';
 import { transporter } from 'utils/EmailProvider';
-import { UserContactFormData } from "types/common/email.js";
+import { UserContactFormData } from "types/common/email";
 
 export const sendContactEmail = async (formData: UserContactFormData) => {
     try {

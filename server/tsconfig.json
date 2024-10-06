@@ -1,20 +1,19 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "module": "CommonJS",
     "outDir": "./dist",
     "rootDir": "./src",
     "esModuleInterop": true,
     "strict": true,
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
-    "noEmit": false,
-    "allowImportingTsExtensions": false,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
     "forceConsistentCasingInFileNames": true,
     "baseUrl": "./",
     "paths": {
-      "controller/*": ["src/controllers/*"],
+      "controller/*": ["src/controller/*"],
       "models/*": ["src/models/*"],
       "middleware/*": ["src/middleware/*"],
       "helpers/*": ["src/helpers/*"],
@@ -23,6 +22,6 @@
       "utils/*": ["src/utils/*"]
     }
   },
-  "include": ["./src/**/*"],
+  "include": ["./src/**/*", "index.ts"],
   "exclude": ["node_modules", "dist"]
 }

@@ -2,8 +2,8 @@ import bcryptjs from "bcryptjs";
 import Jwt from 'jsonwebtoken';
 import dotenv from "dotenv";
 import crypto from "crypto";
-import User from "../models/User";
-import { sendVerificationEmail } from './Email';
+import User from "models/User";
+import { sendVerificationEmail } from 'services/Email';
 import { 
     EXISTING_EMAIL,
      EXISTING_USERNAME,

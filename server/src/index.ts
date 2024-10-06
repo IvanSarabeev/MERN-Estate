@@ -1,10 +1,10 @@
 import express, { ErrorRequestHandler, NextFunction, Request, Response } from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import userRouter from "./middleware/User";
-import authRouter from "./middleware/AuthMiddleware";
 import listingRouter from "./middleware/Listing";
-import commonRouter from "./middleware/Common";
+import authRouter from "./middleware/AuthMiddleware";
+import commonRouter from "middleware/Common";
+import userRouter from "middleware/User";
 import cookieParser from "cookie-parser";
 import path from "path";
 import { createServer } from "http";
@@ -27,14 +27,11 @@ mongoose.connect(DB_URL)
     })
 ;
     
-const __dirname = path.resolve();
-
 const app = express();
 
 // Secure HEADER HTTP
 app.use(helmet({
-    // TODO: Secure the content
-    contentSecurityPolicy: false,
+    contentSecurityPolicy: false, //Secure the content
 }));
 
 // DATE SANITIZATION against NoSQL query injection
@@ -79,6 +76,10 @@ app.listen(PORT, () => {
 
 httpServer.listen(3001, () => {
     console.log('Server Websocket is running correctly');
+});
+
+app.get('/', (req: Request, res: Response) => {
+    res.send("Vercel via Express");
 });
 
 app.use('/api/user', userRouter);

@@ -18,7 +18,7 @@ const PropertyPage: React.FC = () => {
     const response = await fetchListingById(id);
 
     if (response) {
-      setItemData(response);
+      setItemData(response.data);
     }
   }, [id]);
 
