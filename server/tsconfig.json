@@ -19,7 +19,8 @@
       "helpers/*": ["src/helpers/*"],
       "services/*": ["src/services/*"],
       "types/*": ["src/types/*"],
-      "utils/*": ["src/utils/*"]
+      "utils/*": ["src/utils/*"],
+      "validator/*": ["src/validator/*"]
     }
   },
   "include": ["./src/**/*", "index.ts"],

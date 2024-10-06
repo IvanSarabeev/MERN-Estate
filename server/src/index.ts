@@ -1,10 +1,11 @@
 import express, { ErrorRequestHandler, NextFunction, Request, Response } from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import listingRouter from "./middleware/Listing";
-import authRouter from "./middleware/AuthMiddleware";
+import listingRouter from "middleware/Listing";
+import authRouter from "middleware/AuthMiddleware";
 import commonRouter from "middleware/Common";
 import userRouter from "middleware/User";
+import healthRouter from "middleware/HealthCheck";
 import cookieParser from "cookie-parser";
 import path from "path";
 import { createServer } from "http";
@@ -78,14 +79,11 @@ httpServer.listen(3001, () => {
     console.log('Server Websocket is running correctly');
 });
 
-app.get('/', (req: Request, res: Response) => {
-    res.send("Vercel via Express");
-});
-
 app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/listing', listingRouter);
 app.use('/api', commonRouter);
+app.use('/check', healthRouter);
 
 app.use(express.static(path.join(__dirname, '/client/dist')));
 

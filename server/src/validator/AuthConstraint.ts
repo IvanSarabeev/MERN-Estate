@@ -4,8 +4,8 @@ import xssFilters from 'xss-filters';
 import { passwordRegex, usernameRegex } from 'models/Regex';
 
 /**
- * @property {'username', 'email', 'password'} - input propertyes
- * @returns {array} - Validate user input data with constraint rules
+ * @property {'username', 'email', 'password'}
+ * @returns {array} - Validate User Credentials to Procced to Registration
  */
 export const validationSignUpData = () => {
     return [
@@ -30,7 +30,7 @@ export const validationSignUpData = () => {
 
 /**
  * @property {'email', 'password'} - input propertyes
- * @returns {array} - Validate user input data with constraint rules
+ * @returns {array} - Validate User Credentials
  */
 export const validateUserAuthentication = () => {
     return [
@@ -46,21 +46,38 @@ export const validateUserAuthentication = () => {
     ];
 };
 
-export const sanitizerListingData = (req: Request, res: Response, next: NextFunction) => {
-    const sanitizedData: Record<string, any> = {};
-
-    for (const key in req.body) {
-        if (Object.hasOwn(req.body, key)) {
-            sanitizedData[key] = xssFilters.inHTMLData(req.body[key]);
-        }
-    }
-
-    req.body = sanitizedData;
-
-    next();
+/**
+ * @property {'email', 'name', 'photo'}
+ * @returns {Array} - Validate User's Thrird Party Credentials Providers
+ */
+export const validateThirdPartyConstraints = () => {
+    return [
+        body('email')
+            .trim()
+            .isEmail().withMessage("Invalid email address")
+            .isLength({ min: 5, max: 35 }).withMessage("Email must be between 5 and 35 characters.")
+            .customSanitizer(value => xssFilters.inHTMLData(value)),
+        body('name')
+            .trim()
+            .isLength({ min: 3, max: 20 }).withMessage("Name must be between 3 and 20 characters.")
+            .matches(usernameRegex).withMessage("Can only contain letters, numbers and underscores.")
+            .customSanitizer(value => xssFilters.inHTMLData(value)),
+        body('photo')
+            .trim()
+            .isLength({ min: 5, max: 50 }).withMessage("Photo must be a valid link")
+            .customSanitizer(value => xssFilters.inHTMLData(value))
+    ];
 };
 
-export const validate = (req: Request, res: Response, next: NextFunction) => {
+/**
+ * Validate incoming input data from Request 
+ * 
+ * @param req Get all incoming req.body (data)
+ * @param res Send response if the input data isn't correct
+ * @param next Go to next exception middleware
+ * @returns Continue or Array
+ */
+export const validateAuth = (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req);
     
     if (!errors.isEmpty()) {

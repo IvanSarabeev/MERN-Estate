@@ -16,3 +16,6 @@ export const OTP_VERIFIED_SUCCESS = "OTP Verified Successfully";
 
 // Region Server
 export const SERVER_ERROR = "Internal Server Error";
+
+// Common Constatns
+export const EUROPE_TIME_ZONE = 'Europe/Sofia';
