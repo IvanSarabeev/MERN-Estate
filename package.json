@@ -5,7 +5,8 @@
   "scripts": {
     "build": "npm install && npm install --prefix client && npm run build --prefix client && npm run build --prefix server",
     "start": "npm run build && npm run dev --prefix server",
-    "dev": "npm run dev --prefix server"
+    "dev": "npm run dev --prefix server",
+    "postinstall": "npm install --prefix server"
   },
   "keywords": [],
   "author": "Ivan Sarabeev",

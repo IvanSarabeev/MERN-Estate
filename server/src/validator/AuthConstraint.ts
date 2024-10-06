@@ -1,13 +1,13 @@
-import { NextFunction, Request, Response } from 'express';
-import { body, validationResult } from 'express-validator';
+import { Request, Response, NextFunction } from 'express';
+import { body, ValidationChain, validationResult } from 'express-validator';
 import xssFilters from 'xss-filters';
 import { passwordRegex, usernameRegex } from 'models/Regex';
 
 /**
  * @property {'username', 'email', 'password'}
- * @returns {array} - Validate User Credentials to Procced to Registration
+ * @returns {Array<ValidationChain>} - Validate User Credentials to Proceed to Registration
  */
-export const validationSignUpData = () => {
+export const validationSignUpData = (): Array<ValidationChain> => {
     return [
         body('username')
             .trim()
@@ -29,10 +29,10 @@ export const validationSignUpData = () => {
 };
 
 /**
- * @property {'email', 'password'} - input propertyes
- * @returns {array} - Validate User Credentials
+ * @property {'email', 'password'} - input properties
+ * @returns {Array<ValidationChain>} - Validate User Credentials
  */
-export const validateUserAuthentication = () => {
+export const validateUserAuthentication = (): Array<ValidationChain> => {
     return [
         body('email')
             .isEmail().withMessage("Invalid email address!")
@@ -48,9 +48,9 @@ export const validateUserAuthentication = () => {
 
 /**
  * @property {'email', 'name', 'photo'}
- * @returns {Array} - Validate User's Thrird Party Credentials Providers
+ * @returns {Array<ValidationChain>} - Validate User's Third Party Credentials Providers
  */
-export const validateThirdPartyConstraints = () => {
+export const validateThirdPartyConstraints = (): Array<ValidationChain> => {
     return [
         body('email')
             .trim()
@@ -75,9 +75,9 @@ export const validateThirdPartyConstraints = () => {
  * @param req Get all incoming req.body (data)
  * @param res Send response if the input data isn't correct
  * @param next Go to next exception middleware
- * @returns Continue or Array
+ * @returns {void} - Continue or send validation errors
  */
-export const validateAuth = (req: Request, res: Response, next: NextFunction) => {
+export const validateAuth = (req: Request, res: Response, next: NextFunction): void => {
     const errors = validationResult(req);
     
     if (!errors.isEmpty()) {

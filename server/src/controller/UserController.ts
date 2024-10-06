@@ -32,7 +32,7 @@ export const updateUser = async (req: Request, res: Response, next: NextFunction
             return next(errorHandler(404, 'User not found'));
         }
 
-        const {password, ...rest} = updatedUser.toObject();
+        const {...rest} = updatedUser.toObject();
 
         res.status(200).json(rest);
     } catch (error) {
@@ -76,7 +76,7 @@ export const getUser = async (req: Request, res: Response, next: NextFunction) =
             return next(errorHandler(404, "User not found!"));
         };
     
-        const { password: pass, ...rest } = user.toObject();
+        const { ...rest } = user.toObject();
     
         res.status(200).json(rest);
     } catch (error) {

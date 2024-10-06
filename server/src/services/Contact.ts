@@ -1,4 +1,3 @@
-import xssFilters from "xss-filters";
 import Contact from 'models/Contact';
 import { transporter } from 'utils/EmailProvider';
 import { UserContactFormData } from "types/common/email";
@@ -8,11 +7,11 @@ export const sendContactEmail = async (formData: UserContactFormData) => {
         const { first_name, last_name, email, phone, text_message } = formData;
 
         const sanitizedData = {
-            first_name: xssFilters.inHTMLData(first_name),
-            last_name: xssFilters.inHTMLData(last_name),
-            email: xssFilters.inHTMLData(email),
-            phone: xssFilters.inHTMLData(phone),
-            text_message: xssFilters.inHTMLData(text_message),
+            first_name: first_name,
+            last_name: last_name,
+            email: email,
+            phone: phone,
+            text_message: text_message,
         };
 
         const contact = new Contact(sanitizedData);

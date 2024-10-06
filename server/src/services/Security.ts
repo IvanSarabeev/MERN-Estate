@@ -11,7 +11,7 @@ import {
      OTP_SUCCESS,
      SERVER_ERROR,
      USER_NOT_FOUND
- } from '../helpers/ResponseStatus';
+ } from 'helpers/ResponseStatus';
 import { SignInData, SignUpData } from "types/auth/auth";
 import { SignInAuthResponse, SignUpAuthResponse } from "types/responses/promiseResponse";
 
@@ -57,7 +57,7 @@ export const authSignInUser= async (signInCredentials: SignInData): Promise<Sign
         const jwtToken = Jwt.sign({ id: validUser._id }, process.env.JWT_SECRET ?? '');
 
         // Exclude password from user data
-        const { password: pass, ...userWithoutPassword } = validUser.toObject();
+        const { ...userWithoutPassword } = validUser.toObject();
 
         return { success: true, message: "User Authenticated", token: jwtToken, user: userWithoutPassword };
     } catch (error) {

@@ -1,9 +1,13 @@
 import { NextFunction, Request, Response } from "express";
-import { body, validationResult } from "express-validator";
+import { body, ValidationChain, validationResult } from "express-validator";
 import { phoneRegex } from "models/Regex";
+import xssFilters from 'xss-filters';
 
-
-export const validateContactFormData = () => {
+/**
+ * @property {'username', 'email', 'password'}
+ * @returns {Array<ValidationChain>} - Validate User Credentials to Proceed to Registration
+ */
+export const validateContactFormData = (): Array<ValidationChain> => {
     return [
       body('first_name')
           .trim()
@@ -29,7 +33,15 @@ export const validateContactFormData = () => {
     ];
 }
 
-export const validateCommon = (req: Request, res: Response, next: NextFunction) => {
+/**
+ * Validate incoming input data from Request 
+ * 
+ * @param req Get all incoming req.body (data)
+ * @param res Send response if the input data isn't correct
+ * @param next Go to next exception middleware
+ * @returns {void} - Continue or send validation errors
+ */
+export const validateCommon = (req: Request, res: Response, next: NextFunction): void => {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {

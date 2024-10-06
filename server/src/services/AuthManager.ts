@@ -20,12 +20,12 @@ export const googleAuthProviderService = async (googleCredentials: GoogleAuthDat
     const { email, name, photo } = googleCredentials;
 
     try {
-        let user = await User.findOne({ email: email });
+        const user = await User.findOne({ email: email });
 
         if (user) {
             const jwtToken = Jwt.sign({ id: user._id }, process.env.JWT_SECRET ?? '');
         
-            const { password: pass, ...rest } = user.toObject();
+            const { ...rest } = user.toObject();
 
             return { jwtToken, rest };
         } else {
@@ -58,7 +58,7 @@ export const googleAuthProviderService = async (googleCredentials: GoogleAuthDat
 
             const jwtToken = Jwt.sign({ id: newUser._id }, process.env.JWT_SECRET ?? '');
 
-            const { password: pass, ...rest } = newUser.toObject();
+            const { ...rest } = newUser.toObject();
 
             return { jwtToken, rest };
         }
@@ -79,12 +79,12 @@ export const githubAuthProvider = async (userCredentials: GitHubAuthData) => {
     };
 
     try {
-        let user = await User.findOne({ email: SanitizeData.email });
+        const user = await User.findOne({ email: SanitizeData.email });
 
         if (user) {
             const jwtToken = Jwt.sign({ id: user._id }, process.env.JWT_SECRET ?? '');
 
-            const { password: pass, ...rest } = user.toObject();
+            const { ...rest } = user.toObject();
 
             return { jwtToken, rest };
         } else {
@@ -116,7 +116,7 @@ export const githubAuthProvider = async (userCredentials: GitHubAuthData) => {
 
             const jwtToken = Jwt.sign({ id: newUser._id }, process.env.JWT_SECRET ?? '');
 
-            const { password: pass, ...rest } = newUser.toObject();
+            const { ...rest } = newUser.toObject();
 
             return { jwtToken, rest };
         }

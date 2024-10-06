@@ -1,24 +1,23 @@
 import { NextFunction, Request, Response } from "express";
 import Jwt from 'jsonwebtoken';
-import { IUser } from "types/model/user";
 import { errorHandler } from 'utils/Error';
 
-declare global {
-    namespace Express {
-        interface Request {
-            user?: {
-                id: string;
-                email: string;
-            }
-        }
-    }
-}
+// declare global {
+//     namespace Express {
+//         interface Request {
+//             user?: {
+//                 id: string;
+//                 email: string;
+//             }
+//         }
+//     }
+// }
 
-// Define a type for Jwt verification callback parameters
-interface JwtCallback {
-    error: Jwt.VerifyErrors | null; // Use Jwt's built-in types for errors
-    user: { [key: string]: IUser } | undefined; // Adjust this based on your JWT payload structure
-}
+// // Define a type for Jwt verification callback parameters
+// interface JwtCallback {
+//     error: Jwt.VerifyErrors | null; // Use Jwt's built-in types for errors
+//     user: { [key: string]: IUser } | undefined; // Adjust this based on your JWT payload structure
+// }
 
 export const verifyToken = (req: Request, res: Response, next: NextFunction) => {
     const cookieToken = req.cookies.acces_token;

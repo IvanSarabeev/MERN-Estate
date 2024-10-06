@@ -1,11 +1,12 @@
 import { NextFunction, Request, Response } from "express";
-import { body, validationResult } from "express-validator";
+import { body, ValidationChain, validationResult } from "express-validator";
+import xssFilters from 'xss-filters';
 
 /**
- * @property {'email', 'otpCode'} - input data
- * @returns {Array} - Validate Email OTP 
+ * @property {'email', 'name', 'photo'}
+ * @returns {Array<ValidationChain>} - Validate Email OTP
  */
-export const validateEmailOtp = () => {
+export const validateEmailOtp = (): Array<ValidationChain> => {
     return [
         body('email')
             .trim()
@@ -25,9 +26,9 @@ export const validateEmailOtp = () => {
  * @param req Get all incoming req.body (data)
  * @param res Send response if the input data isn't correct
  * @param next Go to next exception middleware
- * @returns Continue or Array
+ * @returns {void} - Continue or send validation errors
  */
-export const validateOtp = (req: Request, res: Response, next: NextFunction) => {
+export const validateOtp = (req: Request, res: Response, next: NextFunction): void => {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {

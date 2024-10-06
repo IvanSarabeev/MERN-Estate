@@ -12,7 +12,6 @@ import { createServer } from "http";
 import { Server } from "socket.io";
 import helmet from "helmet";
 import ExpressMongoSanitize from "express-mongo-sanitize";
-import csurf from "csurf";
 
 dotenv.config();
 
@@ -30,6 +29,9 @@ mongoose.connect(DB_URL)
     
 const app = express();
 
+// Enable csrf in front-end
+// const csrfProtection = csurf({ cookie: true });
+
 // Secure HEADER HTTP
 app.use(helmet({
     contentSecurityPolicy: false, //Secure the content
@@ -45,8 +47,6 @@ const socketIo = new Server(httpServer, {
         methods: ["GET", "POST"]
     }
 });
-
-const csrfProtection = csurf({ cookie: true });
 
 socketIo.on('connection', (socket) => {
     console.log('New client connected');

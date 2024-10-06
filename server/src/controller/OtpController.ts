@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from 'express';
-import xssFilters from 'xss-filters';
 import User from "models/User";
 import {
     OTP_FAILED,
@@ -14,14 +13,9 @@ export const verifyOtp = async (req: Request, res: Response, next: NextFunction)
     try {
         const { email, otp } = req.body;
 
-        // Sanitize input data
-        const sanitizedData = {
-            email: xssFilters.inHTMLData(email),
-            otp: xssFilters.inHTMLData(otp)
-        };
 
         // Find the user by email
-        const user = await User.findOne({ email: sanitizedData.email });
+        const user = await User.findOne({ email: email });
 
         // If the user does not exist, return a 404 error
         if (!user) {

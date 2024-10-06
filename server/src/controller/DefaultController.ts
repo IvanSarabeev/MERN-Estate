@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import { sendContactEmail } from "services/Contact";
 
 export const submitContactForm = async (req: Request, res: Response, next: NextFunction) => {

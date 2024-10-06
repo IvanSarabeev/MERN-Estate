@@ -91,14 +91,8 @@ export const signIn = async (req: Request, res: Response, next: NextFunction) =>
 export const googleAuthentication = async (req: Request, res: Response, next: NextFunction) => {
     const { email, name, photo } = req.body;
 
-    const sanitizedData = {
-        email: xssFilters.inHTMLData(email),
-        name: xssFilters.inHTMLData(name),
-        photo: xssFilters.inHTMLData(photo)
-    };
-
     try {
-        const { jwtToken, rest } = await googleAuthProviderService(sanitizedData);
+        const { jwtToken, rest } = await googleAuthProviderService({ email, name, photo});
 
         if (!jwtToken) {
             next(errorHandler(400, TOKEN_FAILURE));
