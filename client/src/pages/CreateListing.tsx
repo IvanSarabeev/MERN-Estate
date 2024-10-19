@@ -8,7 +8,7 @@ import {
   ref,
   uploadBytesResumable,
 } from "firebase/storage";
-import { app } from "../fireStore/firebase";
+import { app } from "../lib/firebase";
 import { CreateListingIntf } from "types/listing";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";

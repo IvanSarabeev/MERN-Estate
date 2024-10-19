@@ -11,7 +11,7 @@ import {
   ref,
   uploadBytesResumable,
 } from "firebase/storage";
-import { app } from "../fireStore/firebase";
+import { app } from "../lib/firebase";
 // import { signOutUser } from "services/apiAuth";
 import { signOutUser } from "api/auth";
 import { updateUser, deleteUser } from "../services/apiUser";

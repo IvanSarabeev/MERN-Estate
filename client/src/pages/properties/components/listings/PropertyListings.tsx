@@ -5,7 +5,7 @@ import MemoGridProperties from "./../propety-layouts/GridProperties";
 import MemoListProperties from "./../propety-layouts/ListProperties";
 import MemoSkeletonItem from "components/__comp/SkeletonItem";
 import { handlePropertySorting } from "utils/sortData";
-import listingStore from "stores/listingStore";
+import { listingStore } from "stores/listingStore";
 
 type PropertyListingProps = {
   systemLayout: string;

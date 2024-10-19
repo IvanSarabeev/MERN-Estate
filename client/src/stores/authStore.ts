@@ -130,4 +130,6 @@ class AuthStore {
     }
 }
 
-export const authStore = new AuthStore();
+const authStore = new AuthStore();
+
+export default authStore;

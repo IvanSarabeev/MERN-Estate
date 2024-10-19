@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-import socket from "@/services/socket";
+import socket from "lib/socket";
 import Button from "components/HTML/Button";
 
 interface CookieProps {

@@ -1,4 +1,4 @@
-import { app } from "../fireStore/firebase";
+import { app } from "../lib/firebase";
 import { AppDispatch } from "store/store";
 import { signInFailure, signInStart, signInSucces } from "store/user/userSlice";
 import { GoogleAuthProvider, GithubAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
